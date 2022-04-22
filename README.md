@@ -2,12 +2,12 @@
 This is the official repository for the project "Backpack of Wings" within the exhibition context of Driving the Human
 
 ## DRIVING THE HUMAN 
-is a cooperation between Forecast/Skills e.V., HfG, ZKM, acatech
+...is a cooperation between Forecast/Skills e.V., HfG, ZKM, acatech
 
 Supported by: Federal Ministry for the Environment, Nature Conservation, Nuclear Safety and Consumer Protection (BMUV) based on a decision of the German Bundestag
 
 
-ist eine Kooperation von/is a cooperation between Forecast/Skills e.V., HfG, ZKM, acatech
+...ist eine Kooperation von/is a cooperation between Forecast/Skills e.V., HfG, ZKM, acatech
 
 gefördert durch: Bundesministerium für Umwelt, Naturschutz, nukleare Sicherheit und Verbraucherschutz (BMUV) 
 aufgrund eines Beschlusses des Deutschen Bundestages
