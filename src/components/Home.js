@@ -1,5 +1,5 @@
 import React from 'react';
 
 export default function Home(){
-    return <div>Home Page</div>
+    return <h1>Backpack of Wings</h1>
 }
