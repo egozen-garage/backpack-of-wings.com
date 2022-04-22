@@ -1,7 +1,10 @@
 # backpack-of-wings.com
 This is the official repository for the project "Backpack of Wings" within the exhibition context of Driving the Human
 
-## DRIVING THE HUMAN 
+## About BACKPACK OF WINGS
+The Backpack of Wings: Modern Mythology represents the speculative future scenarios, which are collisions and integrations between a bio-geo tracking technology for wild animals in scientific fields and an animism in seismic disaster myth in East Asia.
+
+## About DRIVING THE HUMAN 
 ...is a cooperation between Forecast/Skills e.V., HfG, ZKM, acatech
 
 Supported by: Federal Ministry for the Environment, Nature Conservation, Nuclear Safety and Consumer Protection (BMUV) based on a decision of the German Bundestag
