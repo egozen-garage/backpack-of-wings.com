@@ -1,5 +1,11 @@
 import React from 'react';
+import MovebankAPI from '../utilities/MovebankApi';
+
 
 export default function Home(){
-    return <h1>Backpack of Wings</h1>
+    // MovebankAPI(); // Call Movebank API - Bird Data 
+
+    // console.log('This is your data', data)
+
+    return <h1>Backpack of Wings<MovebankAPI></MovebankAPI></h1>
 }
