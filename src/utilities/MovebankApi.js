@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 // import d3 from 'd3';
 import * as d3 from 'd3';
-import sampleData from '../json/sampledata.json';
-
+// import sampleData from '../json/sampledata.json';
 
 
 function MovebankAPI() {
+    let dataReceived = false;
+
     // all API Data
     const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
     let [movebankData, setMovebankData] = useState(null)
@@ -20,17 +21,19 @@ function MovebankAPI() {
     if(!movebankData){
         return ( <pre>data loading...</pre>)
     }
-    if(movebankData[0].location_lat){
+    if(movebankData && !dataReceived){
+        dataReceived = true;
+        console.log("if is called")
         return <DrawSVG birdData={movebankData}/>
     }
  
 }
 
 
+
 let height = 400;
 let width = 800;
 let projection = d3.geoNaturalEarth1();
-
 
 
 class DrawSVG extends React.Component { 
@@ -46,6 +49,15 @@ class DrawSVG extends React.Component {
         let accessToRef = d3.select(this.myRef.current);
         // accessToRef.style("background-color", "red")
         accessToRef.attr("viewBox", [0, 0, width, height]);
+        
+        
+        let lastItemCount = this.props.birdData.length-1
+        let current_latitude = this.props.birdData[lastItemCount].location_lat
+        let current_longitude = this.props.birdData[lastItemCount].location_long
+        console.log("last entry: " + this.props.birdData[lastItemCount].timestamp)
+
+
+
         accessToRef.append("g")
             .selectAll("circle")
             // .data(sampleData.locations)
@@ -55,8 +67,10 @@ class DrawSVG extends React.Component {
             .attr("r", 1.5)
             .append("title")
             .text(d => d.location_lat);
+        
+        projection.scale(250000).translate([width/2, height/2]);
+        projection.center([current_latitude, current_longitude]) 
 
-        projection.scale(400).translate([width/2, height/2]);
     }
 
     render() {
