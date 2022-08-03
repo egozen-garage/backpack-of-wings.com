@@ -31,8 +31,8 @@ function MovebankAPI() {
 
 
 
-let height = 400;
-let width = 800;
+let height = 800;
+let width = 2000;
 let projection = d3.geoNaturalEarth1();
 
 
@@ -66,9 +66,14 @@ class DrawSVG extends React.Component {
             .attr("transform", d => `translate(${projection([d.location_lat, d.location_long])})`)
             .attr("r", 1.5)
             .append("title")
-            .text(d => d.location_lat);
+            .text(d => "time stamp: " + d.timestamp + " latitude: " + d.location_lat + " longitude: " + d.location_long);
         
-        projection.scale(250000).translate([width/2, height/2]);
+        d3.selectAll("circle:last-child")
+            .attr("r", 10.5)
+            .style("fill", "#69b3a2")
+            .append("title").text(d => "last location");
+
+        projection.scale(1000000).translate([width/2, height/2]);
         projection.center([current_latitude, current_longitude]) 
 
     }

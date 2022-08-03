@@ -7,5 +7,5 @@ export default function Home(){
 
     // console.log('This is your data', data)
 
-    return <h1>Backpack of Wings<MovebankAPI></MovebankAPI></h1>
+    return <MovebankAPI></MovebankAPI>
 }
