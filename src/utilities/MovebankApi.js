@@ -2,10 +2,22 @@ import React, {useState, useEffect} from 'react';
 // import d3 from 'd3';
 import * as d3 from 'd3';
 // import sampleData from '../json/sampledata.json';
+// import useWindowDimensions from './WindowSize';
 
 
+    // call Window Size and prepare data package
+    // let windowSize = [];
+    // const { height, width } = useWindowDimensions();
+    // let topush = {height: [height], width: [width]};
+    // windowSize.push(topush)
+    // console.log("windowSize array width: " + windowSize[0].width + "height: " + windowSize[0].height);
+
+
+// Call Movebank API and provide array
 function MovebankAPI() {
     let dataReceived = false;
+
+
 
     // all API Data
     const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
@@ -31,12 +43,12 @@ function MovebankAPI() {
 
 
 
-let height = 800;
-let width = 1200;
-let height2 = '100vh';
-let width2 = '100vw';
-let projection = d3.geoEquirectangular().scale(1000000).translate([width/2, height/2]);
 
+// let height = 800;
+// let width = 1200;
+// let height2 = '100vh';
+// let width2 = '100vw';
+let projection = d3.geoEquirectangular().scale(1000000);
 
 class DrawSVG extends React.Component { 
     constructor(props){
@@ -44,35 +56,66 @@ class DrawSVG extends React.Component {
         console.log('hi welcome data', this.props.birdData);
         this.myRef = React.createRef();
     }
-    
-    
+
+
     
     componentDidMount(){
-        // select SVG tag -> see render()
-        let svg = d3.select(this.myRef.current);
 
-        // define style and size of SVG tag
-        svg
-            // .attr("viewBox", [0, 0, width, height])
-            .attr('width', width2)
-            .attr('height', height2)
-            .attr('viewBox','0 0 '+Math.min(width2,height2) +' '+Math.min(width2,height2) )
-            // .attr("transform", "translate(" + Math.min(width,height) / 2 + "," + Math.min(width,height) / 2 + ")")
-            .style('background-color', '#7FFFD4');
+        // let lastWindowWidth = window.innerWidth; // 1000
+
+        function handleResize() {
+            
+            // let widthCorrection = (window.innerWidth - lastWindowWidth); // 900 - 1000
+
+            // console.log('resized to: ', window.innerWidth, 'x', window.innerHeight)
+            // let updatedWindowWidth = window.innerWidth*0.1;
+            // let updatedWindowHeight = window.innerHeight*0.1;
+            // console.log('resized to: ', typeof updatedWindowWidth, 'x', updatedWindowHeight)
+
+            // console.log('resized to: ', typeof widthCorrection, ' width: ', widthCorrection)
+
+
+
+
+            svg.selectAll('.svg-content')
+                .attr('transform', function(){
+                    return "translate(" + window.innerWidth/2 + "," + window.innerHeight/2 + ")"
+                })
+        }
+        window.addEventListener('resize', handleResize)
         
-        
+
+
+
+
+        // L A S T    L O C A T I O N    D A T A
         let lastItemCount = this.props.birdData.length-1
         let current_latitude = this.props.birdData[lastItemCount].location_lat
         let current_longitude = this.props.birdData[lastItemCount].location_long
         console.log("last entry: " + lastItemCount + this.props.birdData[lastItemCount].timestamp)
 
-        // center position of geo view
-        projection.center([current_latitude, current_longitude]);
+        // D 3   P R O J E C T I O N
+        // define center of map --> latest bird location
+        projection.center([current_latitude, current_longitude])
+        // define default projection to 0, 0
+        projection.translate([0, 0])
 
+        // S V G 
+        // select SVG tag -> see render()
+        let svg = d3.select(this.myRef.current);
+        // define style and size of SVG tag
+        svg.attr('width', '100vw')
+            .attr('height', '100vh')
+            // .attr("viewBox", [0, 0, width, height])
+            .style('background-color', '#7FFFD4')
+            ;
+        // translate svg-content container to the center of window
+        svg.selectAll('.svg-content')
+        .attr('transform', function(){
+            return "translate(" + window.innerWidth/2 + "," + window.innerHeight/2 + ")"
+        })
 
-
-
-        // draw LINES
+        // L I N E S
         // convert API data to a array --> each item of the array should have 2 GPS locations (start and end) to draw a line
         var data = this.props.birdData;
         var linesArray = [];
@@ -90,10 +133,12 @@ class DrawSVG extends React.Component {
         const path = d3.geoPath()
             .projection(projection)
         // Add the path
-        svg.append("g").attr('class','lines').selectAll("myPath")
+        svg.select(".svg-content")
+            .append("g").attr('class','lines').selectAll("myPath")
             .data(linesArray)
             .enter()
             .append("path")
+                .attr('class','line')
                 .attr("d", function(d){ 
                     // let line = "M" + d.coordinates[0][0]  + " " +  d.coordinates[0][1] + " L" + d.coordinates[1][0] + " " +  d.coordinates[1][1]
                     // console.log('create curvy path: ' + line)
@@ -104,44 +149,30 @@ class DrawSVG extends React.Component {
                 .style("stroke", "orange")
                 .style("stroke-width", 1)
 
-
-
-
-
-
-
-
-
+        // C I R C L E S
         // draw circle for each entry in birdData
-        svg.append("g").attr('class','circles')
+        svg.select(".svg-content")
+            .append("g").attr('class','circles')
             .selectAll("circle")
-            // .data(sampleData.locations)
             .data(this.props.birdData)
             .join("circle")
+            .attr('class','circle')
             .attr("transform", d => `translate(${projection([d.location_lat, d.location_long])})`)
             .attr("r", 2)
             .append("title")
             .text(d => "time stamp: " + d.timestamp + " latitude: " + d.location_lat + " longitude: " + d.location_long);
-        
         // style of current position (last circle of birdData)
         svg.selectAll("circle:last-child").attr('class','last-circle')
             .attr("r", 10.5)
             .style("fill", "#69b3a2")
             .append("title").text(d => "last location");
-
-        
-
-
-
-
-
-
     }
+
 
     render() {
         return(
             <div>
-            <svg ref={this.myRef} className='outline'></svg>
+            <svg ref={this.myRef} className='outline' ><g className='svg-content'></g></svg>
             </div>
         )
     }
