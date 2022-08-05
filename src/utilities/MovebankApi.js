@@ -1,6 +1,7 @@
 import React, {useState, useEffect} from 'react';
 // import d3 from 'd3';
 import * as d3 from 'd3';
+import '../css/svgStyle.css'
 // import sampleData from '../json/sampledata.json';
 // import useWindowDimensions from './WindowSize';
 
@@ -140,10 +141,24 @@ class DrawSVG extends React.Component {
             .append("path")
                 .attr('class','line')
                 .attr("d", function(d){ 
-                    // let line = "M" + d.coordinates[0][0]  + " " +  d.coordinates[0][1] + " L" + d.coordinates[1][0] + " " +  d.coordinates[1][1]
-                    // console.log('create curvy path: ' + line)
-                    // return path(line)
-                    return path(d)
+                    console.log("linesArray content: " + typeof path(d))
+                    let  splitArr = path(d).split(/[L,]+/);
+                    let positionA1 = parseFloat(splitArr[0].replace('M', ''));
+                    let positionA2 = parseFloat(splitArr[1]);
+                    let positionB1 = parseFloat(splitArr[2]);
+                    let positionB2 = parseFloat(splitArr[3]);
+
+                    // calculate Bezier curve value "C x x x x"
+                    let bezierA1 = positionA1 - 50
+                    let bezierA2 = positionA2 - 50
+                    let bezierB1 = positionB1 + 50
+                    let bezierB2 = positionB2 + 50
+
+                    console.log("path array: part 1: " + parseFloat(splitArr[0].replace('M', '')) + "part 2: " + parseFloat(splitArr[1]) ); 
+
+                    let modifiedString = "M " + positionA1 + " " + positionA2 + ", C " + bezierA1 + " " + bezierA2 + " " + bezierB1 + " " + bezierB2 + " " + positionB1 + " " + positionB2;
+                    return modifiedString
+                    // return path(d)
                 })
                 .style("fill", "none")
                 .style("stroke", "orange")
