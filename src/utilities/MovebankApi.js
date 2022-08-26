@@ -161,8 +161,9 @@ class DrawSVG extends React.Component {
                     // return path(d)
                 })
                 .style("fill", "none")
-                .style("stroke", "orange")
-                .style("stroke-width", 1)
+                .style("stroke", "blue")
+                // L I N E - stroke width
+                .style("stroke-width", 10)
 
         // C I R C L E S
         // draw circle for each entry in birdData
@@ -173,7 +174,8 @@ class DrawSVG extends React.Component {
             .join("circle")
             .attr('class','circle')
             .attr("transform", d => `translate(${projection([d.location_lat, d.location_long])})`)
-            .attr("r", 2)
+            // C I R C L E S - change size/radius 
+            .attr("r", 12)
             .append("title")
             .text(d => "time stamp: " + d.timestamp + " latitude: " + d.location_lat + " longitude: " + d.location_long);
         // style of current position (last circle of birdData)
