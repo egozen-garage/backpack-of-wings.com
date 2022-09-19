@@ -1,5 +1,5 @@
 import React from 'react';
-import MovebankAPI from '../utilities/MovebankApi';
+import MovebankDataBackground from '../components/MovebankDataBackground';
 
 
 export default function Home(){
@@ -7,5 +7,5 @@ export default function Home(){
 
     // console.log('This is your data', data)
 
-    return <MovebankAPI></MovebankAPI>
+    return <MovebankDataBackground/>
 }
