@@ -20,3 +20,15 @@ span {
   display: block;
   padding: 10px 0px;
 }
+
+.landingPage {
+  background: white;
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  border: 1px solid black;
+  padding: 50px;
+  opacity: 0.9;
+}
