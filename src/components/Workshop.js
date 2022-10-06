@@ -1,5 +1,12 @@
 import React from 'react';
 
 export function Workshop() {
-    return <h1>Workshop</h1>
+    return (
+        <>
+            <div class="px-9">
+                <h1>Workshop</h1>
+            </div>
+            
+        </>
+    )
 }

@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { withIdleTimer } from "react-idle-timer";
 
-function IdleTimerContainer() {
+export function IdleTimerContainer() {
     const idleTimerRef = useRef(null)
 
     const onIdle = () => {

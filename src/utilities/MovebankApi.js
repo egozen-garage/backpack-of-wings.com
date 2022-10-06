@@ -27,7 +27,7 @@ function MovebankAPI() {
 }
 
 
-let height = 400;
+let height = 800;
 let width = 800;
 let projection = d3.geoNaturalEarth1();
 

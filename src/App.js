@@ -7,32 +7,34 @@ import { Impressum } from './components/Impressum';
 import { NotFound } from './components/NotFound';
 import { StoryPage } from './components/StoryPage';
 import { Menu } from './components/Menu';
-import { IdleTimerContainer } from './components/IdleTimerContainer';
 import { LandingPage } from './components/LandingPage';
+import { About } from './components/About';
 
 function App() {
   const [buttonPopup, setButtonPopup] = useState(true);
+  // const [aboutPopup, setAboutPopup] = useState(false);
 
   return(
     <>
-    <LandingPage trigger={buttonPopup} setTrigger={setButtonPopup}></LandingPage>
+      {/* INTRODUCTORY PAGE */} 
+      <LandingPage trigger={buttonPopup} setTrigger={setButtonPopup}></LandingPage>
     
-    {/* MENU */} 
-    <Menu></Menu>
+      {/* MENU */} 
+      <Menu></Menu>
 
-    {/* TIMER */} 
-    {/* <IdleTimerContainer></IdleTimerContainer> */}
-    
-    {/* EVERY OTHER PAGE */} 
-      <Routes>
-        <Route element={<Home />} path='/' exact />
-        <Route element={<Workshop />} path='/workshop' exact />          
-        <Route element={<Archive />} path='/loadmemories'>
-          <Route element={<StoryPage />} path=':id' />  
-        </Route>          
-        <Route element={<Impressum />} path='/impressum' exact /> 
-        <Route element={<NotFound />} path='*' exact />         
-      </Routes>
+      {/* IDLE TIMER */} 
+      {/* <IdleTimerContainer></IdleTimerContainer> */}
+      
+      {/* EVERY OTHER PAGE */} 
+        <Routes>
+          <Route element={<Home />} path='/' exact />
+          <Route element={<Workshop />} path='/workshop' exact />          
+          <Route element={<Archive />} path='/loadmemories'>
+            <Route element={<StoryPage />} path=':id' />  
+          </Route>          
+          <Route element={<Impressum />} path='/impressum' exact /> 
+          <Route element={<NotFound />} path='*' exact />         
+        </Routes>
     </>
   )
 }
