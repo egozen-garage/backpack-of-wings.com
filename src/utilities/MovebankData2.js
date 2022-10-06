@@ -110,7 +110,7 @@ function DrawSVG(props){
 
             var yearBounds = [];
 
-            var yearPaths = d3.selectAll(".circles-year").selectAll(".circle").each(function(d) {
+            d3.selectAll(".circles-year").selectAll(".circle").each(function(d) {
                 yearBounds.push(pathGenerator.bounds(d))
             });
             console.log("yearBounds: " + yearBounds)
