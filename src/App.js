@@ -10,6 +10,7 @@ import { Menu } from './components/Menu';
 import { LandingPage } from './components/LandingPage';
 import { About } from './components/About';
 
+
 function App() {
   const [buttonPopup, setButtonPopup] = useState(true);
   // const [aboutPopup, setAboutPopup] = useState(false);
@@ -20,7 +21,7 @@ function App() {
       <LandingPage trigger={buttonPopup} setTrigger={setButtonPopup}></LandingPage>
     
       {/* MENU */} 
-      <Menu></Menu>
+      <Menu style={{zIndex:40, position:"absolute"}}></Menu>
 
       {/* IDLE TIMER */} 
       {/* <IdleTimerContainer></IdleTimerContainer> */}
