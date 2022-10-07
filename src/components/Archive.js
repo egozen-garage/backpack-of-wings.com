@@ -4,7 +4,7 @@ import { Link, Outlet } from 'react-router-dom';
 export function Archive() {
     return (
         <>
-            <div class="px-9">
+            <div class="pt-3 loadMemories col-start-2 row-start-2 row-span-3 px-9">
                 <h1>Load Memories</h1>
                 <Link to="/loadmemories/1">Dudaim site, Israel</Link>
                 <br />
