@@ -1,4 +1,4 @@
-import {Link, BrowserRouter, Routes, Route} from 'react-router-dom';
+import {Link, NavLink, BrowserRouter, Routes, Route} from 'react-router-dom';
 import { useState } from 'react';
 import Home from './components/Home';
 import { Archive } from './components/Archive';
@@ -34,15 +34,15 @@ function App() {
       </div>
 
         {/* LOAD MEMORIES */} 
-        <Link class="loadMemories-container z-40 flex items-center text-lg border-solid bg-white border-r-2 border-black w-8 order-1" to="/loadmemories">
+        <NavLink className="loadMemories-container z-40 flex items-center text-lg border-solid bg-white border-r-2 border-black w-8 order-1" to="/loadmemories">
           <h1 class="" style={{ writingMode: 'vertical-rl'}}>Load Memories</h1>
-        </Link>
+        </NavLink>
 
 
         {/* UPLOAD STORIES */} 
-        <Link class="workshop-container z-40 w-8 flex items-center text-lg border-solid bg-white border-l-2 border-black order-3" to="/workshop">
+        <NavLink className="workshop-container z-40 w-8 flex items-center text-lg border-solid bg-white border-l-2 border-black order-3" to="/workshop">
           <h1 class="" style={{ writingMode: 'vertical-rl'}}>Workshop</h1>
-        </Link>
+        </NavLink>
 
         {/* EVERY OTHER PAGE */} 
         <div class="wrapper-content z-30 order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
@@ -63,14 +63,14 @@ function App() {
         </div>
 
         {/* BACK TO DASHBOARD BUTTON */} 
-        <Link class="fixed z-40 top-3 left-4" to="/">
+        <NavLink className="fixed z-40 top-3 left-4" to="/" reloadDocument>
             <p class="px-9">Dashboard</p>
-        </Link>
+        </NavLink>
 
         {/* IMPRESSUM */} 
-        <Link class="impressum-container fixed z-40 right-4 bottom-3 text-sm px-9" to="/impressum">
+        <NavLink className="impressum-container fixed z-40 right-4 bottom-3 text-sm px-9" to="/impressum">
           <p>Impressum</p>
-        </Link>
+        </NavLink>
       </div>
 
       {/* IDLE TIMER */} 
