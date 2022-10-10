@@ -26,7 +26,7 @@ function App() {
       <div class="wrapper flex justify-between min-h-screen">
 
       {/* ABOUT WINDOW */} 
-      <div class="aboutContainer bg-white fixed z-50 border-black border-2 rounded-2xl bottom-10 left-20 w-2/5 p-2">
+      <div class="aboutContainer bg-white fixed z-40 border-black border-2 rounded-2xl bottom-10 left-20 w-2/5 p-2">
         <button onClick={() => setAboutPopup(true)}>
           <h1>Backpack of Wings</h1>
         </button>
@@ -34,18 +34,18 @@ function App() {
       </div>
 
         {/* LOAD MEMORIES */} 
-        <Link class="loadMemories-container z-50 flex items-center text-lg border-solid bg-white border-r-2 border-black w-8 order-1" to="/loadmemories">
+        <Link class="loadMemories-container z-40 flex items-center text-lg border-solid bg-white border-r-2 border-black w-8 order-1" to="/loadmemories">
           <h1 class="" style={{ writingMode: 'vertical-rl'}}>Load Memories</h1>
         </Link>
 
 
         {/* UPLOAD STORIES */} 
-        <Link class="workshop-container z-50 w-8 flex items-center text-lg border-solid bg-white border-l-2 border-black order-3" to="/workshop">
+        <Link class="workshop-container z-40 w-8 flex items-center text-lg border-solid bg-white border-l-2 border-black order-3" to="/workshop">
           <h1 class="" style={{ writingMode: 'vertical-rl'}}>Workshop</h1>
         </Link>
 
         {/* EVERY OTHER PAGE */} 
-        <div class="wrapper-content z-40 order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
+        <div class="wrapper-content z-30 order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
           <Routes>
             <Route element={<Home />} path='/' exact />
             <Route element={<Workshop />} path='/workshop' exact />          
@@ -63,12 +63,12 @@ function App() {
         </div>
 
         {/* BACK TO DASHBOARD BUTTON */} 
-        <Link class="fixed z-50 top-3 left-4" to="/">
+        <Link class="fixed z-40 top-3 left-4" to="/">
             <p class="px-9">Dashboard</p>
         </Link>
 
         {/* IMPRESSUM */} 
-        <Link class="impressum-container fixed z-50 right-4 bottom-3 text-sm px-9" to="/impressum">
+        <Link class="impressum-container fixed z-40 right-4 bottom-3 text-sm px-9" to="/impressum">
           <p>Impressum</p>
         </Link>
       </div>

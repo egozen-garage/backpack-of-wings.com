@@ -8,7 +8,7 @@ export function Menu() {
 
     return (
         <>
-            <div class="bg-slate-500 flex justify-between">
+            {/* <div class="bg-slate-500 flex justify-between">
 
                 <nav>
                     <Link to="/loadmemories">
@@ -51,7 +51,7 @@ export function Menu() {
                     </button>
                         <About trigger={aboutPopup} setTrigger={setAboutPopup}></About>
                 </div>
-            </div>
+            </div> */}
         </>
     ) 
 }
