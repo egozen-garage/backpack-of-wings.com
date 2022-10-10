@@ -1,6 +1,7 @@
 {
   "name": "backpack-of-wings.com",
   "version": "0.1.0",
+  "proxi": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@headlessui/react": "^1.7.3",

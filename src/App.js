@@ -10,6 +10,7 @@ import { Menu } from './components/Menu';
 import { LandingPage } from './components/LandingPage';
 import { About } from './components/About';
 
+import {ServerWeatherRequest} from './utilities/ServerWeatherRequest';
 
 function App() {
   const [buttonPopup, setButtonPopup] = useState(true);
@@ -17,6 +18,8 @@ function App() {
 
   return(
     <>
+      {/* API WEATHER DATA - requested from our server */}
+      <ServerWeatherRequest/>
       {/* INTRODUCTORY PAGE */} 
       <LandingPage trigger={buttonPopup} setTrigger={setButtonPopup}></LandingPage>
     
