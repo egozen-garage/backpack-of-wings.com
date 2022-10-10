@@ -16,7 +16,7 @@ schedule.scheduleJob('*/30 * * * * *', () => {
     weatherData.weather.push(counter)
     console.log("I ran.... counter is: " + counter)
 })
-
+ 
 
 
 app.get("/api", (req, res) => {
