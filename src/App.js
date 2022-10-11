@@ -1,12 +1,11 @@
-import {Link, NavLink, BrowserRouter, Routes, Route} from 'react-router-dom';
+import {NavLink, Routes, Route} from 'react-router-dom';
 import { useState } from 'react';
 import Home from './components/Home';
-import { Archive } from './components/Archive';
+import { LoadMemories } from './components/LoadMemories';
 import { Workshop } from './components/Workshop';
 import { Impressum } from './components/Impressum';
 import { NotFound } from './components/NotFound';
 import { StoryPage } from './components/StoryPage';
-import { Menu } from './components/Menu';
 import { LandingPage } from './components/LandingPage';
 import { About } from './components/About';
 import Mapbox from './components/Mapbox';
@@ -41,7 +40,7 @@ function App() {
 
         {/* UPLOAD STORIES */} 
         <NavLink className="workshop-container z-40 w-8 flex items-center text-lg border-solid bg-white border-l-2 border-black order-3" to="/workshop">
-          <h1 class="" style={{ writingMode: 'vertical-rl'}}>Workshop</h1>
+          <h1 class="" style={{ writingMode: 'vertical-rl'}}>Upload Stories</h1>
         </NavLink>
 
         {/* EVERY OTHER PAGE */} 
@@ -49,7 +48,7 @@ function App() {
           <Routes>
             <Route element={<Home />} path='/' exact />
             <Route element={<Workshop />} path='/workshop' exact />          
-            <Route element={<Archive />} path='/loadmemories'>
+            <Route element={<LoadMemories />} path='/loadmemories'>
               <Route element={<StoryPage />} path=':id' />  
             </Route>          
             <Route element={<Impressum />} path='/impressum' exact /> 

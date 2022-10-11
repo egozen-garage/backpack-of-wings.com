@@ -1,11 +1,18 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
+// import stories from '../json/storiesData.json';
 
 export function StoryPage() {
-    const { id } = useParams()
+    // const { id } = useParams()
+    // console.log("data:" + stories.stories[0].text)
+
     return (
         <>
-            <div class="bg-white border-black border-2 rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]">
+            {/* <div>
+                stories {stories.stories[0].text}
+            </div> */}
+
+            {/* <div class="bg-white border-black border-2 rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]">
                 <h1>Story { id }</h1>
                     <p class="overflow-scroll h-[400px]">
                         The air is loaded, sizzling, electrical, my back feathers tingle whenever I
@@ -32,7 +39,7 @@ export function StoryPage() {
                         Since then, I always seek through the treasures carefully with my beak
                         before swallowing.
                     </p>
-            </div>
+            </div> */}
         </>
     )   
 }
