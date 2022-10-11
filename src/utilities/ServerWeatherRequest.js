@@ -2,10 +2,11 @@ import React, {useEffect, useState} from 'react';
 
 export function ServerWeatherRequest() {
 
-    const [backendData, setBackendData] = useState([{}])
+    const [backendData, setBackendData] = useState(null)
+    // const [backendData, setBackendData] = useState([{}])
 
     useEffect(() => {
-        fetch("/api").then(
+        fetch("https://backpackofwings-weather-api.netlify.app/api").then(
             response => response.json()
         ).then(
             data => {
@@ -13,7 +14,11 @@ export function ServerWeatherRequest() {
             }
         )
     }, [])
-    console.log("weather api fetch: " + backendData)
+    if(backendData){
+        console.log("weather api fetch: " + backendData)
+    } else {
+        console.log("weather api fetch: NONE DATA")
+    }
     return (
         <div>
             

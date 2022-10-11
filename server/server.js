@@ -11,11 +11,11 @@ let counter = 0;
 // run every hour - for more schedule code go to https://crontab.guru/every-hour
 // schedule.scheduleJob('0 * * * *', () => {
 // for testing ever 2 seconds
-schedule.scheduleJob('*/30 * * * * *', () => {
-    counter = counter + 1;
-    weatherData.weather.push(counter)
-    console.log("I ran.... counter is: " + counter)
-})
+// schedule.scheduleJob('*/30 * * * * *', () => {
+//     counter = counter + 1;
+//     weatherData.weather.push(counter)
+//     console.log("I ran.... counter is: " + counter)
+// })
  
 
 
