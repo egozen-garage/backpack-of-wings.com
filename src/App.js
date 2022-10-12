@@ -25,7 +25,7 @@ function App() {
       <div class="wrapper flex justify-between min-h-screen">
 
       {/* ABOUT WINDOW */} 
-      <div class="aboutContainer bg-white fixed z-40 border-black border-2 rounded-2xl bottom-10 left-20 w-2/5 p-2">
+      <div class="aboutContainer bg-white fixed z-40 shadow-md rounded-2xl bottom-10 left-20 w-2/5 p-2">
         <button onClick={() => setAboutPopup(true)}>
           <h1>Backpack of Wings</h1>
         </button>
@@ -33,13 +33,13 @@ function App() {
       </div>
 
         {/* LOAD MEMORIES */} 
-        <NavLink className="loadMemories-container z-40 flex items-center text-lg border-solid bg-white border-r-2 border-black w-8 order-1" to="/loadmemories">
+        <NavLink className="loadMemories-container z-40 flex items-center text-lg bg-white shadow-md w-8 order-1" to="/loadmemories">
           <h1 class="" style={{ writingMode: 'vertical-rl'}}>Load Memories</h1>
         </NavLink>
 
 
         {/* UPLOAD STORIES */} 
-        <NavLink className="workshop-container z-40 w-8 flex items-center text-lg border-solid bg-white border-l-2 border-black order-3" to="/workshop">
+        <NavLink className="workshop-container z-40 w-8 flex items-center text-lg bg-white shadow-md order-3" to="/workshop">
           <h1 class="" style={{ writingMode: 'vertical-rl'}}>Upload Stories</h1>
         </NavLink>
 
