@@ -113,8 +113,8 @@ const handler = async (event, context, callback) => {
 // schedule every 1 minute
 // exports.handler = schedule("* * * * *", handler);
 // schedule every 15 minute
-exports.handler = schedule("*/15 * * * *", handler);
-// exports.handler = schedule("@hourly", handler);
+// exports.handler = schedule("*/15 * * * *", handler);
+exports.handler = schedule("@hourly", handler);
 
 
 
