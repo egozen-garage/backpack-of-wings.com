@@ -24,7 +24,7 @@ export function StoriesData() {
 
     return (
         <>
-            <div class="bg-white shadow-md rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]">
+            <div class="bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]">
                 <h1 class="text-2xl">{stories.stories[currentIndex].location},{stories.stories[currentIndex].country}</h1>
                 <p class="overflow-scroll h-[390px] py-6">
                     {stories.stories[currentIndex].text}
@@ -36,10 +36,10 @@ export function StoriesData() {
                     <div class="w-1/2 cursor-e-resize" onClick={goToNext}></div>
                 </div>
             </div>
-            <div class="col-start-1 row-start-5 p-6">
+            <div class="col-start-2 row-start-4 px-3">
                 {stories.stories.map((story,storyIndex) => (
                     <div class="bg-white rounded-2xl w-3 h-3 m-6 cursor-pointer" key={storyIndex} onClick={() => goToStory(storyIndex)}>
-                        <p class="px-5">Location{storyIndex}</p>
+                        <p class="text-white px-5">Location{storyIndex}</p>
                     </div>
                  ))}
             </div>
