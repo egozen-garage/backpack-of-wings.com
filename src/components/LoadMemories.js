@@ -1,17 +1,13 @@
 import React from 'react';
-import { Link, Outlet } from 'react-router-dom';
 import { StoriesData } from './StoriesData.js';
 import { useParams } from 'react-router-dom';
-import stories from '../json/storiesData.json';
 
 export function LoadMemories() {
     const { id } = useParams()
 
-
-
     return (
         <>
-            <StoriesData/>
+            <StoriesData></StoriesData>
             {/* <div class="pt-3 loadMemories col-start-2 row-start-2 row-span-3 px-9">
                 <h1>Load Memories</h1>
                 <Link to={'/loadmemories/'+ id }>Location { id }</Link>
@@ -24,3 +20,5 @@ export function LoadMemories() {
         </>
     ) 
 }
+
+export default LoadMemories;
