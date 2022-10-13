@@ -22,7 +22,7 @@ function StoryWrite(){
     fetch(`/.netlify/functions/add-story-to-cms`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "story-form", ...formData }),
+      body: encode({ "form-name": "story-form", ...JSON.stringify(formData) }),
     })
       .then((response) => {
         // add what should happen after successful submission
