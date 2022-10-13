@@ -33,7 +33,8 @@ const client = sanityClient({
     var dateTime = date+' '+time;
 
   // Pulling out the payload from the body
-  const { payload } = JSON.parse(JSON.stringify(event.body))
+  const { payload } = JSON.parse(event.body)
+//   const { payload } = JSON.parse(JSON.stringify(event.body))
 
   // Checking which form has been submitted
   const isContactForm = payload.data.formId === "story-form"
