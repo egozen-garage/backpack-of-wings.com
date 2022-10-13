@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
 import { NavLink } from "react-router-dom";
-import progressbar from '../img/audio-progressbar-01.png';
+import progressbar from '../img/audio-progressbar-01-white.svg';
 import '../css/gradientAnimation.css';
 
 // (props) to trigger the component
@@ -27,7 +27,7 @@ setVisible(!visible)
                             <div class="py-20 progressBar-container">
                                 <img class="flex items-center w-screen px-12" src={progressbar} alt="progressbar"/>
                             </div>
-                            <button class="skipBtn py-8" onClick={handleClick}> 
+                            <button class="skipBtn px-4 py-2 ml-40 border-white border-solid border-2 rounded-xl" onClick={handleClick}> 
                                 <p>Skip &#10142;</p> 
                                 {/* to pass through elements */}
                             </button>

@@ -61,15 +61,18 @@ function App() {
           <Mapbox/>
         </div>
 
-        {/* BACK TO DASHBOARD BUTTON */} 
-        <NavLink className="fixed z-40 top-3 left-4" to="/" reloadDocument>
-            <p class="px-9">Dashboard</p>
-        </NavLink>
+        <div class="inline-flex text-sm text-white fixed z-40 bottom-3 right-4 px-9">
+          {/* BACK TO DASHBOARD BUTTON */} 
+          <NavLink className="px-3" to="/" reloadDocument>
+              <p>Dashboard</p>
+          </NavLink>
 
-        {/* IMPRESSUM */} 
-        <NavLink className="impressum-container fixed z-40 right-4 bottom-3 text-sm px-9" to="/impressum">
-          <p>Impressum</p>
-        </NavLink>
+          {/* IMPRESSUM */} 
+          <NavLink className="px-3" to="/impressum">
+            <p>Impressum</p>
+          </NavLink>
+        </div>
+
       </div>
 
       {/* IDLE TIMER */} 
