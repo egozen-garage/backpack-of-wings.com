@@ -31,12 +31,13 @@ const client = sanityClient({
     // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
     // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     // var dateTime = date+' '+time;
+    console.log("event.body: " + event.body)
 
   // Pulling out the payload from the body
   const { payload } = JSON.parse(event.body)
 //   const { payload } = JSON.parse(JSON.stringify(event.body))
 //   const { payload } = event.body
-  console.log(payload)
+  console.log("Payload: " + payload)
 
   // Checking which form has been submitted
   const isStoryForm = payload.data.formId === "story-form"
