@@ -20,16 +20,17 @@ function StoryWrite(){
   // Handles the post process to Netlify so we can access their serverless functions
   const handlePost = (formData, event) => {
     fetch(`/.netlify/functions/add-story-to-cms`, {
+    // fetch(`/.netlify/functions/add-story-to-cms`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
-      body: encode({ "form-name": "story-form", ...JSON.stringify(formData) }),
+      body: encode({ "form-name": "story-form", ...formData }),
+    //   body: encode({ "form-name": "story-form", ...JSON.stringify(formData) }),
     })
       .then((response) => {
         // add what should happen after successful submission
         // e.g. navitate to success page
-        console.log("form data is: " + JSON.stringify(formData) )
+        console.log("form data is: " + JSON.stringify(encode({ "form-name": "story-form", ...formData })) )
         reset()
-        console.log(response)
       })
       .catch((error) => {
         console.log(error)

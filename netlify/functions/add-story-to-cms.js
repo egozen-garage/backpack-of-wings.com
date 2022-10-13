@@ -27,26 +27,28 @@ const client = sanityClient({
 
   exports.handler = async (event, context, callback) => {
     // create timestamp
-    var today = new Date();
-    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    var dateTime = date+' '+time;
+    // var today = new Date();
+    // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    // var dateTime = date+' '+time;
 
   // Pulling out the payload from the body
-//   const { payload } = JSON.parse(event.body)
   const { payload } = JSON.parse(event.body)
+//   const { payload } = JSON.parse(JSON.stringify(event.body))
+//   const { payload } = event.body
+  console.log(payload)
 
   // Checking which form has been submitted
-  const isContactForm = payload.data.formId === "story-form"
+  const isStoryForm = payload.data.formId === "story-form"
 
   // Build the document JSON and submit it to SANITY
-  if (isContactForm) {
+  if (isStoryForm) {
     const storyData = {
       _type: "story",
       name: payload.data.name,
       email: payload.data.email,
       message: payload.data.message,
-      publishedAt: dateTime,
+    //   publishedAt: dateTime,
     }
 
     const result = await client.create(storyData).catch((err) => console.log(err))
