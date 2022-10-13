@@ -6,7 +6,7 @@ import '../css/gradientAnimation.css';
 
 // (props) to trigger the component
 export function UploadStoriesIntro (props) {
-const buttonName = 'Skip'
+
 const [visible,setVisible] = React.useState(true);
     const handleClick=()=>{
 
@@ -28,7 +28,7 @@ setVisible(!visible)
                                 <img class="flex items-center w-screen px-12" src={progressbar} alt="progressbar"/>
                             </div>
                             <button class="skipBtn py-8" onClick={handleClick}> 
-                                <p>{buttonName} &#10142;</p> 
+                                <p>Skip &#10142;</p> 
                                 {/* to pass through elements */}
                             </button>
                         </div>
