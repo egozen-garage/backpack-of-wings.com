@@ -15,7 +15,9 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxd
 export default function Mapbox({zoomedOut}) {
     let dataReceived = false;
     // all API Data
-    const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
+    // const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
+    // daily events
+    const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_01';
     let [movebankData, setMovebankData] = useState(null)
     useEffect(() => {
         // const apiUrl = props.apiUrl;
@@ -51,32 +53,35 @@ function DrawMapbox(props){
     // const [lat, setLat] = useState(38.875);
     const [zoom, setZoom] = useState(12);
     
+    // for later: if click menu then zoom out
+    if(12===3){ setZoom(8) }
 
-            // L A S T    L O C A T I O N     D A T A
-        // -----------------------------------------------------------------
-        let lastItemCount = props.birdData.length-1
-        let current_longitude = props.birdData[lastItemCount].location_long
-        let current_latitude = props.birdData[lastItemCount].location_lat
-        console.log("last entry: " + lastItemCount + props.birdData[lastItemCount].timestamp)
-        console.log("bird data: " + props.birdData[1].location_long)
-        console.log("current location: " + current_longitude + ", " + current_latitude)
-        // for(let x of props.birdData){
-        const currentCoordinates = [];
-        for(let i = 0; i < lastItemCount; i++){
-            var locationX = [
-                props.birdData[i].location_long,
-                props.birdData[i].location_lat
-            ]
-            currentCoordinates.push(locationX)
-            
-            // [
-                //     [-77.044211, 38.852924],
-                //     [-77.045659, 38.860158],
-                //     [-77.044232, 38.862326],
-                // ]
-            }        
-            console.log(currentCoordinates);
-
+    // L A S T    L O C A T I O N     D A T A
+    // -----------------------------------------------------------------
+    let lastItemCount = props.birdData.length-1
+    let current_longitude = props.birdData[lastItemCount].location_long
+    let current_latitude = props.birdData[lastItemCount].location_lat
+    console.log("last entry: " + lastItemCount + props.birdData[lastItemCount].timestamp)
+    console.log("bird data: " + props.birdData[1].location_long)
+    console.log("current location: " + current_longitude + ", " + current_latitude)
+    // for(let x of props.birdData){
+    const currentCoordinates = [];
+    for(let i = 0; i < lastItemCount; i++){
+    // for(let i = 0; i < 50; i++){
+        var locationX = [
+            props.birdData[i].location_long,
+            props.birdData[i].location_lat
+        ]
+        currentCoordinates.push(locationX)
+        
+        // [
+            //     [-77.044211, 38.852924],
+            //     [-77.045659, 38.860158],
+            //     [-77.044232, 38.862326],
+            // ]
+    }        
+    console.log(currentCoordinates);
+    
 
     useEffect(() => {
         if (map.current) return; // initialize map only once
