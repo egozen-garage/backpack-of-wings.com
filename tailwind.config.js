@@ -15,7 +15,12 @@ module.exports = {
       serif: ['Playfair Display', 'serif'],
       monospace: ['DM Mono', 'monospace'],
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        '2xl': '0px 0px 10px 2px rgba(0, 0, 0, 0.3)',
+        '3xl': '3px 12px 10px 0px rgba(0, 0, 0, 0.3)',
+      }
+    },
   },
   plugins: [],
 }
