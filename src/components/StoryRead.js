@@ -7,14 +7,13 @@ function StoryRead(props) {
     useEffect(() => {
             sanityClient
                 .fetch(
-                    `*[_type == "story"]{
-        title,
-        }`
+                    `*[_type == "story"]{ name, }`
                 )
                 .then((data) => setStory(data))
                 .catch(console.error);
         }, []);
     console.log("story json: " + JSON.stringify(story))
+    // console.log("story json: " + JSON.stringify(story))
 
 
     return (

@@ -4,45 +4,30 @@ export default {
     type: 'document',
     fields: [
       {
-        name: 'title',
-        title: 'Title',
+        name: 'name',
+        title: 'Name',
         type: 'string',
       },
       {
-        name: 'slug',
-        title: 'Slug',
-        type: 'slug',
-        options: {
-          source: 'title',
-          maxLength: 96,
-        },
+        name: "email",
+        title: "Email",
+        type: "string",
       },
       {
-        name: 'author',
-        title: 'Author',
-        type: 'string',
-      },
-      {
-        name: 'mail',
-        title: 'Mail',
-        type: 'string',
+        name: "message",
+        title: "Message",
+        type: "text",
       },
       {
         name: 'publishedAt',
         title: 'Published at',
         type: 'datetime',
       },
-      {
-        name: 'body',
-        title: 'Body',
-        type: 'blockContent',
-      },
     ],
   
     preview: {
       select: {
-        title: 'title',
-        author: 'author.name',
+        title: 'name',
       },
       prepare(selection) {
         const {author} = selection
