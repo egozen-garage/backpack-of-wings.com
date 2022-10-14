@@ -1,7 +1,8 @@
 import React, { useRef, useEffect, useState } from 'react';
 // import React from 'react';
-import 'mapbox-gl/dist/mapbox-gl.css';
+// import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
+
 // import MovebankDataYear from '../json/MovebankDataYear.json';
  
 // ADD YOUR ACCESS TOKEN FROM
