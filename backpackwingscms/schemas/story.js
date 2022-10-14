@@ -22,6 +22,7 @@ export default {
         name: 'publishedAt',
         title: 'Published at',
         type: 'datetime',
+        readOnly: true,
       },
     ],
   
@@ -30,9 +31,9 @@ export default {
         title: 'name',
       },
       prepare(selection) {
-        const {author} = selection
+        const {name} = selection
         return Object.assign({}, selection, {
-          subtitle: author && `by ${author}`,
+          subtitle: name && `by ${name}`,
         })
       },
     },

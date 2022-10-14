@@ -116,52 +116,6 @@ const handler = async (event, context, callback) => {
 // schedule every 15 minute
 // exports.handler = schedule("*/15 * * * *", handler);
 exports.handler = schedule("@hourly", handler);
+// schedule every 4 hours
+// exports.handler = schedule("0 */4 * * *", handler);
 
-
-
-
-
-// {
-// "coord":{
-//     "lon":34.743,
-//     "lat":31.3252
-// },
-// "weather":[{
-//     "id":804,
-//     "main":"Clouds"
-//     ,"description":"overcast clouds",
-//     "icon":"04n"
-// }],
-// "base":"stations",
-// "main":{
-//     "temp":23.12,
-//     "feels_like":23.11,
-//     "temp_min":23.12,
-//     "temp_max":23.12,
-//     "pressure":1015,
-//     "humidity":62,
-//     "sea_level":1015,
-//     "grnd_level":988
-// },
-// "visibility":10000,
-// "wind":{"
-//     speed":5.79,
-//     "deg":328,
-//     "gust":5.87
-// },
-// "clouds":{
-//     "all":91
-// },
-// "dt":1665590540,
-// "sys":{
-//     "type":2,
-//     "id":2002441,
-    // "country":"IL",
-    // "sunrise":1665546088,
-    // "sunset":1665587602
-// },
-// "timezone":10800,
-// "id":294184,
-// "name":"Mishmar HaNegev",
-// "cod":200
-// }
