@@ -2,51 +2,67 @@ import React, { useRef, useEffect, useState } from 'react';
 // import React from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
-import MovebankDataYear from '../json/MovebankDataYear.json';
+// import MovebankDataYear from '../json/MovebankDataYear.json';
+import sanityClient from "../client";
  
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxdjhzbm96bGo3In0.MCm-qbborgyvRnQ7JA--5w';
 
 
-
-
 // Call Movebank API and provide array
 export default function Mapbox({zoomedOut}) {
+
+    
     let dataReceived = false;
     // all API Data
     // const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
     // daily events
     const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_01';
     let [movebankData, setMovebankData] = useState(null)
+    let [weatherData, setWeatherData] = useState(null);
     useEffect(() => {
-        // const apiUrl = props.apiUrl;
-        fetch(apiUrl)
-            .then((response) => response.json())
-            .then((data) => setMovebankData(data.individuals[0].locations))
-            // .then((data) => console.log('This is your data', data.individuals[0].locations))
+        Promise.all([
+                fetch(apiUrl).then((response) => response.json()),
+                sanityClient.fetch(
+                    `*[_type == "weatherData"]{
+                        temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
+                    }[0]`
+                ),
+            ])
+            .then(([movebankData, weatherData]) => {
+                setMovebankData(movebankData.individuals[0].locations);
+                setWeatherData(weatherData);
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     },[])
-    // console.log('This is your data', movebankData.id)
+
     if(!movebankData){
         return ( <pre>data loading...</pre>)
     }
     if(movebankData && !dataReceived){
         dataReceived = true;
-        console.log("bird data 30 days: " + movebankData[1].location_long)
-        console.log("bird data length: " + movebankData.length)
-        return <DrawMapbox birdData={movebankData} zoomedOut={zoomedOut}/>
+        // console.log("bird data 30 days: " + movebankData[1].location_long)
+        // console.log("bird data length: " + movebankData.length)
+        return <DrawMapbox birdData={movebankData} weatherData={weatherData} zoomedOut={zoomedOut}/>
     }
 }
 
 
+// const weatherData = null;
 
+// function CallWeatherData() {
 
-
+//     return weatherData
+// }
 
 
 
 
 function DrawMapbox(props){
+    console.log("weather data: " + JSON.stringify(props.weatherData))
     const mapContainer = useRef(null);
     const map = useRef(null);
     // const [lng, setLng] = useState(-77.035);
@@ -61,9 +77,9 @@ function DrawMapbox(props){
     let lastItemCount = props.birdData.length-1
     let current_longitude = props.birdData[lastItemCount].location_long
     let current_latitude = props.birdData[lastItemCount].location_lat
-    console.log("last entry: " + lastItemCount + props.birdData[lastItemCount].timestamp)
-    console.log("bird data: " + props.birdData[1].location_long)
-    console.log("current location: " + current_longitude + ", " + current_latitude)
+    // console.log("last entry: " + lastItemCount + props.birdData[lastItemCount].timestamp)
+    // console.log("bird data: " + props.birdData[1].location_long)
+    // console.log("current location: " + current_longitude + ", " + current_latitude)
     // for(let x of props.birdData){
     const currentCoordinates = [];
     for(let i = 0; i < lastItemCount; i++){
@@ -80,7 +96,7 @@ function DrawMapbox(props){
             //     [-77.044232, 38.862326],
             // ]
     }        
-    console.log(currentCoordinates);
+    // console.log(currentCoordinates);
     
 
     useEffect(() => {
