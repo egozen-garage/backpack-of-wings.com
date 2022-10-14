@@ -37,6 +37,8 @@ exports.handler = async (event, context, callback) => {
 
   console.log("event.body: " + event.body )
   console.log("event.body params: " + JSON.stringify(payload) )
+  console.log("event.body .formID: " + payload.formID )
+  console.log("event.body .data.formID: " + payload.data.formID )
   
 
   // Pulling out the payload from the body
@@ -57,39 +59,15 @@ exports.handler = async (event, context, callback) => {
     //   publishedAt: dateTime,
     }
 
-    const result = await client.create(storyData).catch((err) => console.log(err))
+    const result = await client.create(storyData)
+    // .catch((err) => console.log(err))
+    .then((res) => {
+      // you can see this in the Netlify function logs
+      console.log('RESULT FROM SANITY: ', res)
+    })
   }
 
   callback(null, {
     statusCode: 200,
   })
 }
-
-// exports.handler = async (event, context, callback) => {
-//     try {
-//         // write data to sanity database:
-//         const newWeatherDataset = {
-//           _type: 'weatherData',
-//           timestamp: dateTime,
-//         }
-
-//         // const { payload } = JSON.parse(event.body)
-//         const result = await client.create(newWeatherDataset).then((res) => {
-//           // you can see this in the Netlify function logs
-//           console.log('RESULT FROM SANITY: ', res)
-//         })
-//         callback(null, {
-//           statusCode: 200
-//         })
-
-//       return { statusCode: 200, 
-//         body: JSON.stringify({ data }) 
-//     };
-//     } catch (error) {
-//       console.log(error);
-//       return {
-//         statusCode: 500,
-//         body: JSON.stringify({ error: 'Failed fetching data' }),
-//       };
-//     }
-// };
