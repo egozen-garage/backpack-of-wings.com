@@ -7,7 +7,7 @@ export function NotFound() {
         setTimeout(() => {
             navigate("/",{})
         }, 6000)
-    }, [])
+    })
 
     return (
         <>

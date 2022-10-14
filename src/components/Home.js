@@ -1,6 +1,6 @@
-import React from 'react';
+// import React from 'react';
 // import MovebankDataBackground from '../components/MovebankDataBackground';
-import Mapbox from '../components/Mapbox';
+// import Mapbox from '../components/Mapbox';
 
 export default function Home(){
 

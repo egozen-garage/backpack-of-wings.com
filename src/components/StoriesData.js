@@ -1,6 +1,7 @@
 import stories from '../json/storiesData.json';
 import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+// import { Link, Outlet } from 'react-router-dom';
 
 export function StoriesData() {
     const [currentIndex, setCurrentIndex] = useState(0);

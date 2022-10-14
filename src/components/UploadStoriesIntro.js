@@ -1,6 +1,6 @@
 import React from "react";
-import { useState } from "react";
-import { NavLink } from "react-router-dom";
+// import { useState } from "react";
+// import { NavLink } from "react-router-dom";
 import progressbar from '../img/audio-progressbar-01-white.svg';
 import '../css/gradientAnimation.css';
 

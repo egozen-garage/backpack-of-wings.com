@@ -1,9 +1,9 @@
 import React from 'react';
 import { StoriesData } from './StoriesData.js';
-import { useParams } from 'react-router-dom';
+// import { useParams } from 'react-router-dom';
 
 export function LoadMemories() {
-    const { id } = useParams()
+    // const { id } = useParams()
 
     return (
         <>
