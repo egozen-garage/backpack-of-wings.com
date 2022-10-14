@@ -35,6 +35,12 @@ const unit = '&units=metric'
 
 
 const handler = async (event, context, callback) => {
+    // create timestamp
+    var today = new Date();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+    var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var dateTime = date+' '+time;
+
     try {
         const response = await fetch(apiLastLocation);
         const data = await response.json();
@@ -58,7 +64,8 @@ const handler = async (event, context, callback) => {
 
         const newWeatherDataset = {
           _type: 'weatherData',
-          timestamp: current_timestamp.slice(0, -5),
+          timestamp_bird: current_timestamp.slice(0, -5),
+          timestamp: dateTime,
           latitude: current_lat,
           longitude: current_long,
           temp: dataOpenWeather.main.temp,

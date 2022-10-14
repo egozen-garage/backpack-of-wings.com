@@ -5,19 +5,18 @@ import sanityClient from "./client";
 
 function App() {
   // test Sanity connection
-  const [story, setStory] = useState(null);
+  const [weatherData, setWeatherData] = useState(null);
   useEffect(() => {
 		sanityClient
 			.fetch(
-				`*[_type == "story"]{
-      title,
-    }`
+				`*[_type == "weatherData"]{
+          temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
+        }[0]`
 			)
-			.then((data) => setStory(data))
+			.then((data) => setWeatherData(data))
 			.catch(console.error);
 	}, []);
-  console.log("story json: " + JSON.stringify(story))
-  console.log("story json: " + story[0].title)
+  console.log("Weather Data json: " + JSON.stringify(weatherData))
 
 
   return(
