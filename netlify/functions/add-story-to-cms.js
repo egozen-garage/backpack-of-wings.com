@@ -5,7 +5,7 @@
 // netlify functions:invoke scheduled-api-function --port 9999
 // invoke function in browser http://localhost:9999/.netlify/functions/add-story-to-cms
 
-const bodyParser = require('body-parser')
+// const bodyParser = require('body-parser')
 const sanityClient = require('@sanity/client')
 const client = sanityClient({
     projectId: process.env.REACT_APP_SANITY_DATABASE_PROJECT_ID,
@@ -14,6 +14,13 @@ const client = sanityClient({
 })
 
 
+// function paramsToObject(entries) {
+//   const result = {}
+//   for(const [key, value] of entries) { // each 'entry' is a [key, value] tupple
+//     result[key] = value;
+//   }
+//   return result;
+// }
 
 exports.handler = async (event, context, callback) => {
   // create timestamp
@@ -21,7 +28,16 @@ exports.handler = async (event, context, callback) => {
   // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
   // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
   // var dateTime = date+' '+time;
-  console.log("event.body: " + bodyParser.json(event.body) )
+
+  
+  const urlParams = new URLSearchParams(event.body); // event.body -> 'abc=foo&def=%5Basf%5D&xyz=5'
+  // const entries = urlParams.entries(); //returns an iterator of decoded [key,value] tuples
+  // const params = paramsToObject(entries); //{abc:"foo",def:"[asf]",xyz:"5"}
+  const params = Object.fromEntries(urlParams); // {abc: "foo", def: "[asf]", xyz: "5"}
+
+  console.log("event.body: " + event.body )
+  console.log("event.body params: " + params )
+  
 
   // Pulling out the payload from the body
   const { payload } = JSON.parse(event.body)
