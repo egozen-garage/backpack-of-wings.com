@@ -1,26 +1,25 @@
-import React, { useState, useEffect } from "react";
-import sanityClient from "../client";
+// import React, { useState, useEffect } from "react";
+// import sanityClient from "../client";
 
-function StoryRead(props) {
-    // test Sanity connection
-    const [story, setStory] = useState(null);
-    useEffect(() => {
-            sanityClient
-                .fetch(
-                    `*[_type == "story"]{ name, }`
-                )
-                .then((data) => setStory(data))
-                .catch(console.error);
-        }, []);
-    console.log("story json: " + JSON.stringify(story))
-    // console.log("story json: " + JSON.stringify(story))
+// function StoryRead(props) {
+//     // test Sanity connection
+//     const [story, setStory] = useState(null);
+//     useEffect(() => {
+//             sanityClient
+//                 .fetch(
+//                     `*[_type == "story"]{ name, }`
+//                 )
+//                 .then((data) => setStory(data))
+//                 .catch(console.error);
+//         }, []);
+//     console.log("story json: " + JSON.stringify(story))
+//     // console.log("story json: " + JSON.stringify(story))
 
-
-    return (
-        <div>
+//     return (
+//         <div>
             
-        </div>
-    );
-}
+//         </div>
+//     );
+// }
 
-export default StoryRead;
+// export default StoryRead;
