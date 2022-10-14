@@ -46,7 +46,7 @@ exports.handler = async (event, context, callback) => {
   //   const { payload } = event.body
 
   // Checking which form has been submitted
-  const isStoryForm = payload.formId === "story-form";
+  const isStoryForm = payload.formID === "story-form";
 
   // Build the document JSON and submit it to SANITY
   if (isStoryForm) {
