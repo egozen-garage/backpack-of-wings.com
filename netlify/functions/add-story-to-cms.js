@@ -36,11 +36,11 @@ exports.handler = async (event, context, callback) => {
   const params = Object.fromEntries(urlParams); // {abc: "foo", def: "[asf]", xyz: "5"}
 
   console.log("event.body: " + event.body )
-  console.log("event.body params: " + params )
+  console.log("event.body params: " + JSON.stringify(params) )
   
 
   // Pulling out the payload from the body
-  const { payload } = JSON.parse(event.body)
+  const { payload } = JSON.parse(params)
   //   const { payload } = JSON.parse(JSON.stringify(event.body))
   //   const { payload } = event.body
   console.log("Payload: " + JSON.stringify(payload) )
