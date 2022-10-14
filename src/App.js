@@ -1,4 +1,3 @@
-// import {BrowserRouter, Routes, Route } from 'react-router-dom';
 import {NavLink, Routes, Route} from 'react-router-dom';
 import { useState } from 'react';
 import Home from './components/Home';
@@ -10,6 +9,7 @@ import { StoryPage } from './components/StoryPage';
 import { LandingPage } from './components/LandingPage';
 import { About } from './components/About';
 import Mapbox from './components/Mapbox';
+
 
 
 function App() {
