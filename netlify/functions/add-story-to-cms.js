@@ -33,29 +33,27 @@ exports.handler = async (event, context, callback) => {
   const urlParams = new URLSearchParams(event.body); // event.body -> 'abc=foo&def=%5Basf%5D&xyz=5'
   // const entries = urlParams.entries(); //returns an iterator of decoded [key,value] tuples
   // const params = paramsToObject(entries); //{abc:"foo",def:"[asf]",xyz:"5"}
-  const params = Object.fromEntries(urlParams); // {abc: "foo", def: "[asf]", xyz: "5"}
+  const payload = Object.fromEntries(urlParams); // {abc: "foo", def: "[asf]", xyz: "5"}
 
   console.log("event.body: " + event.body )
-  console.log("event.body params: " + JSON.stringify(params) )
+  console.log("event.body params: " + JSON.stringify(payload) )
   
 
   // Pulling out the payload from the body
-  const { payload } = params
   // const { payload } = JSON.parse(params)
   //   const { payload } = JSON.parse(JSON.stringify(event.body))
   //   const { payload } = event.body
-  console.log("Payload: " + JSON.stringify(payload) )
 
   // Checking which form has been submitted
-  const isStoryForm = payload.data.formId === "story-form"
+  const isStoryForm = payload.formId === "story-form"
 
   // Build the document JSON and submit it to SANITY
   if (isStoryForm) {
     const storyData = {
       _type: "story",
-      name: payload.data.name,
-      email: payload.data.email,
-      message: payload.data.message,
+      name: payload.name,
+      email: payload.email,
+      message: payload.message,
     //   publishedAt: dateTime,
     }
 
