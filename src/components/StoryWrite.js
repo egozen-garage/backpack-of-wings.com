@@ -9,7 +9,6 @@ function StoryWrite(){
 
     // Transforms the form data from the React Hook Form output to a format Netlify can read
   const encode = (data) => {
-    console.log("Story: data = " + JSON.stringify(data) )
     return Object.keys(data)
       .map(
         (key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key])
@@ -24,12 +23,10 @@ function StoryWrite(){
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "story-form", ...formData }),
-    //   body: encode({ "form-name": "story-form", ...JSON.stringify(formData) }),
     })
       .then((response) => {
         // add what should happen after successful submission
         // e.g. navitate to success page
-        console.log("form data is: " + JSON.stringify(encode({ "form-name": "story-form", ...formData })) )
         reset()
       })
       .catch((error) => {

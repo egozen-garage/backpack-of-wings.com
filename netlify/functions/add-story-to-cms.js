@@ -5,7 +5,7 @@
 // netlify functions:invoke scheduled-api-function --port 9999
 // invoke function in browser http://localhost:9999/.netlify/functions/add-story-to-cms
 
-
+const bodyParser = require('body-parser')
 const sanityClient = require('@sanity/client')
 const client = sanityClient({
     projectId: process.env.REACT_APP_SANITY_DATABASE_PROJECT_ID,
@@ -13,31 +13,21 @@ const client = sanityClient({
     token: process.env.REACT_APP_SANITY_WRITE_SERVERSIDE
 })
 
-// exports.handler = async function (event, context, callback) {
-//     const { payload } = JSON.parse(event.body)
-//     const result = await client.create({ 
-//     //   _id: `submission.${uuid()}`
-//       _type: 'submission.form', ...payload })
-//     callback(null, {
-//       statusCode: 200
-//     })
-//   }
 
 
-
-  exports.handler = async (event, context, callback) => {
-    // create timestamp
-    // var today = new Date();
-    // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-    // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-    // var dateTime = date+' '+time;
-    console.log("event.body: " + event.body)
+exports.handler = async (event, context, callback) => {
+  // create timestamp
+  // var today = new Date();
+  // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  // var dateTime = date+' '+time;
+  console.log("event.body: " + bodyParser.json(event.body) )
 
   // Pulling out the payload from the body
   const { payload } = JSON.parse(event.body)
-//   const { payload } = JSON.parse(JSON.stringify(event.body))
-//   const { payload } = event.body
-  console.log("Payload: " + payload)
+  //   const { payload } = JSON.parse(JSON.stringify(event.body))
+  //   const { payload } = event.body
+  console.log("Payload: " + JSON.stringify(payload) )
 
   // Checking which form has been submitted
   const isStoryForm = payload.data.formId === "story-form"
@@ -58,7 +48,7 @@ const client = sanityClient({
   callback(null, {
     statusCode: 200,
   })
-  }
+}
 
 // exports.handler = async (event, context, callback) => {
 //     try {
