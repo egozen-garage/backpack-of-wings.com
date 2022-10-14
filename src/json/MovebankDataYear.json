@@ -1,0 +1,38 @@
+{
+    "individuals": [
+      {
+        "study_id": 10449318,
+        "individual_local_identifier": "HL457 (3083)",
+        "individual_taxon_canonical_name": "Ciconia ciconia",
+        "sensor_type_id": 653,
+        "sensor_id": 10754007,
+        "individual_id": 10792907,
+        "locations": [
+          {
+            "timestamp":1373992223000,
+            "city": "Germany",
+            "location_long":11.2354003,
+            "location_lat":52.4865283
+          },
+          {
+            "timestamp":1373992223000,
+            "city": "Budapest",
+            "location_long": 19.043723186178685,
+            "location_lat": 47.503125406127964
+          },
+          {
+            "timestamp": 1373992223000,
+            "city": "Istanbul",
+            "location_long": 28.95339683849142,
+            "location_lat": 41.03691725724855
+          },
+          {
+            "timestamp": 1376654707000,
+            "city" : "Beirut",
+            "location_long": 35.48911366916271,
+            "location_lat": 33.913823269420284
+          }
+        ]
+      }
+    ]
+  }
