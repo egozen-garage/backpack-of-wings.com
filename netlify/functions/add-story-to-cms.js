@@ -10,6 +10,7 @@ const sanityClient = require('@sanity/client')
 const client = sanityClient({
     projectId: process.env.REACT_APP_SANITY_DATABASE_PROJECT_ID,
     dataset: process.env.REACT_APP_SANITY_MAIN_DATABASE_NAME,
+    apiVersion: '2022-10-14',
     token: process.env.REACT_APP_SANITY_WRITE_SERVERSIDE
 })
 
@@ -37,9 +38,7 @@ exports.handler = async (event, context, callback) => {
 
   console.log("event.body: " + event.body )
   console.log("event.body params: " + JSON.stringify(payload) )
-  console.log("event.body .formID: " + payload.formID )
-  console.log("event.body .data.formID: " + payload.data.formID )
-  
+  console.log("event.body .formID: " + payload.formID )  
 
   // Pulling out the payload from the body
   // const { payload } = JSON.parse(params)
@@ -47,10 +46,11 @@ exports.handler = async (event, context, callback) => {
   //   const { payload } = event.body
 
   // Checking which form has been submitted
-  const isStoryForm = payload.formId === "story-form"
+  const isStoryForm = payload.formId === "story-form";
 
   // Build the document JSON and submit it to SANITY
   if (isStoryForm) {
+    console.log("story form accepted");
     const storyData = {
       _type: "story",
       name: payload.name,
@@ -59,12 +59,17 @@ exports.handler = async (event, context, callback) => {
     //   publishedAt: dateTime,
     }
 
-    const result = await client.create(storyData)
-    // .catch((err) => console.log(err))
-    .then((res) => {
-      // you can see this in the Netlify function logs
-      console.log('RESULT FROM SANITY: ', res)
-    })
+
+      // const result = await client.create(storyData)
+      // // .catch((err) => console.log(err))
+      // .then((res) => {
+      //   // you can see this in the Netlify function logs
+      //   console.log('RESULT FROM SANITY: ', res)
+      // })
+
+      client.create(storyData).then((res) => {
+        console.log(`story was created`)
+      })
   }
 
   callback(null, {

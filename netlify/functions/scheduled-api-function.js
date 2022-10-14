@@ -13,6 +13,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const client = sanityClient({
   projectId: process.env.REACT_APP_SANITY_DATABASE_PROJECT_ID,
   dataset: process.env.REACT_APP_SANITY_MAIN_DATABASE_NAME,
+  apiVersion: '2022-10-14',
   token: process.env.REACT_APP_SANITY_WRITE_SERVERSIDE
 })
 
