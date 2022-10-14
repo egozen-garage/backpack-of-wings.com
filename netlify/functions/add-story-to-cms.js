@@ -40,7 +40,8 @@ exports.handler = async (event, context, callback) => {
   
 
   // Pulling out the payload from the body
-  const { payload } = JSON.parse(params)
+  const { payload } = params
+  // const { payload } = JSON.parse(params)
   //   const { payload } = JSON.parse(JSON.stringify(event.body))
   //   const { payload } = event.body
   console.log("Payload: " + JSON.stringify(payload) )
