@@ -14,6 +14,14 @@ import Mapbox from "./components/Mapbox";
 function App() {
   const [buttonPopup, setButtonPopup] = useState(true);
   const [aboutPopup, setAboutPopup] = useState(false);
+  const [zoomOut, setZoomOut] = useState(false);
+  
+
+  const handleZoom = (value) => {
+    // 👇️ take parameter passed from Child component
+    setZoomOut(value);
+    console.log("handle zoom from child: " + zoomOut)
+  };
 
   return (
     <>
@@ -56,9 +64,9 @@ function App() {
         {/* EVERY OTHER PAGE */}
         <div class="wrapper-content z-30 order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
           <Routes>
-            <Route element={<Home />} path="/" exact />
-            <Route element={<UploadStories />} path="/uploadstories" exact />
-            <Route element={<LoadMemories />} path="/loadmemories">
+            <Route element={<Home handleZoom={handleZoom}/>} path="/" exact />
+            <Route element={<UploadStories handleZoom={handleZoom}/>} path="/uploadstories" exact />
+            <Route element={<LoadMemories handleZoom={handleZoom} />} path="/loadmemories">
               <Route element={<StoryPage />} path=":id" />
             </Route>
             <Route element={<Impressum />} path="/impressum" exact />
@@ -68,7 +76,7 @@ function App() {
 
         {/* MAP BACKGROUND*/}
         <div class="fixed z-0 w-full h-full px-7">
-          <Mapbox />
+          <Mapbox zoomOut={zoomOut}/>
         </div>
 
         <div class="inline-flex text-sm text-white fixed z-40 bottom-3 right-4 px-9">
