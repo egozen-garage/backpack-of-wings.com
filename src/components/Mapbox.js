@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 // import React from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
@@ -155,7 +155,7 @@ function DrawMapbox(props){
             {
                 'type': 'Feature',
                 'properties': {
-                    'description': 'temperatur: ' + props.weatherData.temp + '° C',
+                    'description': 'Temperature: ' + props.weatherData.temp + '°C',
                     // 'icon': 'theatre-15'
                 },
                 'geometry': {
@@ -166,7 +166,7 @@ function DrawMapbox(props){
             {
                 'type': 'Feature',
                 'properties': {
-                    'description': 'humidity: ' + props.weatherData.humidity + ' g/m3',
+                    'description': 'Humidity: ' + props.weatherData.humidity + ' g/m3',
                     // 'icon': 'theatre-15'
                 },
                 'geometry': {
@@ -177,7 +177,7 @@ function DrawMapbox(props){
             {
                 'type': 'Feature',
                 'properties': {
-                    'description': "pressure: " + props.weatherData.pressure + " hPa",
+                    'description': "Pressure: " + props.weatherData.pressure + " hPa",
                     // 'icon': 'theatre-15'
                 },
                 'geometry': {
@@ -199,7 +199,78 @@ function DrawMapbox(props){
         ]
     }
     
-
+    const storyLocations = {
+        'type': 'FeatureCollection',
+        'features': [
+            {
+                'type': 'Feature',
+                'properties': {
+                    'description': 'Istanbul, Turkey',
+                    'icon': 'current-location',
+                    // 'icon': 'icon-bird-location',
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [29.087114420286106, 41.062342115603734]
+                }
+            },
+            {
+                'type': 'Feature',
+                'properties': {
+                    'description': 'Drömling, Germany',
+                    // 'icon': 'theatre-15'
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [11.027669114580046, 52.49456226795604]
+                }
+            },
+            {
+                'type': 'Feature',
+                'properties': {
+                    'description': 'Lacková, Slovakia',
+                    // 'icon': 'theatre-15'
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [20.590533054164478, 49.31698642610774]
+                }
+            },
+            {
+                'type': 'Feature',
+                'properties': {
+                    'description': 'Hama, Syria',
+                    // 'icon': 'theatre-15'
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [36.755196474432246, 35.13211177222622]
+                }
+            },
+            {
+                'type': 'Feature',
+                'properties': {
+                    'description': 'Neve Eitan, Israel',
+                    // 'icon': 'theatre-15'
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [35.5320056758374, 32.491984286564104]
+                }
+            },
+            {
+                'type': 'Feature',
+                'properties': {
+                    'description': 'Dudaim site, Israel',
+                    // 'icon': 'theatre-15'
+                },
+                'geometry': {
+                    'type': 'Point',
+                    'coordinates': [34.90823611685902, 32.147553437885264]
+                }
+            },
+        ]
+    }
 
     
 
@@ -267,6 +338,8 @@ function DrawMapbox(props){
             zoom: zoom
         });
         
+        // disable map zoom when using scroll
+        // map.current.scrollZoom.disable();
 
         map.current.on('load', () => {
             // 'line-gradient' can only be used with GeoJSON sources
@@ -330,11 +403,7 @@ function DrawMapbox(props){
                         ['linear'],
                         ['line-progress'],
                         0, 'rgba(' + pathRGB + ',0)',
-                        // 0.1, 'royalblue',
-                        // 0.3, 'cyan',
-                        // 0.5, 'lime',
                         0.2, 'rgba(' + pathRGB + ',0.5)',
-                        // 0.7, 'rgba(' + pathRGB + ',0.3)',
                         1, 'rgba(' + pathRGB + ',1)'
                     ]
                 },
@@ -388,15 +457,18 @@ function DrawMapbox(props){
                     'text-radial-offset': 0.5,
                     'text-justify': 'center',
                     'icon-image': ['get', 'icon'],
-                    'icon-size': 0.25,
+                    'icon-size': 0.3,
                 },
                 paint: {
-                    "text-color": 'rgba(' + pathRGB + ',1)'
-                }
+                    "text-color": 'rgba(' + pathRGB + ',1)',
+                    "text-halo-color": "black",
+                    "text-halo-width": 1,                }
             });
 
             map.current.setLayoutProperty("settlement-major-label", 'visibility', 'none');
             map.current.setLayoutProperty("settlement-minor-label", 'visibility', 'none');
+            map.current.setLayoutProperty("admin-0-boundary", 'visibility', 'none');
+            map.current.setLayoutProperty("admin-0-boundary-bg", 'visibility', 'none');
             // map.current.setPaintProperty('settlement-major-label"', 'opacity', [
             //     'interpolate',
             //     ['exponential', 0.5], // Set the exponential rate of change to 0.5
@@ -404,6 +476,34 @@ function DrawMapbox(props){
             //     11, 0, // When zoom is 11 or less, set opacit to 1
             //     12, 1 // When zoom is 12 or higher, set opacit to 0
             // ]);
+
+
+
+            map.current.addSource('story-locations', {
+                type: 'geojson',
+                lineMetrics: true,
+                data: storyLocations
+            });
+            map.current.addLayer({
+                type: 'symbol',
+                source: 'story-locations',
+                id: 'story-locations',
+                layout: {
+                    'text-field': ['get', 'description'],
+                    'text-variable-anchor': ['left'],
+                    'text-radial-offset': 0.5,
+                    'text-justify': 'center',
+                    // 'icon-image': ['get', 'icon'],
+                    'icon-image': 'current-location',
+                    'icon-size': 0.25,
+                },
+                paint: {
+                    "text-color": 'rgba(' + pathRGB + ',1)',
+                    "text-halo-color": "black",
+                    "text-halo-width": 1,
+                    // "text-halo-blur": 1,
+                }
+            });
 
         });
 
@@ -423,6 +523,7 @@ function DrawMapbox(props){
     return (
         <div>
             <div ref={mapContainer} class={mapStyle} className="map-container" style={mapContainerStyle} />
+            {/* <div ref={mapContainer} class={mapStyle} className="map-container" style={mapContainerStyle} /> */}
         </div>
     );
 }

@@ -9,6 +9,7 @@ import { StoryPage } from "./components/StoryPage";
 import { LandingPage } from "./components/LandingPage";
 import { About } from "./components/About";
 import Mapbox from "./components/Mapbox";
+// import CallWeatherData from "./utilities/CallWeatherWind";
 
 
 function App() {
@@ -25,6 +26,7 @@ function App() {
 
   return (
     <>
+      {/* <CallWeatherData/> */}
       {/* INTRODUCTORY PAGE */}
       <LandingPage
         trigger={buttonPopup}
@@ -62,7 +64,13 @@ function App() {
         </NavLink>
 
         {/* EVERY OTHER PAGE */}
-        <div class="wrapper-content z-30 order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
+        <div class="relative wrapper-content z-30 order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
+                    {/* MAP BACKGROUND*/}
+          <div class="absolute z-0 w-full h-full" style={{objectFit: "cover"}}>
+          {/* <div class="fixed z-0 w-full h-full px-7"> */}
+            <Mapbox zoomOut={zoomOut}/>
+          </div>
+
           <Routes>
             <Route element={<Home handleZoom={handleZoom}/>} path="/" exact />
             <Route element={<UploadStories handleZoom={handleZoom}/>} path="/uploadstories" exact />
@@ -72,11 +80,7 @@ function App() {
             <Route element={<Impressum />} path="/impressum" exact />
             <Route element={<NotFound />} path="*" exact />
           </Routes>
-        </div>
 
-        {/* MAP BACKGROUND*/}
-        <div class="fixed z-0 w-full h-full px-7">
-          <Mapbox zoomOut={zoomOut}/>
         </div>
 
         <div class="inline-flex text-sm text-white fixed z-40 bottom-3 right-4 px-9">

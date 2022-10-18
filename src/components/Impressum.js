@@ -3,7 +3,7 @@ import React from 'react';
 export function Impressum() {
     return (
         <>
-            <div class="bg-white col-span-2 row-span-6 px-5 py-16 opacity-90">
+            <div class="bg-white col-span-2 row-span-6 px-5 py-16 opacity-90 z-1">
                 <h1>Impressum</h1>
                 <p>
                     <span class="block py-9">
