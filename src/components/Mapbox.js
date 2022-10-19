@@ -4,7 +4,7 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import MovebankDataYear from '../json/MovebankDataYear.json';
 import sanityClient from "../client";
-import iconCurrentLocation from "../img/current-location.svg"
+// import iconCurrentLocation from "../img/current-location.svg"
  
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com

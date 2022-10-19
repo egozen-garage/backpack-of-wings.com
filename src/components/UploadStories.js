@@ -4,7 +4,7 @@ import { UploadStoriesIntro } from "./UploadStoriesIntro.js";
 
 export function UploadStories() {
   const [text, setText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [currentIndex, setCurrentIndex] = useState(0);
 
   return (
     <>
