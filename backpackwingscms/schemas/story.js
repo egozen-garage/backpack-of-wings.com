@@ -41,12 +41,7 @@ export default {
   preview: {
     select: {
       title: "name",
-    },
-    prepare(selection) {
-      const { name } = selection;
-      return Object.assign({}, selection, {
-        subtitle: name && `by ${name}`,
-      });
+      subtitle: "location",
     },
   },
 };

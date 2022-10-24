@@ -12,7 +12,7 @@ export function UploadStories() {
       <UploadStoriesIntro trigger={true}></UploadStoriesIntro>
 
       {/* STORIES INPUT TEXT CONTAINER */}
-      <div class="uploadstories-container uploadstories-textField bg-white shadow-3xl rounded-2xl col-start-1 row-start-3 row-span-4 p-5 mx-6 h-[440px]">
+      <div class="z-30 uploadstories-container uploadstories-textField bg-white shadow-3xl rounded-2xl col-start-1 row-start-3 row-span-4 p-5 mx-6 h-[440px]">
         <form>
           {/* STORY TEXT BODY */}
           <div class="flex">
@@ -51,7 +51,7 @@ export function UploadStories() {
 
         
     {/* STORIES MATERIAL CONTAINER */}
-    <div class="row-start-1 row-span-2 col-span-2 my-6">
+    <div class="z-30 row-start-1 row-span-2 col-span-2 my-6">
         <div class="flex overflow-x-scroll scrollbar-hide">
             <div class="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
                 material 01

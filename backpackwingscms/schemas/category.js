@@ -14,8 +14,8 @@ export default {
       type: "string",
     },
     {
-      name: "image",
-      title: "Image Upload",
+      name: "material",
+      title: "Upload Materials",
       type: "array",
       of: [
         { type: "image" },
@@ -25,15 +25,26 @@ export default {
           type: "object",
           fields: [
             {
-              title: "URL",
-              name: "urlField",
+              title: "Image URL",
+              name: "imgurl",
               type: "url",
             },
           ],
+          preview: {
+            select: {
+              title: "imgurl",
+            }
+          }
         },
         { type: 'youtube'},
         { type: 'twitter'},
       ],
     },
   ],
+  preview: {
+    select: {
+      title: "locationName",
+      subtitle: "country",
+    }
+  }
 }; 
