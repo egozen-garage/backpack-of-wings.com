@@ -6,13 +6,15 @@ import MovebankDataYear from '../json/MovebankDataYear.json';
 import sanityClient from "../client";
 // import iconCurrentLocation from "../img/current-location.svg"
  
+import { useNavigate } from "react-router-dom";
+
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxdjhzbm96bGo3In0.MCm-qbborgyvRnQ7JA--5w';
 
 
 // Call Movebank API and provide array
-export default function Mapbox(props) {   
+export default function Mapbox(props) {  
     let dataReceived = false;
     // all API Data
     const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
@@ -61,7 +63,18 @@ export default function Mapbox(props) {
 
 
 function DrawMapbox(props){
-    console.log("weather data: " + JSON.stringify(props.weatherData))
+    let navigate  = useNavigate();
+    // const [currentRoute, setCurrentRoute]  = useState(null);
+
+    function changeRoute(newRoute) {
+      // change route
+      console.log("change route")
+      navigate('/'+newRoute)
+
+        // change route params
+        console.log("landmark clicked" + newRoute)
+    }
+    // console.log("weather data: " + JSON.stringify(props.weatherData))
     const mapContainer = useRef(null);
     const map = useRef(null);
     // const [lng, setLng] = useState(-77.035);
@@ -276,9 +289,6 @@ function DrawMapbox(props){
 
     // interactive map elements
     useEffect(() => {
-
-
-
         if(props.zoomOut){
             if (!map.current){ 
                 setZoom(12)
@@ -287,6 +297,11 @@ function DrawMapbox(props){
                     [-20, 5], // southwestern corner of the bounds
                     [20, 60], // northeastern corner of the bounds
                 ]);
+                map.current.scrollZoom.disable();
+                map.current.doubleClickZoom.disable();
+                map.current.dragRotate.disable();
+                map.current.keyboard.disable();
+                map.current.dragPan.disable();
                 // map.current.on('zoomstart', () => {
                     // map.current.setLayoutProperty("settlement-major-label", 'visibility', 'none');
                     // map.current.setLayoutProperty("settlement-minor-label", 'visibility', 'none');
@@ -299,7 +314,10 @@ function DrawMapbox(props){
             if (!map.current){  
             } else {
                 map.current.flyTo({center: [current_longitude, current_latitude], zoom:12});
-
+                map.current.scrollZoom.enable();
+                map.current.doubleClickZoom.enable();
+                map.current.keyboard.enable();
+                map.current.dragPan.enable();
 
                 // map.current.setLayoutProperty("settlement-major-label", 'visibility', 'visible');
                 // map.current.setLayoutProperty("settlement-minor-label", 'visibility', 'visible');
@@ -328,18 +346,23 @@ function DrawMapbox(props){
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
-            projection: 'naturalEarth',
-            name: 'naturalEarth',
+            projection: 'mercator',
+            // projection: 'naturalEarth',
+            name: 'Earth',
             // style: 'mapbox://styles/mapbox/light-v10',
             style: 'mapbox://styles/arminarndt/cl8vqgc4h002v14phy6bbsut8',
             // center: [lng, lat],
             center: [current_longitude, current_latitude],
+            minZoom: 3,
             maxZoom: 17,
             zoom: zoom
         });
         
-        // disable map zoom when using scroll
-        // map.current.scrollZoom.disable();
+        // disable map Toggle interactions
+        map.current.dragRotate.disable();
+        map.current.touchZoomRotate.disable();
+        map.current.boxZoom.disable();
+
 
         map.current.on('load', () => {
             // 'line-gradient' can only be used with GeoJSON sources
@@ -430,9 +453,6 @@ function DrawMapbox(props){
             ]);
 
 
-
-
-
             // map.current.loadImage(
             //     iconCurrentLocation,
             //     (error, image) => {
@@ -482,7 +502,8 @@ function DrawMapbox(props){
             map.current.addSource('story-locations', {
                 type: 'geojson',
                 lineMetrics: true,
-                data: storyLocations
+                data: storyLocations,
+                generateId: true // This ensures that all features have unique IDs
             });
             map.current.addLayer({
                 type: 'symbol',
@@ -496,13 +517,27 @@ function DrawMapbox(props){
                     // 'icon-image': ['get', 'icon'],
                     'icon-image': 'current-location',
                     'icon-size': 0.25,
+                    // "background-color": "yellow",
                 },
                 paint: {
                     "text-color": 'rgba(' + pathRGB + ',1)',
                     "text-halo-color": "black",
-                    "text-halo-width": 1,
+                    "text-halo-width": 2,
+                    // "cursor": "pointer",
                     // "text-halo-blur": 1,
                 }
+            });
+
+            map.current.on("mouseenter", 'story-locations', () => {
+                map.current.getCanvas().style.cursor = "pointer";
+            });
+            map.current.on("mouseleave", 'story-locations', () => {
+                map.current.getCanvas().style.cursor = "default";
+              });
+            map.current.on('click', 'story-locations', (e) => {
+                changeRoute(e.features[0].properties.description);
+                // setCurrentRoute(e.features[0].properties.description)
+                return 
             });
 
         });
