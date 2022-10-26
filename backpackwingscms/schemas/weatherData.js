@@ -1,7 +1,10 @@
+import { TiWeatherCloudy } from 'react-icons/ti'
+
 export default {
     name: 'weatherData',
     title: 'Weather Data',
     type: 'document',
+    icon: TiWeatherCloudy,
     fields: [
       {
         name: 'timestamp',

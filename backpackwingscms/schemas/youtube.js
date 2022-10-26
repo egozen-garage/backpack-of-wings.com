@@ -1,7 +1,10 @@
+import { FaYoutube } from 'react-icons/fa'
+
 export default {
   name: "youtube",
   type: "object",
   title: "Youtube Embed",
+  icon: FaYoutube,
   fields: [
     {
       name: "videoname",

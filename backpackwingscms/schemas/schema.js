@@ -6,11 +6,14 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 
 // We import object and document schemas
 import blockContent from './blockContent'
-import category from './category'
+import landmark from './landmark'
 import story from './story'
 import weatherData from './weatherData'
 import youtube from './youtube'
 import twitter from './twitter'
+import imageURL from './imageURL'
+import googleReviews from './googleReviews'
+import googleMaps from './googleMaps'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -21,11 +24,14 @@ export default createSchema({
   types: schemaTypes.concat([
     // The following are document types which will appear
     // in the studio.
-    category,
+    landmark,
     story,
     weatherData, 
     youtube,
     twitter,
+    imageURL,
+    googleReviews,
+    googleMaps,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,
