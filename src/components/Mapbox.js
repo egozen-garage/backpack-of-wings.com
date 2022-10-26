@@ -6,6 +6,8 @@ import MovebankDataYear from '../json/MovebankDataYear.json';
 import sanityClient from "../client";
 // import iconCurrentLocation from "../img/current-location.svg"
  
+import { useNavigate } from "react-router-dom";
+
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxdjhzbm96bGo3In0.MCm-qbborgyvRnQ7JA--5w';
@@ -61,11 +63,14 @@ export default function Mapbox(props) {
 
 
 function DrawMapbox(props){
+    let navigate  = useNavigate();
     // const [currentRoute, setCurrentRoute]  = useState(null);
 
     function changeRoute(newRoute) {
       // change route
       console.log("change route")
+      navigate('/'+newRoute)
+
         // change route params
         console.log("landmark clicked" + newRoute)
     }
