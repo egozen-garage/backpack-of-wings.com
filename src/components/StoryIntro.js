@@ -12,20 +12,21 @@ export function StoryIntro() {
   // const [visible,setVisible] = useState(true);
 
   let navigate = useNavigate();
-  const querySanityAPI =
-    '*[_id == "2e54a567-9a74-4a92-99cd-f4676a2915c0"]{"url":url.current}';
+  const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
   let [sanityData, setSanityData] = useState(null);
 
   useEffect(() => {
     Promise.all([SanityClient.fetch(querySanityAPI)])
       .then(([sanityData]) => {
         setSanityData(sanityData);
-        console.log("sanity data : " + sanityData[0].url);
       })
       .catch((err) => {
         console.log(err);
       });
   }, []);
+
+//   let urlVariable = sanityData[0].url;
+//   console.log(urlVariable);
 
   return (
     <>
