@@ -4,9 +4,9 @@ import React from "react";
 export function About(props) {
     return (props.trigger) ? (
         <>
-            <div class="h-64 overflow-scroll">
-                <button class="aboutBtn absolute right-3 top-3" onClick={() => props.setTrigger(false)}>&#9711;</button>{props.children}
-                <div class="py-8 text-xs">
+            <div className="h-64 overflow-scroll">
+                <button className="aboutBtn absolute right-3 top-3" onClick={() => props.setTrigger(false)}>&#9711;</button>{props.children}
+                <div className="py-8 text-xs">
                     <code>
                         last login. fri jun 24 18.44.10 on ttys000
                     </code>

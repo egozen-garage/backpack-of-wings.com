@@ -1,17 +1,25 @@
+import {BsTwitter} from 'react-icons/bs'
+
 export default {
     name: 'twitter',
     type: 'object',
     title: 'Twitter Embed',
+    icon: BsTwitter,
     fields: [
         {
-            name: "twittername",
+            name: "tweetTitle",
             type: "string",
             title: "Tweed Title",
         },
         {
-            name: "twitterurl",
+            name: "tweetURL",
             type: "url",
             title: "Full Twitter Link",
+        },
+        {
+            name: "tweetEmbed",
+            type: "string",
+            title: "Embed Tweet",
         },
         {
             name: 'id',
@@ -22,8 +30,8 @@ export default {
     preview: {
         select: {
           url: "url",
-          title: "twittername",
-          subtitle: "twitterurl",
+          title: "tweetTitle",
+          subtitle: "tweetURL",
         },
       },
 };
