@@ -11,6 +11,7 @@ import post from './post'
 import author from './author'
 import story from './story'
 import weatherData from './weatherData'
+import movebankData from './movebankData'
 import youtube from './youtube'
 import twitter from './twitter'
 
@@ -28,6 +29,7 @@ export default createSchema({
     category,
     story,
     weatherData, 
+    movebankData,
     youtube,
     twitter,
     // When added to this list, object types can be used as

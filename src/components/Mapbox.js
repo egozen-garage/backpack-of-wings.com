@@ -9,7 +9,7 @@ import sanityClient from "../client";
 // ADD YOUR ACCESS TOKEN FROM
 // https://account.mapbox.com
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxdjhzbm96bGo3In0.MCm-qbborgyvRnQ7JA--5w';
-
+// first entry on timestamp Tue Jul 16 2013 16:30:23 GMT+0000 --> 1373992223000 location_long: 11.2354003 location_lat: 52.4865283
 
 // Call Movebank API and provide array
 export default function Mapbox(props) {   
