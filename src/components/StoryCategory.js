@@ -1,8 +1,9 @@
 import React from "react";
-import { Story } from "./Story.js";
+// import { Story } from "./Story.js";
 // import SanityClient from "../client";
 // import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
+import StoryInputForm from "./StoryInputForm.js";
 
 export function StoryCategory() {
   let { landmark } = useParams()
@@ -38,7 +39,8 @@ export function StoryCategory() {
       */}
 
       {/* STORIES INPUT TEXT CONTAINER */}
-      <Story />
+      <StoryInputForm/>
+      {/* <Story /> */}
 
       {/* 
       TO-DO:
