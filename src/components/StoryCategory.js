@@ -1,9 +1,8 @@
 import React from "react";
 import { Story } from "./Story.js";
-import SanityClient from "../client";
-import { useEffect } from "react";
+// import SanityClient from "../client";
+// import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 
 export function StoryCategory() {
   let { landmark } = useParams()
