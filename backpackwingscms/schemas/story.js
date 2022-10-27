@@ -1,7 +1,10 @@
+import { BsFileText } from 'react-icons/bs'
+
 export default {
   name: "story",
   title: "Story",
   type: "document",
+  icon: BsFileText,
   fields: [
     {
       name: "name",
@@ -12,12 +15,12 @@ export default {
       name: "country",
       title: "Country",
       type: "reference",
-      to: [{ type: "category" }],
+      to: [{ type: "landmark" }],
       options: { filter: "!defined(country)" },
     },
     {
-      name: "location",
-      title: "Location Name",
+      name: "locationType",
+      title: "Location Type",
       type: "string",
     },
     {
@@ -41,12 +44,7 @@ export default {
   preview: {
     select: {
       title: "name",
-    },
-    prepare(selection) {
-      const { name } = selection;
-      return Object.assign({}, selection, {
-        subtitle: name && `by ${name}`,
-      });
+      subtitle: "location",
     },
   },
 };

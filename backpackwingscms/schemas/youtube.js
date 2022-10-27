@@ -1,17 +1,31 @@
+import { FaYoutube } from 'react-icons/fa'
+
 export default {
   name: "youtube",
   type: "object",
   title: "Youtube Embed",
+  icon: FaYoutube,
   fields: [
     {
-      name: "url",
+      name: "videoname",
+      type: "string",
+      title: "Video Name",
+    },
+    {
+      name: "iframe",
+      type: "string",
+      title: "iframe Code",
+    },
+    {
+      name: "youtubeURL",
       type: "url",
       title: "URL",
     },
   ],
   preview: {
     select: {
-      url: "url",
+      title: "videoname",
+      subtitle: "youtubeURL",
     },
   },
 };
