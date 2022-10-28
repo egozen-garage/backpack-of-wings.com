@@ -1,13 +1,13 @@
 import React from "react";
-import { Story } from "./Story.js";
-import SanityClient from "../client";
-import { useEffect } from "react";
+// import { Story } from "./Story.js";
+// import SanityClient from "../client";
+// import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { useState } from "react";
 import StoryInputForm from "./StoryInputForm.js";
 import CallSanityAPI from "../utilities/CallSanityAPI"
 
-export function StoryCategory() {
+export function StoryCategory({handleZoom}) {
+  handleZoom(true);
   let { landmark } = useParams()
 
   // OPERATION TO CHECK IF ON CORRECT PAGE
