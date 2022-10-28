@@ -4,6 +4,8 @@ import SanityClient from "../client";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import StoryInputForm from "./StoryInputForm.js";
+import CallSanityAPI from "../utilities/CallSanityAPI"
 
 export function StoryCategory() {
   let { landmark } = useParams()
@@ -31,6 +33,14 @@ export function StoryCategory() {
   //     });
   // }, []);
 
+
+  const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
+
+
+
+  console.log("storyCatergory - API data: " + JSON.stringify(data))
+  console.log("storyCatergory - API error: " + error)
+  console.log("storyCatergory - API isloaded: " + isLoaded)
   return (
     <>
       {/* 
@@ -39,7 +49,8 @@ export function StoryCategory() {
       */}
 
       {/* STORIES INPUT TEXT CONTAINER */}
-      <Story />
+      <StoryInputForm/>
+      {/* <Story /> */}
 
       {/* 
       TO-DO:
