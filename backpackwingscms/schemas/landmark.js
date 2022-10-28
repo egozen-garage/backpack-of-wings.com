@@ -3,7 +3,7 @@ import { AiFillFileImage } from 'react-icons/ai'
 
 export default {
   name: "landmark",
-  title: "Landmarks",
+  title: "Landmark",
   type: "document",
   icon: BsFillPinMapFill,
   fields: [
