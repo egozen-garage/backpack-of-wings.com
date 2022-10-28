@@ -4,8 +4,11 @@ import React from "react";
 // import { useEffect, useState} from "react";
 import { useParams } from "react-router-dom";
 import StoryInputForm from "./StoryInputForm.js";
+// import { useEffect, useState } from "react";
+import CallSanityAPI from "../utilities/CallSanityAPI"
 
-export function StoryCategory() {
+export function StoryCategory({handleZoom}) {
+  handleZoom(true);
   let { landmark } = useParams()
 
   // OPERATION TO CHECK IF ON CORRECT PAGE
@@ -31,6 +34,14 @@ export function StoryCategory() {
   //     });
   // }, []);
 
+
+  const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
+
+
+
+  console.log("storyCatergory - API data: " + JSON.stringify(data))
+  console.log("storyCatergory - API error: " + error)
+  console.log("storyCatergory - API isloaded: " + isLoaded)
   return (
     <>
       {/* 
