@@ -9,38 +9,13 @@ import CallSanityAPI from "../utilities/CallSanityAPI"
 
 export function StoryCategory() {
   let { landmark } = useParams()
-
-  // OPERATION TO CHECK IF ON CORRECT PAGE
-  if (landmark === 'israel-dudaimsite') {
-    console.log("You're on Dudaim Site!")
-  } else {
-    console.log("You're on another Landmark")
-  }
-
-  // SANITY CLIENT > READ OUT API
-  // let [sanityData, setSanityData] = useState(null);
-  // const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
-
-
-  // useEffect(() => {
-  //   Promise.all([SanityClient.fetch(querySanityAPI)])
-  //     .then(([sanityData]) => {
-  //       setSanityData(sanityData);
-  //       console.log("Read Sanity Data inside Story Category : " + sanityData[0].url);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-
+  // NEEDS FIXING! API IN ARRAY CANT BE RETURNED AS PROPER VALUE
   const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
-
-
 
   console.log("storyCatergory - API data: " + JSON.stringify(data))
   console.log("storyCatergory - API error: " + error)
   console.log("storyCatergory - API isloaded: " + isLoaded)
+  // console.log("show iFrameCompiler:" + data.material.length)
   return (
     <>
       {/* 
@@ -52,19 +27,11 @@ export function StoryCategory() {
       <StoryInputForm/>
       {/* <Story /> */}
 
-      {/* 
-      TO-DO:
-      match "uploadstory/:URL" to specific JSON.ITEM.URL 
-      if URL == TRUE 
-      show JSON.ITEM[].MATERIAL.CONTENT 
-      */}
-
       {/* STORIES MATERIAL CONTAINER */}
       <div className="z-30 row-start-1 row-span-2 col-span-2 my-6">
         <div className="flex overflow-x-scroll scrollbar-hide">
           <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-            material 01
-            { landmark }
+            {/* {data._type} */}
           </div>
           <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
             material 02

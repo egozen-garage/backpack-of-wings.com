@@ -28,19 +28,26 @@ export default {
       type: "string",
     },
     {
-      name: "material",
-      title: "Upload Materials",
-      type: "array",
-      of: [
-        { type: "image",
-          icon: AiFillFileImage, },
-        { type: "imageURL"},
-        { type: 'youtube'},
-        { type: 'twitter'},
-        { type: 'googleReviews'},
-        { type: 'googleMaps'},
-      ],
-    },
+      name: "materialObj",
+      title: "Materials",
+      type: "object",
+      fields: [
+        {
+          name: "materialArray",
+          title: "Upload Materials",
+          type: "array",
+          of: [
+            { type: "image",
+              icon: AiFillFileImage, },
+            { type: "imageURL"},
+            { type: 'youtube'},
+            { type: 'twitter'},
+            { type: 'googleReviews'},
+            { type: 'googleMaps'},
+          ],
+        },
+      ]
+    }
   ],
   preview: {
     select: {
