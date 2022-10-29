@@ -4,7 +4,7 @@
 
 @layer base {
   /* SERIF : Apoc Revelations */
-  @font-face { 
+  @font-face {
     font-family: "Apoc Revelations";
     font-style: normal;
     font-weight: 300; /*light*/
@@ -13,7 +13,7 @@
       url("./fonts/ApocRevelations-Light.woff") format("woff");
   }
 
-  @font-face { 
+  @font-face {
     font-family: "Apoc Revelations";
     font-style: normal;
     font-weight: 700; /*light*/
@@ -22,7 +22,7 @@
       url("./fonts/ApocRevelations-Bold.woff") format("woff");
   }
 
-  @font-face { 
+  @font-face {
     font-family: "Apoc Revelations";
     font-style: italic;
     font-weight: 300; /*light*/
@@ -31,7 +31,7 @@
       url("./fonts/ApocRevelations-LightItalic.woff") format("woff");
   }
 
-  @font-face { 
+  @font-face {
     font-family: "Apoc Revelations";
     font-style: italic;
     font-weight: 700; /*light*/
@@ -40,7 +40,7 @@
       url("./fonts/ApocRevelations-BoldItalic.woff") format("woff");
   }
 
-    /* SANS : Area Normal */
+  /* SANS : Area Normal */
   @font-face {
     font-family: "Area Normal";
     font-style: normal;
@@ -68,15 +68,17 @@
     src: url("./fonts/FT88-Regular.woff2") format("woff2");
   }
 
-  h1, h2, h3 {
-        font-family: "Apoc Revelations", serif;
-    };
+  h1,
+  h2,
+  h3 {
+    font-family: "Apoc Revelations", serif;
+  }
 
-    p {
-        font-family: "Area Normal", sans-serif;
-    }
-    
-    code {
-        font-family: 'FT88', monospace;
-    };
+  p {
+    font-family: "Area Normal", sans-serif;
+  }
+
+  code {
+    font-family: "FT88", monospace;
+  }
 }
