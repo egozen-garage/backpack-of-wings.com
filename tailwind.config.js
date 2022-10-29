@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -10,15 +12,20 @@ module.exports = {
       'xl': '1280px',
       '2xl': '1536px',
     },
-    fontFamily: {
-      sans: ['Space Grotesk', 'sans'],
-      serif: ['Playfair Display', 'serif'],
-      monospace: ['DM Mono', 'monospace'],
-    },
     extend: {
+      fontFamily: {
+        sans: ["'Area Normal'", ...defaultTheme.fontFamily.sans],
+        serif: ["'Apoc Revelations'", ...defaultTheme.fontFamily.serif],
+        mono: ["'FT88'", ...defaultTheme.fontFamily.mono],
+      },
       boxShadow: {
         '2xl': '0px 0px 10px 2px rgba(0, 0, 0, 0.3)',
         '3xl': '3px 12px 10px 0px rgba(0, 0, 0, 0.3)',
+      },
+      inset: {
+        '1/5': '20%',
+        '1/6': '17%',
+        '1/7': '14%',
       }
     },
   },
