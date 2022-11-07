@@ -28,6 +28,16 @@ export default {
       type: "string",
     },
     {
+      name: "latitude",
+      title: "Latitude",
+      type: "number",
+    },
+    {
+      name: "longitude",
+      title: "Longitude",
+      type: "number",
+    },
+    {
       name: "material",
       title: "Upload Materials",
       type: "array",

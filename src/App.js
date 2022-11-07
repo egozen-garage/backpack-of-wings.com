@@ -1,5 +1,5 @@
 import { NavLink, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Home from "./components/Home";
 import { LoadMemories } from "./components/LoadMemories";
 import { StoryCategory } from "./components/StoryCategory";
@@ -9,6 +9,7 @@ import { NotFound } from "./components/NotFound";
 import { LandingPage } from "./components/LandingPage";
 import { About } from "./components/About";
 import Mapbox from "./components/Mapbox";
+import CallSanityAPI from "./utilities/CallSanityAPI";
 // import CallWeatherData from "./utilities/CallWeatherWind";
 
 function App() {
@@ -18,8 +19,21 @@ function App() {
   const handleZoom = (value) => {
     // 👇️ take parameter passed from Child component
     setZoomOut(value);
-    console.log("handle zoom from child: " + zoomOut);
+    // console.log("handle zoom from child: " + zoomOut);
   };
+
+
+  // call sanity data
+
+  // const [landmarkData, setLandmarkData] = useState(null) 
+  // const callLandmarkData = () => {
+    // const { data, error, isLoaded } = CallSanityAPI( 
+    //   '*[_type == "landmark" ]{"url":url.current, "country":country, "locationType": locationType, "locationName": locationName, "latitude":latitude, "longitude":longitude}'
+    // );
+  //  console.log("landmark: " + data)
+  //  setLandmarkData(data);
+  // }
+  // callLandmarkData();
 
   return (
     <>
@@ -69,23 +83,23 @@ function App() {
             style={{ objectFit: "cover" }}
           >
             {/* <div className="fixed z-0 w-full h-full px-7"> */}
-            <Mapbox zoomOut={zoomOut} />
+
+            <Mapbox zoomOut={zoomOut}/>
           </div>
 
           <Routes>
-            <Route element={<Home handleZoom={handleZoom} />} path="/" exact />
-            <Route element={<StoryIntro />} path="/uploadstory" exact />
-            <Route
-              element={<StoryCategory handleZoom={handleZoom} />}
-              path="/uploadstory/:landmark"
-              exact
-            />
-            <Route
-              element={<LoadMemories handleZoom={handleZoom} />}
-              path="/loadmemories"
-            />
-            <Route element={<Impressum />} path="/impressum" exact />
-            <Route element={<NotFound />} path="*" exact />
+            <Route  element={ <Home handleZoom={handleZoom} /> }
+                    path="/" exact />
+            <Route  element={ <StoryIntro />} 
+                    path="/uploadstory" exact />
+            <Route  element={ <StoryCategory handleZoom={handleZoom} /> }
+                    path="/uploadstory/:landmark" exact />
+            <Route  element={ <LoadMemories handleZoom={handleZoom} /> }
+                    path="/loadmemories"/>
+            <Route  element={<Impressum />} 
+                    path="/impressum" exact />
+            <Route  element={<NotFound />} 
+                    path="*" exact />
           </Routes>
         </div>
 

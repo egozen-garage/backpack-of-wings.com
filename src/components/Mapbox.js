@@ -5,6 +5,7 @@ import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import MovebankDataYear from '../json/MovebankDataYear.json';
 import sanityClient from "../client";
 // import iconCurrentLocation from "../img/current-location.svg"
+import { useLocation } from 'react-router-dom'
  
 import { useNavigate } from "react-router-dom";
 
@@ -15,6 +16,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxd
 
 // Call Movebank API and provide array
 export default function Mapbox(props) {  
+    console.log("CALL Mapbox.js")
     let dataReceived = false;
     // all API Data
     // case 1: get 1 entry per day (ca. 3200 entries)
@@ -31,6 +33,7 @@ export default function Mapbox(props) {
 
     let [movebankData, setMovebankData] = useState(null)
     let [weatherData, setWeatherData] = useState(null);
+    let [landmark, setLandmark] = useState(null);
     useEffect(() => {
         Promise.all([
                 fetch(apiUrl).then((response) => response.json()),
@@ -39,10 +42,14 @@ export default function Mapbox(props) {
                         temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
                     }[0]`
                 ),
+                sanityClient.fetch(
+                    `*[_type == "landmark" ]{"url":url.current, "country":country, "locationType": locationType, "locationName": locationName, "latitude":latitude, "longitude":longitude}`
+                ),
             ])
-            .then(([movebankData, weatherData]) => {
+            .then(([movebankData, weatherData, landmark]) => {
                 setMovebankData(movebankData.individuals[0].locations);
                 setWeatherData(weatherData);
+                setLandmark(landmark)
             })
             .catch((err) => {
                 console.log(err);
@@ -55,13 +62,23 @@ export default function Mapbox(props) {
     if(movebankData && !dataReceived){
         dataReceived = true;
         // console.log("bird data 30 days: " + movebankData[1].location_long)
-        return <DrawMapbox birdData={movebankData} weatherData={weatherData} zoomOut={props.zoomOut}/>
+        // console.log("### landmark data is: " + JSON.stringify(props.landmarkLinks.length))
+        return <DrawMapbox birdData={movebankData} weatherData={weatherData} zoomOut={props.zoomOut} landmarkLinks={landmark}/>
     }
 }
 
 
 
 function DrawMapbox(props){
+    let navigate  = useNavigate();
+    // const [checkBaseUrl, setCheckBaseUrl] = useState(0)
+    const location = useLocation();
+    const [currentBaseUrl, setCurrentBaseUrl] = useState("");
+    useEffect(() => {
+        setCurrentBaseUrl(location.pathname)
+    }, [location.pathname])
+    console.log("current base URL: " + currentBaseUrl)
+
 
     // console.log("weather data: " + JSON.stringify(props.weatherData))
     const mapContainer = useRef(null);
@@ -80,7 +97,7 @@ function DrawMapbox(props){
     let current_latitude = props.birdData[lastItemCount].location_lat
     // console.log("last entry: " + lastItemCount + " timestamp: " + props.birdData[0].timestamp)
     // console.log("bird data: " + props.birdData[1].location_long)
-    console.log("current location: " + current_latitude + ", " + current_longitude)
+    // console.log("current location: " + current_latitude + ", " + current_longitude)
     const currentCoordinates = [];
     for(let i = 0; i < props.birdData.length; i++){
     // for(let i = 0; i < 100; i++){
@@ -145,7 +162,7 @@ function DrawMapbox(props){
                 'type': 'Feature',
                 'properties': {
                     'description': '',
-                    'route': '',
+                    'url': '',
                     'icon': 'current-location',
                     // 'icon': 'icon-bird-location',
                     'icon-size': 0.25
@@ -213,83 +230,106 @@ function DrawMapbox(props){
     
     // STORY LOCATIONS DATA
     // -----------------------------------------------------------------
+    // landmarkLinks
+    // console.log("landmark details: " + props.landmarkLinks.length)
+    // console.log("landmark details: " + JSON.stringify(props.landmarkLinks[0]))
+    let landmarks = []
+    for(let i = 0; i < props.landmarkLinks.length; i++){
+        const landmark = {
+            'type': 'Feature',
+            'properties': {
+                'description': props.landmarkLinks[i].locationName + ", " + props.landmarkLinks[i].locationType,
+                'icon': 'current-location',
+                'url': 'url', // add url link form sanity 
+                // 'url': props.landmarkLinks[i].url, // WRONG needs fix
+                // 'icon': 'icon-bird-location',
+            },
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [props.landmarkLinks[i].longitude, props.landmarkLinks[i].latitude]
+            }
+        }
+        landmarks.push(landmark)
+    }
+    // console.log("array of landmarks: " + JSON.stringify(landmarks))
     const storyLocations = {
         'type': 'FeatureCollection',
-        'features': [
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Istanbul, Turkey',
-                    'icon': 'current-location',
-                    'route': 'istanbul',
-                    // 'icon': 'icon-bird-location',
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [29.087114420286106, 41.062342115603734]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Drömling, Germany',
-                    'route': 'droemling',
-                    // 'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [11.027669114580046, 52.49456226795604]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Lacková, Slovakia',
-                    'route': 'lackova',
-                    // 'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [20.590533054164478, 49.31698642610774]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Hama, Syria',
-                    'route': 'hama',
-                    // 'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [36.755196474432246, 35.13211177222622]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Neve Eitan, Israel',
-                    'route': 'neve-eitan',
-                    // 'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [35.5320056758374, 32.491984286564104]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Dudaim site, Israel',
-                    'route': 'dudaim-site',
-                    // 'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [34.90823611685902, 32.147553437885264]
-                }
-            },
-        ]
+        'features': landmarks
+        // [ 
+            // {
+            //     'type': 'Feature',
+            //     'properties': {
+            //         'description': 'Istanbul, Turkey',
+            //         'icon': 'current-location',
+            //         'url': 'istanbul',
+            //         // 'icon': 'icon-bird-location',
+            //     },
+            //     'geometry': {
+            //         'type': 'Point',
+            //         'coordinates': [29.087114420286106, 41.062342115603734]
+            //     }
+            // },
+            // {
+            //     'type': 'Feature',
+            //     'properties': {
+            //         'description': 'Drömling, Germany',
+            //         'url': 'droemling',
+            //         // 'icon': 'theatre-15'
+            //     },
+            //     'geometry': {
+            //         'type': 'Point',
+            //         'coordinates': [11.027669114580046, 52.49456226795604]
+            //     }
+            // },
+            // {
+            //     'type': 'Feature',
+            //     'properties': {
+            //         'description': 'Lacková, Slovakia',
+            //         'url': 'lackova',
+            //         // 'icon': 'theatre-15'
+            //     },
+            //     'geometry': {
+            //         'type': 'Point',
+            //         'coordinates': [20.590533054164478, 49.31698642610774]
+            //     }
+            // },
+            // {
+            //     'type': 'Feature',
+            //     'properties': {
+            //         'description': 'Hama, Syria',
+            //         'url': 'hama',
+            //         // 'icon': 'theatre-15'
+            //     },
+            //     'geometry': {
+            //         'type': 'Point',
+            //         'coordinates': [36.755196474432246, 35.13211177222622]
+            //     }
+            // },
+            // {
+            //     'type': 'Feature',
+            //     'properties': {
+            //         'description': 'Neve Eitan, Israel',
+            //         'url': 'neve-eitan',
+            //         // 'icon': 'theatre-15'
+            //     },
+            //     'geometry': {
+            //         'type': 'Point',
+            //         'coordinates': [35.5320056758374, 32.491984286564104]
+            //     }
+            // },
+            // {
+            //     'type': 'Feature',
+            //     'properties': {
+            //         'description': 'Dudaim site, Israel',
+            //         'url': 'dudaim-site',
+            //         // 'icon': 'theatre-15'
+            //     },
+            //     'geometry': {
+            //         'type': 'Point',
+            //         'coordinates': [34.90823611685902, 32.147553437885264]
+            //     }
+            // },
+        // ]
     }
 
     
@@ -352,7 +392,7 @@ function DrawMapbox(props){
         // });
 
         if(props.zoomOut){
-            console.log("hello world")
+            console.log("zoomOut true")
         }
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
@@ -586,6 +626,8 @@ function DrawMapbox(props){
             });
 
 
+
+
             // MAP INTERACTIONS
             map.current.on("mouseenter", 'story-locations', () => {
                 map.current.getCanvas().style.cursor = "pointer";
@@ -593,11 +635,7 @@ function DrawMapbox(props){
             map.current.on("mouseleave", 'story-locations', () => {
                 map.current.getCanvas().style.cursor = "default";
             });
-            map.current.on('click', 'story-locations', (e) => {
-                changeRoute(e.features[0].properties.route);
-                // setCurrentRoute(e.features[0].properties.description)
-                return 
-            });
+
 
             map.current.on("mouseenter", 'last-location', () => {
                 map.current.getCanvas().style.cursor = "pointer";
@@ -606,7 +644,9 @@ function DrawMapbox(props){
                 map.current.getCanvas().style.cursor = "default";
             });
             map.current.on('click', 'last-location', (e) => {
-                changeRoute(e.features[0].properties.route);
+                // navigate('/'+e.features[0].properties.url)
+                navigate('/')
+
                 map.current.flyTo({
                     center: e.features[0].geometry.coordinates,
                     zoom: 12,
@@ -624,13 +664,26 @@ function DrawMapbox(props){
 
 
 
+        map.current.on('click', 'story-locations', (e) => {
+            console.log("# # base Url: " + currentBaseUrl)
+            // NavigateTo(e.features[0].properties.url)
+            // console.log(location.pathname);
+            // ReNavigate(e.features[0].properties.url)
+            // navigate(location.pathname + '/' + e.features[0].properties.url);
+            // setCurrentRoute(e.features[0].properties.description)
+        });
+        
+        
     });
+    
 
-    let navigate  = useNavigate();
-    function changeRoute(newRoute) {
-      // change route
-      navigate('/'+newRoute)
-    }
+    // function NavigateTo(destinationUrl){
+    //     console.log("# destination suffix: " + destinationUrl)
+    //     console.log("# base Url: " + currentBaseUrl)
+    // }
+
+
+
 
     const mapContainerStyle ={
         height: '100vh',
@@ -646,3 +699,6 @@ function DrawMapbox(props){
         </div>
     );
 }
+
+
+

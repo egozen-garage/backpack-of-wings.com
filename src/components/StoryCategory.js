@@ -34,11 +34,12 @@ export function StoryCategory({handleZoom}) {
   // }, []);
 
 
+  // call sanity data
   const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
 
 
 
-  console.log("storyCatergory - API data: " + JSON.stringify(data))
+  console.log("storyCatergory - API data: " + JSON.stringify(data) )
   console.log("storyCatergory - API error: " + error)
   console.log("storyCatergory - API isloaded: " + isLoaded)
   return (

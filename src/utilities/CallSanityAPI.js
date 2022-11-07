@@ -7,10 +7,11 @@ export default function CallSanityAPI(query) {
     const [error, setError] = useState(null);
 
     // const query = '*[_type == "landmark"]{url{current}, locationName, country}'
-
     useEffect(()=>{
-        SanityClient.fetch(
-            query
+        Promise.all(
+            SanityClient.fetch(
+                query
+            )
         )
         .then(([sanityData]) => {
             setData(sanityData);
