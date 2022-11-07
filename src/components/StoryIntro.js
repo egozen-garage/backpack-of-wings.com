@@ -11,19 +11,20 @@ export function StoryIntro() {
   // >>>TOGGLE STATE DEFINING VISIBILITY OF STORYINTRO<<<
   // const [visible,setVisible] = useState(true);
 
+  // TEMPORARY > UNCOMMENT TO STOP API REQUEST
   let navigate = useNavigate();
-  const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
-  let [sanityData, setSanityData] = useState(null);
+  // const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
+  // let [sanityData, setSanityData] = useState(null);
 
-  useEffect(() => {
-    Promise.all([SanityClient.fetch(querySanityAPI)])
-      .then(([sanityData]) => {
-        setSanityData(sanityData);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  }, []);
+  // useEffect(() => {
+  //   Promise.all([SanityClient.fetch(querySanityAPI)])
+  //     .then(([sanityData]) => {
+  //       setSanityData(sanityData);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //     });
+  // }, []);
 
 //   let urlVariable = sanityData[0].url;
 //   console.log(urlVariable);
@@ -59,7 +60,8 @@ export function StoryIntro() {
           {/* NEXT BUTTON */}
           <button
             className="z-50 fixed skipBtn px-4 py-2 ml-40 border-white border-solid border-2 rounded-xl"
-            onClick={() => navigate("/uploadstory/" + sanityData[0].url)}
+            // TEMPORARY SOLUTION > ADD SHUFFLE TO URL ITEM ARRAY
+            onClick={() => navigate("/uploadstory/israel-dudaimsite")}
           >
             <p>Skip &#10142;</p>
           </button>
