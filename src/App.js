@@ -86,11 +86,6 @@ function App() {
           <NavLink className="px-3" to="/" reloadDocument>
             <p>Dashboard</p>
           </NavLink>
-
-          {/* IMPRESSUM */}
-          <NavLink className="px-3" to="/impressum">
-            <p>Impressum</p>
-          </NavLink>
         </div>
       </div>
 
