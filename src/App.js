@@ -3,7 +3,7 @@ import { useState } from "react";
 import Home from "./components/Home";
 import { LoadMemories } from "./components/LoadMemories";
 import { StoryCategory } from "./components/StoryCategory";
-import { StoryIntro } from "./components/StoryIntro";
+import { UploadStoriesIntro } from "./components/UploadStoriesIntro";
 import { Impressum } from "./components/Impressum";
 import { NotFound } from "./components/NotFound";
 import { LandingPage } from "./components/LandingPage";
@@ -68,7 +68,7 @@ function App() {
           <Routes>
             <Route  element={ <Home handleZoom={handleZoom} /> }
                     path="/" exact />
-            <Route  element={ <StoryIntro />} 
+            <Route  element={ <UploadStoriesIntro />} 
                     path="/uploadstory" exact />
             <Route  element={ <StoryCategory handleZoom={handleZoom} /> }
                     path="/uploadstory/:landmark" exact />

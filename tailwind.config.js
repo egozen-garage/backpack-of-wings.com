@@ -15,6 +15,8 @@ module.exports = {
     extend: {
       colors: {
         'backpackYellow' : '#f9fe1e',
+        'backpackGray' : '#CFCFCF',
+        'backpackBlue' : '#F0B4FC',
       },
       fontFamily: {
         sans: ["'Area Normal'", ...defaultTheme.fontFamily.sans],

@@ -45,6 +45,11 @@
   );
 }
 
+.gradientPlayer {
+  background: rgb(240,180,252);
+  background: linear-gradient(0deg, rgba(240,180,252,1) 0%, rgba(240,180,252,0) 100%);
+}
+
 @-webkit-keyframes Gradient {
   0% {
     background-position: 0% 50%;

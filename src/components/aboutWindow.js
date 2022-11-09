@@ -47,7 +47,7 @@ export default function AboutWindow() {
           </div>
         </div>
       </div>
-      <div className="z-40 gradientDashboard fixed h-36 w-full"></div>
+      <div className="z-30 gradientDashboard fixed h-36 w-full"></div>
 
       {/* COLLAPSIBLE */}
       <PanelContent
