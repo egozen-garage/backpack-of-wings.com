@@ -1,16 +1,21 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useSearchParams } from "react-router-dom";
 import { About } from "./About";
 import { useState } from "react";
 import { useSpring, animated } from "react-spring";
 import styled from "styled-components";
 import "../css/gradientAnimation.css";
+import "../css/animation.css";
 
 export default function AboutWindow() {
   const [isOpen, setIsOpen] = useState(false);
   const toggleCollapsible = () => {
     setIsOpen((prevState) => !prevState);
   };
+  const [impressumIsOpen, setImpressumIsOpen] = useState(false);
+  const toggleImpressum = () => {
+    setImpressumIsOpen((prevImpressumState) => !prevImpressumState);
+  }
   const AboutAnimatedStyle = useSpring({
     height: isOpen ? "100vh" : "0",
   });
@@ -32,15 +37,15 @@ export default function AboutWindow() {
           </button>
         </div>
         {/* IMPRESSUM */}
-        {isOpen && (
-          <div className="flex-2 text-white py-1 px-4">
-            <NavLink to="/impressum">
-              <h1 className="text-xl text-white mx-2 bg-black shadow-buttonBlack shadow-black rounded-2xl px-2">
+        <div className={isOpen ? "animateOpacity show" : "animateOpacity"}>
+          <div className="flex-2 text-white text-xl py-1 px-7">
+            <NavLink to="/impressum" onClick={toggleImpressum}>
+              <h1 className="impressumIdle">
                 Impressum
               </h1>
             </NavLink>
           </div>
-        )}
+        </div>
       </div>
       <div className="z-40 gradientDashboard fixed h-36 w-full"></div>
 

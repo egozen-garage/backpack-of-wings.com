@@ -54,7 +54,7 @@ function App() {
         <MenuButton/>
 
         {/* EVERY OTHER PAGE */}
-        <div className="ChildGridContainer relative wrapper-content z-30 order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
+        <div className="ChildGridContainer relative wrapper-content order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
           {/* MAP BACKGROUND*/}
           <div
             className="absolute z-0 w-full h-full"

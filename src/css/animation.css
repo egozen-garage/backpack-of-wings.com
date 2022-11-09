@@ -1,0 +1,29 @@
+.impressumIdle {
+    background-color: black;
+    box-shadow: 0px 0px 4px 4px #000;
+    color: white;
+    border-radius: 1rem;
+    padding: 0 0.7rem;
+}
+
+.gradientOff {
+    opacity: 0 !important;
+}
+
+.impressumActive {
+    background-color: white;
+    box-shadow: 0px 0px 4px 4px #FFF;
+    color: black;
+    border-radius: 1rem;
+    padding: 0 0.7rem;
+}
+
+.animateOpacity {
+    transition: opacity .5s ease-in-out;
+    opacity: 0;
+}
+
+.animateOpacity.show {
+    opacity: 1;
+}
+

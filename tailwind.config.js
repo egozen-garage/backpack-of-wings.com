@@ -13,6 +13,9 @@ module.exports = {
       '2xl': '1536px',
     },
     extend: {
+      colors: {
+        'backpackYellow' : '#f9fe1e',
+      },
       fontFamily: {
         sans: ["'Area Normal'", ...defaultTheme.fontFamily.sans],
         serif: ["'Apoc Revelations'", ...defaultTheme.fontFamily.serif],
@@ -30,7 +33,12 @@ module.exports = {
         '1/7': '14%',
       },
       zIndex: {
+        '41': '41',
+        '42': '42',
+        '43': '43',
+        '44': '44',
         '45': '45',
+        '60': '60',
       }
     },
   },
