@@ -1,4 +1,14 @@
-.impressumIdle {
+.buttonInactive {
+    transition: all 0.2s ease-in;
+    background-color: white;
+    box-shadow: 0px 0px 4px 4px #FFF;
+    color: black;
+    border-radius: 1rem;
+    padding: 0 0.7rem;
+}
+
+.buttonActive {
+    transition: all 0.2s ease-in;
     background-color: black;
     box-shadow: 0px 0px 4px 4px #000;
     color: white;
@@ -10,13 +20,13 @@
     opacity: 0 !important;
 }
 
-.impressumActive {
+/* .impressumActive {
     background-color: white;
     box-shadow: 0px 0px 4px 4px #FFF;
     color: black;
     border-radius: 1rem;
     padding: 0 0.7rem;
-}
+} */
 
 .animateOpacity {
     transition: opacity .5s ease-in-out;
