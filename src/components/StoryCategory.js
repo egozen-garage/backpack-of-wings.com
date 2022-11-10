@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 // import { Story } from "./Story.js";
 // import SanityClient from "../client";
 // import { useEffect, useState } from "react";
@@ -6,15 +6,16 @@ import { useParams } from "react-router-dom";
 import StoryInputForm from "./StoryInputForm.js";
 import CallSanityAPI from "../utilities/CallSanityAPI"
 
-export function StoryCategory({handleZoom}) {
-  handleZoom(true);
+export function StoryCategory() {
+
+
   let { landmark } = useParams()
   // NEEDS FIXING! API IN ARRAY CANT BE RETURNED AS PROPER VALUE
   const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
 
-  console.log("storyCatergory - API data: " + JSON.stringify(data))
-  console.log("storyCatergory - API error: " + error)
-  console.log("storyCatergory - API isloaded: " + isLoaded)
+  // console.log("storyCatergory - API data: " + JSON.stringify(data))
+  // console.log("storyCatergory - API error: " + error)
+  // console.log("storyCatergory - API isloaded: " + isLoaded)
   // console.log("show iFrameCompiler:" + data.material.length)
   return (
     <>

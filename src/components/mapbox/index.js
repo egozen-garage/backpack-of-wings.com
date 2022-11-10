@@ -1,11 +1,12 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState, useMemo, useCallback} from 'react';
 // import React from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
-import MovebankDataYear from '../json/MovebankDataYear.json';
-import sanityClient from "../client";
+import MovebankDataYear from '../../json/MovebankDataYear.json';
+import sanityClient from "../../client";
 // import iconCurrentLocation from "../img/current-location.svg"
 import { useLocation } from 'react-router-dom'
+import FetchMapData from './service/FetchMapData';
  
 import { useNavigate } from "react-router-dom";
 
@@ -14,96 +15,98 @@ import { useNavigate } from "react-router-dom";
 mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxdjhzbm96bGo3In0.MCm-qbborgyvRnQ7JA--5w';
 
 
-// Call Movebank API and provide array
-export default function Mapbox(props) {  
-    console.log("CALL Mapbox.js")
+// const mapData = FetchMapData() // fetch relevant data for map
+
+export default function Mapbox() { 
+    console.log("CALL Mapbox")
     let dataReceived = false;
-    // all API Data
-    // case 1: get 1 entry per day (ca. 3200 entries)
-    // const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_01';
-    // case 2: get 1 entry every 50km distance
-    // const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_02';
-    // case 3: get last 30 days (ca. 300 entries)
+
     const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
     
-    // get entries of time range
-    // &timestamp_start=1666648800000&timestamp_end=1666735200000  // from 25.10.2022 to 26.10.2022 
-    // const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&timestamp_start=1664143200000&timestamp_end=1666735200000&sensor_type=gps';
-    // &timestamp_start=1664056800000&timestamp_end=1666648800000  // from 25.09.2022 to 25.10.2022 
-
     let [movebankData, setMovebankData] = useState(null)
     let [weatherData, setWeatherData] = useState(null);
     let [landmark, setLandmark] = useState(null);
+    let [dataReady, setDataReady] = useState(false);
+    let [mapData, setMapData] = useState([])
+
     useEffect(() => {
-        Promise.all([
-                fetch(apiUrl).then((response) => response.json()),
-                sanityClient.fetch(
-                    `*[_type == "weatherData"]{
-                        temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
-                    }[0]`
-                ),
-                sanityClient.fetch(
-                    `*[_type == "landmark" ]{"url":url.current, "country":country, "locationType": locationType, "locationName": locationName, "latitude":latitude, "longitude":longitude}`
-                ),
-            ])
-            .then(([movebankData, weatherData, landmark]) => {
-                setMovebankData(movebankData.individuals[0].locations);
-                setWeatherData(weatherData);
-                setLandmark(landmark)
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    },[])
+        // if(dataReady) return
+        // if(!dataReady){
+            Promise.all([
+                    fetch(apiUrl).then((response) => response.json()),
+                    sanityClient.fetch(
+                        `*[_type == "weatherData"]{
+                            temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
+                        }[0]`
+                    ),
+                    sanityClient.fetch(
+                        `*[_type == "landmark" ]{"url":url.current, "country":country, "locationType": locationType, "locationName": locationName, "latitude":latitude, "longitude":longitude}`
+                    ),
+                ])
+                .then(([movebankData, weatherData, landmark]) => {
+                    setMovebankData(movebankData.individuals[0].locations);
+                    setWeatherData(weatherData);
+                    setLandmark(landmark);
+                    setDataReady(true);
+                    setMapData([movebankData, weatherData, landmark])
+                    console.log("FetchMapData: Api Data has been called")
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        // } else {
+        //     return
+        // }
+    }, [])    
+
+
+    // console.log("mapData: " + JSON.stringify(mapData))
+    // console.log("mapData: " + JSON.stringify(movebankData))
+
 
     if(!movebankData){
+        console.log("data coming")
         return ( <pre>data loading...</pre>)
     }
     if(movebankData && !dataReceived){
+        console.log("data arrived")
         dataReceived = true;
         // console.log("bird data 30 days: " + movebankData[1].location_long)
-        // console.log("### landmark data is: " + JSON.stringify(props.landmarkLinks.length))
-        return <DrawMapbox birdData={movebankData} weatherData={weatherData} zoomOut={props.zoomOut} landmarkLinks={landmark}/>
+        return <DrawMapbox mapData={mapData}/>
     }
 }
 
 
 
 function DrawMapbox(props){
-    let navigate  = useNavigate();
-    // const [checkBaseUrl, setCheckBaseUrl] = useState(0)
-    const location = useLocation();
-    const [currentBaseUrl, setCurrentBaseUrl] = useState("");
-    useEffect(() => {
-        setCurrentBaseUrl(location.pathname)
-    }, [location.pathname])
-    console.log("current base URL: " + currentBaseUrl)
-
-
-    // console.log("weather data: " + JSON.stringify(props.weatherData))
     const mapContainer = useRef(null);
     const map = useRef(null);
-    // const [lng, setLng] = useState(-77.035);
-    // const [lat, setLat] = useState(38.875);
-    const [zoom, setZoom] = useState(12);
-    
-    // for later: if click menu then zoom out
-    if(12===3){ setZoom(8) }
+    const location = useLocation()
+    let navigate  = useNavigate();
 
-    // LATEST LOCATIONS DATA
-    // -----------------------------------------------------------------
-    let lastItemCount = props.birdData.length-1
-    let current_longitude = props.birdData[lastItemCount].location_long
-    let current_latitude = props.birdData[lastItemCount].location_lat
+
+    // console.log("mapData: " + JSON.stringify(props.mapData[0]))
+    // console.log("mapData: " + JSON.stringify(props.weatherData))
+
+    const latestBirdData = props.mapData[0].individuals[0].locations // FetchMapData() --> [0] movebankData latest locations
+    const weatherData    = props.mapData[1] // FetchMapData() --> [1] weatherData
+    const landmarkSanity = props.mapData[2] // FetchMapData() --> [2] landmark
+    // const dataReady      = props.mapData[3] // FetchMapData() --> [3] dataReady
+
+    const pathRGB = '255,0,255';
+
+    let lastItemCount = latestBirdData.length-1
+    let current_longitude = latestBirdData[lastItemCount].location_long
+    let current_latitude = latestBirdData[lastItemCount].location_lat
     // console.log("last entry: " + lastItemCount + " timestamp: " + props.birdData[0].timestamp)
     // console.log("bird data: " + props.birdData[1].location_long)
-    // console.log("current location: " + current_latitude + ", " + current_longitude)
+    console.log("current location: " + current_latitude + ", " + current_longitude)
     const currentCoordinates = [];
-    for(let i = 0; i < props.birdData.length; i++){
+    for(let i = 0; i < latestBirdData.length; i++){
     // for(let i = 0; i < 100; i++){
         var locationX = [
-            props.birdData[i].location_long,
-            props.birdData[i].location_lat
+            latestBirdData[i].location_long,
+            latestBirdData[i].location_lat
         ]
         currentCoordinates.push(locationX)
             // [
@@ -152,7 +155,7 @@ function DrawMapbox(props){
             }
         ]
     };
-
+    
     // THE LAST LOCATION DATA
     // -----------------------------------------------------------------
     const lastLocation = {
@@ -162,7 +165,7 @@ function DrawMapbox(props){
                 'type': 'Feature',
                 'properties': {
                     'description': '',
-                    'url': '',
+                    'route': '',
                     'icon': 'current-location',
                     // 'icon': 'icon-bird-location',
                     'icon-size': 0.25
@@ -184,7 +187,7 @@ function DrawMapbox(props){
             {
                 'type': 'Feature',
                 'properties': {
-                    'description': 'Temperature: ' + props.weatherData.temp + '°C',
+                    'description': 'Temperature: ' + weatherData.temp + '°C',
                     // 'icon': 'theatre-15'
                 },
                 'geometry': {
@@ -195,7 +198,7 @@ function DrawMapbox(props){
             {
                 'type': 'Feature',
                 'properties': {
-                    'description': 'Humidity: ' + props.weatherData.humidity + ' g/m3',
+                    'description': 'Humidity: ' + weatherData.humidity + ' g/m3',
                     // 'icon': 'theatre-15'
                 },
                 'geometry': {
@@ -206,7 +209,7 @@ function DrawMapbox(props){
             {
                 'type': 'Feature',
                 'properties': {
-                    'description': "Pressure: " + props.weatherData.pressure + " hPa",
+                    'description': "Pressure: " + weatherData.pressure + " hPa",
                     // 'icon': 'theatre-15'
                 },
                 'geometry': {
@@ -227,18 +230,15 @@ function DrawMapbox(props){
             // },
         ]
     }
-    
+
     // STORY LOCATIONS DATA
     // -----------------------------------------------------------------
-    // landmarkLinks
-    // console.log("landmark details: " + props.landmarkLinks.length)
-    // console.log("landmark details: " + JSON.stringify(props.landmarkLinks[0]))
     let landmarks = []
-    for(let i = 0; i < props.landmarkLinks.length; i++){
+    for(let i = 0; i < landmarkSanity.length; i++){
         const landmark = {
             'type': 'Feature',
             'properties': {
-                'description': props.landmarkLinks[i].locationName + ", " + props.landmarkLinks[i].locationType,
+                'description': landmarkSanity[i].locationName + ", " + landmarkSanity[i].locationType,
                 'icon': 'current-location',
                 'url': 'url', // add url link form sanity 
                 // 'url': props.landmarkLinks[i].url, // WRONG needs fix
@@ -246,7 +246,7 @@ function DrawMapbox(props){
             },
             'geometry': {
                 'type': 'Point',
-                'coordinates': [props.landmarkLinks[i].longitude, props.landmarkLinks[i].latitude]
+                'coordinates': [landmarkSanity[i].longitude, landmarkSanity[i].latitude]
             }
         }
         landmarks.push(landmark)
@@ -255,134 +255,15 @@ function DrawMapbox(props){
     const storyLocations = {
         'type': 'FeatureCollection',
         'features': landmarks
-        // [ 
-            // {
-            //     'type': 'Feature',
-            //     'properties': {
-            //         'description': 'Istanbul, Turkey',
-            //         'icon': 'current-location',
-            //         'url': 'istanbul',
-            //         // 'icon': 'icon-bird-location',
-            //     },
-            //     'geometry': {
-            //         'type': 'Point',
-            //         'coordinates': [29.087114420286106, 41.062342115603734]
-            //     }
-            // },
-            // {
-            //     'type': 'Feature',
-            //     'properties': {
-            //         'description': 'Drömling, Germany',
-            //         'url': 'droemling',
-            //         // 'icon': 'theatre-15'
-            //     },
-            //     'geometry': {
-            //         'type': 'Point',
-            //         'coordinates': [11.027669114580046, 52.49456226795604]
-            //     }
-            // },
-            // {
-            //     'type': 'Feature',
-            //     'properties': {
-            //         'description': 'Lacková, Slovakia',
-            //         'url': 'lackova',
-            //         // 'icon': 'theatre-15'
-            //     },
-            //     'geometry': {
-            //         'type': 'Point',
-            //         'coordinates': [20.590533054164478, 49.31698642610774]
-            //     }
-            // },
-            // {
-            //     'type': 'Feature',
-            //     'properties': {
-            //         'description': 'Hama, Syria',
-            //         'url': 'hama',
-            //         // 'icon': 'theatre-15'
-            //     },
-            //     'geometry': {
-            //         'type': 'Point',
-            //         'coordinates': [36.755196474432246, 35.13211177222622]
-            //     }
-            // },
-            // {
-            //     'type': 'Feature',
-            //     'properties': {
-            //         'description': 'Neve Eitan, Israel',
-            //         'url': 'neve-eitan',
-            //         // 'icon': 'theatre-15'
-            //     },
-            //     'geometry': {
-            //         'type': 'Point',
-            //         'coordinates': [35.5320056758374, 32.491984286564104]
-            //     }
-            // },
-            // {
-            //     'type': 'Feature',
-            //     'properties': {
-            //         'description': 'Dudaim site, Israel',
-            //         'url': 'dudaim-site',
-            //         // 'icon': 'theatre-15'
-            //     },
-            //     'geometry': {
-            //         'type': 'Point',
-            //         'coordinates': [34.90823611685902, 32.147553437885264]
-            //     }
-            // },
-        // ]
     }
 
-    
 
-    // interactive map elements
-    useEffect(() => {
-        if(props.zoomOut){
-            if (!map.current){ 
-                setZoom(12)
-            } else {
-                map.current.fitBounds([
-                    [-20, 5], // southwestern corner of the bounds
-                    [20, 60], // northeastern corner of the bounds
-                ]);
-                // map.current.
-                // map.current.setLayoutProperty('story-locations', 'symbol-sort-key', '1');
-                // map.current.getCanvas().style.cursor = "default";
 
-                map.current.scrollZoom.disable();
-                map.current.doubleClickZoom.disable();
-                map.current.dragRotate.disable();
-                map.current.keyboard.disable();
-                map.current.dragPan.disable();
-                // map.current.on('zoomstart', () => {
-                    // map.current.setLayoutProperty("settlement-major-label", 'visibility', 'none');
-                    // map.current.setLayoutProperty("settlement-minor-label", 'visibility', 'none');
-                    // map.current.setLayoutProperty("latest-locations", 'visibility', 'none');
-                    // map.current.setLayoutProperty("year-locations", 'visibility', 'visible');
-                // });
-                // console.log("zoom out: " + props.zoomOut)
-            }
-        } else {
-            if (!map.current){  
-            } else {
-                map.current.flyTo({center: [current_longitude, current_latitude], zoom:12});
-                map.current.scrollZoom.enable();
-                map.current.doubleClickZoom.enable();
-                map.current.keyboard.enable();
-                map.current.dragPan.enable();
 
-                // map.current.setLayoutProperty("settlement-major-label", 'visibility', 'visible');
-                // map.current.setLayoutProperty("settlement-minor-label", 'visibility', 'visible');
-                // map.current.setLayoutProperty("latest-locations", 'visibility', 'visible');
-                // map.current.setLayoutProperty("year-locations", 'visibility', 'none');
-                
-                // console.log("zoom in (normal): " + props.zoomOut)
-            }
-        }
-        
-    }, [props.zoomOut, current_longitude, current_latitude]);
-    
 
-    const pathRGB = '255,0,255';
+
+
+
 
     // load map and project data
     useEffect(() => {
@@ -391,9 +272,9 @@ function DrawMapbox(props){
         //     console.log('A zoom event occurred.');
         // });
 
-        if(props.zoomOut){
-            console.log("zoomOut true")
-        }
+        // if(props.zoomOut){
+        //     console.log("zoomOut true")
+        // }
         if (map.current) return; // initialize map only once
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
@@ -406,7 +287,7 @@ function DrawMapbox(props){
             center: [current_longitude, current_latitude],
             minZoom: 3,
             maxZoom: 17,
-            zoom: zoom
+            // zoom: zoom
         });
         
         // disable map Toggle interactions
@@ -416,25 +297,6 @@ function DrawMapbox(props){
 
 
         map.current.on('load', () => {
-            // Turn layers off
-            // map.current.setLayoutProperty("settlement-major-label", 'visibility', 'none');
-            // map.current.setLayoutProperty("settlement-minor-label", 'visibility', 'none');
-            // map.current.setLayoutProperty("admin-0-boundary", 'visibility', 'none');
-            // map.current.setLayoutProperty("admin-0-boundary-bg", 'visibility', 'none');
-            // map.current.setPaintProperty('settlement-major-label"', 'opacity', [
-            //     'interpolate',
-            //     ['exponential', 0.5], // Set the exponential rate of change to 0.5
-            //     ['zoom'],
-            //     11, 0, // When zoom is 11 or less, set opacit to 1
-            //     12, 1 // When zoom is 12 or higher, set opacit to 0
-            // ]);
-            
-
-
-            
-            // ADD LATEST LOCATIONS
-            // 'line-gradient' can only be used with GeoJSON sources
-            // and the source must have the 'lineMetrics' option set to true
             map.current.addSource('latest-locations', {
                 type: 'geojson',
                 lineMetrics: true,
@@ -475,7 +337,6 @@ function DrawMapbox(props){
                 },
                 // minzoom: 10,
             });
-
 
             // ADD YEAR LOACTIONS
             map.current.addSource('year-locations', {
@@ -520,17 +381,6 @@ function DrawMapbox(props){
                 },
                 // maxzoom: 10,
             });
-
-
-
-            // map.current.loadImage(
-            //     iconCurrentLocation,
-            //     (error, image) => {
-            //         if (error) throw error;
-            //         // Add the image to the map style.
-            //         map.current.addImage('current-location', image, { "sdf": "true" } );
-            // });
-            
             
             // ADD WEATHER DATA
             map.current.addSource('weather-info', {
@@ -564,7 +414,6 @@ function DrawMapbox(props){
                 }
             });
 
-
             // ADD STORY LOCATIONS
             map.current.addSource('story-locations', {
                 type: 'geojson',
@@ -597,7 +446,6 @@ function DrawMapbox(props){
                 }
             });
 
-
             // ADD THE LAST LOCATION 
             map.current.addSource('last-location', {
                 type: 'geojson',
@@ -624,9 +472,6 @@ function DrawMapbox(props){
                     "text-halo-width": 1,
                 }
             });
-
-
-
 
             // MAP INTERACTIONS
             map.current.on("mouseenter", 'story-locations', () => {
@@ -660,27 +505,65 @@ function DrawMapbox(props){
                 return 
             });
 
+
+
         });
 
-
-
-        map.current.on('click', 'story-locations', (e) => {
-            console.log("# # base Url: " + currentBaseUrl)
-            // NavigateTo(e.features[0].properties.url)
-            // console.log(location.pathname);
-            // ReNavigate(e.features[0].properties.url)
-            // navigate(location.pathname + '/' + e.features[0].properties.url);
-            // setCurrentRoute(e.features[0].properties.description)
-        });
-        
-        
     });
-    
 
-    // function NavigateTo(destinationUrl){
-    //     console.log("# destination suffix: " + destinationUrl)
-    //     console.log("# base Url: " + currentBaseUrl)
-    // }
+
+
+    // define URL link behavior 
+    // -----------------------------------------------------------------
+    const urlPrefix = useMemo(() => {
+        const currentPath = location.pathname
+        const prefix = currentPath.split('/')[1]
+        console.log("url prefix: " + prefix)
+        return prefix
+    }, [location.pathname])
+
+    useEffect(() => {
+        map.current.on('click', 'story-locations', (e) => {
+            navigate( urlPrefix + '/' + e.features[0].properties.url);
+        });
+    }, [navigate, urlPrefix])
+
+
+    // define zoom behavior
+    // -----------------------------------------------------------------
+    const zoom = useMemo(() => {
+        return location.pathname === "/" ? false : true
+    }, [location.pathname])
+    useEffect(() => {
+        if (!map.current) return; 
+        console.log("perform zoom")
+        if (!zoom){ 
+            // if(dataReady){
+                map.current.flyTo({center: [current_longitude, current_latitude], zoom:12});
+            // } else {
+            //     map.current.flyTo({center: [10, 50], zoom:3});
+            // }
+            map.current.scrollZoom.enable();
+            map.current.doubleClickZoom.enable();
+            map.current.keyboard.enable();
+            map.current.dragPan.enable();
+        } else {
+            // map.current.flyTo({ zoom:3});
+            map.current.fitBounds([
+                [-20, 5], // southwestern corner of the bounds
+                [20, 60], // northeastern corner of the bounds
+            ]);
+
+            map.current.scrollZoom.disable();
+            map.current.doubleClickZoom.disable();
+            map.current.dragRotate.disable();
+            map.current.keyboard.disable();
+            map.current.dragPan.disable();
+        }
+    }, [current_latitude, current_longitude, zoom])
+
+
+
 
 
 
@@ -690,15 +573,11 @@ function DrawMapbox(props){
         // width: '100px',
         // zIndex: -1
     }
-    const mapStyle = "top-0 right-0 w-100 h-200"
+    const mapStyle = "top-0 right-0 w-100 h-200 map-container"
     
     return (
         <div>
-            <div ref={mapContainer} class={mapStyle} className="map-container" style={mapContainerStyle} />
-            {/* <div ref={mapContainer} class={mapStyle} className="map-container" style={mapContainerStyle} /> */}
+            <div ref={mapContainer} className={mapStyle} style={mapContainerStyle} />
         </div>
     );
 }
-
-
-

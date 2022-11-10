@@ -1,5 +1,5 @@
 import { NavLink, Routes, Route } from "react-router-dom";
-import { useState } from "react";
+import { useState, useMemo, useEffect, useRef } from "react";
 import Home from "./components/Home";
 import { LoadMemories } from "./components/LoadMemories";
 import { StoryCategory } from "./components/StoryCategory";
@@ -7,21 +7,25 @@ import { StoryIntro } from "./components/StoryIntro";
 import { Impressum } from "./components/Impressum";
 import { NotFound } from "./components/NotFound";
 import { LandingPage } from "./components/LandingPage";
-import Mapbox from "./components/Mapbox";
+import Mapbox from "./components/mapbox";
 // import CallSanityAPI from "./utilities/CallSanityAPI";
 import MenuButton from "./components/menuButtons";
 import AboutWindow from "./components/aboutWindow";
 import './css/gradientAnimation.css';
 // import CallWeatherData from "./utilities/CallWeatherWind";
 
+// import FetchMapData from "./components/mapbox/service/FetchMapData";
+// import { set } from "react-hook-form";
+
+
+
+
+
 function App() {
-  const [buttonPopup, setButtonPopup] = useState(true);
-  const [zoomOut, setZoomOut] = useState(false);
-  const handleZoom = (value) => {
-    // 👇️ take parameter passed from Child component
-    setZoomOut(value);
-    // console.log("handle zoom from child: " + zoomOut);
-  };
+  console.log("C App is running")
+
+  
+
 
 
   // call sanity data
@@ -40,10 +44,8 @@ function App() {
     <>
       {/* <CallWeatherData/> */}
       {/* INTRODUCTORY PAGE */}
-      <LandingPage
-        trigger={buttonPopup}
-        setTrigger={setButtonPopup}
-      ></LandingPage>
+      {/* <LandingPage /> */}
+
       {/* <CallSanityAPI query={query}/> */}
 
       {/* PARENT GRID */}
@@ -61,18 +63,21 @@ function App() {
             style={{ objectFit: "cover" }}
           >
             {/* <div className="fixed z-0 w-full h-full px-7"> */}
-
-            <Mapbox zoomOut={zoomOut}/>
+            <Mapbox />
+            {/* {mapData[3] ? <Mapbox zoomOut={zoomOut} mapData={mapData}/> : (
+              <pre>data loading...</pre>
+            )} */}
+            
           </div>
 
           <Routes>
-            <Route  element={ <Home handleZoom={handleZoom} /> }
+            <Route  element={ <Home /> }
                     path="/" exact />
             <Route  element={ <StoryIntro />} 
                     path="/uploadstory" exact />
-            <Route  element={ <StoryCategory handleZoom={handleZoom} /> }
+            <Route  element={ <StoryCategory /> }
                     path="/uploadstory/:landmark" exact />
-            <Route  element={ <LoadMemories handleZoom={handleZoom} /> }
+            <Route  element={ <LoadMemories /> }
                     path="/loadmemories"/>
             <Route  element={<Impressum />} 
                     path="/impressum" exact />

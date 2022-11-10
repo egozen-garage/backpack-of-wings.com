@@ -1,6 +1,7 @@
 import { useForm } from "react-hook-form"
 
 export default function StoryInputForm(){
+
     // Initiate forms
     // const { register, handleSubmit, errors, reset } = useForm()
     const { register, handleSubmit, formState: { errors }, reset } = useForm()
@@ -35,7 +36,7 @@ export default function StoryInputForm(){
   }
 
     return (
-      <div class="z-30 uploadstories-container uploadstories-textField bg-white shadow-3xl rounded-2xl col-start-1 row-start-3 row-span-4 p-5 mx-6 h-[440px]">
+      <div className="z-30 uploadstories-container uploadstories-textField bg-white shadow-3xl rounded-2xl col-start-1 row-start-3 row-span-4 p-5 mx-6 h-[440px]">
 
         <form
         onSubmit={handleSubmit(handlePost)}
@@ -56,44 +57,44 @@ export default function StoryInputForm(){
           />
 
           {/* STORY TEXT BODY */}
-          <div class="flex">
-            <div class="flex-col w-40 text-xs font-monospace mr-5">
-              <label htmlFor="message" class="block pb-12">
+          <div className="flex">
+            <div className="flex-col w-40 text-xs font-monospace mr-5">
+              <label htmlFor="message" className="block pb-12">
                   Please write in the perspective of Jonas
                   {errors.message && <span style={{color: 'red'}}> *</span>}
               </label>
-              <label class="block pb-12">
+              <label className="block pb-12">
                 What did I see, hear, feel and smell?
               </label>
-              <label class="block pb-12">What did I sense?</label>
+              <label className="block pb-12">What did I sense?</label>
             </div>
             <textarea 
               rows="4" 
               name="message" 
-              class="rounded-2xl p-2 h-[320px] w-full resize-none "
+              className="rounded-2xl p-2 h-[320px] w-full resize-none "
               required
               {...register('message', { required: true })}/>
           </div>
 
 
           {/* STORY AUTHOR NAME */}
-          <div class="flex">
-            <label htmlFor="name" class="w-40 text-xs font-monospace mr-5">
+          <div className="flex">
+            <label htmlFor="name" className="w-40 text-xs font-monospace mr-5">
                 Your Name?
                 {errors.name && <span style={{color: 'red'}}> *</span>}
             </label>
-            <input name="name" class="rounded-2xl w-full p-2" required
+            <input name="name" className="rounded-2xl w-full p-2" required
             {...register('name', { required: true })} />
           </div>
 
 
           {/* STORY EMAIL ADDRESS */}
-          <div class="flex">
-            <label htmlFor="email" class="w-40 text-xs font-monospace">
+          <div className="flex">
+            <label htmlFor="email" className="w-40 text-xs font-monospace">
                 Email
                 {errors.email && <span style={{color: 'red'}}> *</span>}
             </label>
-            <input name="email" class="rounded-2xl w-full p-2 mr-4" required
+            <input name="email" className="rounded-2xl w-full p-2 mr-4" required
                 {...register('email', { 
                     required: true,
                     pattern: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
@@ -114,7 +115,7 @@ export default function StoryInputForm(){
                 {/* <input tabIndex="-1" name="got-ya" ref={register()} /> */}
                 <input tabIndex="-1" name="got-ya" {...register('got-ya', {})} />
             </label>
-            <button type="submit" class="w-40 ml-2 px-2 py-2 border-black border-solid border-2 rounded-xl">
+            <button type="submit" className="w-40 ml-2 px-2 py-2 border-black border-solid border-2 rounded-xl">
               <p>Submit &#10142;</p>
             </button>
           </div>
