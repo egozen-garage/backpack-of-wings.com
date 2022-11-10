@@ -19,8 +19,9 @@ export function Impressum() {
         </div>
         {/* IMPRESSUM */}
         <div className="flex-2 text-white text-xl py-1 px-7">
-          <NavLink to="/impressum">
-            <h1 className="impressumActive">Impressum</h1>
+          <NavLink to="/">
+            <h1 className="impressumActive">Impressum<span className="font-mono text-black pl-2">x</span></h1>
+            
           </NavLink>
         </div>
       </div>

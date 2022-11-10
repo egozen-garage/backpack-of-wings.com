@@ -33,7 +33,7 @@ export function UploadStoriesIntro() {
   return (
     <>
       {/* {visible === true && __INSERT-CODE-HERE-4-VISIBLE-TOGGLE__ } */}
-      <div className="uploadStories-container gradientBackground top-0 fixed h-screen w-screen z-30 overflow-scroll py-20">
+      <div className="uploadStories-container gradientBGJonasIntro top-0 fixed h-screen w-screen z-30 overflow-scroll py-20">
         <div className="text-xl w-screen top-16  pr-[3.7rem]">
           {/* INTRODUCTION TO JONAS */}
           <div className="text-2xl px-8">
@@ -56,7 +56,7 @@ export function UploadStoriesIntro() {
               alt="progressbar"
             />
           </div>
-          <div className="gradientPlayer z-20 fixed bottom-0 w-full h-36"></div>
+          <div className="gradientPlayer z-20 fixed bottom-0 w-full h-40"></div>
 
           {/* NEXT BUTTON */}
           <button
