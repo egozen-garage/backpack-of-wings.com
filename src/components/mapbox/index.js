@@ -501,20 +501,7 @@ function DrawMapbox(props){
             });
 
             // MAP INTERACTIONS
-            map.current.on("mouseenter", 'upload-story-locations', () => {
-                map.current.getCanvas().style.cursor = "pointer";
-            });
-            map.current.on("mouseleave", 'upload-story-locations', () => {
-                map.current.getCanvas().style.cursor = "default";
-            });
-            map.current.on("mouseenter", 'load-memory-locations', () => {
-                map.current.getCanvas().style.cursor = "pointer";
-            });
-            map.current.on("mouseleave", 'load-memory-locations', () => {
-                map.current.getCanvas().style.cursor = "default";
-            });
-
-
+            // current location of bird
             map.current.on("mouseenter", 'last-location', () => {
                 map.current.getCanvas().style.cursor = "pointer";
             });
@@ -537,13 +524,31 @@ function DrawMapbox(props){
                 // setCurrentRoute(e.features[0].properties.description)
                 return 
             });
+
+            // landmarks upload story
+            map.current.on("mouseenter", 'upload-story-locations', () => {
+                map.current.getCanvas().style.cursor = "pointer";
+            });
+            map.current.on("mouseleave", 'upload-story-locations', () => {
+                map.current.getCanvas().style.cursor = "default";
+            });
             map.current.on('click', 'upload-story-locations', (e) => {
                 console.log("upload-story-link")
-            })
-            map.current.on('click', 'load-memory-locations', (e) => {
-                console.log("load-memory-link")
+                navigate('/uploadstory/' + e.features[0].properties.url)
             })
             
+            // landmarks load memory
+            map.current.on("mouseenter", 'load-memory-locations', () => {
+                map.current.getCanvas().style.cursor = "pointer";
+            });
+            map.current.on("mouseleave", 'load-memory-locations', () => {
+                map.current.getCanvas().style.cursor = "default";
+            });
+            map.current.on('click', 'load-memory-locations', (e) => {
+                console.log("load-memory-link")
+                navigate('/loadmemory/' + e.features[0].properties.url)
+            })
+
             if(location.pathname.split('/')[1] === "uploadstory"){
                 map.current.setLayoutProperty('load-memory-locations', 'visibility', 'none');
                 map.current.setLayoutProperty('upload-story-locations', 'visibility', 'visible');
@@ -557,11 +562,6 @@ function DrawMapbox(props){
                 map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
             }
 
-            // map.current.on('click', 'story-locations', (e) => {
-            //     console.log("url: off it goes")
-            //     // navigate( urlPrefix + '/' + e.features[0].properties.url);
-            //     map.current.off('click', 'story-locations');
-            // });
         });
 
         
