@@ -80,6 +80,7 @@ export default function Mapbox() {
 
 function DrawMapbox(props){
     const mapContainer = useRef(null);
+    const weaterContainer = useRef(null);
     const map = useRef(null);
     const location = useLocation()
     let navigate  = useNavigate();
@@ -93,7 +94,11 @@ function DrawMapbox(props){
     const landmarkSanity = props.mapData[2] // FetchMapData() --> [2] landmark
     // const dataReady      = props.mapData[3] // FetchMapData() --> [3] dataReady
 
-    const pathRGB = '255,0,255';
+    const pathRGB = '0,204,255';
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
 
     let lastItemCount = latestBirdData.length-1
     let current_longitude = latestBirdData[lastItemCount].location_long
@@ -165,6 +170,8 @@ function DrawMapbox(props){
                 'type': 'Feature',
                 'properties': {
                     'description': '',
+                    'location': String(current_latitude).slice(0,7) + ', ' + String(current_longitude).slice(0,7),
+                    'date': day + "." + month + "." + year,
                     'route': '',
                     'icon': 'current-location',
                     // 'icon': 'icon-bird-location',
@@ -181,55 +188,55 @@ function DrawMapbox(props){
 
     // WEATHER DATA
     // -----------------------------------------------------------------
-    const weatherInfo = {
-        'type': 'FeatureCollection',
-        'features': [
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Temperature: ' + weatherData.temp + '°C',
-                    // 'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [current_longitude+0.005, current_latitude]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': 'Humidity: ' + weatherData.humidity + ' g/m3',
-                    // 'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [current_longitude+0.005, current_latitude-0.004]
-                }
-            },
-            {
-                'type': 'Feature',
-                'properties': {
-                    'description': "Pressure: " + weatherData.pressure + " hPa",
-                    // 'icon': 'theatre-15'
-                },
-                'geometry': {
-                    'type': 'Point',
-                    'coordinates': [current_longitude+0.005, current_latitude-0.008]
-                }
-            },
-            // {
-            //     'type': 'Feature',
-            //     'properties': {
-            //         'description': props.weatherData.pressure + "pressure",
-            //         // 'icon': 'theatre-15'
-            //     },
-            //     'geometry': {
-            //         'type': 'Point',
-            //         'coordinates': [current_longitude+0.001, current_latitude-0.001]
-            //     }
-            // },
-        ]
-    }
+    // const weatherInfo = {
+    //     'type': 'FeatureCollection',
+    //     'features': [
+    //         {
+    //             'type': 'Feature',
+    //             'properties': {
+    //                 'description': 'Temperature: ' + weatherData.temp + '°C',
+    //                 // 'icon': 'theatre-15'
+    //             },
+    //             'geometry': {
+    //                 'type': 'Point',
+    //                 'coordinates': [current_longitude+0.005, current_latitude]
+    //             }
+    //         },
+    //         {
+    //             'type': 'Feature',
+    //             'properties': {
+    //                 'description': 'Humidity: ' + weatherData.humidity + ' g/m3',
+    //                 // 'icon': 'theatre-15'
+    //             },
+    //             'geometry': {
+    //                 'type': 'Point',
+    //                 'coordinates': [current_longitude+0.005, current_latitude-0.004]
+    //             }
+    //         },
+    //         {
+    //             'type': 'Feature',
+    //             'properties': {
+    //                 'description': "Pressure: " + weatherData.pressure + " hPa",
+    //                 // 'icon': 'theatre-15'
+    //             },
+    //             'geometry': {
+    //                 'type': 'Point',
+    //                 'coordinates': [current_longitude+0.005, current_latitude-0.008]
+    //             }
+    //         },
+    //         // {
+    //         //     'type': 'Feature',
+    //         //     'properties': {
+    //         //         'description': props.weatherData.pressure + "pressure",
+    //         //         // 'icon': 'theatre-15'
+    //         //     },
+    //         //     'geometry': {
+    //         //         'type': 'Point',
+    //         //         'coordinates': [current_longitude+0.001, current_latitude-0.001]
+    //         //     }
+    //         // },
+    //     ]
+    // }
 
     // STORY LOCATIONS DATA
     // -----------------------------------------------------------------
@@ -238,7 +245,7 @@ function DrawMapbox(props){
         const landmark = {
             'type': 'Feature',
             'properties': {
-                'description': landmarkSanity[i].locationName + ", " + landmarkSanity[i].locationType,
+                'description': landmarkSanity[i].locationType + ", " + landmarkSanity[i].locationName,
                 'icon': 'current-location',
                 'url': 'url', // add url link form sanity 
                 // 'url': props.landmarkLinks[i].url, // WRONG needs fix
@@ -314,7 +321,7 @@ function DrawMapbox(props){
                         'interpolate',
                         ['linear'],
                         ['line-progress'],
-                        0, 'rgba(' + pathRGB + ',0)',
+                        0, 'rgba(' + pathRGB + ',0.1)',
                         // 0.1, 'royalblue',
                         // 0.3, 'cyan',
                         // 0.5, 'lime',
@@ -335,6 +342,24 @@ function DrawMapbox(props){
                 },
                 // minzoom: 10,
             });
+            map.current.addLayer({
+                type: 'circle',
+                source: 'latest-locations',
+                id: 'latest-locations-circles',
+                paint: {
+                    'circle-color': 'rgba(' + pathRGB + ',1)',
+                    'circle-radius': 5,
+                    'circle-opacity': [
+                        'interpolate',
+                        ['exponential', 0.5], // Set the exponential rate of change to 0.5
+                        ['zoom'],
+                        11, 0, // When zoom is 11 or less, set opacit to 1
+                        12, 1 // When zoom is 12 or higher, set opacit to 0
+                    ],
+                },
+            });
+
+
 
             // ADD YEAR LOACTIONS
             map.current.addSource('year-locations', {
@@ -361,9 +386,12 @@ function DrawMapbox(props){
                         'interpolate',
                         ['linear'],
                         ['line-progress'],
-                        0, 'rgba(' + pathRGB + ',0)',
-                        0.2, 'rgba(' + pathRGB + ',0.5)',
-                        1, 'rgba(' + pathRGB + ',1)'
+                        // 0, 'rgba(' + pathRGB + ',0)',
+                        // 0.2, 'rgba(' + pathRGB + ',0.5)',
+                        // 1, 'rgba(' + pathRGB + ',1)',
+                        0, 'rgba(0,0,0,0)',
+                        0.2, 'rgba(0,0,0,0.5)',
+                        1, 'rgba(0,0,0,1)',
                     ],
                     'line-opacity': [
                         'interpolate',
@@ -381,36 +409,36 @@ function DrawMapbox(props){
             });
             
             // ADD WEATHER DATA
-            map.current.addSource('weather-info', {
-                type: 'geojson',
-                lineMetrics: true,
-                data: weatherInfo
-            });
-            map.current.addLayer({
-                type: 'symbol',
-                source: 'weather-info',
-                id: 'weather-info',
-                layout: {
-                    'text-field': ['get', 'description'],
-                    'text-variable-anchor': ['left'],
-                    'text-radial-offset': 0.5,
-                    'text-justify': 'center',
-                    'icon-image': ['get', 'icon'],
-                    'icon-size': 0.3,
-                },
-                paint: {
-                    "text-color": 'rgba(' + pathRGB + ',1)',
-                    "text-halo-color": "black",
-                    "text-halo-width": 1,
-                    'text-opacity': [
-                        'interpolate',
-                        ['exponential', 0.5], // Set the exponential rate of change to 0.5
-                        ['zoom'],
-                        11, 0, // When zoom is 11 or less, set opacit to 1
-                        12, 1 // When zoom is 12 or higher, set opacit to 0
-                    ],
-                }
-            });
+            // map.current.addSource('weather-info', {
+            //     type: 'geojson',
+            //     lineMetrics: true,
+            //     data: weatherInfo
+            // });
+            // map.current.addLayer({
+            //     type: 'symbol',
+            //     source: 'weather-info',
+            //     id: 'weather-info',
+            //     layout: {
+            //         'text-field': ['get', 'description'],
+            //         'text-variable-anchor': ['left'],
+            //         'text-radial-offset': 0.5,
+            //         'text-justify': 'center',
+            //         'icon-image': ['get', 'icon'],
+            //         'icon-size': 0.3,
+            //     },
+            //     paint: {
+            //         "text-color": 'rgba(' + pathRGB + ',1)',
+            //         "text-halo-color": "black",
+            //         "text-halo-width": 1,
+            //         'text-opacity': [
+            //             'interpolate',
+            //             ['exponential', 0.5], // Set the exponential rate of change to 0.5
+            //             ['zoom'],
+            //             11, 0, // When zoom is 11 or less, set opacit to 1
+            //             12, 1 // When zoom is 12 or higher, set opacit to 0
+            //         ],
+            //     }
+            // });
 
             // ADD STORY LOCATIONS
             map.current.addSource('landmarks', {
@@ -430,20 +458,22 @@ function DrawMapbox(props){
                     'text-radial-offset': 0.5,
                     'text-justify': 'left',
                     // 'icon-image': ['get', 'icon'],
-                    'icon-image': 'story-location',
-                    'icon-size': 0.25,
-                    'icon-allow-overlap': true,
+                    // 'icon-image': 'story-location',
+                    // 'icon-size': 0.25,
+                    // 'icon-allow-overlap': true,
                     'text-allow-overlap': true,
                 },
                 paint: {
-                    "text-color": 'rgba(' + pathRGB + ',1)',
-                    "text-halo-color": "black",
-                    "text-halo-width": 2,
+                    "text-color": 'black',
+                    // "text-color": 'rgba(' + pathRGB + ',1)',
+                    // "text-halo-color": "black",
+                    // "text-halo-width": 2,
                     // "cursor": "pointer",
                     // "text-halo-blur": 1,
                 }
             });
             map.current.addLayer({
+                // type: 'circle',
                 type: 'symbol',
                 source: 'landmarks',
                 id: 'load-memory-locations',
@@ -454,20 +484,35 @@ function DrawMapbox(props){
                     'text-radial-offset': 0.5,
                     'text-justify': 'left',
                     // 'icon-image': ['get', 'icon'],
-                    'icon-image': 'story-location',
-                    'icon-size': 0.25,
-                    'icon-allow-overlap': true,
+                    // 'icon-image': 'story-location',
+                    // 'icon-size': 0.25,
+                    // 'icon-allow-overlap': true,
                     'text-allow-overlap': true,
                 },
                 paint: {
-                    "text-color": 'rgba(' + pathRGB + ',1)',
-                    "text-halo-color": "black",
-                    "text-halo-width": 2,
+                    "text-color": 'black',
+                    // "text-color": 'rgba(' + pathRGB + ',1)',
+                    // "text-halo-color": "black",
+                    // "text-halo-width": 2,
                     // "cursor": "pointer",
                     // "text-halo-blur": 1,
+                    // "circle-radius": 3,
+                    // "circle-color": "#5b94c6",
+                    // "circle-opacity": 1,
                 }
             });
+            map.current.addLayer({
+                type: 'circle',
+                source: 'landmarks',
+                id: 'landmark-circle',
+                layout: {
 
+                },
+                paint: {
+                    'circle-radius': 4,
+                    'circle-color': 'rgba(' + pathRGB + ',1)',
+                }
+            });
 
 
 
@@ -480,24 +525,51 @@ function DrawMapbox(props){
                 data: lastLocation
             });
             map.current.addLayer({
-                type: 'symbol',
+                // type: 'symbol',
+                type: 'circle',
                 source: 'last-location',
                 id: 'last-location',
                 layout: {
-                    'text-field': ['get', 'description'],
-                    'text-variable-anchor': ['left'],
+                    // 'text-field': ['get', 'description'],
+                    // 'text-variable-anchor': ['left'],
                     // 'text-radial-offset': 0.5,
-                    // 'text-justify': 'center',
-                    'icon-image': ['get', 'icon'],
-                    'icon-size': 0.3,
-                    'icon-allow-overlap': true,
-                    'text-allow-overlap': true,
+                //     // 'text-justify': 'center',
+                //     // 'icon-image': ['get', 'icon'],
+                //     // 'icon-size': 0.3,
+                //     // 'icon-allow-overlap': true,
+                //     // 'text-allow-overlap': true,
                 },
                 paint: {
-                    "text-color": 'rgba(' + pathRGB + ',1)',
-                    "text-halo-color": "black",
-                    "text-halo-width": 1,
+                    'circle-radius': 10,
+                    'circle-color': 'rgba(' + pathRGB + ',1)',
+                    // 'circle-color': 'rgba(0,204,255,1)',
+                    // 'circle-color': '#00ccff',
+                    // "text-color": 'rgba(' + pathRGB + ',1)',
+                    // "text-halo-color": "black",
+                    // "text-halo-width": 1,
+                    // "circle-opacity": 1
                 }
+            });
+            map.current.addLayer({
+                type: 'symbol',
+                source: 'last-location',
+                id: 'last-location-text',
+                layout: {
+                    'text-field': [
+                        'format', 
+                        ['get', 'date'],
+                        // { 'font-scale': 1.2 },
+                        '\n',
+                        ['get', 'location'],
+                        // {
+                        //     'font-scale': 0.8,
+                        //     'text-font': 'Apoc Revelations'
+                        //     }
+                    ],
+                    'text-variable-anchor': ['left'],
+                    'text-radial-offset': 0.5,
+                    'text-justify': 'left',
+                },
             });
 
             // MAP INTERACTIONS
@@ -653,7 +725,13 @@ function DrawMapbox(props){
 
 
 
-
+    const weaterContainerStyle= {
+        position: 'fixed',
+        zIndex: 3,
+        bottom: '40px',
+        marginLeft: '40px',
+        // backgroundColor: '#fff',
+    }
     const mapContainerStyle ={
         height: '100vh',
         // width: '100px',
@@ -661,8 +739,28 @@ function DrawMapbox(props){
     }
     const mapStyle = "top-0 right-0 w-100 h-200 map-container"
     
+    // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
+
+
+    const weatherObject = "mr-10 font-mono  text-sm "
+
+    
+    function timestamp2Time(timestamp){
+
+        // adjust timezone
+        // read location of Jonas and define Ländercode
+        return new Date(timestamp).toLocaleTimeString("it-IT")
+    }
+
     return (
         <div>
+            <div ref={weaterContainer} style={weaterContainerStyle}>
+                <span className={weatherObject}>Jonas Location</span>
+                <span className={weatherObject}>Sunrise {timestamp2Time(weatherData.sunrise)}</span>
+                <span className={weatherObject}>Sunset {timestamp2Time(weatherData.sunset)}</span>
+                <span className={weatherObject}>{weatherData.temp} °C</span>
+                <span className={weatherObject}>Air humidity: {weatherData.humidity} g/m3</span>
+            </div>
             <div ref={mapContainer} className={mapStyle} style={mapContainerStyle} />
         </div>
     );
