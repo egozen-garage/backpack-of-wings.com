@@ -263,8 +263,6 @@ function DrawMapbox(props){
 
 
 
-
-
     // load map and project data
     useEffect(() => {
 
@@ -415,7 +413,7 @@ function DrawMapbox(props){
             });
 
             // ADD STORY LOCATIONS
-            map.current.addSource('story-locations', {
+            map.current.addSource('landmarks', {
                 type: 'geojson',
                 lineMetrics: true,
                 data: storyLocations,
@@ -423,8 +421,8 @@ function DrawMapbox(props){
             });
             map.current.addLayer({
                 type: 'symbol',
-                source: 'story-locations',
-                id: 'story-locations',
+                source: 'landmarks',
+                id: 'upload-story-locations',
                 layout: {
                     'text-field': ['get', 'description'],
                     'text-variable-anchor': ['bottom-left', 'top-left'],
@@ -445,6 +443,35 @@ function DrawMapbox(props){
                     // "text-halo-blur": 1,
                 }
             });
+            map.current.addLayer({
+                type: 'symbol',
+                source: 'landmarks',
+                id: 'load-memory-locations',
+                layout: {
+                    'text-field': ['get', 'description'],
+                    'text-variable-anchor': ['bottom-left', 'top-left'],
+                    // 'text-variable-anchor': ['left', 'right'],
+                    'text-radial-offset': 0.5,
+                    'text-justify': 'left',
+                    // 'icon-image': ['get', 'icon'],
+                    'icon-image': 'story-location',
+                    'icon-size': 0.25,
+                    'icon-allow-overlap': true,
+                    'text-allow-overlap': true,
+                },
+                paint: {
+                    "text-color": 'rgba(' + pathRGB + ',1)',
+                    "text-halo-color": "black",
+                    "text-halo-width": 2,
+                    // "cursor": "pointer",
+                    // "text-halo-blur": 1,
+                }
+            });
+
+
+
+
+
 
             // ADD THE LAST LOCATION 
             map.current.addSource('last-location', {
@@ -474,10 +501,16 @@ function DrawMapbox(props){
             });
 
             // MAP INTERACTIONS
-            map.current.on("mouseenter", 'story-locations', () => {
+            map.current.on("mouseenter", 'upload-story-locations', () => {
                 map.current.getCanvas().style.cursor = "pointer";
             });
-            map.current.on("mouseleave", 'story-locations', () => {
+            map.current.on("mouseleave", 'upload-story-locations', () => {
+                map.current.getCanvas().style.cursor = "default";
+            });
+            map.current.on("mouseenter", 'load-memory-locations', () => {
+                map.current.getCanvas().style.cursor = "pointer";
+            });
+            map.current.on("mouseleave", 'load-memory-locations', () => {
                 map.current.getCanvas().style.cursor = "default";
             });
 
@@ -504,10 +537,34 @@ function DrawMapbox(props){
                 // setCurrentRoute(e.features[0].properties.description)
                 return 
             });
+            map.current.on('click', 'upload-story-locations', (e) => {
+                console.log("upload-story-link")
+            })
+            map.current.on('click', 'load-memory-locations', (e) => {
+                console.log("load-memory-link")
+            })
+            
+            if(location.pathname.split('/')[1] === "uploadstory"){
+                map.current.setLayoutProperty('load-memory-locations', 'visibility', 'none');
+                map.current.setLayoutProperty('upload-story-locations', 'visibility', 'visible');
+            }
+            if(location.pathname.split('/')[1] === "loadmemory"){
+                map.current.setLayoutProperty('load-memory-locations', 'visibility', 'visible');
+                map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
+            }
+            if(location.pathname.split('/')[1] === ""){
+                map.current.setLayoutProperty('load-memory-locations', 'visibility', 'visible');
+                map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
+            }
 
-
-
+            // map.current.on('click', 'story-locations', (e) => {
+            //     console.log("url: off it goes")
+            //     // navigate( urlPrefix + '/' + e.features[0].properties.url);
+            //     map.current.off('click', 'story-locations');
+            // });
         });
+
+        
 
     });
 
@@ -521,12 +578,41 @@ function DrawMapbox(props){
         console.log("url prefix: " + prefix)
         return prefix
     }, [location.pathname])
-
     useEffect(() => {
-        map.current.on('click', 'story-locations', (e) => {
-            navigate( urlPrefix + '/' + e.features[0].properties.url);
-        });
+        var mapLayer = map.current.getLayer('load-memory-locations');
+        if(typeof mapLayer !== 'undefined') {
+            if(urlPrefix === "uploadstory"){
+                map.current.setLayoutProperty('load-memory-locations', 'visibility', 'none');
+                map.current.setLayoutProperty('upload-story-locations', 'visibility', 'visible');
+            }
+            if(urlPrefix === "loadmemory"){
+                map.current.setLayoutProperty('load-memory-locations', 'visibility', 'visible');
+                map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
+            }
+            if(urlPrefix === ""){
+                map.current.setLayoutProperty('load-memory-locations', 'visibility', 'visible');
+                map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
+            }
+        }
+        // map.current.on('click', 'story-locations', (e) => {
+        //     console.log("url: " + urlPrefix)
+        //     navigate( urlPrefix + '/' + e.features[0].properties.url);
+        // });
     }, [navigate, urlPrefix])
+
+    // function ClickLandmark(urlEndpoint){
+    //     console.log("www urlEndpoint: ", urlEndpoint)
+    //     const currentPath = location.pathname
+
+
+    //     console.log("www urlPrefix: ", currentPath)
+    //     // map.current.on('click', 'story-locations', (e) => {
+    //     //     console.log("url: " + urlPrefix)
+    //     //     navigate( urlPrefix + '/' + e.features[0].properties.url);
+    //     // });
+    // }
+
+
 
 
     // define zoom behavior

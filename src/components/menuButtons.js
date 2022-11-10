@@ -6,7 +6,7 @@ export default function menuButton(){
         <>
         <NavLink
           className="loadMemoriesBtnContainer gradientLoadMemories z-45 flex items-center text-lg bg-white w-8 order-1"
-          to="/loadmemories"
+          to="/loadmemory"
         >
           <h1 className="" style={{ writingMode: "vertical-rl" }}>
             Load Memories
