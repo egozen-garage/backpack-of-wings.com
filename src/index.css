@@ -16,7 +16,7 @@
   @font-face {
     font-family: "Apoc Revelations";
     font-style: normal;
-    font-weight: 700; /*light*/
+    font-weight: 700; /*bold*/
     font-display: swap;
     src: url("./fonts/ApocRevelations-Bold.woff2") format("woff2"),
       url("./fonts/ApocRevelations-Bold.woff") format("woff");
@@ -34,7 +34,7 @@
   @font-face {
     font-family: "Apoc Revelations";
     font-style: italic;
-    font-weight: 700; /*light*/
+    font-weight: 700; /*bold*/
     font-display: swap;
     src: url("./fonts/ApocRevelations-BoldItalic.woff2") format("woff2"),
       url("./fonts/ApocRevelations-BoldItalic.woff") format("woff");

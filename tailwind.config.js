@@ -13,6 +13,11 @@ module.exports = {
       '2xl': '1536px',
     },
     extend: {
+      colors: {
+        'backpackYellow' : '#f9fe1e',
+        'backpackGray' : '#CFCFCF',
+        'backpackBlue' : '#F0B4FC',
+      },
       fontFamily: {
         sans: ["'Area Normal'", ...defaultTheme.fontFamily.sans],
         serif: ["'Apoc Revelations'", ...defaultTheme.fontFamily.serif],
@@ -21,6 +26,8 @@ module.exports = {
       boxShadow: {
         '2xl': '0px 0px 10px 2px rgba(0, 0, 0, 0.3)',
         '3xl': '3px 12px 10px 0px rgba(0, 0, 0, 0.3)',
+        'button': '0px 0px 6px 4px rgba(0, 0, 0, 0.3)',
+        'buttonBlack': '0px 0px 4px 4px rgba(0 ,0 ,0 , 0.5)',
       },
       inset: {
         '1/5': '20%',
@@ -28,7 +35,12 @@ module.exports = {
         '1/7': '14%',
       },
       zIndex: {
+        '41': '41',
+        '42': '42',
+        '43': '43',
+        '44': '44',
         '45': '45',
+        '60': '60',
       }
     },
   },

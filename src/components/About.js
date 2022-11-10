@@ -4,9 +4,9 @@ import React from "react";
 export function About() {
   return (
     <>
-      <div className="z-40 px-16 pt-[6rem] pb-10 fixed h-full w-full overflow-scroll p-16">
+      <div className="p-16 px-16 pb-10 pt-[6rem]">
         {/* <button className="aboutBtn absolute right-3 top-3" onClick={() => props.setTrigger(false)}>&#9711;</button>{props.children} */}
-        <div className="font-mono py-8 leading-5 text-s">
+        <div className="z-45 font-mono py-8 leading-5 text-s">
           <code>last login. fri jun 24 18.44.10 on ttys000</code>
           <br />
           <code>the default interactive shell is now zsh.</code>

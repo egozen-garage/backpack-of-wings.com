@@ -3,7 +3,7 @@ import { useState, useMemo, useEffect, useRef } from "react";
 import Home from "./components/Home";
 import { LoadMemories } from "./components/LoadMemories";
 import { StoryCategory } from "./components/StoryCategory";
-import { StoryIntro } from "./components/StoryIntro";
+import { UploadStoriesIntro } from "./components/UploadStoriesIntro";
 import { Impressum } from "./components/Impressum";
 import { NotFound } from "./components/NotFound";
 import { LandingPage } from "./components/LandingPage";
@@ -56,7 +56,7 @@ function App() {
         <MenuButton/>
 
         {/* EVERY OTHER PAGE */}
-        <div className="ChildGridContainer relative wrapper-content z-30 order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
+        <div className="ChildGridContainer relative wrapper-content order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
           {/* MAP BACKGROUND*/}
           <div
             className="absolute z-0 w-full h-full"
@@ -73,7 +73,7 @@ function App() {
           <Routes>
             <Route  element={ <Home /> }
                     path="/" exact />
-            <Route  element={ <StoryIntro />} 
+            <Route  element={ <UploadStoriesIntro />} 
                     path="/uploadstory" exact />
             <Route  element={ <StoryCategory /> }
                     path="/uploadstory/:landmark" exact />
@@ -90,11 +90,6 @@ function App() {
           {/* BACK TO DASHBOARD BUTTON */}
           <NavLink className="px-3" to="/" reloadDocument>
             <p>Dashboard</p>
-          </NavLink>
-
-          {/* IMPRESSUM */}
-          <NavLink className="px-3" to="/impressum">
-            <p>Impressum</p>
           </NavLink>
         </div>
       </div>
