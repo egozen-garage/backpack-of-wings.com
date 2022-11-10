@@ -30,32 +30,35 @@ export default function AboutWindow() {
       {/* BACKPACK OF WINGS BUTTON */}
       <div className="z-45 aboutBackground fixed flex top-0 py-6 px-14">
         <div onClick={toggleCollapsible} className="aboutContainer z-40 flex-1">
-          <button className="toggle bg-white shadow-button shadow-white rounded-2xl py-1">
-            <h1 className="text-xl mx-4">
+          <button className={isOpen? "buttonActive" : "buttonInactive"}>
+            <h1 className="text-xl mx-1 py-1">
               Backpack of Wings: Sensory Networks
+              {isOpen && (
+                <span className="font-mono text-white pl-4">x</span>
+              )}
             </h1>
           </button>
         </div>
         {/* IMPRESSUM */}
         <div className={isOpen ? "animateOpacity show" : "animateOpacity"}>
-          <div className="flex-2 text-white text-xl py-1 px-7">
+          <div className="flex-2 buttonInactive mx-6">
             <NavLink to="/impressum" onClick={toggleImpressum}>
-              <h1 className="impressumIdle">
+              <h1 className="text-xl mx-4 py-1">
                 Impressum
               </h1>
             </NavLink>
           </div>
         </div>
       </div>
-      <div className="z-30 gradientDashboard fixed h-36 w-full"></div>
+      <div className="z-30 gradientDashboard_header fixed h-36 w-full"></div>
 
       {/* COLLAPSIBLE */}
       <PanelContent
         style={AboutAnimatedStyle}
-        className="gradientDashboard fixed w-full"
-      >
-        <About />
+        className="gradientDashboard_header fixed w-full"
+      >        <About />
       </PanelContent>
+      <div className={isOpen ? "animateAboutOpacity show" : "animateAboutOpacity"}></div>
     </>
   );
 }

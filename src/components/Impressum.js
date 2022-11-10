@@ -10,17 +10,18 @@ export function Impressum() {
       <div className="z-60 aboutBackground fixed flex top-0 py-6 px-[26px]">
         <div className="aboutContainer z-40 flex-1">
           <NavLink to="/">
-            <button className="toggle bg-backpackYellow shadow-button shadow-backpackYellow rounded-2xl py-1">
-              <h1 className="text-xl mx-4">
+            <button className="buttonInactive">
+              <h1 className="text-xl mx-4 py-1">
                 Backpack of Wings: Sensory Networks
               </h1>
             </button>
           </NavLink>
         </div>
         {/* IMPRESSUM */}
-        <div className="flex-2 text-white text-xl py-1 px-7">
-          <NavLink to="/impressum">
-            <h1 className="impressumActive">Impressum</h1>
+        <div className="flex-2 buttonActive mx-6">
+          <NavLink to="/">
+            <h1 className="text-xl mx-4 py-1">Impressum<span className="font-mono text-white pl-2">x</span></h1>
+            
           </NavLink>
         </div>
       </div>

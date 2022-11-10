@@ -1,4 +1,14 @@
-.impressumIdle {
+.buttonInactive {
+    transition: all 0.2s ease-in;
+    background-color: white;
+    box-shadow: 0px 0px 4px 4px #FFF;
+    color: black;
+    border-radius: 1rem;
+    padding: 0 0.7rem;
+}
+
+.buttonActive {
+    transition: all 0.2s ease-in;
     background-color: black;
     box-shadow: 0px 0px 4px 4px #000;
     color: white;
@@ -10,13 +20,13 @@
     opacity: 0 !important;
 }
 
-.impressumActive {
+/* .impressumActive {
     background-color: white;
     box-shadow: 0px 0px 4px 4px #FFF;
     color: black;
     border-radius: 1rem;
     padding: 0 0.7rem;
-}
+} */
 
 .animateOpacity {
     transition: opacity .5s ease-in-out;
@@ -25,5 +35,23 @@
 
 .animateOpacity.show {
     opacity: 1;
+}
+
+.animateAboutOpacity {
+    background: rgb(207,207,207);
+    background: linear-gradient(180deg, rgba(207,207,207,0) 0%, rgba(207,207,207,0.8673844537815126) 48%, rgba(207,207,207,0.8981967787114846) 91%);  
+    width: 100vw;
+    height: 0vh;
+    position: fixed;
+    bottom: 0;
+    transition: opacity 0.5s ease-in-out;
+    opacity: 0;
+    z-index: 30;
+    overflow: hidden;
+}
+
+.animateAboutOpacity.show {
+    opacity: 1;
+    height: 100vh;
 }
 
