@@ -1,8 +1,6 @@
-import React from "react";
 import { StoriesData } from "./StoriesData.js";
 
-export function LoadMemories({handleZoom}) {
-  handleZoom(true);
+export function LoadMemories() {
   
   return (
     <>

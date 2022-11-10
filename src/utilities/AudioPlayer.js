@@ -36,14 +36,14 @@ class AudioPlayer extends Component {
         return (
             <div>
                 {/* Show state of song on website */}
-                <p class="fixed top-0 left-10">
+                <p className="fixed top-0 left-10">
                 {this.state.isPlaying ? 
                     "Song is Playing" : 
                     "Song is Paused"}
                 </p>
 
                 {/* CANVAS to call our main function */}
-                <div class="fixed z-40 top-0 w-screen h-screen soundscape-btn cursor-cell" onClick={this.playPause}>
+                <div className="fixed z-40 top-0 w-screen h-screen soundscape-btn cursor-cell" onClick={this.playPause}>
                 </div>
             </div>
         );
