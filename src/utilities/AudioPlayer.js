@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import track from "../audio/6_BirdSanctuary_Germany.wav";
+import "../css/soundscape.css";
 
 class AudioPlayer extends Component {
 
@@ -36,14 +37,14 @@ class AudioPlayer extends Component {
         return (
             <div>
                 {/* Show state of song on website */}
-                <p className="fixed top-0 left-10">
+                {/* <p className="fixed top-0 left-10">
                 {this.state.isPlaying ? 
                     "Song is Playing" : 
                     "Song is Paused"}
-                </p>
+                </p> */}
 
                 {/* CANVAS to call our main function */}
-                <div className="fixed z-40 top-0 w-screen h-screen soundscape-btn cursor-cell" onClick={this.playPause}>
+                <div className="soundscapeButton fixed z-40 bottom-0 w-screen h-28" onClick={this.playPause}>
                 </div>
             </div>
         );

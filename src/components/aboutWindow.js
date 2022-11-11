@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { About } from "./About";
 import { useState } from "react";
 import { useSpring, animated } from "react-spring";
@@ -22,14 +22,14 @@ export default function AboutWindow() {
   const PanelContent = styled(animated.div)`
     color: black;
     overflow: scroll;
-    z-index: 35;
+    z-index: 49;
   `;
 
   return (
     <>
       {/* BACKPACK OF WINGS BUTTON */}
-      <div className="z-45 aboutBackground fixed flex top-0 py-6 px-14">
-        <div onClick={toggleCollapsible} className="aboutContainer z-40 flex-1">
+      <div className="z-50 aboutBackground fixed flex top-0 py-6 px-14">
+        <div onClick={toggleCollapsible} className="aboutContainer z-50 flex-1">
           <button className={isOpen? "buttonActive" : "buttonInactive"}>
             <h1 className="text-xl mx-1 py-1">
               Backpack of Wings: Sensory Networks
@@ -43,19 +43,19 @@ export default function AboutWindow() {
         <div className={isOpen ? "animateOpacity show" : "animateOpacity"}>
           <div className="flex-2 buttonInactive mx-6">
             <NavLink to="/impressum" onClick={toggleImpressum}>
-              <h1 className="text-xl mx-4 py-1">
+              <h1 className="text-xl mx-2 py-1">
                 Impressum
               </h1>
             </NavLink>
           </div>
         </div>
       </div>
-      <div className="z-30 gradientDashboard_header fixed h-36 w-full"></div>
+      <div className="z-30 gradientDashboard_header fixed h-32 w-full"></div>
 
       {/* COLLAPSIBLE */}
       <PanelContent
         style={AboutAnimatedStyle}
-        className="gradientDashboard_header fixed w-full"
+        className="gradientDashboard_header fixed w-full top-0 left-0"
       >        <About />
       </PanelContent>
       <div className={isOpen ? "animateAboutOpacity show" : "animateAboutOpacity"}></div>

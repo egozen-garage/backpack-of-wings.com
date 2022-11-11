@@ -20,14 +20,6 @@
     opacity: 0 !important;
 }
 
-/* .impressumActive {
-    background-color: white;
-    box-shadow: 0px 0px 4px 4px #FFF;
-    color: black;
-    border-radius: 1rem;
-    padding: 0 0.7rem;
-} */
-
 .animateOpacity {
     transition: opacity .5s ease-in-out;
     opacity: 0;
@@ -46,7 +38,7 @@
     bottom: 0;
     transition: opacity 0.5s ease-in-out;
     opacity: 0;
-    z-index: 30;
+    z-index: 38;
     overflow: hidden;
 }
 

@@ -1,32 +1,32 @@
 import React from "react";
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 
 export function Impressum() {
+  const navigate = useNavigate();
+
   return (
     <>
       {/* BACKPACK OF WINGS BUTTON */}
-      <div className="z-60 aboutBackground fixed flex top-0 py-6 px-[26px]">
+      <div className="z-60 aboutBackground fixed flex top-0 py-6 px-14">
         <div className="aboutContainer z-40 flex-1">
-          <NavLink to="/">
-            <button className="buttonInactive">
-              <h1 className="text-xl mx-4 py-1">
+            <button onClick={() => navigate(-1)} className="buttonInactive">
+              <h1 className="text-xl mx-1 py-1">
                 Backpack of Wings: Sensory Networks
               </h1>
             </button>
-          </NavLink>
         </div>
         {/* IMPRESSUM */}
         <div className="flex-2 buttonActive mx-6">
           <NavLink to="/">
-            <h1 className="text-xl mx-4 py-1">Impressum<span className="font-mono text-white pl-2">x</span></h1>
+            <h1 className="text-xl mx-2 py-1">Impressum<span className="font-mono text-white pl-2">x</span></h1>
             
           </NavLink>
         </div>
       </div>
 
-      <div className="text-white gradientImpressum z-50 col-span-2 row-span-6 px-5 py-16">
+      <div className="text-white gradientImpressum z-50 fixed top-0 left-0 h-full w-full px-12 py-16 overflow-scroll">
         <p className="font-serif font-light text-2xl p-4 py-4">
           <span className="block py-9">
             Hyeseon Jeong <br/>
