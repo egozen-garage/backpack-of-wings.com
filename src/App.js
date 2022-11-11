@@ -9,7 +9,7 @@ import { NotFound } from "./components/NotFound";
 import { LandingPage } from "./components/LandingPage";
 import Mapbox from "./components/mapbox";
 // import CallSanityAPI from "./utilities/CallSanityAPI";
-import MenuButton from "./components/menuButtons";
+import MenuButtons from "./components/MenuButtons";
 import AboutWindow from "./components/aboutWindow";
 import './css/gradientAnimation.css';
 // import CallWeatherData from "./utilities/CallWeatherWind";
@@ -23,8 +23,6 @@ import './css/gradientAnimation.css';
 
 function App() {
   console.log("C App is running")
-
-  
 
 
 
@@ -42,18 +40,12 @@ function App() {
 
   return (
     <>
-      {/* <CallWeatherData/> */}
-      {/* INTRODUCTORY PAGE */}
-      {/* <LandingPage /> */}
-
-      {/* <CallSanityAPI query={query}/> */}
-
       {/* PARENT GRID */}
       <div className="ParentGrid wrapper flex justify-between min-h-screen">
         
         <AboutWindow/>
         
-        <MenuButton/>
+        <MenuButtons/>
 
         {/* EVERY OTHER PAGE */}
         <div className="ChildGridContainer relative wrapper-content order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
@@ -88,7 +80,7 @@ function App() {
 
         <div className="inline-flex text-sm text-white fixed z-40 bottom-3 right-4 px-9">
           {/* BACK TO DASHBOARD BUTTON */}
-          <NavLink className="px-3" to="/" reloadDocument>
+          <NavLink className="px-3" to="/">
             <p>Dashboard</p>
           </NavLink>
         </div>

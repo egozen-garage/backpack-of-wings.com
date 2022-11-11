@@ -13,6 +13,9 @@ module.exports = {
       '2xl': '1536px',
     },
     extend: {
+      cursor: {
+        'play' : 'url(./img/cursor-play.svg), pointer'
+      },
       colors: {
         'backpackYellow' : '#f9fe1e',
         'backpackGray' : '#CFCFCF',
@@ -35,6 +38,15 @@ module.exports = {
         '1/7': '14%',
       },
       zIndex: {
+        '18': '18',
+        '22': '22',
+        '24': '25',
+        '26': '26',
+        '28': '28',
+        '32': '32',
+        '34': '34',
+        '36': '36',
+        '38': '38',
         '41': '41',
         '42': '42',
         '43': '43',

@@ -1,5 +1,5 @@
 import React from "react";
-import { NavLink, useSearchParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import { About } from "./About";
 import { useState } from "react";
 import { useSpring, animated } from "react-spring";
@@ -50,7 +50,7 @@ export default function AboutWindow() {
           </div>
         </div>
       </div>
-      <div className="z-30 gradientDashboard_header fixed h-36 w-full"></div>
+      <div className="z-30 gradientDashboard_header fixed h-32 w-full"></div>
 
       {/* COLLAPSIBLE */}
       <PanelContent

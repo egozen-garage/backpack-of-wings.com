@@ -2,15 +2,20 @@ import React from "react";
 import { useState } from "react";
 import { UploadStoriesIntro } from "./UploadStoriesIntro.js";
 import StoryInputForm from "./StoryInputForm.js";
+import "../css/menuButtons.css"
 
 export function UploadStories({handleZoom}) {
   handleZoom(true);
-  // const [currentIndex, setCurrentIndex] = useState(0);
+  const [isOpen, setIsOpen] = useState(true);
+  // const toggleRightPanel = () => {
+  //   setIsOpen((prevState) => !prevState);
+  // };
 
   return (
     <>
       {/* JONAS INTRO POP-UP */}
-      <UploadStoriesIntro trigger={true}></UploadStoriesIntro>
+      <div className="z-50 bg-blue-60 w-full h-full fixed top-0">checkchec</div>
+      {/* <UploadStoriesIntro></UploadStoriesIntro> */}
 
       {/* STORIES INPUT TEXT CONTAINER */}
       <StoryInputForm/>
@@ -20,10 +25,10 @@ export function UploadStories({handleZoom}) {
     <div class="z-30 row-start-1 row-span-2 col-span-2 my-6">
         <div class="flex overflow-x-scroll scrollbar-hide">
             <div class="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                material 01
+                material 01 Ken
             </div>
             <div class="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                material 02
+                material 03 Ken
             </div>
             <div class="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
                 material 03

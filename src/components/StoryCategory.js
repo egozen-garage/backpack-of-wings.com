@@ -8,7 +8,6 @@ import CallSanityAPI from "../utilities/CallSanityAPI"
 
 export function StoryCategory() {
 
-
   let { landmark } = useParams()
   // NEEDS FIXING! API IN ARRAY CANT BE RETURNED AS PROPER VALUE
   const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );

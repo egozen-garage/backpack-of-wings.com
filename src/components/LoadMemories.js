@@ -14,6 +14,10 @@ export function LoadMemories() {
                 <Link to="/loadmemories/3">Hama, Syria and Hatay, Turkey</Link> 
             </div>
             <Outlet />  */}
+
+      {/* LEFT PANEL */}
+      {/* <div className="leftPanel move"></div> */}
+
     </>
   );
 }
