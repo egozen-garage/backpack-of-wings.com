@@ -70,7 +70,7 @@ function App() {
             <Route  element={ <StoryCategory /> }
                     path="/uploadstory/:landmark" exact />
             <Route  element={ <LoadMemories /> }
-                    path="/loadmemories"/>
+                    path="/loadmemory"/>
             <Route  element={<Impressum />} 
                     path="/impressum" exact />
             <Route  element={<NotFound />} 

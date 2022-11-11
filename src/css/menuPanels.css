@@ -31,9 +31,9 @@
 }
 
 .rightPanel.w100 {
-   width: 100vh;
+   width: 100vw;
 }
 
 .rightPanel.w50, .leftPanel.w50 {
-   width: 50vh;
+   width: 50vw;
 }

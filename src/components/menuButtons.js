@@ -15,7 +15,7 @@ export default function MenuButtons() {
       {/* LOAD MEMORIES */}
       <NavLink
         className="fixed h-full loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg bg-white w-9"
-        to={currentURL === "loadmemories" ? "/" : "/loadmemories"}
+        to={currentURL === "loadmemory" ? "/" : "/loadmemory"}
       >
         <h1
           className="fixed bottom-5 left-1"
@@ -28,7 +28,7 @@ export default function MenuButtons() {
       {/* LEFT PANEL */}
       <div
         className={
-          currentURL === "loadmemories" ? "leftPanel w50" : "leftPanel"
+          currentURL === "loadmemory" ? "leftPanel w50" : "leftPanel"
         }
       ></div>
 
