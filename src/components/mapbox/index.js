@@ -35,9 +35,13 @@ export default function Mapbox() {
             Promise.all([
                     fetch(apiUrl).then((response) => response.json()),
                     sanityClient.fetch(
-                        `*[_type == "weatherData"]{
-                            temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
+                        // *[dateTime(_updatedAt) > dateTime(now()) - 60*60*24*7] // Updated within the past week
+                        `*[_type == "weatherData" && dateTime(_updatedAt) > dateTime(now()) - 60*60]{
+                            temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description, timestamp
                         }[0]`
+                        // `*[_type == "weatherData"]{
+                        //     temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description, timestamp
+                        // }[0]`
                     ),
                     sanityClient.fetch(
                         `*[_type == "landmark" ]{"url":url.current, "country":country, "locationType": locationType, "locationName": locationName, "latitude":latitude, "longitude":longitude}`
@@ -746,18 +750,28 @@ function DrawMapbox(props){
 
     
     function timestamp2Time(timestamp){
+        const birdTime = timestamp + weatherData.timezone - 3600
+        // console.log("timezone: ", timeZone, " ", weatherData.country, " ", timestamp)
 
+        console.log("timestamp: ", new Date(birdTime * 1000 ).toLocaleTimeString("de-DE"))
+        // console.log("timestamp: ", birdTime, " birdTime: ", birdTime.getHours(birdTime), ":", birdTime.getMinutes(birdTime), ":", birdTime.getSeconds(birdTime))
+        // console.log("sun set: ", new Date(new Date(weatherData.sunset).toLocaleString("en-US", weaterContainer.country) ), " sun rise: ", new Date(weatherData.sunrise).toLocaleString(timeZone) )
+        // console.log("sun ", new Date(timestamp).toLocaleString({timeZone}))
+        // console.log("weather array: " + JSON.stringify(weatherData))
         // adjust timezone
         // read location of Jonas and define Ländercode
-        return new Date(timestamp).toLocaleTimeString("it-IT")
+        // return new Date(timestamp).toLocaleTimeString("it-IT")
+        return new Date(birdTime * 1000 ).toLocaleTimeString("de-DE")
     }
+    // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description
 
     return (
         <div>
             <div ref={weaterContainer} style={weaterContainerStyle}>
-                <span className={weatherObject}>Jonas Location</span>
+                <span className={weatherObject}>Jonas Location: {weatherData.city_name}, {weatherData.country}</span>
                 <span className={weatherObject}>Sunrise {timestamp2Time(weatherData.sunrise)}</span>
                 <span className={weatherObject}>Sunset {timestamp2Time(weatherData.sunset)}</span>
+                <span className={weatherObject}>Weather condition: {weatherData.weather_description}</span>
                 <span className={weatherObject}>{weatherData.temp} °C</span>
                 <span className={weatherObject}>Air humidity: {weatherData.humidity} g/m3</span>
             </div>
