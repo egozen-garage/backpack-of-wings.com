@@ -1,6 +1,6 @@
 .leftPanel {
-    transition: all 1s ease-in;
-    z-index: 28;
+    transition: all 0.3s ease-in;
+    z-index: 1;
     position: fixed;
     left: 0;
     width: 0vw;
@@ -15,8 +15,8 @@
 }
 
 .rightPanel {
-    transition: all 1s ease-in;
-    z-index: 28;
+    transition: width 0.3s ease-in;
+    z-index: 1;
     position: fixed;
     right: 0;
     width: 0vw;
@@ -35,5 +35,5 @@
 }
 
 .rightPanel.w50, .leftPanel.w50 {
-   width: 50vw;
+   width: 35rem;
 }
