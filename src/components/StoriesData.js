@@ -44,7 +44,7 @@ export function StoriesData() {
           <h1 className="flex-2 text-xl font-bold">1/10 Memories</h1>
         </div>
         {/* STORY TEXT */}
-        <p className="gradientStoryOverlay font-sans text-base overflow-scroll max-h-[30rem] pb-40">
+        <p className="gradientStoryOverlay font-sans text-base overflow-scroll max-h-[26rem] pb-40">
           {stories.stories[currentIndex].text}
         </p>
         {/* NEXT BUTTON */}
@@ -55,7 +55,7 @@ export function StoriesData() {
           Next Memory &#8594;
         </div>
         {/* AUDIO PROGRESS BAR */}
-        <div className="py-5 z-32 progressBar-container w-auto">
+        <div className="fixed bottom-0 py-5 z-32 progressBar-container  w-[30rem]">
           <img
             className="flex items-center w-screen pt-3 px-1"
             src={progressbar}

@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 // import { useEffect } from "react";
 // import SanityClient from "../client";
 import "../css/menuPanels.css";
-import "../css/gradientAnimation.css";
 
 export function UploadStoriesIntro() {
   // const [isOpen, setIsOpen] = useState(true);
@@ -43,7 +42,7 @@ export function UploadStoriesIntro() {
   return (
     <>
       {/* {visible === true && __INSERT-CODE-HERE-4-VISIBLE-TOGGLE__ } */}
-      <div className="uploadStoriesContainerAnimation top-0 fixed z-30 mx-8">
+      <div className="jonasIntroContainerAnimation top-0 fixed z-30 mx-8">
         <div className="gradientJonasIntroOverlay gradientBGJonasIntro h-screen text-xl w-screen overflow-scroll top-16 pt-20 pr-[3.7rem] pb-[12rem]">
           {/* INTRODUCTION TO JONAS */}
           <div className="text-2xl px-8 pt-6 pb-10">
@@ -58,11 +57,11 @@ export function UploadStoriesIntro() {
 
           {/* NEXT BUTTON */}
           <button
-            className="z-50 skipBtn float-right mr-8 mt-3 px-4 py-2 border-black border-solid border-2 rounded-xl"
+            className="z-50 skipBtn float-right mr-8 mt-3 px-4 py-2 border-black border-solid border-[1px] rounded-xl"
             // TEMPORARY SOLUTION > ADD SHUFFLE TO URL ITEM ARRAY
             onClick={() => navigate("/uploadstory/" + landmarkOptions[randomNumber])}
           >
-            <p>Connect &#10142;</p>
+            <p className="font-serif font-bold">Connect &#8594;</p>
           </button>
 
           <AudioPlayer></AudioPlayer>

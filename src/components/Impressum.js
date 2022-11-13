@@ -30,8 +30,8 @@ export function Impressum() {
         <p className="font-serif font-light text-2xl p-4 py-4">
           <span className="block py-9">
             Hyeseon Jeong <br/>
-            Anemonenweg 8 <br/>
-            51069 Cologne
+            Erzbergerplatz 9 <br/>
+            50733 Cologne
           </span>
           <span className="block py-9">
             Artists: <br/>

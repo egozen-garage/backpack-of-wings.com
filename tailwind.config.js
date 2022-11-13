@@ -26,11 +26,15 @@ module.exports = {
         serif: ["'Apoc Revelations'", ...defaultTheme.fontFamily.serif],
         mono: ["'FT88'", ...defaultTheme.fontFamily.mono],
       },
+      fontSize: {
+        '2xs': ['10px', '12px'],
+      },
       boxShadow: {
         '2xl': '0px 0px 10px 2px rgba(0, 0, 0, 0.3)',
         '3xl': '3px 12px 10px 0px rgba(0, 0, 0, 0.3)',
         'button': '0px 0px 6px 4px rgba(0, 0, 0, 0.3)',
         'buttonBlack': '0px 0px 4px 4px rgba(0 ,0 ,0 , 0.5)',
+        'innerText': 'inset 0px 2px 20px 2px rgba(0, 0, 0, 0.05)',
       },
       inset: {
         '1/5': '20%',
