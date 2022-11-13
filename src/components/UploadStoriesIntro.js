@@ -54,11 +54,11 @@ export function UploadStoriesIntro() {
 
           {/* NEXT BUTTON */}
           <button
-            className="z-50 skipBtn float-right mr-8 mt-3 px-4 py-2 border-black border-solid border-2 rounded-xl"
+            className="z-50 skipBtn float-right mr-8 mt-3 px-4 py-2 border-black border-solid border-[1px] rounded-xl"
             // TEMPORARY SOLUTION > ADD SHUFFLE TO URL ITEM ARRAY
             onClick={() => navigate("/uploadstory/israel-dudaimsite")}
           >
-            <p>Connect &#10142;</p>
+            <p className="font-serif font-bold">Connect &#8594;</p>
           </button>
 
           <AudioPlayer></AudioPlayer>
