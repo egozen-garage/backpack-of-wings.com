@@ -1,14 +1,14 @@
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import "../css/animation.css";
 
 export default function StoryInputForm(props){
   console.log("storyInputForm: " + JSON.stringify(props) )
   console.log("storyInputForm: " + props.currentLandmark )
 
-  const location = useLocation();
-  let currentURL = location.pathname.split("/")[1];
-  let uploadStoryURL = location.pathname.split("/")[2];
+  // const location = useLocation();
+  // let currentURL = location.pathname.split("/")[1];
+  // let uploadStoryURL = location.pathname.split("/")[2];
 
   // Initiate forms
   // const { register, handleSubmit, errors, reset } = useForm()

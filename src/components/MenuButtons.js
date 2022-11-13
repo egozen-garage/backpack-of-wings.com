@@ -49,7 +49,7 @@ export default function MenuButtons() {
       <div className="">
         <div
           className={
-            currentURL === "uploadstory" && uploadStoryURL == undefined
+            currentURL === "uploadstory" && uploadStoryURL === undefined
               ? "rightPanel w100"
               : currentURL === "uploadstory" && uploadStoryURL !== undefined
               ? "rightPanel w50"
