@@ -4,11 +4,18 @@
     padding: 5px;
     cursor:pointer;
     color:black;
+    font-family: "Area Normal", sans-serif;
+    font-size: 12px;
+    box-shadow: 2px 2px 5px gray;
 }
 
 .landmarkMarker:hover{
     background-color: black;
     color: white;
+    font-family: "Apoc Revelations", serif;
+    font-weight: 700;
+    /* font-family: "FT88", monospace; */
+
 }
 .landmarkMarker:focus {
     background-color: black;
@@ -28,7 +35,8 @@
 }
 
 .landmarkText{
-    margin-left: 20px
+    margin-left: 20px;
+    margin-right: 10px;
 }
 
 .hideElement{

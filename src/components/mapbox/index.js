@@ -91,6 +91,11 @@ function DrawMapbox(props){
     let navigate  = useNavigate();
     const firstLoad = useRef(true);
 
+    // const mapBounds = [
+    //     [-140, -50], // Southwest coordinates
+    //     [140, 50] // Northeast coordinates
+    // ];
+
     // console.log("mapData: " + JSON.stringify(props.mapData[0]))
     // console.log("mapData: " + JSON.stringify(props.weatherData))
 
@@ -191,58 +196,6 @@ function DrawMapbox(props){
         ]
     }
 
-    // WEATHER DATA
-    // -----------------------------------------------------------------
-    // const weatherInfo = {
-    //     'type': 'FeatureCollection',
-    //     'features': [
-    //         {
-    //             'type': 'Feature',
-    //             'properties': {
-    //                 'description': 'Temperature: ' + weatherData.temp + '°C',
-    //                 // 'icon': 'theatre-15'
-    //             },
-    //             'geometry': {
-    //                 'type': 'Point',
-    //                 'coordinates': [current_longitude+0.005, current_latitude]
-    //             }
-    //         },
-    //         {
-    //             'type': 'Feature',
-    //             'properties': {
-    //                 'description': 'Humidity: ' + weatherData.humidity + ' g/m3',
-    //                 // 'icon': 'theatre-15'
-    //             },
-    //             'geometry': {
-    //                 'type': 'Point',
-    //                 'coordinates': [current_longitude+0.005, current_latitude-0.004]
-    //             }
-    //         },
-    //         {
-    //             'type': 'Feature',
-    //             'properties': {
-    //                 'description': "Pressure: " + weatherData.pressure + " hPa",
-    //                 // 'icon': 'theatre-15'
-    //             },
-    //             'geometry': {
-    //                 'type': 'Point',
-    //                 'coordinates': [current_longitude+0.005, current_latitude-0.008]
-    //             }
-    //         },
-    //         // {
-    //         //     'type': 'Feature',
-    //         //     'properties': {
-    //         //         'description': props.weatherData.pressure + "pressure",
-    //         //         // 'icon': 'theatre-15'
-    //         //     },
-    //         //     'geometry': {
-    //         //         'type': 'Point',
-    //         //         'coordinates': [current_longitude+0.001, current_latitude-0.001]
-    //         //     }
-    //         // },
-    //     ]
-    // }
-
     // STORY LOCATIONS DATA
     // -----------------------------------------------------------------
     let landmarks = []
@@ -289,7 +242,7 @@ function DrawMapbox(props){
         map.current = new mapboxgl.Map({
             container: mapContainer.current,
             projection: 'mercator',
-            // projection: 'naturalEarth',
+            // projection: 'equirectangular',
             name: 'Earth',
             // style: 'mapbox://styles/mapbox/light-v10',
             style: 'mapbox://styles/arminarndt/cl8vqgc4h002v14phy6bbsut8',
@@ -297,6 +250,7 @@ function DrawMapbox(props){
             center: [current_longitude, current_latitude],
             minZoom: 3,
             maxZoom: 17,
+            // maxBounds: mapBounds,
             // zoom: zoom
         });
         
@@ -626,16 +580,19 @@ function DrawMapbox(props){
                     'text-field': [
                         'format', 
                         ['get', 'date'],
-                        // { 'font-scale': 1.2 },
+                        {
+                            // 'font-scale': 1,
+                            'text-font': ['literal', ['Apoc-Revelations-Trial Bold', 'Open Sans Regular']],
+                        },
                         '\n',
                         ['get', 'location'],
-                        // {
-                        //     'font-scale': 0.8,
-                        //     'text-font': 'Apoc Revelations'
-                        //     }
+                        {
+                            // 'font-scale': 1,
+                            'text-font': ['literal', ['Apoc-Revelations-Trial Bold', 'Open Sans Regular']],
+                        },
                     ],
                     'text-variable-anchor': ['left'],
-                    'text-radial-offset': 0.5,
+                    'text-radial-offset': 1,
                     'text-justify': 'left',
                 },
             });
@@ -664,91 +621,28 @@ function DrawMapbox(props){
                 // setCurrentRoute(e.features[0].properties.description)
                 return 
             });
+            map.current.on("mouseenter", 'last-location-text', () => {
+                map.current.getCanvas().style.cursor = "pointer";
+            });
+            map.current.on("mouseleave", 'last-location-text', () => {
+                map.current.getCanvas().style.cursor = "default";
+            });
+            map.current.on('click', 'last-location-text', (e) => {
+                // navigate('/'+e.features[0].properties.url)
+                navigate('/')
 
-
-
-
-            // let hoverID = null;
-            // function HoverLandmarks(event, sourceName){
-            //     map.current.getCanvas().style.cursor = "pointer";
-            //     // Check whether features exist
-            //     if (event.features.length === 0) return;
-            //     // If hoverID for the hovered feature is not null,
-            //     // use removeFeatureState to reset to the default behavior
-            //     if (hoverID) {
-            //         map.current.removeFeatureState({
-            //             source: sourceName,
-            //             id: hoverID
-            //         });
-            //     }
-                
-            //     hoverID = event.features[0].id;
-
-            //     // When the mouse moves over the earthquakes-viz layer, update the
-            //     // feature state for the feature under the mouse
-            //     map.current.setFeatureState(
-            //         {
-            //             source: sourceName,
-            //             id: hoverID
-            //         },
-            //         {
-            //             hover: true
-            //         }
-            //     );
-            // }
-            // function LeaveHoverLandmarks(sourceName){
-            //     // if (hoverID) {
-            //         map.current.setFeatureState(
-            //             {
-            //                 source: sourceName,
-            //                 id: hoverID
-            //             },
-            //             {
-            //                 hover: false
-            //             }
-            //     );
-            //     // }
-            //     map.current.getCanvas().style.cursor = 'default';
-            // }
-            // // landmarks load memory
-            // map.current.on('mouseenter', 'load-memory-locations', (event) => {
-            //     const sourceName = "landmarks-downloads"
-            //     HoverLandmarks(event, sourceName)
-            // })
-            // map.current.on('mouseleave', 'load-memory-locations', () => {
-            //     const sourceName = "landmarks-downloads"
-            //     LeaveHoverLandmarks(sourceName)
-            // });
-            // map.current.on('click', 'load-memory-locations', (e) => {
-            //     console.log("load-memory-link")
-            //     navigate('/loadmemory/' + e.features[0].properties.url)
-            // })
-            // // landmarks upload story
-            // map.current.on('mouseenter', 'upload-story-locations', (event) => {
-            //     const sourceName = "landmarks-uploads"
-            //     HoverLandmarks(event, sourceName)
-            // })
-            // map.current.on('mouseleave', 'upload-story-locations', () => {
-            //     const sourceName = "landmarks-uploads"
-            //     LeaveHoverLandmarks(sourceName)
-            // });
-            // map.current.on('click', 'upload-story-locations', (e) => {
-            //     console.log("upload-story-link")
-            //     navigate('/uploadstory/' + e.features[0].properties.url)
-            // })
-
-            // if(location.pathname.split('/')[1] === "uploadstory"){
-            //     map.current.setLayoutProperty('load-memory-locations', 'visibility', 'none');
-            //     map.current.setLayoutProperty('upload-story-locations', 'visibility', 'visible');
-            // }
-            // if(location.pathname.split('/')[1] === "loadmemory"){
-            //     map.current.setLayoutProperty('load-memory-locations', 'visibility', 'visible');
-            //     map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
-            // }
-            // if(location.pathname.split('/')[1] === ""){
-            //     map.current.setLayoutProperty('load-memory-locations', 'visibility', 'visible');
-            //     map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
-            // }
+                map.current.flyTo({
+                    center: e.features[0].geometry.coordinates,
+                    zoom: 12,
+                    // bearing: 130,
+                    // pitch: 75,
+                    duration: 1000, // Animate over 1 seconds
+                    essential: true // This animation is considered essential with
+                    //respect to prefers-reduced-motion
+                });
+                // setCurrentRoute(e.features[0].properties.description)
+                return 
+            });
 
 
 
@@ -817,6 +711,7 @@ function DrawMapbox(props){
                     });
                 }
             }
+
 
 
             map.current.on('render', () => {
@@ -919,10 +814,18 @@ function DrawMapbox(props){
             map.current.dragPan.enable();
         } else {
             // map.current.flyTo({ zoom:3});
-            map.current.fitBounds([
-                [-20, 5], // southwestern corner of the bounds
-                [20, 60], // northeastern corner of the bounds
-            ]);
+            if(urlPrefix === "loadmemory"){
+                map.current.fitBounds([
+                    [-20, 5], // southwestern corner of the bounds
+                    [20, 60], // northeastern corner of the bounds
+                ]);
+            }
+            if(urlPrefix === "uploadstory"){
+                map.current.fitBounds([
+                    [20, 5], // southwestern corner of the bounds
+                    [80, 60], // northeastern corner of the bounds
+                ]);
+            }
 
             map.current.scrollZoom.disable();
             map.current.doubleClickZoom.disable();
@@ -930,7 +833,7 @@ function DrawMapbox(props){
             map.current.keyboard.disable();
             map.current.dragPan.disable();
         }
-    }, [current_latitude, current_longitude, zoom])
+    }, [current_latitude, current_longitude, zoom, urlPrefix])
 
 
 
@@ -976,6 +879,7 @@ function DrawMapbox(props){
 
     return (
         <div>
+            { zoom ? "" :
             <div ref={weaterContainer} style={weaterContainerStyle}>
                 <span className={weatherObject}>Jonas Location: {weatherData.city_name}, {weatherData.country}</span>
                 <span className={weatherObject}>Sunrise {timestamp2Time(weatherData.sunrise)}</span>
@@ -983,7 +887,7 @@ function DrawMapbox(props){
                 <span className={weatherObject}>Weather condition: {weatherData.weather_description}</span>
                 <span className={weatherObject}>{weatherData.temp} °C</span>
                 <span className={weatherObject}>Air humidity: {weatherData.humidity} g/m3</span>
-            </div>
+            </div> }
             <div ref={mapContainer} className={mapStyle} style={mapContainerStyle} />
         </div>
     );
