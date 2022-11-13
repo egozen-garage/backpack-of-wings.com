@@ -34,6 +34,10 @@
    width: 100vw;
 }
 
-.rightPanel.w50, .leftPanel.w50 {
+.leftPanel.w50 {
    width: 35rem;
+}
+
+.rightPanel.w50 {
+  width: 50rem;
 }

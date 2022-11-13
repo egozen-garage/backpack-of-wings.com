@@ -14,7 +14,7 @@ export default function MenuButtons() {
     <>
       {/* LOAD MEMORIES */}
       <NavLink
-        className="fixed h-full loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg bg-white w-9"
+        className="fixed h-full loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg w-9"
         to={currentURL === "loadmemory" ? "/" : "/loadmemory"}
       >
         <h1
@@ -34,7 +34,7 @@ export default function MenuButtons() {
 
       {/* RIGHT PANEL: UPLOAD STORIES */}
       <NavLink
-        className="fixed h-full right-0 uploadStoryBtnContainer gradientUploadStory z-36 w-9 text-lg bg-white"
+        className="fixed h-full right-0 uploadStoryBtnContainer gradientUploadStory z-36 text-lg w-9"
         to="/uploadstory"
       >
         <h1
@@ -46,15 +46,17 @@ export default function MenuButtons() {
       </NavLink>
 
       {/* Right PANEL */}
-      <div
-        className={
-          currentURL === "uploadstory" && uploadStoryURL == undefined
-            ? "rightPanel w100"
-            : currentURL === "uploadstory" && uploadStoryURL !== undefined
-            ? "rightPanel w50"
-            : "rightPanel"
-        }
-      ></div>
+      <div className="">
+        <div
+          className={
+            currentURL === "uploadstory" && uploadStoryURL == undefined
+              ? "rightPanel w100"
+              : currentURL === "uploadstory" && uploadStoryURL !== undefined
+              ? "rightPanel w50"
+              : "rightPanel"
+          }
+        ></div>
+      </div>
     </>
   );
 }

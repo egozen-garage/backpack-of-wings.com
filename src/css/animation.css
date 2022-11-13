@@ -51,8 +51,12 @@
     animation: fadeInAnimation ease-in 0.5s;
 }
 
-.uploadStoriesContainerAnimation {
+.jonasIntroContainerAnimation {
     animation: fadeInAnimation ease-in 1s;
+}
+
+.uploadStoriesContainerAnimation {
+    animation: fadeInAnimation ease-in 0.5s;
 }
 
 @keyframes fadeInAnimation {

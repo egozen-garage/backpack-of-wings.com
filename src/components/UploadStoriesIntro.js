@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
 import SanityClient from "../client";
 import "../css/menuPanels.css";
-import "../css/gradientAnimation.css";
 
 export function UploadStoriesIntro() {
   // const [isOpen, setIsOpen] = useState(true);
@@ -40,7 +39,7 @@ export function UploadStoriesIntro() {
   return (
     <>
       {/* {visible === true && __INSERT-CODE-HERE-4-VISIBLE-TOGGLE__ } */}
-      <div className="uploadStoriesContainerAnimation top-0 fixed z-30 mx-8">
+      <div className="jonasIntroContainerAnimation top-0 fixed z-30 mx-8">
         <div className="gradientJonasIntroOverlay gradientBGJonasIntro h-screen text-xl w-screen overflow-scroll top-16 pt-20 pr-[3.7rem] pb-[12rem]">
           {/* INTRODUCTION TO JONAS */}
           <div className="text-2xl px-8 pt-6 pb-10">
