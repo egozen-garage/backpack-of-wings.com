@@ -49,9 +49,9 @@ export default function MenuButtons() {
       <div
         className={
           currentURL === "uploadstory" && uploadStoryURL == undefined
-            ? "rightPanel "
+            ? "rightPanel w100"
             : currentURL === "uploadstory" && uploadStoryURL !== undefined
-            ? "rightPanel "
+            ? "rightPanel w50"
             : "rightPanel"
         }
       ></div>
