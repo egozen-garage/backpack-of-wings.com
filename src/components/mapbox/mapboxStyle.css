@@ -1,0 +1,36 @@
+.landmarkMarker{
+    background-color: white; 
+    border-radius: 25px;
+    padding: 5px;
+    cursor:pointer;
+    color:black;
+}
+
+.landmarkMarker:hover{
+    background-color: black;
+    color: white;
+}
+.landmarkMarker:focus {
+    background-color: black;
+    color: white;
+}
+
+.landmarkCircle{
+    height:10px; 
+    width: 10px;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    -ms-transform: translateY(-50%);
+    transform: translateY(-50%);
+    border-radius: 10px;
+    /* background-color: rgb(163, 220, 245); */
+}
+
+.landmarkText{
+    margin-left: 20px
+}
+
+.hideElement{
+    display:none;
+}
