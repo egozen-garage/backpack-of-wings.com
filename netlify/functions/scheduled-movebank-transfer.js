@@ -6,7 +6,7 @@
 // invoke function in browser http://localhost:9999/.netlify/functions/scheduled-movebank-transfer
 
 const sanityClient = require('@sanity/client')
-const { schedule } = require('@netlify/functions');
+// const { schedule } = require('@netlify/functions');
 // const fetch = require('node-fetch');
 const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
