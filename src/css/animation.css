@@ -47,8 +47,12 @@
     height: 100vh;
 }
 
-.storiesContainer {
+.storiesContainerAnimation {
     animation: fadeInAnimation ease-in 0.5s;
+}
+
+.uploadStoriesContainerAnimation {
+    animation: fadeInAnimation ease-in 1s;
 }
 
 @keyframes fadeInAnimation {

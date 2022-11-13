@@ -733,7 +733,8 @@ function DrawMapbox(props){
         position: 'fixed',
         zIndex: 3,
         bottom: '40px',
-        marginLeft: '40px',
+        marginLeft: '60px',
+        marginRight: '60px',
         // backgroundColor: '#fff',
     }
     const mapContainerStyle ={

@@ -34,8 +34,12 @@
   );
 }
 
-.gradientUploadStoryOverlay {
+.gradientStoryOverlay {
   -webkit-mask-image: -webkit-gradient(linear, left 70%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+}
+
+.gradientJonasIntroOverlay {
+  -webkit-mask-image: -webkit-gradient(linear, left 70%, left 90%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
 
 .gradientDashboard_header {
@@ -45,6 +49,25 @@
     rgba(249, 254, 30, 1) 12%,
     rgba(249, 254, 30, 0) 100%
   );
+}
+
+.dashboardLight {
+  transition: all 0.7s ease-in-out;
+  opacity: 0;
+  z-index: 30;
+  height: 8rem;
+  width: 100%;
+  position: fixed;
+  background: rgb(249, 254, 30);
+  background: linear-gradient(
+    180deg,
+    rgba(249, 254, 30, 1) 12%,
+    rgba(249, 254, 30, 0) 100%
+  );
+}
+
+.dashboardLight.show {
+  opacity: 1;
 }
 
 .gradientImpressum {

@@ -34,7 +34,7 @@ export function StoriesData() {
 
   return (
     <>
-      <div className="storiesContainer absolute z-20 w-[35rem] col-start-1 row-start-2 row-span-4 pl-14 pr-12">
+      <div className="storiesContainerAnimation absolute z-20 w-[35rem] col-start-1 row-start-2 row-span-4 pl-14 pr-12">
         {/* <div className=" bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]"> */}
         <div className="flex pb-10">
           <h1 className="flex-1 text-xl font-bold">
@@ -44,12 +44,12 @@ export function StoriesData() {
           <h1 className="flex-2 text-xl font-bold">1/10 Memories</h1>
         </div>
         {/* STORY TEXT */}
-        <p className="gradientUploadStoryOverlay font-sans text-base overflow-scroll max-h-[30rem] pb-40">
+        <p className="gradientStoryOverlay font-sans text-base overflow-scroll max-h-[30rem] pb-40">
           {stories.stories[currentIndex].text}
         </p>
         {/* NEXT BUTTON */}
         <div
-          className="font-serif font-bold text-xl pt-14 z-50 row-start-5 col-start-1 w-1/2 cursor-e-resize"
+          className="font-serif font-bold text-lg pt-14 z-50 row-start-5 col-start-1 w-1/2 cursor-e-resize"
           onClick={goToNext}
         >
           Next Memory &#8594;

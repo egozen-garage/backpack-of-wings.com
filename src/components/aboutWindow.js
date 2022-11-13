@@ -6,8 +6,14 @@ import { useSpring, animated } from "react-spring";
 import styled from "styled-components";
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
+import { useLocation } from "react-router-dom";
+
 
 export default function AboutWindow() {
+  const location = useLocation();
+  let currentURL = location.pathname;
+  console.log("show current URL navigation : " + currentURL)
+
   const [isOpen, setIsOpen] = useState(false);
   const toggleCollapsible = () => {
     setIsOpen((prevState) => !prevState);
@@ -32,7 +38,7 @@ export default function AboutWindow() {
         <div onClick={toggleCollapsible} className="aboutContainer z-50 flex-1">
           <button className={isOpen? "buttonActive" : "buttonInactive"}>
             <h1 className="text-xl mx-1 py-1">
-              Backpack of Wings: Sensory Networks
+              The Backpack of Wings: Sensory Networks
               {isOpen && (
                 <span className="font-mono text-white pl-4">x</span>
               )}
@@ -50,7 +56,10 @@ export default function AboutWindow() {
           </div>
         </div>
       </div>
-      <div className="z-30 gradientDashboard_header fixed h-32 w-full"></div>
+      {/* LIGHTRAY HEADER */}
+      <div className={currentURL == "/" ? "dashboardLight show" : "dashboardLight"}>
+      </div>
+      {/* currentURL === "/" &&  */}
 
       {/* COLLAPSIBLE */}
       <PanelContent

@@ -13,7 +13,7 @@ export function Impressum() {
         <div className="aboutContainer z-40 flex-1">
             <button onClick={() => navigate(-1)} className="buttonInactive">
               <h1 className="text-xl mx-1 py-1">
-                Backpack of Wings: Sensory Networks
+                The Backpack of Wings: Sensory Networks
               </h1>
             </button>
         </div>

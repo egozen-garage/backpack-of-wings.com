@@ -10,7 +10,7 @@ import { LandingPage } from "./components/LandingPage";
 import Mapbox from "./components/mapbox";
 // import CallSanityAPI from "./utilities/CallSanityAPI";
 import MenuButtons from "./components/MenuButtons";
-import AboutWindow from "./components/aboutWindow";
+import AboutWindow from "./components/AboutWindow";
 import './css/gradientAnimation.css';
 // import CallWeatherData from "./utilities/CallWeatherWind";
 
