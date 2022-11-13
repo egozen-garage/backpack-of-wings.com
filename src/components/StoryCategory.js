@@ -1,89 +1,66 @@
-import React from "react";
+// import React from "react";
 // import { Story } from "./Story.js";
 // import SanityClient from "../client";
-// import { useEffect, useState} from "react";
-import { useParams } from "react-router-dom";
-import StoryInputForm from "./StoryInputForm.js";
 // import { useEffect, useState } from "react";
-import CallSanityAPI from "../utilities/CallSanityAPI"
+// import { useParams } from "react-router-dom";
+import StoryInputForm from "./StoryInputForm.js";
+// import CallSanityAPI from "../utilities/CallSanityAPI"
+import { useLocation } from "react-router-dom";
+// import CallSanityAPI from "../utilities/CallSanityAPI"
+import "../css/gradientAnimation.css";
+import "../css/animation.css";
 
-export function StoryCategory({handleZoom}) {
-  handleZoom(true);
-  let { landmark } = useParams()
+export function StoryCategory() {
+  const location = useLocation()
+  let currentLandmark = location.pathname.split("/")[2];
+  console.log("storyCatergory: " + currentLandmark)
+  
 
-  // OPERATION TO CHECK IF ON CORRECT PAGE
-  if (landmark === 'israel-dudaimsite') {
-    console.log("You're on Dudaim Site!")
-  } else {
-    console.log("You're on another Landmark")
-  }
+  // let { landmark } = useParams()
+  // NEEDS FIXING! API IN ARRAY CANT BE RETURNED AS PROPER VALUE
+  // const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
 
-  // SANITY CLIENT > READ OUT API
-  // let [sanityData, setSanityData] = useState(null);
-  // const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
-
-
-  // useEffect(() => {
-  //   Promise.all([SanityClient.fetch(querySanityAPI)])
-  //     .then(([sanityData]) => {
-  //       setSanityData(sanityData);
-  //       console.log("Read Sanity Data inside Story Category : " + sanityData[0].url);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err);
-  //     });
-  // }, []);
-
-
-  const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
-
-
-
-  console.log("storyCatergory - API data: " + JSON.stringify(data))
-  console.log("storyCatergory - API error: " + error)
-  console.log("storyCatergory - API isloaded: " + isLoaded)
+  // console.log("storyCatergory - API data: " + JSON.stringify(data))
+  // console.log("storyCatergory - API error: " + error)
+  // console.log("storyCatergory - API isloaded: " + isLoaded)
+  // console.log("show iFrameCompiler:" + data.material.length)
   return (
     <>
       {/* 
       >>>> UPDATE: ASSIGNED A ROUTING TO STORYINTRO AS SEPARATE PAGE <<<<
       <StoryIntro trigger={true}></StoryIntro> 
       */}
+      <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed top-0 pt-4 z-30 right-0 w-[50rem]">
 
-      {/* STORIES INPUT TEXT CONTAINER */}
-      <StoryInputForm/>
-      {/* <Story /> */}
-
-      {/* 
-      TO-DO:
-      match "uploadstory/:URL" to specific JSON.ITEM.URL 
-      if URL == TRUE 
-      show JSON.ITEM[].MATERIAL.CONTENT 
-      */}
-
-      {/* STORIES MATERIAL CONTAINER */}
-      <div className="z-30 row-start-1 row-span-2 col-span-2 my-6">
-        <div className="flex overflow-x-scroll scrollbar-hide">
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-            material 01
-            { landmark }
-          </div>
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-            material 02
-          </div>
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-            material 03
-          </div>
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-            material 04
-          </div>
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-            material 05
-          </div>
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-            material 06
+        {/* STORIES MATERIAL CONTAINER */}
+        <div className="gradientMaterialOverlay my-10 pl-[0.4rem]">
+          <div className="flex overflow-x-scroll scrollbar-hide">
+            <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+              {/* {data._type} */}
+            </div>
+            <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+              material 02
+            </div>
+            <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+              material 03
+            </div>
+            <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+              material 04
+            </div>
+            <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+              material 05
+            </div>
+            <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+              material 06
+            </div>
           </div>
         </div>
+
+        {/* STORIES INPUT TEXT CONTAINER */}
+        <StoryInputForm currentLandmark={currentLandmark}/>
+        {/* <Story /> */}
       </div>
+
     </>
   );
 }

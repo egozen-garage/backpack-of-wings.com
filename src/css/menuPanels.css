@@ -1,0 +1,43 @@
+.leftPanel {
+    transition: all 0.3s ease-in;
+    z-index: 1;
+    position: fixed;
+    left: 0;
+    width: 0vw;
+    height: 100vh;
+    background: rgb(207, 207, 207);
+    background: linear-gradient(
+      180deg,
+      rgba(207, 207, 207, 1) 14%,
+      rgba(195, 211, 218, 1) 55%,
+      rgba(163, 220, 245, 1) 100%
+    );
+}
+
+.rightPanel {
+    transition: width 0.4s ease-in;
+    z-index: 1;
+    position: fixed;
+    right: 0;
+    width: 0vw;
+    height: 100vh;
+    background: rgb(207, 207, 207);
+    background: linear-gradient(
+      180deg,
+      rgba(207, 207, 207, 1) 14%,
+      rgba(217, 199, 220, 1) 58%,
+      rgba(240, 180, 252, 1) 100%
+    );
+}
+
+.rightPanel.w100 {
+   width: 100vw;
+}
+
+.leftPanel.w50 {
+   width: 35rem;
+}
+
+.rightPanel.w50 {
+  width: 50rem;
+}

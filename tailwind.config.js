@@ -1,3 +1,5 @@
+const defaultTheme = require('tailwindcss/defaultTheme')
+
 module.exports = {
   content: [
     "./src/**/*.{js,jsx,ts,tsx}",
@@ -10,15 +12,51 @@ module.exports = {
       'xl': '1280px',
       '2xl': '1536px',
     },
-    fontFamily: {
-      sans: ['Space Grotesk', 'sans'],
-      serif: ['Playfair Display', 'serif'],
-      monospace: ['DM Mono', 'monospace'],
-    },
     extend: {
+      cursor: {
+        'play' : 'url(./img/cursor-play.svg), pointer'
+      },
+      colors: {
+        'backpackYellow' : '#f9fe1e',
+        'backpackGray' : '#CFCFCF',
+        'backpackBlue' : '#F0B4FC',
+      },
+      fontFamily: {
+        sans: ["'Area Normal'", ...defaultTheme.fontFamily.sans],
+        serif: ["'Apoc Revelations'", ...defaultTheme.fontFamily.serif],
+        mono: ["'FT88'", ...defaultTheme.fontFamily.mono],
+      },
+      fontSize: {
+        '2xs': ['10px', '12px'],
+      },
       boxShadow: {
         '2xl': '0px 0px 10px 2px rgba(0, 0, 0, 0.3)',
         '3xl': '3px 12px 10px 0px rgba(0, 0, 0, 0.3)',
+        'button': '0px 0px 6px 4px rgba(0, 0, 0, 0.3)',
+        'buttonBlack': '0px 0px 4px 4px rgba(0 ,0 ,0 , 0.5)',
+        'innerText': 'inset 0px 2px 20px 2px rgba(0, 0, 0, 0.05)',
+      },
+      inset: {
+        '1/5': '20%',
+        '1/6': '17%',
+        '1/7': '14%',
+      },
+      zIndex: {
+        '18': '18',
+        '22': '22',
+        '24': '25',
+        '26': '26',
+        '28': '28',
+        '32': '32',
+        '34': '34',
+        '36': '36',
+        '38': '38',
+        '41': '41',
+        '42': '42',
+        '43': '43',
+        '44': '44',
+        '45': '45',
+        '60': '60',
       }
     },
   },

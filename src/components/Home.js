@@ -2,8 +2,8 @@
 // import MovebankDataBackground from '../components/MovebankDataBackground';
 // import Mapbox from '../components/Mapbox';
 
-export default function Home({handleZoom}) {
-    handleZoom(false);
+
+export default function Home() {
     
     return
 

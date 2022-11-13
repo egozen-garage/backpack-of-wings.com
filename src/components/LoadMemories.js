@@ -1,8 +1,6 @@
-import React from "react";
 import { StoriesData } from "./StoriesData.js";
 
-export function LoadMemories({handleZoom}) {
-  handleZoom(true);
+export function LoadMemories() {
   
   return (
     <>
@@ -16,6 +14,10 @@ export function LoadMemories({handleZoom}) {
                 <Link to="/loadmemories/3">Hama, Syria and Hatay, Turkey</Link> 
             </div>
             <Outlet />  */}
+
+      {/* LEFT PANEL */}
+      {/* <div className="leftPanel move"></div> */}
+
     </>
   );
 }
