@@ -1,11 +1,11 @@
 import React from "react";
-import { useState } from "react";
+// import { useState } from "react";
 import progressbar from "../img/audio-progressbar-02-black.svg";
 import "../css/gradientAnimation.css";
 import AudioPlayer from "../utilities/AudioPlayer.js";
 import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import SanityClient from "../client";
+// import { useEffect } from "react";
+// import SanityClient from "../client";
 import "../css/menuPanels.css";
 import "../css/gradientAnimation.css";
 
@@ -37,6 +37,9 @@ export function UploadStoriesIntro() {
 //   let urlVariable = sanityData[0].url;
 //   console.log(urlVariable);
 
+  const landmarkOptions = ["istanbul", "droemling", "lackova", "hama", "neveeitan", "dudaimsite"]
+  const randomNumber = Math.floor(Math.random() * 6);
+  
   return (
     <>
       {/* {visible === true && __INSERT-CODE-HERE-4-VISIBLE-TOGGLE__ } */}
@@ -57,7 +60,7 @@ export function UploadStoriesIntro() {
           <button
             className="z-50 skipBtn float-right mr-8 mt-3 px-4 py-2 border-black border-solid border-2 rounded-xl"
             // TEMPORARY SOLUTION > ADD SHUFFLE TO URL ITEM ARRAY
-            onClick={() => navigate("/uploadstory/israel-dudaimsite")}
+            onClick={() => navigate("/uploadstory/" + landmarkOptions[randomNumber])}
           >
             <p>Connect &#10142;</p>
           </button>

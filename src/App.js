@@ -1,5 +1,5 @@
 import { NavLink, Routes, Route } from "react-router-dom";
-import { useState, useMemo, useEffect, useRef } from "react";
+// import { useState, useMemo, useEffect, useRef } from "react";
 import Home from "./components/Home";
 import { LoadMemories } from "./components/LoadMemories";
 import { StoryCategory } from "./components/StoryCategory";
@@ -40,6 +40,9 @@ function App() {
 
   return (
     <>
+      {/* INTRODUCTORY PAGE */}
+      <LandingPage/>
+
       {/* PARENT GRID */}
       <div className="ParentGrid wrapper flex justify-between min-h-screen">
         

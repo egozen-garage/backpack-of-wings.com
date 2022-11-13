@@ -19,6 +19,7 @@ export default function AboutWindow() {
     setIsOpen((prevState) => !prevState);
   };
   const [impressumIsOpen, setImpressumIsOpen] = useState(false);
+  console.log("impressumIsOpen " + impressumIsOpen)
   const toggleImpressum = () => {
     setImpressumIsOpen((prevImpressumState) => !prevImpressumState);
   }
@@ -57,7 +58,7 @@ export default function AboutWindow() {
         </div>
       </div>
       {/* LIGHTRAY HEADER */}
-      <div className={currentURL == "/" ? "dashboardLight show" : "dashboardLight"}>
+      <div className={currentURL === "/" ? "dashboardLight show" : "dashboardLight"}>
       </div>
       {/* currentURL === "/" &&  */}
 

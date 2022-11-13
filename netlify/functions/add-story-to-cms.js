@@ -31,6 +31,7 @@ exports.handler = async (event, context, callback) => {
   if (isStoryForm) {
     const storyData = {
       _type: "story",
+      landmark: payload.landmarkName,
       name: payload.name,
       email: payload.email,
       message: payload.message,

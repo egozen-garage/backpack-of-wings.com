@@ -14,13 +14,13 @@ export function StoriesData() {
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToPrev = () => {
-    const isFirstStory = currentIndex === 0;
-    const newIndex = isFirstStory
-      ? stories.stories.length - 1
-      : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  // const goToPrev = () => {
+  //   const isFirstStory = currentIndex === 0;
+  //   const newIndex = isFirstStory
+  //     ? stories.stories.length - 1
+  //     : currentIndex - 1;
+  //   setCurrentIndex(newIndex);
+  // };
 
   const goToNext = () => {
     const isLastStory = currentIndex === stories.stories.length - 1;

@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form"
 
-export default function StoryInputForm(){
+export default function StoryInputForm(props){
+  console.log("storyInputForm: " + JSON.stringify(props) )
+  console.log("storyInputForm: " + props.currentLandmark )
 
     // Initiate forms
     // const { register, handleSubmit, errors, reset } = useForm()
@@ -56,6 +58,16 @@ export default function StoryInputForm(){
               {...register('formID', {})}
           />
 
+          {/* STORY Landmar hidden input field */}
+          <input type="hidden" name="landmark-name" value={props.currentLandmark} />
+          <input
+              type="hidden"
+              name="landmarkName"
+              value={props.currentLandmark}
+              // ref={register()}
+              {...register('landmarkName', {})}
+          />
+
           {/* STORY TEXT BODY */}
           <div className="flex">
             <div className="flex-col w-40 text-xs font-monospace mr-5">
@@ -69,6 +81,7 @@ export default function StoryInputForm(){
               <label className="block pb-12">What did I sense?</label>
             </div>
             <textarea 
+              title="What did I sense?"
               rows="4" 
               name="message" 
               className="rounded-2xl p-2 h-[320px] w-full resize-none "
