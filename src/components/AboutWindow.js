@@ -65,7 +65,7 @@ export default function AboutWindow() {
       {/* COLLAPSIBLE */}
       <PanelContent
         style={AboutAnimatedStyle}
-        className="gradientDashboard_header fixed w-full top-0 left-0"
+        className="noScrollBar gradientDashboard_header fixed w-full top-0 left-0"
       >        <About />
       </PanelContent>
       <div className={isOpen ? "animateAboutOpacity show" : "animateAboutOpacity"}></div>

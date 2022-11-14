@@ -12,6 +12,7 @@ import Mapbox from "./components/mapbox";
 import MenuButtons from "./components/MenuButtons";
 import AboutWindow from "./components/AboutWindow";
 import "./css/gradientAnimation.css";
+import "./App.css";
 // import CallWeatherData from "./utilities/CallWeatherWind";
 
 // import FetchMapData from "./components/mapbox/service/FetchMapData";
@@ -23,9 +24,8 @@ function App() {
   return (
     <>
       {/* INTRODUCTORY PAGE */}
-      <LandingPage/>
-
-      <AboutWindow />
+        <LandingPage />
+        <AboutWindow />
 
       {/* EVERY OTHER PAGE */}
       <div className="ChildGridContainer relative wrapper-content order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">

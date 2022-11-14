@@ -18,7 +18,7 @@ export function LandingPage(props) {
       <div
         className="fixed z-60 flex flex-col w-[20rem] tablet:w-[30rem] laptop:w-[40rem] wideScreen:w-[60rem] h-[70vh] laptop:h-[60vh] wideScreen:h-[50vh] bg-white shadow-3xl border-solid rounded-[2rem] top-1/7 wideScreen:top-1/5 tablet:-ml-[15rem] left-1/2 -ml-[10rem] laptop:-ml-[20rem] wideScreen:-ml-[30rem]"
       >
-        <div className="gradientLandingPageOverlay w-auto wideScreen:w-[46rem] overflow-y-scroll pt-8 pb-40 px-8 rounded-[2rem]">
+        <div className="noScrollBar gradientLandingPageOverlay w-auto wideScreen:w-[46rem] overflow-y-scroll pt-8 pb-40 px-8 rounded-[2rem]">
           <h1 className="font-serif flex-1 leading-6 tablet:leading-[2rem] laptop:leading-8 text-2xl tablet:text-3xl wideScreen:leading-[2.8rem] wideScreen:text-[3rem]">
             Hello I'm Jonas. <br /> Welcome to my Backpack. <br /> Here you can
             access an app that tracks and provides information about my memories

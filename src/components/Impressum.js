@@ -26,7 +26,7 @@ export function Impressum() {
         </div>
       </div>
 
-      <div className="text-white gradientImpressum z-50 fixed top-0 left-0 h-full w-full px-12 py-16 overflow-scroll">
+      <div className="noScrollBar text-white gradientImpressum z-50 fixed top-0 left-0 h-full w-full px-12 py-16 overflow-scroll">
         <p className="font-serif font-light text-2xl p-4 py-4">
           <span className="block py-9">
             Hyeseon Jeong <br/>

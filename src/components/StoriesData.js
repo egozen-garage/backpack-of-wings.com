@@ -59,7 +59,7 @@ export function StoriesData() {
           <h1 className="flex-2 text-xl font-bold">1/10 Memories</h1>
         </div>
         {/* STORY TEXT */}
-        <p className="gradientStoryOverlay font-sans text-base overflow-scroll max-h-[26rem] pb-40">
+        <p className="noScrollBar gradientStoryOverlay font-sans text-base overflow-scroll max-h-[26rem] pb-40">
           {stories.stories[currentIndex].text}
         </p>
         {/* NEXT BUTTON */}
