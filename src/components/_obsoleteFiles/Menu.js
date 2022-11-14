@@ -1,7 +1,7 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom';
-import { About } from './About';
+import { About } from '../About';
 
 export function Menu() {
     const [aboutPopup, setAboutPopup] = useState(false);

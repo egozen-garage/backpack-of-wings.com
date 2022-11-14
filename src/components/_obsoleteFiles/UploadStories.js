@@ -1,7 +1,7 @@
 import React from "react";
 import { useState } from "react";
-import { UploadStoriesIntro } from "./UploadStoriesIntro.js";
-import StoryInputForm from "./StoryInputForm.js";
+import { UploadStoriesIntro } from "../UploadStoriesIntro.js";
+import StoryInputForm from "../StoryInputForm.js";
 import "../css/menuButtons.css"
 
 export function UploadStories({handleZoom}) {

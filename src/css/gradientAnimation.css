@@ -42,6 +42,16 @@
   -webkit-mask-image: -webkit-gradient(linear, left 70%, left 90%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
 
+.gradientLandingPageOverlay {
+  -webkit-mask-image: -webkit-gradient(
+    linear, left top, left bottom,
+    color-stop(0%, rgba(0,0,0,0)),
+    color-stop(10%, rgba(0,0,0,1)),
+    color-stop(90%, rgba(0,0,0,1)),
+    color-stop(100%, rgba(0,0,0,0))
+  );
+}
+
 .gradientMaterialOverlay {
   -webkit-mask-image: -webkit-gradient(
     linear, right top, left top, 
