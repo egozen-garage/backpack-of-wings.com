@@ -35,7 +35,7 @@ function App() {
   return (
     <>
       {/* INTRODUCTORY PAGE */}
-      {/* <LandingPage/> */}
+      <LandingPage/>
 
       <AboutWindow />
 
@@ -65,6 +65,7 @@ function App() {
             exact
           />
           <Route element={<LoadMemories />} path="/loadmemory" />
+          <Route element={<LoadMemories />} path="/loadmemory/:landmark" />
           <Route element={<Impressum />} path="/impressum" exact />
           <Route element={<NotFound />} path="*" exact />
         </Routes>
