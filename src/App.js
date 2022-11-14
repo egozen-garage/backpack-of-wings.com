@@ -28,7 +28,7 @@ function App() {
         <AboutWindow />
 
       {/* EVERY OTHER PAGE */}
-      <div className="ChildGridContainer relative wrapper-content order-2 grid grid-cols-2 grid-rows-6 grid-flow-col auto-rows-fr w-full">
+      <div className="contentWrapper relative grid h-full w-full">
 
         <MenuButtons />
         

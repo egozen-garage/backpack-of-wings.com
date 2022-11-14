@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import "../css/animation.css";
 // import { useLocation } from "react-router-dom";
 import "../css/gradientAnimation.css";
-import progressbar from "../img/audio-progressbar-short-01-black.svg";
+import progressbar from "../img/audio-progressbar-01-black.svg";
 // import { Link, Outlet } from 'react-router-dom';
 // import CallSanityAPI from "../utilities/CallSanityAPI";
 import { useEffect } from "react";
@@ -49,36 +49,36 @@ export function StoriesData() {
 
   return (
     <>
-      <div className="storiesContainerAnimation absolute z-20 w-[35rem] col-start-1 row-start-2 row-span-4 pl-14 pr-12">
+      <div className="storiesContainerAnimation fixed flex flex-col z-20 w-[35rem] wideScreen:w-[60rem] pt-24 pl-14 pr-12 h-screen">
         {/* <div className=" bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]"> */}
         <div className="flex pb-10">
-          <h1 className="flex-1 text-xl font-bold">
+          <h1 className="flex-1 text-xl wideScreen:text-2xl font-bold">
             {stories.stories[currentIndex].location},
             {stories.stories[currentIndex].country}
           </h1>
-          <h1 className="flex-2 text-xl font-bold">1/10 Memories</h1>
+          <h1 className="flex-2 text-xl  wideScreen:text-2xl font-bold">1/10 Memories</h1>
         </div>
         {/* STORY TEXT */}
-        <p className="noScrollBar gradientStoryOverlay font-sans text-base overflow-scroll max-h-[26rem] pb-40">
+        <p className="noScrollBar gradientStoryOverlay font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
           {stories.stories[currentIndex].text}
         </p>
         {/* NEXT BUTTON */}
         <div
-          className="font-serif font-bold text-lg pt-14 z-50 row-start-5 col-start-1 w-1/2 cursor-e-resize"
+          className="font-serif font-bold text-lg wideScreen:text-2xl z-50 w-1/2 cursor-e-resize mt-auto pb-10"
           onClick={goToNext}
         >
           Next Memory &#8594;
         </div>
         {/* AUDIO PROGRESS BAR */}
-        <div className="fixed bottom-0 py-5 z-32 progressBar-container  w-[30rem]">
+        <div className="py-4 z-32 progressBar-container">
           <img
-            className="flex items-center w-screen pt-3 px-1"
+            className="object-cover h-[3rem] wideScreen:h-[5rem]"
             src={progressbar}
             alt="progressbar"
           />
         </div>
       </div>
-      <div className="col-start-2 row-start-4 px-3">
+      <div className="px-3">
         {stories.stories.map((story, storyIndex) => (
           <div
             className="bg-white rounded-2xl w-3 h-3 m-6 cursor-pointer"
