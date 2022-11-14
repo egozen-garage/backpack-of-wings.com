@@ -1,6 +1,24 @@
 import { StoriesData } from "./StoriesData.js";
+// import { useNavigate } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
+// import { useEffect } from "react";
 
 export function LoadMemories() {
+  // const navigate = useNavigate()
+  // const location = useLocation();
+  // let currentURL = location.pathname.split("/")[1];
+  // console.log(currentURL);
+
+  
+  // useEffect(() =>{
+  //   const landmarkOptions = ["istanbul", "droemling", "lackova", "hama", "neveeitan", "dudaimsite"]
+  //   const randomNumber = Math.floor(Math.random() * 6);
+  //   navigate(landmarkOptions[randomNumber])
+  // }, [navigate])
+  // check if url has location and story id
+  // if not random pick one of 6 && select random Story id
+  // 
+
   
   return (
     <>

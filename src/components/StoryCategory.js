@@ -2,17 +2,23 @@
 // import { Story } from "./Story.js";
 // import SanityClient from "../client";
 // import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 import StoryInputForm from "./StoryInputForm.js";
-import CallSanityAPI from "../utilities/CallSanityAPI"
+// import CallSanityAPI from "../utilities/CallSanityAPI"
+import { useLocation } from "react-router-dom";
+// import CallSanityAPI from "../utilities/CallSanityAPI"
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
 
 export function StoryCategory() {
+  const location = useLocation()
+  let currentLandmark = location.pathname.split("/")[2];
+  console.log("storyCatergory: " + currentLandmark)
+  
 
-  let { landmark } = useParams()
+  // let { landmark } = useParams()
   // NEEDS FIXING! API IN ARRAY CANT BE RETURNED AS PROPER VALUE
-  const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
+  // const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
 
   // console.log("storyCatergory - API data: " + JSON.stringify(data))
   // console.log("storyCatergory - API error: " + error)
@@ -51,7 +57,7 @@ export function StoryCategory() {
         </div>
 
         {/* STORIES INPUT TEXT CONTAINER */}
-        <StoryInputForm/>
+        <StoryInputForm currentLandmark={currentLandmark}/>
         {/* <Story /> */}
       </div>
 

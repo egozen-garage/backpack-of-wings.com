@@ -7,20 +7,13 @@ export default {
   icon: BsFileText,
   fields: [
     {
-      name: "name",
-      title: "Name",
+      name: "landmark",
+      title: "Landmark",
       type: "string",
     },
     {
-      name: "country",
-      title: "Country",
-      type: "reference",
-      to: [{ type: "landmark" }],
-      options: { filter: "!defined(country)" },
-    },
-    {
-      name: "locationType",
-      title: "Location Type",
+      name: "name",
+      title: "Name",
       type: "string",
     },
     {

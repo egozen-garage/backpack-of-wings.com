@@ -13,7 +13,7 @@ export function LandingPage(props) {
     // boolean true or false statement
     return (buttonPopup) ? (
         <>
-            <div className="landingPage gradientBackground fixed z-50 h-screen w-screen">
+            <div className="landingPage gradientBackground fixed z-60 h-screen w-screen">
 
                 <div className="fixed w-[40rem] p-8 bg-white shadow-3xl border-solid rounded-[2rem] top-1/7 left-1/2 -ml-[20rem]">
                     <h1 className="font-serif leading-8 text-3xl">Hello I'm Jonas. <br/> Welcome to my Backpack. <br/> Here you can access an app that tracks and provides information about my memories of migration. Some are lost, some remain. It would be great if you could retrieve my memories.</h1>

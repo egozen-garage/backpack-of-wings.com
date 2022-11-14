@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import "../css/menuPanels.css";
 import { useLocation } from "react-router-dom";
@@ -8,7 +8,7 @@ export default function MenuButtons() {
 
   let currentURL = location.pathname.split("/")[1];
   let uploadStoryURL = location.pathname.split("/")[2];
-  let URLlength = location.pathname.split("/").length;
+  // let URLlength = location.pathname.split("/").length;
 
   return (
     <>
@@ -49,7 +49,7 @@ export default function MenuButtons() {
       <div className="">
         <div
           className={
-            currentURL === "uploadstory" && uploadStoryURL == undefined
+            currentURL === "uploadstory" && uploadStoryURL === undefined
               ? "rightPanel w100"
               : currentURL === "uploadstory" && uploadStoryURL !== undefined
               ? "rightPanel w50"

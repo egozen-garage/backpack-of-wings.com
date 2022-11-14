@@ -1,12 +1,14 @@
 import { useForm } from "react-hook-form";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import "../css/animation.css";
 
+export default function StoryInputForm(props){
+  console.log("storyInputForm: " + JSON.stringify(props) )
+  console.log("storyInputForm: " + props.currentLandmark )
 
-export default function StoryInputForm() {
-  const location = useLocation();
-  let currentURL = location.pathname.split("/")[1];
-  let uploadStoryURL = location.pathname.split("/")[2];
+  // const location = useLocation();
+  // let currentURL = location.pathname.split("/")[1];
+  // let uploadStoryURL = location.pathname.split("/")[2];
 
   // Initiate forms
   // const { register, handleSubmit, errors, reset } = useForm()
@@ -67,6 +69,16 @@ export default function StoryInputForm() {
             {...register("formID", {})}
           />
 
+          {/* STORY Landmar hidden input field */}
+          <input type="hidden" name="landmark-name" value={props.currentLandmark} />
+          <input
+              type="hidden"
+              name="landmarkName"
+              value={props.currentLandmark}
+              // ref={register()}
+              {...register('landmarkName', {})}
+          />
+
           {/* STORY TEXT BODY */}
           <div className="flex pb-2">
             <div className="flex-col w-40 text-2xs font-mono font-bold mt-2 mr-2">
@@ -80,6 +92,7 @@ export default function StoryInputForm() {
               <label className="block pb-12">What did I sense?</label>
             </div>
             <textarea
+              title="What did I sense?"
               rows="4"
               name="message"
               className="bg-transparent shadow-innerText font-sans rounded-2xl p-2 h-[320px] w-full resize-none "

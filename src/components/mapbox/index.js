@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useMemo, useCallback} from 'react';
+import React, { useRef, useEffect, useState, useMemo } from 'react';
 // import React from 'react';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
@@ -6,7 +6,7 @@ import MovebankDataYear from '../../json/MovebankDataYear.json';
 import sanityClient from "../../client";
 // import iconCurrentLocation from "../img/current-location.svg"
 import { useLocation } from 'react-router-dom'
-import FetchMapData from './service/FetchMapData';
+// import FetchMapData from './service/FetchMapData';
 import './mapboxStyle.css'
  
 import { useNavigate } from "react-router-dom";
@@ -25,9 +25,9 @@ export default function Mapbox() {
     const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
     
     let [movebankData, setMovebankData] = useState(null)
-    let [weatherData, setWeatherData] = useState(null);
-    let [landmark, setLandmark] = useState(null);
-    let [dataReady, setDataReady] = useState(false);
+    // let [weatherData, setWeatherData] = useState(null);
+    // let [landmark, setLandmark] = useState(null);
+    // let [dataReady, setDataReady] = useState(false);
     let [mapData, setMapData] = useState([])
 
     useEffect(() => {
@@ -50,9 +50,9 @@ export default function Mapbox() {
                 ])
                 .then(([movebankData, weatherData, landmark]) => {
                     setMovebankData(movebankData.individuals[0].locations);
-                    setWeatherData(weatherData);
-                    setLandmark(landmark);
-                    setDataReady(true);
+                    // setWeatherData(weatherData);
+                    // setLandmark(landmark);
+                    // setDataReady(true);
                     setMapData([movebankData, weatherData, landmark])
                     console.log("FetchMapData: Api Data has been called")
                 })
@@ -74,7 +74,7 @@ export default function Mapbox() {
         return ( <pre>data loading...</pre>)
     }
     if(movebankData && !dataReceived){
-        console.log("data arrived")
+        // console.log("data arrived " + JSON.stringify(mapData[2]))
         dataReceived = true;
         // console.log("bird data 30 days: " + movebankData[1].location_long)
         return <DrawMapbox mapData={mapData}/>
@@ -205,7 +205,7 @@ function DrawMapbox(props){
             'properties': {
                 'description': landmarkSanity[i].locationType + ", " + landmarkSanity[i].locationName,
                 'icon': 'current-location',
-                'url': 'url', // add url link form sanity 
+                'url': landmarkSanity[i].url, // add url link form sanity 
                 'counter': i,
                 // 'url': props.landmarkLinks[i].url, // WRONG needs fix
                 // 'icon': 'icon-bird-location',
@@ -410,88 +410,88 @@ function DrawMapbox(props){
                 data: storyLocations,
                 generateId: true // This ensures that all features have unique IDs
             });
-            const landmarkPaint = {
-                    "text-color": 'black',
-                    // 'text-color': [
-                    //     'case',
-                    //     ['boolean', ['feature-state', 'hover'], false],
-                    //     'blue',
-                    //     'black'
-                    //   ],
-            }
-            const landmarkLayout = {
-                // 'text-field': [
-                //     'format',
-                //     ['get', 'description'],
-                //     {'font-scale': ["to-number", [
-                //         'case',
-                //         ['boolean', ['feature-state', 'hover'], false],
-                //         1,
-                //         0.5
-                //     ]]},
-                // ],
-                'text-field': ['get', 'description'],
+            // const landmarkPaint = {
+            //         "text-color": 'black',
+            //         // 'text-color': [
+            //         //     'case',
+            //         //     ['boolean', ['feature-state', 'hover'], false],
+            //         //     'blue',
+            //         //     'black'
+            //         //   ],
+            // }
+            // const landmarkLayout = {
+            //     // 'text-field': [
+            //     //     'format',
+            //     //     ['get', 'description'],
+            //     //     {'font-scale': ["to-number", [
+            //     //         'case',
+            //     //         ['boolean', ['feature-state', 'hover'], false],
+            //     //         1,
+            //     //         0.5
+            //     //     ]]},
+            //     // ],
+            //     'text-field': ['get', 'description'],
         
-                // 'text-justify': [
-                //         'case',
-                //         ['boolean', ['feature-state', 'hover'], false],
-                //         'left',
-                //         'right'
-                // ],
-                // 'text-justify': 'left',
+            //     // 'text-justify': [
+            //     //         'case',
+            //     //         ['boolean', ['feature-state', 'hover'], false],
+            //     //         'left',
+            //     //         'right'
+            //     // ],
+            //     // 'text-justify': 'left',
 
-                // 'text-field': [
-                //     'case',
-                //     ['boolean', ['feature-state', 'hover'], false],
-                //     'a',
-                //     'fallback'
-                //     // ['get', 'description'],
-                //     // ['get', 'url']
-                // ],
+            //     // 'text-field': [
+            //     //     'case',
+            //     //     ['boolean', ['feature-state', 'hover'], false],
+            //     //     'a',
+            //     //     'fallback'
+            //     //     // ['get', 'description'],
+            //     //     // ['get', 'url']
+            //     // ],
 
 
 
-                // 'text-field': [
-                //     'case',
-                //     ['boolean', ['feature-state', 'hover'], false],
-                //     [
-                //         'format',
-                //         ['get', 'description'],
-                //         {'font-scale': 0.5}
-                //     ],
-                //     [
-                //         'format',
-                //         ['get', 'description'],
-                //         {'font-scale': 1}
-                //     ]
-                // ],
+            //     // 'text-field': [
+            //     //     'case',
+            //     //     ['boolean', ['feature-state', 'hover'], false],
+            //     //     [
+            //     //         'format',
+            //     //         ['get', 'description'],
+            //     //         {'font-scale': 0.5}
+            //     //     ],
+            //     //     [
+            //     //         'format',
+            //     //         ['get', 'description'],
+            //     //         {'font-scale': 1}
+            //     //     ]
+            //     // ],
                 
-                // 'text-field': [
-                //     'format',
-                //     ['get', 'description'],
-                //     {
-                //         'font-scale': 1,
-                //         // 'font-scale': [
-                //         //     'case',
-                //         //     ['boolean', ['feature-state', 'hover'], false],
-                //         //     0.5,
-                //         //     1
-                //         // ],
-                //         // 'text-font' : 'Arial Unicode MS Regular',
-                //         // 'text-font' : [
-                //         //     'case',
-                //         //     ['boolean', ['feature-state', 'hover'], false],
-                //         //     'literal', ['FT88 Serif', 'Open Sans Regular'],
-                //         //     'literal', ['Open Sans Regular', 'Open Sans Regular']
-                //         // ]
-                //     }
-                // ],
+            //     // 'text-field': [
+            //     //     'format',
+            //     //     ['get', 'description'],
+            //     //     {
+            //     //         'font-scale': 1,
+            //     //         // 'font-scale': [
+            //     //         //     'case',
+            //     //         //     ['boolean', ['feature-state', 'hover'], false],
+            //     //         //     0.5,
+            //     //         //     1
+            //     //         // ],
+            //     //         // 'text-font' : 'Arial Unicode MS Regular',
+            //     //         // 'text-font' : [
+            //     //         //     'case',
+            //     //         //     ['boolean', ['feature-state', 'hover'], false],
+            //     //         //     'literal', ['FT88 Serif', 'Open Sans Regular'],
+            //     //         //     'literal', ['Open Sans Regular', 'Open Sans Regular']
+            //     //         // ]
+            //     //     }
+            //     // ],
                 
-                'text-variable-anchor': ['bottom-left', 'top-left'],
-                // 'text-radial-offset': 0.5,
-                // 'text-justify': 'left',
-                'text-allow-overlap': true,
-            }
+            //     'text-variable-anchor': ['bottom-left', 'top-left'],
+            //     // 'text-radial-offset': 0.5,
+            //     // 'text-justify': 'left',
+            //     'text-allow-overlap': true,
+            // }
             // map.current.addLayer({
             //     // type: 'circle',
             //     type: 'symbol',
@@ -822,8 +822,8 @@ function DrawMapbox(props){
             }
             if(urlPrefix === "uploadstory"){
                 map.current.fitBounds([
-                    [20, 5], // southwestern corner of the bounds
-                    [80, 60], // northeastern corner of the bounds
+                    [35, 5], // southwestern corner of the bounds
+                    [95, 60], // northeastern corner of the bounds
                 ]);
             }
 

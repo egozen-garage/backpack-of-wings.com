@@ -2,25 +2,40 @@ import stories from "../json/storiesData.json";
 import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import "../css/animation.css";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 import "../css/gradientAnimation.css";
 import progressbar from "../img/audio-progressbar-short-01-black.svg";
 // import { Link, Outlet } from 'react-router-dom';
+// import CallSanityAPI from "../utilities/CallSanityAPI";
+import { useEffect } from "react";
 
 export function StoriesData() {
-  const location = useLocation();
-  let currentURL = location.pathname.split("/")[1];
-  console.log(currentURL);
+  // const location = useLocation();
+  // let urlLandmark = location.pathname.split("/")[2];
+  // let urlStoryNumber = location.pathname.split("/")[3];
+
+  // console.log("loadmemory url: "  + urlLandmark +" "+ urlStoryNumber);
+
+
+  // call sanity data
+  useEffect(() => {
+    // CallSanityAPI('*[_type == "landmark"]{url{current}, locationName, country}')
+  }, [])
+
+
+  // check if url has location and story id
+  // if not random pick one of 6 && select random Story id
+  // 
 
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const goToPrev = () => {
-    const isFirstStory = currentIndex === 0;
-    const newIndex = isFirstStory
-      ? stories.stories.length - 1
-      : currentIndex - 1;
-    setCurrentIndex(newIndex);
-  };
+  // const goToPrev = () => {
+  //   const isFirstStory = currentIndex === 0;
+  //   const newIndex = isFirstStory
+  //     ? stories.stories.length - 1
+  //     : currentIndex - 1;
+  //   setCurrentIndex(newIndex);
+  // };
 
   const goToNext = () => {
     const isLastStory = currentIndex === stories.stories.length - 1;
