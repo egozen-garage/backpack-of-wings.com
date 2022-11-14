@@ -15,10 +15,10 @@ const client = sanityClient({
 
 exports.handler = async (event, context, callback) => {
   // create timestamp
-  var today = new Date();
-  var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
-  var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
-  var dateTime = date+' '+time;
+  var today = new Date().toISOString();
+  // var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
+  // var time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+  // var dateTime = date+' '+time;
 
   // Pulling out the payload from the body
   const urlParams = new URLSearchParams(event.body); // event.body -> 'abc=foo&def=%5Basf%5D&xyz=5'
@@ -35,7 +35,7 @@ exports.handler = async (event, context, callback) => {
       name: payload.name,
       email: payload.email,
       message: payload.message,
-      publishedAt: dateTime,
+      publishedAt: today,
     }
     client.create(storyData).then((res) => {
       console.log(`story was created`)
