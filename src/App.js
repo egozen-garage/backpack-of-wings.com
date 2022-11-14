@@ -35,7 +35,7 @@ function App() {
   return (
     <>
       {/* INTRODUCTORY PAGE */}
-      <LandingPage/>
+      {/* <LandingPage/> */}
 
       <AboutWindow />
 
