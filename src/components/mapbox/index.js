@@ -7,7 +7,7 @@ import sanityClient from "../../client";
 // import iconCurrentLocation from "../img/current-location.svg"
 import { useLocation } from 'react-router-dom'
 // import FetchMapData from './service/FetchMapData';
-import './mapboxStyle.css'
+import './mapboxStyle.css';
  
 import { useNavigate } from "react-router-dom";
 
@@ -835,19 +835,21 @@ function DrawMapbox(props){
         }
     }, [current_latitude, current_longitude, zoom, urlPrefix])
 
-    // FIX: SPACE BETWEEN WEATHER ITEMS 
-    const weaterContainerStyle= {
-        position: 'fixed',
-        zIndex: 3,
-        bottom: '40px',
-        paddingLeft: '60px',
-        paddingRight: '60px',
-        display: 'flex',
-        flexWrap: 'nowrap',
-        justifyContent: 'space-between',
-        width: '100vw',
-        // backgroundColor: '#fff',
-    }
+    // NEEED FIXING: SPACE BETWEEN WEATHER ITEMS (log 14.11.22, 14:30)
+    // const weatherContainerStyle = {
+    //     position: 'fixed',
+    //     zIndex: 3,
+    //     bottom: '40px',
+    //     paddingLeft: '60px',
+    //     paddingRight: '60px',
+    //     display: 'flex',
+    //     flexWrap: 'nowrap',
+    //     justifyContent: 'space-between',
+    //     width: '100vw',
+    // }
+
+    const weatherContainerStyle = "fixed z-10 bottom-7 px-14 flex flex-wrap-nowrap place-content-between w-screen"
+
     const mapContainerStyle ={
         height: '100vh',
         // width: '100px',
@@ -858,7 +860,7 @@ function DrawMapbox(props){
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
 
 
-    const weatherObject = "mr-10 font-mono  text-sm "
+    const weatherObject = "weatherObject mr-10 font-mono text-2xs xl:text-xs 2xl:text-sm"
 
     
     function timestamp2Time(timestamp){
@@ -880,7 +882,7 @@ function DrawMapbox(props){
     return (
         <div>
             { zoom ? "" :
-            <div ref={weaterContainer} style={weaterContainerStyle}>
+            <div ref={weaterContainer} className={weatherContainerStyle}>
                 <span className={weatherObject}>Jonas Location: <span className='font-mono inline-block'>{weatherData.city_name}, {weatherData.country}</span></span>
                 <span className={weatherObject}>Sunrise: {timestamp2Time(weatherData.sunrise)}</span>
                 <span className={weatherObject}>Sunset: {timestamp2Time(weatherData.sunset)}</span>

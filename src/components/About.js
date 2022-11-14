@@ -1,17 +1,20 @@
 import React from "react";
-// import { Link } from "react-router-dom";
+import jonas from "../img/Jonas-2-glow.png";
+import Typewriter from "typewriter-effect/dist/core";
 
 export function About() {
+
   return (
     <>
       <div className="p-16 px-16 pb-10 pt-[6rem]">
         {/* <button className="aboutBtn absolute right-3 top-3" onClick={() => props.setTrigger(false)}>&#9711;</button>{props.children} */}
-        <div className="z-45 font-mono py-8 leading-5 text-s">
-          <code>last login. fri jun 24 18.44.10 on ttys000</code>
+        <span className="loginShell z-45 font-mono py-8 leading-5 text-s">
+          last login. fri jun 24 18.44.10 on ttys000
           <br />
-          <code>the default interactive shell is now zsh.</code>
-          <code>&#40;base&#41; user-mbp. ~ loading ...</code>
-        </div>
+          the default interactive shell is now zsh.
+          <br />
+          &#40;base&#41; user-mbp. ~ loading ...
+        </span>
         <p className="font-serif text-2xl py-4">
           This website works as an online platform from the physical workshop
           “The Backpack of Wings: Sensory Networks”. Here you can experience the
@@ -36,18 +39,24 @@ export function About() {
           responsibility as humans to use distributed sensing technologies to
           nonhuman agents.
         </p>
+        <img className="jonasImg float-right w-1/2" src={jonas} alt="jonas" />
         <p className="font-serif text-2xl py-4">
-          LIFE SPAN 20-35 yrs <br />
-          WEIGHT 2.3-4.5 kg <br />
-          HEIGHT 1-1.5 m <br />
-          WINGSPAN 1.5-2m <br />
-          MATING BEHAVIOUR monogamy <br />
-          DIET insects, scorpions and spiders, frogs, fish, toads, lizards,
-          snakes, earthworms and small mammals <br />
-          COMMUNICATION almost voiceless, loud bill clattering and low hissing
-          sounds <br />
-          HABITAT open wetland, particularly grassy areas, marshes, swamps,
-          ditches, grassland and meadows
+          <span className="font-mono text-xs pr-4">LIFE SPAN</span>20-35 yrs{" "}
+          <br />
+          <span className="font-mono text-xs pr-4">WEIGHT</span>2.3-4.5 kg{" "}
+          <br />
+          <span className="font-mono text-xs pr-4">HEIGHT</span>1-1.5 m <br />
+          <span className="font-mono text-xs pr-4">WINGSPAN</span>1.5-2m <br />
+          <span className="font-mono text-xs pr-4">MATING BEHAVIOUR</span>
+          monogamy <br />
+          <span className="font-mono text-xs pr-4">DIET</span>insects, scorpions
+          and spiders, frogs, fish, toads, lizards, snakes, earthworms and small
+          mammals <br />
+          <span className="font-mono text-xs pr-4">COMMUNICATION</span>almost
+          voiceless, loud bill clattering and low hissing sounds <br />
+          <span className="font-mono text-xs pr-4">HABITAT</span>open wetland,
+          particularly grassy areas, marshes, swamps, ditches, grassland and
+          meadows
         </p>
       </div>
     </>

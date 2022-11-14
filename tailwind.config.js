@@ -11,6 +11,11 @@ module.exports = {
       'lg': '1024px',
       'xl': '1280px',
       '2xl': '1536px',
+      'mobileHorizontal': '480px',
+      'tablet': '768px',
+      'laptop': '1024px',
+      'desktop': '1350px',
+      'wideScreen': '1800px',
     },
     extend: {
       cursor: {
@@ -28,6 +33,7 @@ module.exports = {
       },
       fontSize: {
         '2xs': ['10px', '12px'],
+        'xs': ['12px', '14px'],
       },
       boxShadow: {
         '2xl': '0px 0px 10px 2px rgba(0, 0, 0, 0.3)',
@@ -57,6 +63,10 @@ module.exports = {
         '43': '43',
         '44': '44',
         '45': '45',
+        '52' : '52',
+        '54' : '54',
+        '56' : '56',
+        '58' : '58',
         '60': '60',
       }
     },

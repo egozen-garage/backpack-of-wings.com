@@ -25,6 +25,10 @@
     opacity: 0;
 }
 
+.introWindow {
+    transition: opacity .5s ease-out;
+}
+
 .animateOpacity.show {
     opacity: 1;
 }
