@@ -822,8 +822,8 @@ function DrawMapbox(props){
             }
             if(urlPrefix === "uploadstory"){
                 map.current.fitBounds([
-                    [20, 5], // southwestern corner of the bounds
-                    [80, 60], // northeastern corner of the bounds
+                    [35, 5], // southwestern corner of the bounds
+                    [95, 60], // northeastern corner of the bounds
                 ]);
             }
 
