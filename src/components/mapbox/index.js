@@ -835,17 +835,17 @@ function DrawMapbox(props){
         }
     }, [current_latitude, current_longitude, zoom, urlPrefix])
 
-
-
-
-
-
+    // FIX: SPACE BETWEEN WEATHER ITEMS 
     const weaterContainerStyle= {
         position: 'fixed',
         zIndex: 3,
         bottom: '40px',
-        marginLeft: '60px',
-        marginRight: '60px',
+        paddingLeft: '60px',
+        paddingRight: '60px',
+        display: 'flex',
+        flexWrap: 'nowrap',
+        justifyContent: 'space-between',
+        width: '100vw',
         // backgroundColor: '#fff',
     }
     const mapContainerStyle ={
@@ -881,12 +881,12 @@ function DrawMapbox(props){
         <div>
             { zoom ? "" :
             <div ref={weaterContainer} style={weaterContainerStyle}>
-                <span className={weatherObject}>Jonas Location: {weatherData.city_name}, {weatherData.country}</span>
-                <span className={weatherObject}>Sunrise {timestamp2Time(weatherData.sunrise)}</span>
-                <span className={weatherObject}>Sunset {timestamp2Time(weatherData.sunset)}</span>
-                <span className={weatherObject}>Weather condition: {weatherData.weather_description}</span>
-                <span className={weatherObject}>{weatherData.temp} °C</span>
-                <span className={weatherObject}>Air humidity: {weatherData.humidity} g/m3</span>
+                <span className={weatherObject}>Jonas Location: <span className='font-mono inline-block'>{weatherData.city_name}, {weatherData.country}</span></span>
+                <span className={weatherObject}>Sunrise: {timestamp2Time(weatherData.sunrise)}</span>
+                <span className={weatherObject}>Sunset: {timestamp2Time(weatherData.sunset)}</span>
+                <span className={weatherObject}>Weather condition: <span className='font-mono inline-block'>{weatherData.weather_description}</span></span>
+                <span className={weatherObject}>Temperature: <span className='font-mono inline-block'>{weatherData.temp} °C</span></span>
+                <span className={weatherObject}>Air humidity: <span className='font-mono inline-block'>{weatherData.humidity} g/m3</span></span>
             </div> }
             <div ref={mapContainer} className={mapStyle} style={mapContainerStyle} />
         </div>
