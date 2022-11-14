@@ -20,18 +20,6 @@ import "./css/gradientAnimation.css";
 function App() {
   console.log("C App is running");
 
-  // call sanity data
-
-  // const [landmarkData, setLandmarkData] = useState(null)
-  // const callLandmarkData = () => {
-  // const { data, error, isLoaded } = CallSanityAPI(
-  //   '*[_type == "landmark" ]{"url":url.current, "country":country, "locationType": locationType, "locationName": locationName, "latitude":latitude, "longitude":longitude}'
-  // );
-  //  console.log("landmark: " + data)
-  //  setLandmarkData(data);
-  // }
-  // callLandmarkData();
-
   return (
     <>
       <AboutWindow />
