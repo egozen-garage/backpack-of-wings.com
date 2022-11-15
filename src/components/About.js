@@ -39,22 +39,25 @@ export function About() {
           responsibility as humans to use distributed sensing technologies to
           nonhuman agents.
         </p>
-        <img className="jonasImg float-right w-1/2" src={jonas} alt="jonas" />
+        <div className="relative float-right w-1/2">
+          <img className="jonasImg right-0 bottom-0" src={jonas} alt="jonas" />
+          <span className="font-mono text-sm absolute right-0 bottom-5">Jonas, White Stork<p className="font-serif text-3xl">Ciconia ciconia</p></span>
+        </div>
         <p className="font-serif text-2xl py-4">
-          <span className="font-mono text-xs pr-4">LIFE SPAN</span>20-35 yrs{" "}
+          <span className="font-mono text-xs pr-2">LIFE SPAN</span>20-35 yrs{" "}
           <br />
-          <span className="font-mono text-xs pr-4">WEIGHT</span>2.3-4.5 kg{" "}
+          <span className="font-mono text-xs pr-2">WEIGHT</span>2.3-4.5 kg{" "}
           <br />
-          <span className="font-mono text-xs pr-4">HEIGHT</span>1-1.5 m <br />
-          <span className="font-mono text-xs pr-4">WINGSPAN</span>1.5-2m <br />
-          <span className="font-mono text-xs pr-4">MATING BEHAVIOUR</span>
+          <span className="font-mono text-xs pr-2">HEIGHT</span>1-1.5 m <br />
+          <span className="font-mono text-xs pr-2">WINGSPAN</span>1.5-2m <br />
+          <span className="font-mono text-xs pr-2">MATING BEHAVIOUR</span>
           monogamy <br />
-          <span className="font-mono text-xs pr-4">DIET</span>insects, scorpions
+          <span className="font-mono text-xs pr-2">DIET</span>insects, scorpions
           and spiders, frogs, fish, toads, lizards, snakes, earthworms and small
           mammals <br />
-          <span className="font-mono text-xs pr-4">COMMUNICATION</span>almost
+          <span className="font-mono text-xs pr-2">COMMUNICATION</span>almost
           voiceless, loud bill clattering and low hissing sounds <br />
-          <span className="font-mono text-xs pr-4">HABITAT</span>open wetland,
+          <span className="font-mono text-xs pr-2">HABITAT</span>open wetland,
           particularly grassy areas, marshes, swamps, ditches, grassland and
           meadows
         </p>

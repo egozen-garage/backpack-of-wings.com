@@ -54,7 +54,7 @@
 }
 
 .gradientJonasIntroOverlay {
-  -webkit-mask-image: -webkit-gradient(linear, left 70%, left 90%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  -webkit-mask-image: -webkit-gradient(linear, left 50%, left 90%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
 
 .gradientLandingPageOverlay {
@@ -106,11 +106,11 @@
 }
 
 .gradientImpressum {
-  background: rgb(255, 255, 255);
+  background: rgb(207, 225, 232);
   background: linear-gradient(
     0deg,
-    rgba(255, 255, 255, 0.9514180672268907) 0%,
-    rgba(0, 0, 0, 0.9430147058823529) 100%
+    rgba(207, 225, 232, 0.9514180672268907) 0%,
+    rgba(50, 50, 50, 0.9430147058823529) 100%
   );
 }
 

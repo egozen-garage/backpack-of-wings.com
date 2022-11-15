@@ -36,7 +36,7 @@ export default function AboutWindow() {
     <>
       {/* BACKPACK OF WINGS BUTTON */}
       <div className="z-50 aboutBackground fixed flex top-0 py-6 px-14">
-        <div onClick={toggleCollapsible} className="aboutContainer z-50 flex-1">
+        <div onClick={toggleCollapsible} className="aboutContainer flex-1">
           <button className={isOpen? "buttonActive" : "buttonInactive"}>
             <h1 className="text-xl mx-1 py-1">
               The Backpack of Wings: Sensory Networks
