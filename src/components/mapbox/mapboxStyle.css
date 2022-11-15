@@ -1,3 +1,23 @@
+.mapboxContainerDashboard{
+    transition: all 0.3s ease-in;
+    height: 100vh;
+    margin-left: 2.25rem;
+    margin-right: 2.25rem;
+}
+.mapboxContainerLoadMemory{
+    transition: all 0.3s ease-in;
+    height: 100vh;
+    margin-left: 2.25rem;
+    margin-right: 50vw;
+}
+.mapboxContainerUploadStory{
+    transition: all 0.3s ease-in;
+    height: 100vh;
+    margin-left: 50vw;
+    margin-right: 2.25rem;
+}
+
+
 .landmarkMarker{
     background-color: white; 
     border-radius: 25px;

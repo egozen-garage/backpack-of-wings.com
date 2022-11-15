@@ -21,7 +21,7 @@ export function LoadMemories() {
 
   
   return (
-    <>
+    <div id="loadmemory">
       <StoriesData></StoriesData>
       {/* <div class="pt-3 loadMemories col-start-2 row-start-2 row-span-3 px-9">
                 <h1>Load Memories</h1>
@@ -36,7 +36,7 @@ export function LoadMemories() {
       {/* LEFT PANEL */}
       {/* <div className="leftPanel move"></div> */}
 
-    </>
+    </div>
   );
 }
 

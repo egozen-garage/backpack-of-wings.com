@@ -644,8 +644,14 @@ function DrawMapbox(props){
                 return 
             });
 
-
-
+            map.current.on('resize', () => {
+                map.current.resize()
+                console.log('A resize event occurred.');
+            });
+            
+            // map.current.on("click", () => {
+            //     map.current.resize()
+            // });
 
 
             function LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color){
@@ -728,16 +734,17 @@ function DrawMapbox(props){
     });
 
 
+
     // define URL link behavior 
     // -----------------------------------------------------------------
     const urlPrefix = useMemo(() => {
         const currentPath = location.pathname
         const prefix = currentPath.split('/')[1]
-        console.log("url prefix: " + prefix)
+        console.log("url prefix: " + typeof prefix)
         return prefix
     }, [location.pathname])
+
     useEffect(() => {
-        
         if(urlPrefix === "uploadstory"){
             // if(document.getElementsByClassName("load-memories hideElement")) return
             for(let i = 0; i < document.getElementsByClassName("load-memories").length; i++){
@@ -759,39 +766,10 @@ function DrawMapbox(props){
                 document.getElementsByClassName("load-memories")[i].classList.remove("hideElement")
             }
         }
-
-
-        // var mapLayer = map.current.getLayer('load-memory-locations');
-        // if(typeof mapLayer !== 'undefined') {
-        //     if(urlPrefix === "uploadstory"){
-        //         map.current.setLayoutProperty('load-memory-locations', 'visibility', 'none');
-        //         map.current.setLayoutProperty('upload-story-locations', 'visibility', 'visible');
-        //     }
-        //     if(urlPrefix === "loadmemory"){
-        //         map.current.setLayoutProperty('load-memory-locations', 'visibility', 'visible');
-        //         map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
-        //     }
-        //     if(urlPrefix === ""){
-        //         map.current.setLayoutProperty('load-memory-locations', 'visibility', 'visible');
-        //         map.current.setLayoutProperty('upload-story-locations', 'visibility', 'none');
-        //     }
-        // }
-
     }, [navigate, urlPrefix])
 
-    // function ClickLandmark(urlEndpoint){
-    //     console.log("www urlEndpoint: ", urlEndpoint)
-    //     const currentPath = location.pathname
 
-
-    //     console.log("www urlPrefix: ", currentPath)
-    //     // map.current.on('click', 'story-locations', (e) => {
-    //     //     console.log("url: " + urlPrefix)
-    //     //     navigate( urlPrefix + '/' + e.features[0].properties.url);
-    //     // });
-    // }
-
-
+    // window.setTimeout(()=>map.current.resize(), 500)
 
 
     // define zoom behavior
@@ -803,17 +781,16 @@ function DrawMapbox(props){
         if (!map.current) return; 
         console.log("perform zoom")
         if (!zoom){ 
-            // if(dataReady){
-                map.current.flyTo({center: [current_longitude, current_latitude], zoom:12});
-            // } else {
-            //     map.current.flyTo({center: [10, 50], zoom:3});
-            // }
+            map.current.flyTo({center: [current_longitude, current_latitude], zoom:12});
             map.current.scrollZoom.enable();
             map.current.doubleClickZoom.enable();
             map.current.keyboard.enable();
             map.current.dragPan.enable();
         } else {
-            // map.current.flyTo({ zoom:3});
+            // map.current.fitBounds([
+            //     [6, 0], // southwestern corner of the bounds
+            //     [50, 60], // northeastern corner of the bounds
+            // ]);
             if(urlPrefix === "loadmemory"){
                 map.current.fitBounds([
                     [-20, 5], // southwestern corner of the bounds
@@ -826,7 +803,6 @@ function DrawMapbox(props){
                     [95, 60], // northeastern corner of the bounds
                 ]);
             }
-
             map.current.scrollZoom.disable();
             map.current.doubleClickZoom.disable();
             map.current.dragRotate.disable();
@@ -834,7 +810,6 @@ function DrawMapbox(props){
             map.current.dragPan.disable();
         }
     }, [current_latitude, current_longitude, zoom, urlPrefix])
-
 
 
 
@@ -849,36 +824,66 @@ function DrawMapbox(props){
         // backgroundColor: '#fff',
     }
     const mapContainerStyle ={
+        transition: 'all 0.3s ease-in',
         height: '100vh',
-        // width: '100px',
-        // zIndex: -1
+        // marginLeft:  urlPrefix === "loadmemory" ? '50vw'  : urlPrefix === "uploadstory" ? '0'    : '0',
+        // marginRight: urlPrefix === "loadmemory" ? '0'     : urlPrefix === "uploadstory" ? '50vw' : '0',
+        // transform: urlPrefix === "loadmemory" ? 'translateX(50%)'     : urlPrefix === "uploadstory" ? 'translateX(-50%)' : 'translateX(0)',
     }
-    const mapStyle = "top-0 right-0 w-100 h-200 map-container"
-    
+
+    // const [interval, setInterval] = useState()
+    // useEffect(() => {
+    //     let interval;
+    //     mapContainer.current.addEventListener("transitionstart", (e) => {
+    //         // on dubble click it goes to infinity !!!
+    //         // interval = setInterval(() => {
+    //         //     map.current.resize()
+    //         //     console.log('Transition This will run every second!');
+    //         //   }, 10);
+    //         //   window.setTimeout(()=> clearInterval(interval), 2000)
+            
+    //     })
+    //     mapContainer.current.addEventListener("transitionend", (e) => {
+    //         // map.current.resize()
+    //         // console.log("transition end")
+    //         clearInterval(interval);
+    //         interval = ""
+    //         if(document.getElementById("loadmemory")){
+    //             map.current.fitBounds([
+    //                 [6, 0], // southwestern corner of the bounds
+    //                 [50, 60], // northeastern corner of the bounds
+    //             ]);
+    //         } 
+    //         else {
+    //             map.current.flyTo({center: [current_longitude, current_latitude], zoom:12});
+    //         }
+    //     })
+    //     window.addEventListener("resize", () => {
+    //         console.log("transition window resize")
+    //         clearInterval(interval);
+    //         interval = ""
+    //     })
+    // // eslint-disable-next-line react-hooks/exhaustive-deps
+    // }, [])
+
+
+
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
 
+    const mapStyle = "top-0 right-0 map-container"
 
-    const weatherObject = "mr-10 font-mono  text-sm "
+    const weatherObject = "mr-10 font-mono text-sm "
 
     
     function timestamp2Time(timestamp){
         const birdTime = timestamp + weatherData.timezone - 3600
-        // console.log("timezone: ", timeZone, " ", weatherData.country, " ", timestamp)
-
         console.log("timestamp: ", new Date(birdTime * 1000 ).toLocaleTimeString("de-DE"))
-        // console.log("timestamp: ", birdTime, " birdTime: ", birdTime.getHours(birdTime), ":", birdTime.getMinutes(birdTime), ":", birdTime.getSeconds(birdTime))
-        // console.log("sun set: ", new Date(new Date(weatherData.sunset).toLocaleString("en-US", weaterContainer.country) ), " sun rise: ", new Date(weatherData.sunrise).toLocaleString(timeZone) )
-        // console.log("sun ", new Date(timestamp).toLocaleString({timeZone}))
-        // console.log("weather array: " + JSON.stringify(weatherData))
-        // adjust timezone
-        // read location of Jonas and define Ländercode
-        // return new Date(timestamp).toLocaleTimeString("it-IT")
         return new Date(birdTime * 1000 ).toLocaleTimeString("de-DE")
     }
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description
 
     return (
-        <div>
+        <div style={{paddingLeft: "2.25rem", paddingRight: "2.25rem"}}>
             { zoom ? "" :
             <div ref={weaterContainer} style={weaterContainerStyle}>
                 <span className={weatherObject}>Jonas Location: {weatherData.city_name}, {weatherData.country}</span>
@@ -888,7 +893,8 @@ function DrawMapbox(props){
                 <span className={weatherObject}>{weatherData.temp} °C</span>
                 <span className={weatherObject}>Air humidity: {weatherData.humidity} g/m3</span>
             </div> }
-            <div ref={mapContainer} className={mapStyle} style={mapContainerStyle} />
+            <div id="map" ref={mapContainer} className={mapStyle} style={mapContainerStyle} />
+            {/* <div ref={mapContainer} className={mapStyle} style={{...mapContainerStyle, ...mapZoomStyle}}/> */}
         </div>
     );
 }
