@@ -74,6 +74,7 @@
 
 .uploadStoriesContainerAnimation {
     animation: fadeInAnimation ease-in 0.5s;
+    transition: width 0.4s ease-in;
 }
 
 .pulsate {

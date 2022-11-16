@@ -30,10 +30,10 @@ export function StoryCategory() {
       >>>> UPDATE: ASSIGNED A ROUTING TO STORYINTRO AS SEPARATE PAGE <<<<
       <StoryIntro trigger={true}></StoryIntro> 
       */}
-      <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed top-0 pt-4 z-30 right-0 w-[50rem]">
+      <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
 
         {/* STORIES MATERIAL CONTAINER */}
-        <div className="gradientMaterialOverlay my-10 pl-[0.4rem]">
+        <div className="flex-1 gradientMaterialOverlay my-10 pl-[0.4rem]">
           <div className="flex overflow-x-scroll scrollbar-hide">
             <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
               {/* {data._type} */}

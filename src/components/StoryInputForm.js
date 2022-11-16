@@ -50,7 +50,7 @@ export default function StoryInputForm(props){
 
   return (
 
-      <div className="z-30 uploadstories-container uploadstories-textField pl-4 pr-12 mx-6 h-[440px]">
+      <div className="z-30 uploadstories-container uploadstories-textField h-full pl-4 pr-12 mx-6 ">
         <form
           onSubmit={handleSubmit(handlePost)}
           name="story-form"
@@ -58,6 +58,7 @@ export default function StoryInputForm(props){
           action="/success/"
           data-netlify="true"
           netlify-honeypot="got-ya"
+          className="flex flex-col h-full pb-10"
         >
           {/* STORY ID hidden input field */}
           <input type="hidden" name="form-name" value="story-form" />
@@ -80,7 +81,7 @@ export default function StoryInputForm(props){
           />
 
           {/* STORY TEXT BODY */}
-          <div className="flex pb-2">
+          <div className="flex pb-2 h-full">
             <div className="flex-col w-40 text-2xs font-mono font-bold mt-2 mr-2">
               <label htmlFor="message" className="block pb-12">
                 Please write in the perspective of Jonas
@@ -95,14 +96,14 @@ export default function StoryInputForm(props){
               title="What did I sense?"
               rows="4"
               name="message"
-              className="bg-transparent shadow-innerText font-sans rounded-2xl p-2 h-[320px] w-full resize-none "
+              className="bg-transparent shadow-innerText font-sans rounded-2xl p-2 h-auto w-full resize-none "
               required
               {...register("message", { required: true })}
             />
           </div>
 
           {/* STORY AUTHOR NAME */}
-          <div className="flex pb-2">
+          <div className="flex pb-2 mt-auto">
             <label htmlFor="name" className="w-40 text-2xs font-mono font-bold mt-3 mr-2">
               Write your name
               {errors.name && <span style={{ color: "red" }}> *</span>}
@@ -153,7 +154,7 @@ export default function StoryInputForm(props){
           {/* SUBMIT BUTTON */}
           <button
             type="submit"
-            className="float-right pt-10"
+            className="pt-10"
           >
             <p className="font-serif font-bold border-black border-solid border-[1px] rounded-xl py-1 px-3">Finalize &#8594;</p>
           </button>
