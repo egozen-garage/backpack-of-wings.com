@@ -1,13 +1,17 @@
 import { StoriesData } from "./StoriesData.js";
 // import { useNavigate } from "react-router-dom";
 // import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 // import { useEffect } from "react";
+import CallSanityAPI from "../utilities/CallSanityAPI";
+
 
 export function LoadMemories() {
-  // const navigate = useNavigate()
-  // const location = useLocation();
-  // let currentURL = location.pathname.split("/")[1];
-  // console.log(currentURL);
+  const { landmark } = useParams()
+  console.log("Loadmemories")
+  let memoryIDs = CallSanityAPI(`*[_type == "story" && landmark == "${landmark}"]{_id}`)
+  // console.log("Loadmemories" + JSON.stringify(memoryIDs.data))
+
 
   
   // useEffect(() =>{
@@ -22,7 +26,7 @@ export function LoadMemories() {
   
   return (
     <>
-      <StoriesData></StoriesData>
+      {/* { memoryIDs ? <StoriesData memoryIDs={memoryIDs} /> : "" } */}
       {/* <div class="pt-3 loadMemories col-start-2 row-start-2 row-span-3 px-9">
                 <h1>Load Memories</h1>
                 <Link to={'/loadmemories/'+ id }>Location { id }</Link>
