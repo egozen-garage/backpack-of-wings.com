@@ -74,15 +74,17 @@ export function StoriesData(props) {
         </p>
         {/* NEXT BUTTON */}
         <div
-          className="font-serif font-bold text-lg wideScreen:text-2xl z-50 w-1/2 cursor-e-resize mt-auto pb-10"
+          className="font-serif font-bold text-lg wideScreen:text-2xl z-50 w-1/2 cursor-e-resize mt-auto pb-5"
           onClick={goToNext}
         >
+          <span className="pulsateBlack">
           { storyCounter === amountOfMemories ? "Next Landmark " : "Next Memory "}&#8594;
+          </span>
         </div>
         {/* AUDIO PROGRESS BAR */}
         <div className="py-4 z-32 progressBar-container">
           <img
-            className="object-cover h-[3rem] wideScreen:h-[5rem]"
+            className="object-cover h-[4rem] wideScreen:h-[5rem]"
             src={progressbar}
             alt="progressbar"
           />

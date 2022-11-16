@@ -1,12 +1,12 @@
 import React from "react";
-// import { useState } from "react";
-import progressbar from "../img/audio-progressbar-02-black.svg";
+import progressbar from "../img/audio-progressbar-01-black.svg";
 import "../css/gradientAnimation.css";
 import AudioPlayer from "../utilities/AudioPlayer.js";
 import { useNavigate } from "react-router-dom";
-// import { useEffect } from "react";
-// import SanityClient from "../client";
 import "../css/menuPanels.css";
+import "../css/animation.css";
+import jonas from "../img/Jonas-2-glow.png";
+import "../App.css";
 
 export function UploadStoriesIntro() {
   // const [isOpen, setIsOpen] = useState(true);
@@ -33,50 +33,106 @@ export function UploadStoriesIntro() {
   //     });
   // }, []);
 
-//   let urlVariable = sanityData[0].url;
-//   console.log(urlVariable);
+  //   let urlVariable = sanityData[0].url;
+  //   console.log(urlVariable);
 
-  const landmarkOptions = ["istanbul", "droemling", "lackova", "hama", "neveeitan", "dudaimsite"]
+  const landmarkOptions = [
+    "istanbul",
+    "droemling",
+    "lackova",
+    "hama",
+    "neveeitan",
+    "dudaimsite",
+  ];
   const randomNumber = Math.floor(Math.random() * 6);
-  
+
   return (
     <>
       {/* {visible === true && __INSERT-CODE-HERE-4-VISIBLE-TOGGLE__ } */}
-      <div className="jonasIntroContainerAnimation top-0 fixed z-30 mx-8">
-        <div className="gradientJonasIntroOverlay gradientBGJonasIntro h-screen text-xl w-screen overflow-scroll top-16 pt-20 pr-[3.7rem] pb-[12rem]">
+      <div className="jonasIntroContainerAnimation flex w-screen h-screen top-0 fixed z-30 px-8">
+        <div className="gradientJonasIntroOverlay gradientBGJonasIntro h-screen w-screen fixed"></div>
+        <div className="gradientJonasIntroOverlay text-xl h-screen overflow-y-scroll noScrollBar pb-[12rem] wideScreen:pb-[20rem]">
           {/* INTRODUCTION TO JONAS */}
-          <div className="text-2xl px-8 pt-6 pb-10">
-            <p className="font-serif py-4">Hello, I am Jonas.</p>
-            <p className="font-serif py-2">In the middle of June of 2013, I was born in Drömling, Germany. I received a backpack from humans after my first four weeks of existence, and it is still on my back. When cold winds blew, I had to learn how to fly using the wind relative to my own body in order to go to Africa with my companions. On the first long flight, I was nervous and just followed other older friends. They guided me to locations where we can easily fill up on energy, such as in human-made areas. After several years of harsh flight experience, sometimes I take the lead of our flight group. Plus, we definitely don't need to fly to Africa to survive the winter. We have found a better place, where our food is piled up like a mountain for 24 hours. Just peck it up, stop foraging. Some of us were against this motto like my son Håljer. He was born last year, and is now in Uganda. I did the same when I was a teenager, so I understand his decision. As an adult, I really love this new trending area though. During the stay in this place, I always keep in mind that I will return to my hometown to meet my partner and take care of my home in spring. We are actually a long distance couple. While she used to travel west through Spain during the winter, I would like to fly the opposite route from Germany to Israel. Despite staying at another location in winter, we never missed our first date spot every spring. As of now, we have 7 children. Every autumn some of them choose my partner’s route, and the others fly over my route. It's not a competition of how many children followed me or my partner. Most of the time, we fly in other flight groups. If we had luck, we could see each other. A year ago, I lost two children - X6F89 and X6V90. One was sacrificed by a sea eagle, and one died on an electrical power line. I hope they are flying somewhere in paradise.</p>
-            <p className="font-serif py-2">The backpack helps me to send data.</p>
+          <div className="pl-8 pt-24 wideScreen:pt-28 pb-10 text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] ">
+            <div className="flex flex-wrap font-serif py-4">
+              <span>Hello, I am Jonas.</span>
+              <img
+                className="jonasImg h-10 tablet:h-12 desktop:h-16 wideScreen:h-20 tablet:-mt-1 desktop:-mt-2"
+                src={jonas}
+                alt="jonas"
+              />
+            </div>
+            <p className="font-serif py-2 desktop:py-4">
+              I’m a white stork with a backpack, and this is my story:
+            </p>
             <p className="font-serif py-2">
+              In the middle of June of 2013, I was born in Drömling, Germany. I
+              received a backpack from humans after my first four weeks of
+              existence, and it is still on my back. When cold winds blew, I had
+              to learn how to fly using the wind relative to my own body in
+              order to go to Africa with my companions.
+            </p>
+            <p className="font-serif py-2 desktop:py-4">
+              On the first long flight, I was nervous and just followed other
+              older friends. They guided me to locations where we can easily
+              fill up on energy, such as in human-made areas. After several
+              years of harsh flight experience, sometimes I take the lead of our
+              flight group. Plus, we definitely don't need to fly to Africa to
+              survive the winter. We have found a better place, where our food
+              is piled up like a mountain for 24 hours. Just peck it up, stop
+              foraging. Some of us were against this motto like my son Håljer.
+              He was born last year, and is now in Uganda. I did the same when I
+              was a teenager, so I understand his decision. As an adult, I
+              really love this new trending area though.
+            </p>
+            <p className="font-serif py-2 desktop:py-4">
+              I will return to my hometown to meet my partner and take care of
+              my home in spring. We are actually a long distance couple. While
+              she used to travel west through Spain during the winter, I would
+              like to fly the opposite route from Germany to Israel. Despite
+              staying at another location in winter, we never missed our first
+              date spot every spring.
+            </p>
+            <p className="font-serif py-2 desktop:py-4">
+              As of now, we have 7 children. Every autumn some of them choose my
+              partner’s route, and the others fly over my route. It's not a
+              competition of how many children followed me or my partner. Most
+              of the time, we fly in other flight groups. If we had luck, we
+              could see each other. A year ago, I lost two children - X6F89 and
+              X6V90. One was sacrificed by a sea eagle, and one died on an
+              electrical power line. I hope they are flying somewhere in
+              paradise.
+            </p>
+            <p className="font-serif py-2 desktop:py-4">
+              The backpack helps me to send data. <br />
               Do you want to listen to the soundscape where I am?
             </p>
           </div>
           {/* <div className="gradientPlayer z-20 fixed bottom-0 w-full h-40"></div> */}
-
-          {/* NEXT BUTTON */}
-          <button
-            className="z-50 skipBtn float-right mr-8 mt-3 px-4 py-2 border-black border-solid border-[1px] rounded-xl"
-            // TEMPORARY SOLUTION > ADD SHUFFLE TO URL ITEM ARRAY
-            onClick={() => navigate("/uploadstory/" + landmarkOptions[randomNumber])}
-          >
-            <p className="font-serif font-bold">Connect &#8594;</p>
-          </button>
-
           <AudioPlayer></AudioPlayer>
-
         </div>
 
-          {/* AUDIO PROGRESS BAR */}
-          <div className="py-5 z-32 progressBar-container fixed bottom-0">
-            <img
-              className="flex items-center w-screen pl-4 pr-12"
-              src={progressbar}
-              alt="progressbar"
-            />
-          </div>
+        {/* NEXT BUTTON */}
+        <div className="relative h-screen w-[60rem] tablet:w-[120rem] pr-8">
+          <button
+            className="z-50 wideScreen:text-2xl button left-0 absolute bottom-28 tablet:bottom-32 wideScreen:bottom-[13rem] -ml-24 tablet:ml-0 mt-3 px-4 py-2 border-black border-solid border-[1px] rounded-[2rem] font-serif"
+            // TEMPORARY SOLUTION > ADD SHUFFLE TO URL ITEM ARRAY
+            onClick={() =>
+              navigate("/uploadstory/" + landmarkOptions[randomNumber])
+            }
+          >
+            Connect &#8594;
+          </button>
+        </div>
 
+        {/* AUDIO PROGRESS BAR */}
+        <div className="py-5 z-32 progressBar-container fixed bottom-0 left-0 w-screen px-14">
+          <img
+            className="object-cover h-[4rem] wideScreen:h-[6rem]"
+            src={progressbar}
+            alt="progressbar"
+          />
+        </div>
       </div>
       {/* <div className={isOpen ? "rightPanel move" : "rightPanel"}></div> */}
     </>

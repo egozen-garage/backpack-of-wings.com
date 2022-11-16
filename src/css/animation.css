@@ -2,7 +2,6 @@
     transition: all 0.2s ease-in;
     background-color: white;
     box-shadow: 0px 0px 4px 4px #FFF;
-    color: black;
     border-radius: 1rem;
     padding: 0 0.7rem;
 }
@@ -14,6 +13,20 @@
     color: white;
     border-radius: 1rem;
     padding: 0 0.7rem;
+}
+
+.button {
+    transition: box-shadow 0.2s ease-in, border-color 0.2s ease-in;
+}
+
+.button:hover {
+    box-shadow: inset 0px 0px 4px 4px rgba(0,0,0,0.1);
+    border-color: rgba(0,0,0,0.3);
+}
+
+.button:active {
+    background-color: black;
+    color: white;
 }
 
 .gradientOff {
@@ -61,6 +74,43 @@
 
 .uploadStoriesContainerAnimation {
     animation: fadeInAnimation ease-in 0.5s;
+    transition: width 0.4s ease-in;
+}
+
+.pulsate {
+    animation: pulsate 3s ease-in-out;
+    animation-iteration-count: infinite;
+    text-shadow: 0px 0px 0px #FFF;
+}
+
+.pulsateBlack {
+    animation: pulsateBlack 3s ease-in-out;
+    animation-iteration-count: infinite;
+    text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes pulsate {
+    0% { 
+        text-shadow: 0px 0px 0px #FFF;
+    }
+    50% { 
+        text-shadow: 0px 0px 4px #FFF;
+    }
+    100% { 
+        text-shadow: 0px 0px 0px #FFF;
+    }
+}
+
+@keyframes pulsateBlack {
+    0% { 
+        text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+    }
+    50% { 
+        text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    }
+    100% { 
+        text-shadow: 0px 0px 0px rgba(0, 0, 0, 0.2);
+    }
 }
 
 @keyframes fadeInAnimation {

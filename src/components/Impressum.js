@@ -35,23 +35,23 @@ export function Impressum() {
           </span>
           <span className="block py-9">
             Artists: <br/>
-            Hyeseon Jeong, Seongmin Yuk https://www.heysun.xyz/
+            Hyeseon Jeong, <a className="pulsate" href="https://www.heysun.xyz/" target="_blank">Seongmin Yuk</a>
           </span>
           <span className="block py-9">
-            Design and programmiing: <br/>
-            egozen https://www.egozen.org/
+            Design and Web-Development: <br/>
+            <a className="pulsate" href="https://www.egozen.org/" target="_blank">egozen collective</a>
           </span>
           <span className="block py-9">
             Acknowledgement: <br/>
             Michael Quetting, Hemal Naik, Andrea Flack <br/>
             from Max Planck Institute of Animal Behaviour <br/>
-            Atelier Xodam Temporary Gallery, Nordic House
+            Atelier Xoda Temporary Gallery, Nordic House
           </span>
           <span className="block">'The Backpack of Wings' is developed in the context of Driving the Human.</span>
           <span className="block py-9">
             Supported by: <br/>
             Michael Quetting, Hemal Naik, Andrea Flack <br/>
-            Federal Ministry for the Environment, Nature Conservation, Nuclear Safety and Consumer Protection (BMUV) based on a decision of the German Bundestag
+            <a className="pulsate" href="https://www.bmuv.de/" target="_blank">Federal Ministry for the Environment, Nature Conservation, Nuclear Safety and Consumer Protection (BMUV)</a> based on a decision of the German Bundestag
           </span>
         </p>
       </div>

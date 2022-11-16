@@ -40,7 +40,7 @@ export function LandingPage(props) {
           className="absolute bottom-6 wideScreen:bottom-10 right-6 wideScreen:right-10 closeBtn"
           onClick={() => HideLandingPage()}
         >
-          <p className="font-serif text-xl wideScreen:text-2xl bg-white border-black border-solid border-[1px] rounded-[1rem] py-1 px-5">
+          <p className="button font-serif text-xl wideScreen:text-2xl bg-white border-black border-solid border-[1px] rounded-[2rem] py-1 px-5">
             Connect &#10142;
           </p>
         </button>
