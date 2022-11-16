@@ -1,12 +1,14 @@
 import React from "react";
-import progressbar from "../img/audio-progressbar-01-black.svg";
-import "../css/gradientAnimation.css";
 import AudioPlayer from "../utilities/AudioPlayer.js";
 import { useNavigate } from "react-router-dom";
+
+import "../App.css";
+import "../css/gradientAnimation.css";
 import "../css/menuPanels.css";
 import "../css/animation.css";
+
+import progressbar from "../img/audio-progressbar-01-black.svg";
 import jonas from "../img/Jonas-2-glow.png";
-import "../App.css";
 
 export function UploadStoriesIntro() {
   // const [isOpen, setIsOpen] = useState(true);
@@ -17,7 +19,7 @@ export function UploadStoriesIntro() {
 
   // TEMPORARY > UNCOMMENT TO STOP API REQUEST
   let navigate = useNavigate();
-  const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
+  // const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
   // let [sanityData, setSanityData] = useState(null);
 
   // useEffect(() => {

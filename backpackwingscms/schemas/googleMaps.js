@@ -19,7 +19,7 @@ export default {
         {
             name: "googleiFrame",
             type: "string",
-            title: "iframe code",
+            title: "iframe src",
         },
         {
             name: "googleCoordinates",
