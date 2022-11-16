@@ -15,12 +15,9 @@ export function UploadStoriesIntro() {
   //   useNavigate("/uploadstory/israel-dudaimsite");
   // };
 
-  // >>>TOGGLE STATE DEFINING VISIBILITY OF STORYINTRO<<<
-  // const [visible,setVisible] = useState(true);
-
   // TEMPORARY > UNCOMMENT TO STOP API REQUEST
   let navigate = useNavigate();
-  // const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
+  const querySanityAPI = '*[_type == "landmark"]{"url":url.current}';
   // let [sanityData, setSanityData] = useState(null);
 
   // useEffect(() => {
@@ -48,11 +45,13 @@ export function UploadStoriesIntro() {
 
   return (
     <>
-      {/* {visible === true && __INSERT-CODE-HERE-4-VISIBLE-TOGGLE__ } */}
       <div className="jonasIntroContainerAnimation flex w-screen h-screen top-0 fixed z-30 px-8">
+
+        {/* BACKGROUND GRADIENT ANIMATION */}
         <div className="gradientJonasIntroOverlay gradientBGJonasIntro h-screen w-screen fixed"></div>
+
+        {/* INTRODUCTION TEXT OF JONAS */}
         <div className="gradientJonasIntroOverlay text-xl h-screen overflow-y-scroll noScrollBar pb-[12rem] wideScreen:pb-[20rem]">
-          {/* INTRODUCTION TO JONAS */}
           <div className="pl-8 pt-24 wideScreen:pt-28 pb-10 text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] ">
             <div className="flex flex-wrap font-serif py-4">
               <span>Hello, I am Jonas.</span>
@@ -108,8 +107,6 @@ export function UploadStoriesIntro() {
               Do you want to listen to the soundscape where I am?
             </p>
           </div>
-          {/* <div className="gradientPlayer z-20 fixed bottom-0 w-full h-40"></div> */}
-          <AudioPlayer></AudioPlayer>
         </div>
 
         {/* NEXT BUTTON */}
@@ -125,6 +122,8 @@ export function UploadStoriesIntro() {
           </button>
         </div>
 
+        {/* PLAY SOUNDSCAPE */}
+        <AudioPlayer></AudioPlayer>
         {/* AUDIO PROGRESS BAR */}
         <div className="py-5 z-32 progressBar-container fixed bottom-0 left-0 w-screen px-14">
           <img
@@ -134,7 +133,6 @@ export function UploadStoriesIntro() {
           />
         </div>
       </div>
-      {/* <div className={isOpen ? "rightPanel move" : "rightPanel"}></div> */}
     </>
   );
 }

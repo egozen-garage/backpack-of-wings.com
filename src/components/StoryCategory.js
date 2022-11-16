@@ -2,28 +2,27 @@
 // import { Story } from "./Story.js";
 // import SanityClient from "../client";
 // import { useEffect, useState } from "react";
-// import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import StoryInputForm from "./StoryInputForm.js";
-// import CallSanityAPI from "../utilities/CallSanityAPI"
 import { useLocation } from "react-router-dom";
-// import CallSanityAPI from "../utilities/CallSanityAPI"
+import CallSanityAPI from "../utilities/CallSanityAPI";
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
 
 export function StoryCategory() {
+  const { landmark } = useParams()
   const location = useLocation()
   let currentLandmark = location.pathname.split("/")[2];
-  console.log("storyCatergory: " + currentLandmark)
+  let queryLandmark = CallSanityAPI(`*[_type == "landmark" && url.current == "${landmark}"]`)
+  let landmarkContent = queryLandmark.data[0];
   
+  console.log("Current URL for Sanity: " + currentLandmark)
+  console.log("Sanity API 2:" + JSON.stringify(landmarkContent.country))
 
-  // let { landmark } = useParams()
-  // NEEDS FIXING! API IN ARRAY CANT BE RETURNED AS PROPER VALUE
-  // const { data, error, isLoaded } = CallSanityAPI( '*[_type == "landmark" && url.current == "' + landmark + '"]' );
-
-  // console.log("storyCatergory - API data: " + JSON.stringify(data))
-  // console.log("storyCatergory - API error: " + error)
-  // console.log("storyCatergory - API isloaded: " + isLoaded)
-  // console.log("show iFrameCompiler:" + data.material.length)
+  // console.log("Sanity storyCatergory - API data: " + JSON.stringify(data))
+  // console.log("Sanity storyCatergory - API error: " + error)
+  // console.log("Sanity storyCatergory - API isloaded: " + isLoaded)
+  // console.log("Sanity show iFrameCompiler:" + data.material.length)
   return (
     <>
       {/* 
