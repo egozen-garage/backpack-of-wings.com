@@ -13,6 +13,8 @@ import MenuButtons from "./components/MenuButtons";
 import AboutWindow from "./components/AboutWindow";
 import "./css/gradientAnimation.css";
 import "./App.css";
+import { useEffect, useState } from "react";
+import SanityClient from "./client";
 // import CallWeatherData from "./utilities/CallWeatherWind";
 
 // import FetchMapData from "./components/mapbox/service/FetchMapData";
@@ -20,6 +22,24 @@ import "./App.css";
 
 function App() {
   console.log("C App is running");
+
+  const [landmarkData, setLandmarkData] = useState(null)
+  useEffect(() =>{
+    console.log("app.js - load landmark data")
+    Promise.all([
+      SanityClient.fetch(
+          `*[_type == "landmark"]`
+      )
+  ])
+  .then(([landmarkData]) => {
+      setLandmarkData(landmarkData);
+  })
+  .catch((err) => {
+      // setError(err)
+  })
+  }, [])
+
+  console.log("landmark Data: " + landmarkData)
 
   return (
     <>
@@ -30,7 +50,7 @@ function App() {
       {/* EVERY OTHER PAGE */}
       <div className="contentWrapper relative grid h-full w-full">
 
-        <MenuButtons />
+        { landmarkData ? <MenuButtons landmarkData={landmarkData}/> : "" }
         
         {/* MAP BACKGROUND*/}
         <div
@@ -48,12 +68,13 @@ function App() {
           <Route element={<Home />} path="/" exact />
           <Route element={<UploadStoriesIntro />} path="/uploadstory" exact />
           <Route
-            element={<StoryCategory />}
+            element={landmarkData ? <StoryCategory landmarkData={landmarkData} /> : ""}
             path="/uploadstory/:landmark"
             exact
           />
-          <Route element={<LoadMemories />} path="/loadmemory" />
+          {/* <Route element={<LoadMemories />} path="/loadmemory" /> */}
           <Route element={<LoadMemories />} path="/loadmemory/:landmark" />
+          <Route element={<LoadMemories />} path="/loadmemory/:landmark/:id" />
           <Route element={<Impressum />} path="/impressum" exact />
           <Route element={<NotFound />} path="*" exact />
         </Routes>

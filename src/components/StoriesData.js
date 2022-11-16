@@ -1,33 +1,40 @@
 import stories from "../json/storiesData.json";
 import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import "../css/animation.css";
 // import { useLocation } from "react-router-dom";
 import "../css/gradientAnimation.css";
 import progressbar from "../img/audio-progressbar-01-black.svg";
 // import { Link, Outlet } from 'react-router-dom';
-// import CallSanityAPI from "../utilities/CallSanityAPI";
-import { useEffect } from "react";
-
-export function StoriesData() {
-  // const location = useLocation();
-  // let urlLandmark = location.pathname.split("/")[2];
-  // let urlStoryNumber = location.pathname.split("/")[3];
-
-  // console.log("loadmemory url: "  + urlLandmark +" "+ urlStoryNumber);
+import { useEffect, useMemo } from "react";
+import { useParams } from "react-router-dom";
+import CallSanityAPI from "../utilities/CallSanityAPI";
+import { redirect } from "react-router-dom";
 
 
-  // call sanity data
-  useEffect(() => {
-    // CallSanityAPI('*[_type == "landmark"]{url{current}, locationName, country}')
-  }, [])
 
-
-  // check if url has location and story id
-  // if not random pick one of 6 && select random Story id
-  // 
-
+export function StoriesData(props) {
+  // const { landmark, id } = useParams()
+  const navigate = useNavigate()
+  
   const [currentIndex, setCurrentIndex] = useState(0);
+
+  let amountOfMemories = props.memoryIDs.data.length
+
+  // const [addMemoryId2URL, setAddMemoryId2URL] = useState(false);
+
+  let currentMemoryID = props.memoryIDs.data[0]._id
+  console.log("currentMemoryID " + currentMemoryID)
+  navigate(currentMemoryID)
+
+
+
+
+
+  
+  // const id = "tHeP5c0LRgwgppIjwZnMBZ"
+  // let memoryContent = CallSanityAPI(`*[_type == "story" && _id == "${currentMemoryID}"]`)
+  // console.log("memory content: " + JSON.stringify(memoryContent))  
 
   // const goToPrev = () => {
   //   const isFirstStory = currentIndex === 0;
@@ -37,7 +44,10 @@ export function StoriesData() {
   //   setCurrentIndex(newIndex);
   // };
 
+  const [storyCounter, setStoryCounter] = useState(1)
+
   const goToNext = () => {
+    setStoryCounter(amountOfMemories === storyCounter ? 1 : storyCounter+1)
     const isLastStory = currentIndex === stories.stories.length - 1;
     const newIndex = isLastStory ? 0 : currentIndex + 1;
     setCurrentIndex(newIndex);
@@ -56,7 +66,7 @@ export function StoriesData() {
             {stories.stories[currentIndex].location},
             {stories.stories[currentIndex].country}
           </h1>
-          <h1 className="flex-2 text-xl  wideScreen:text-2xl font-bold">1/10 Memories</h1>
+          <h1 className="flex-2 text-xl  wideScreen:text-2xl font-bold">{storyCounter}/{amountOfMemories} Memories</h1>
         </div>
         {/* STORY TEXT */}
         <p className="noScrollBar gradientStoryOverlay font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
@@ -67,7 +77,7 @@ export function StoriesData() {
           className="font-serif font-bold text-lg wideScreen:text-2xl z-50 w-1/2 cursor-e-resize mt-auto pb-10"
           onClick={goToNext}
         >
-          Next Memory &#8594;
+          { storyCounter === amountOfMemories ? "Next Landmark " : "Next Memory "}&#8594;
         </div>
         {/* AUDIO PROGRESS BAR */}
         <div className="py-4 z-32 progressBar-container">

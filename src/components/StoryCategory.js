@@ -10,7 +10,8 @@ import { useLocation } from "react-router-dom";
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
 
-export function StoryCategory() {
+export function StoryCategory(props) {
+  console.log("storyCatergory - landmark data: " + props.landmarkData[0].url.current )
   const location = useLocation()
   let currentLandmark = location.pathname.split("/")[2];
   console.log("storyCatergory: " + currentLandmark)

@@ -3,19 +3,23 @@ import { NavLink } from "react-router-dom";
 import "../css/menuPanels.css";
 import { useLocation } from "react-router-dom";
 
-export default function MenuButtons() {
+export default function MenuButtons(props) {
   const location = useLocation();
 
   let currentURL = location.pathname.split("/")[1];
   let uploadStoryURL = location.pathname.split("/")[2];
   // let URLlength = location.pathname.split("/").length;
 
+  const landmark = props.landmarkData[Math.floor(Math.random() * 5)].url.current 
+  // console.log("menuButton: " + landmark)
+  console.log("load menu")
+
   return (
     <>
       {/* LOAD MEMORIES */}
       <NavLink
         className="fixed h-full loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg w-9"
-        to={currentURL === "loadmemory" ? "/" : "/loadmemory"}
+        to={currentURL === "loadmemory" ? "/" : "/loadmemory/"+landmark }
       >
         <h1
           className="fixed bottom-5 left-1"
