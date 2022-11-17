@@ -75,12 +75,12 @@ function App() {
         </Routes>
       </div>
 
-      <div className="inline-flex text-sm text-white fixed z-40 bottom-3 right-4 px-9">
-        {/* BACK TO DASHBOARD BUTTON */}
+      {/* BACK TO DASHBOARD BUTTON */}
+      {/* <div className="inline-flex text-sm text-white fixed z-40 bottom-3 right-4 px-9">
         <NavLink className="px-3" to="/">
           <p>Dashboard</p>
         </NavLink>
-      </div>
+      </div> */}
 
       {/* IDLE TIMER */}
       {/* <IdleTimerContainer></IdleTimerContainer> */}

@@ -14,7 +14,7 @@ export default {
     {
       name: "iframe",
       type: "string",
-      title: "iframe Code",
+      title: "iframe src",
     },
     {
       name: "youtubeURL",

@@ -58,7 +58,7 @@ export default function StoryInputForm(props){
           action="/success/"
           data-netlify="true"
           netlify-honeypot="got-ya"
-          className="flex flex-col h-full pb-10"
+          className="flex flex-col h-full pb-6"
         >
           {/* STORY ID hidden input field */}
           <input type="hidden" name="form-name" value="story-form" />
@@ -90,7 +90,7 @@ export default function StoryInputForm(props){
               <label className="block pb-12">
                 What did I see, hear, feel and smell?
               </label>
-              <label className="block pb-12">What did I sense?</label>
+              <label className="block pb-5">What did I sense?</label>
             </div>
             <textarea
               title="What did I sense?"
@@ -154,9 +154,9 @@ export default function StoryInputForm(props){
           {/* SUBMIT BUTTON */}
           <button
             type="submit"
-            className="pt-10"
+            className="pt-7 ml-auto"
           >
-            <p className="font-serif font-bold border-black border-solid border-[1px] rounded-xl py-1 px-3">Finalize &#8594;</p>
+            <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Finalise &#8594;</p>
           </button>
         </form>
       </div>
