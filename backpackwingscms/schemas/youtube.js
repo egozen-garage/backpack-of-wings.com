@@ -12,14 +12,24 @@ export default {
       title: "Video Name",
     },
     {
-      name: "iframe",
+      name: "channel",
       type: "string",
-      title: "iframe src",
+      title: "Video Channel",
     },
     {
       name: "youtubeURL",
       type: "url",
       title: "URL",
+    },
+    {
+      name: "embedHTML",
+      type: "string",
+      title: "Embed HTML",
+    },
+    {
+      name: "iframeSRC",
+      type: "string",
+      title: "iframe src",
     },
   ],
   preview: {

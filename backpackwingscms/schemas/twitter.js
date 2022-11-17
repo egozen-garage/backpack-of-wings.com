@@ -12,6 +12,11 @@ export default {
             title: "Tweed Title",
         },
         {
+            name: "channel",
+            type: "string",
+            title: "Twitter Channel",
+        },
+        {
             name: "tweetURL",
             type: "url",
             title: "Full Twitter Link",
@@ -19,19 +24,19 @@ export default {
         {
             name: "tweetEmbed",
             type: "string",
-            title: "Embed Tweet",
+            title: "Embed HTML",
         },
-        {
-            name: 'id',
-            type: 'string',
-            title: 'Tweed ID'
-        },
+        // {
+        //     name: 'id',
+        //     type: 'string',
+        //     title: 'Tweed ID'
+        // },
     ],
     preview: {
         select: {
           url: "url",
           title: "tweetTitle",
-          subtitle: "tweetURL",
+          subtitle: "channel",
         },
       },
 };

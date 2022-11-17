@@ -5,6 +5,7 @@
 import { useParams } from "react-router-dom";
 import StoryInputForm from "./StoryInputForm.js";
 import { useLocation } from "react-router-dom";
+import PortableText from "react-portable-text";
 import CallSanityAPI from "../utilities/CallSanityAPI";
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
@@ -26,15 +27,7 @@ export function StoryCategory(props) {
   console.log("storyCategory > current Landmark:" + currentLandmark)
   console.log("storyCatergory > landmark data: " + landmark[0].url.current )
   console.log("storyCatergory > materials of landmark : " + JSON.stringify(hama.materialObj.materialArray.length) )
-  // console.log("storyCatergory > materials array of landmark : " + materialArray)
 
-  // console.log("Current URL for Sanity: " + currentLandmark)
-  // console.log("Sanity API 2:" + JSON.stringify(landmarkContent.country))
-
-  // console.log("Sanity storyCatergory - API data: " + JSON.stringify(data))
-  // console.log("Sanity storyCatergory - API error: " + error)
-  // console.log("Sanity storyCatergory - API isloaded: " + isLoaded)
-  // console.log("Sanity show iFrameCompiler:" + data.material.length)
   return (
       <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
 
@@ -47,7 +40,18 @@ export function StoryCategory(props) {
                 <>
                   {hama.materialObj.materialArray.map(({ _type }) => (
                     <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                      {_type}
+                      {_type == "googleMaps" ? 
+                        (<div>googleMaps</div>) : 
+                      _type == "youtube" ?
+                        (<div>youtube</div>) :
+                      _type == "imageURL" ?
+                        (<div>image</div>) :
+                      _type == "blockObj" ?
+                        (<div>comment section</div>) :
+                      _type == "twitter" ?
+                        (<div>twitter feed</div>) :
+                        (<div>other Material</div>)
+                      } 
                     </div>
                   ))}
                 </>
@@ -56,9 +60,21 @@ export function StoryCategory(props) {
               currentLandmark == "dudaimsite" ?
               (
                 <>
-                  {dudaimsite.materialObj.materialArray.map(({ _type }) => (
-                    <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                      {_type}
+                  {dudaimsite.materialArray.map(({ _type, placeId, youtubeURL, url, blockContent, tweetURL  }) => (
+                     <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 overflow-scroll">
+                      {_type == "googleMaps" ? 
+                        (<iframe src={placeId}></iframe>) : 
+                      _type == "youtube" ?
+                        (<iframe src={youtubeURL}></iframe>) :
+                      _type == "imageURL" ?
+                        (<img src={url}/>) :
+                      _type == "blockObj" ?
+                      // >>> NEEDS IMPROVEMENT: render img element (watch https://www.youtube.com/watch?v=fKXGTJ0NA5c)
+                        (<PortableText content={blockContent}/>) :
+                      _type == "twitter" ?
+                        (<iframe border="0" frameborder="0" height="250" width="550" src={tweetURL}></iframe>) :
+                        (<div>other Material</div>)
+                      } 
                     </div>
                   ))}
                 </>
@@ -67,10 +83,21 @@ export function StoryCategory(props) {
               currentLandmark == "istanbul" ?
               (
                 <>
-                  {istanbul.materialObj.materialArray.map(({ _type }) => (
+                  {istanbul.materialArray.map(({ _type }) => (
                     <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                      {_type}
-                    </div>
+                    {_type == "googleMaps" ? 
+                      (<div>googleMaps</div>) : 
+                    _type == "youtube" ?
+                      (<div>youtube</div>) :
+                    _type == "imageURL" ?
+                      (<div>image</div>) :
+                    _type == "blockObj" ?
+                      (<div>comment section</div>) :
+                    _type == "twitter" ?
+                      (<div>twitter feed</div>) :
+                      (<div>other Material</div>)
+                    } 
+                  </div>
                   ))}
                 </>
               ) :  
@@ -78,7 +105,7 @@ export function StoryCategory(props) {
               currentLandmark == "lackova" ?
               (
                 <>
-                  {lackova.materialObj.materialArray.map(({ _type }) => (
+                  {lackova.materialArray.map(({ _type }) => (
                     <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
                       {_type}
                     </div>
@@ -89,7 +116,7 @@ export function StoryCategory(props) {
               currentLandmark == "droemling" ?
               (
                 <>
-                {droemling.materialObj.materialArray.map(({ _type }) => (
+                {droemling.materialArray.map(({ _type }) => (
                   <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
                     {_type}
                   </div>
@@ -100,7 +127,7 @@ export function StoryCategory(props) {
               currentLandmark == "neveeitan" &&
               (                
               <>
-                {neveeitan.materialObj.materialArray.map(({ _type }) => (
+                {neveeitan.materialArray.map(({ _type }) => (
                   <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
                     {_type}
                   </div>

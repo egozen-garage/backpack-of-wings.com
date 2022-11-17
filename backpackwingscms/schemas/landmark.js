@@ -38,26 +38,20 @@ export default {
       type: "number",
     },
     {
-      name: "materialObj",
-      title: "Materials",
-      type: "object",
-      fields: [
-        {
-          name: "materialArray",
-          title: "Upload Materials",
-          type: "array",
-          of: [
-            { type: "image",
-              icon: AiFillFileImage, },
-            { type: "imageURL"},
-            { type: 'youtube'},
-            { type: 'twitter'},
-            { type: 'googleReviews'},
-            { type: 'googleMaps'},
-          ],
-        },
-      ]
-    }
+      name: "materialArray",
+      title: "Upload Materials",
+      type: "array",
+      of: [
+        { type: "image",
+          icon: AiFillFileImage, },
+        { type: "imageURL"},
+        { type: "blockObj"},
+        { type: 'youtube'},
+        { type: 'twitter'},
+        // { type: 'googleReviews'},
+        { type: 'googleMaps'},
+      ],
+    },
   ],
   preview: {
     select: {

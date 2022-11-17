@@ -12,7 +12,7 @@ import weatherData from './weatherData'
 import youtube from './youtube'
 import twitter from './twitter'
 import imageURL from './imageURL'
-import googleReviews from './googleReviews'
+// import googleReviews from './googleReviews'
 import googleMaps from './googleMaps'
 import movebank from './movebank'
 import movebankSingleLocation from './movebankSingleLocation'
@@ -32,7 +32,7 @@ export default createSchema({
     youtube,
     twitter,
     imageURL,
-    googleReviews,
+    // googleReviews,
     googleMaps,
     movebank,
     movebankSingleLocation,
