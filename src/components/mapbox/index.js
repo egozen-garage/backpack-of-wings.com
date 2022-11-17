@@ -37,7 +37,7 @@ export default function Mapbox() {
                     fetch(apiUrl).then((response) => response.json()),
                     sanityClient.fetch(
                         // *[dateTime(_updatedAt) > dateTime(now()) - 60*60*24*7] // Updated within the past week
-                        `*[_type == "weatherData" && dateTime(_updatedAt) > dateTime(now()) - 60*60]{
+                        `*[_type == "weatherData" && dateTime(_updatedAt) > dateTime(now()) - 60*60*2]{
                             temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description, timestamp
                         }[0]`
                         // `*[_type == "weatherData"]{
@@ -54,6 +54,7 @@ export default function Mapbox() {
                     // setLandmark(landmark);
                     // setDataReady(true);
                     setMapData([movebankData, weatherData, landmark])
+                    console.log("FetchMapData: Api Data has been called" + JSON.stringify(weatherData))
                     console.log("FetchMapData: Api Data has been called")
                 })
                 .catch((err) => {
@@ -881,7 +882,7 @@ function DrawMapbox(props){
 
     return (
         <div>
-            { zoom ? "" :
+            { zoom || !weatherData ? "" :
             <div ref={weaterContainer} className={weatherContainerStyle}>
                 <span className={weatherObject}>Jonas Location: <span className='font-mono inline-block'>{weatherData.city_name}, {weatherData.country}</span></span>
                 <span className={weatherObject}>Sunrise: {timestamp2Time(weatherData.sunrise)}</span>

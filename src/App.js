@@ -23,9 +23,9 @@ import SanityClient from "./client";
 function App() {
   console.log("C App is running");
 
-  const [landmarkData, setLandmarkData] = useState(null)
+  const [landmarkData, setLandmarkData] = useState(false)
   useEffect(() =>{
-    console.log("app.js - load landmark data")
+    // console.log("C App.js - load landmark data")
     Promise.all([
       SanityClient.fetch(
           `*[_type == "landmark"]`
@@ -39,8 +39,7 @@ function App() {
   })
   }, [])
 
-  console.log("landmark Data: " + landmarkData)
-
+  if (landmarkData) {
   return (
     <>
       {/* INTRODUCTORY PAGE */}
@@ -59,21 +58,17 @@ function App() {
         >
           {/* <div className="fixed z-0 w-full h-full px-7"> */}
           <Mapbox />
-          {/* {mapData[3] ? <Mapbox zoomOut={zoomOut} mapData={mapData}/> : (
-              <pre>data loading...</pre>
-            )} */}
         </div>
 
         <Routes>
           <Route element={<Home />} path="/" exact />
           <Route element={<UploadStoriesIntro />} path="/uploadstory" exact />
-          <Route
+          {/* <Route
             element={landmarkData ? <StoryCategory landmarkData={landmarkData} /> : ""}
             path="/uploadstory/:landmark"
             exact
-          />
-          {/* <Route element={<LoadMemories />} path="/loadmemory" /> */}
-          <Route element={<LoadMemories />} path="/loadmemory/:landmark" />
+          /> */}
+          <Route element={<LoadMemories />} path="/loadmemory/:landmark" /> 
           <Route element={<LoadMemories />} path="/loadmemory/:landmark/:id" />
           <Route element={<Impressum />} path="/impressum" exact />
           <Route element={<NotFound />} path="*" exact />
@@ -91,6 +86,7 @@ function App() {
       {/* <IdleTimerContainer></IdleTimerContainer> */}
     </>
   );
+        }
 }
 
 export default App;

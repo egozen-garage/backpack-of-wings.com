@@ -10,28 +10,54 @@ import { useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import CallSanityAPI from "../utilities/CallSanityAPI";
 import { redirect } from "react-router-dom";
+import SanityClient from "../client";
 
 
 
 export function StoriesData(props) {
-  // const { landmark, id } = useParams()
+  const { id } = useParams()
   const navigate = useNavigate()
   
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  let amountOfMemories = props.memoryIDs.data.length
+  let amountOfMemories = props.memoryIDs.length
+  // let memoryContent = CallSanityAPI(`*[_id == "${id}"]`)
 
-  // const [addMemoryId2URL, setAddMemoryId2URL] = useState(false);
+  const [data, setData] = useState(null);
+  const [isLoaded, setIsLoaded] = useState(false);
+  const [error, setError] = useState(null);
+  useEffect(()=>{
+      Promise.all([
+          SanityClient.fetch(
+            `*[_id == "${id}"]`
+          )
+      ])
+      .then(([sanityData]) => {
+              console.log("call story data locally")
+              setData(sanityData);
+              setIsLoaded(true);
+      })
+      .catch((err) => {
+          setError(err)
+      })
+  },[id])
+  // let memoryContent = null;
 
-  let currentMemoryID = props.memoryIDs.data[0]._id
-  console.log("currentMemoryID " + currentMemoryID)
-  navigate(currentMemoryID)
+
+  // console.log("memory Content: " + JSON.stringify(memoryContent.data[0].message) )
+
+  // const [memoryId2URL, setMemoryId2URL] = useState(false);
+
+  // let currentMemoryID = props.memoryIDs.data[0]._id
+  // console.log("currentMemoryID " + currentMemoryID)
+  // const memoryId2URL = props.memoryIDs[0]._id
+  // useEffect(() => {
+
+  //   navigate(memoryId2URL)
+  // }, [memoryId2URL, navigate])
+  // console.log("memory id: " + JSON.stringify(props.memoryIDs[0]._id))
 
 
-
-
-
-  
   // const id = "tHeP5c0LRgwgppIjwZnMBZ"
   // let memoryContent = CallSanityAPI(`*[_type == "story" && _id == "${currentMemoryID}"]`)
   // console.log("memory content: " + JSON.stringify(memoryContent))  
@@ -43,6 +69,12 @@ export function StoriesData(props) {
   //     : currentIndex - 1;
   //   setCurrentIndex(newIndex);
   // };
+
+  useEffect(() => {
+    window.onpopstate = e => {
+      navigate("/")
+    };
+  });
 
   const [storyCounter, setStoryCounter] = useState(1)
 
@@ -57,6 +89,7 @@ export function StoriesData(props) {
     setCurrentIndex(storyIndex);
   };
 
+  if(data){
   return (
     <>
       <div className="storiesContainerAnimation fixed flex flex-col z-20 w-[35rem] wideScreen:w-[60rem] pt-24 pl-14 pr-12 h-screen">
@@ -70,7 +103,8 @@ export function StoriesData(props) {
         </div>
         {/* STORY TEXT */}
         <p className="noScrollBar gradientStoryOverlay font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
-          {stories.stories[currentIndex].text}
+          {data[0].message}
+          {/* {stories.stories[currentIndex].text} */}
         </p>
         {/* NEXT BUTTON */}
         <div
@@ -104,6 +138,7 @@ export function StoriesData(props) {
       <Outlet />
     </>
   );
+}
 }
 
 export default StoriesData;

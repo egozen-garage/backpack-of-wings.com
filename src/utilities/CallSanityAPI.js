@@ -13,8 +13,8 @@ export default function CallSanityAPI(query) {
             )
         ])
         .then(([sanityData]) => {
-            setData(sanityData);
-            setIsLoaded(true);
+                setData(sanityData);
+                setIsLoaded(true);
         })
         .catch((err) => {
             setError(err)
