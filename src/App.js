@@ -63,11 +63,11 @@ function App() {
         <Routes>
           <Route element={<Home />} path="/" exact />
           <Route element={<UploadStoriesIntro />} path="/uploadstory" exact />
-          {/* <Route
+          <Route
             element={landmarkData ? <StoryCategory landmarkData={landmarkData} /> : ""}
             path="/uploadstory/:landmark"
             exact
-          /> */}
+          />
           <Route element={<LoadMemories />} path="/loadmemory/:landmark" /> 
           <Route element={<LoadMemories />} path="/loadmemory/:landmark/:id" />
           <Route element={<Impressum />} path="/impressum" exact />
