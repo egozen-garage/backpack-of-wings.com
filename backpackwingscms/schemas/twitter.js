@@ -16,15 +16,15 @@ export default {
             type: "string",
             title: "Twitter Channel",
         },
-        {
-            name: "tweetURL",
-            type: "url",
-            title: "Full Twitter Link",
-        },
+        // {
+        //     name: "tweetURL",
+        //     type: "url",
+        //     title: "Full Twitter Link",
+        // },
         {
             name: "tweetEmbed",
             type: "string",
-            title: "Embed HTML",
+            title: "Embed Tweet HTML",
         },
         // {
         //     name: 'id',

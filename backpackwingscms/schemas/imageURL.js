@@ -12,6 +12,11 @@ export default {
         name: "url",
         type: "url",
       },
+      {
+        title: "Description",
+        name: "description",
+        type: "string",
+      },
     ],
     preview: {
       select: {

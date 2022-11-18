@@ -15,9 +15,9 @@ export function StoryCategory(props) {
   let currentLandmark = location.pathname.split("/")[2];
   let landmark = props.landmarkData
 
-  let hama = landmark[0]
+  let istanbul = landmark[0]
   let dudaimsite = landmark[1]
-  let istanbul = landmark[2]
+  let hama = landmark[2]
   let lackova = landmark[3]
   let droemling = landmark[4]
   let neveeitan = landmark[5]
@@ -26,7 +26,7 @@ export function StoryCategory(props) {
   
   console.log("storyCategory > current Landmark:" + currentLandmark)
   console.log("storyCatergory > landmark data: " + landmark[0].url.current )
-  console.log("storyCatergory > materials of landmark : " + JSON.stringify(hama.materialObj.materialArray.length) )
+  console.log("storyCatergory > materials of landmark : " + JSON.stringify(hama.materialArray) )
 
   return (
       <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
@@ -35,21 +35,27 @@ export function StoryCategory(props) {
         <div className="gradientMaterialOverlay my-10 pl-[0.4rem]">
           <div className="flex overflow-x-scroll scrollbar-hide">
             {
-              currentLandmark == "hama" ?
+              currentLandmark === "istanbul" ?
               (
                 <>
-                  {hama.materialObj.materialArray.map(({ _type }) => (
+                  {istanbul.materialArray.map(({ _type, embedMapsSRC, embedYoutubeHTML, url, blockContent, tweetEmbed, embedFacebookHTML, embedTiktokHTML }) => (
                     <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                      {_type == "googleMaps" ? 
-                        (<div>googleMaps</div>) : 
-                      _type == "youtube" ?
-                        (<div>youtube</div>) :
-                      _type == "imageURL" ?
-                        (<div>image</div>) :
-                      _type == "blockObj" ?
-                        (<div>comment section</div>) :
-                      _type == "twitter" ?
-                        (<div>twitter feed</div>) :
+                      {_type === "googleMaps" ? 
+                        (<iframe src={embedMapsSRC}></iframe>) : 
+                      _type === "youtube" ?
+                        (<iframe src={embedYoutubeHTML}></iframe>) :
+                      _type === "imageURL" ?
+                        (<img src={url}/>) :
+                      _type === "image" ?
+                        (<img src={_type}/>) :
+                      // _type === "blockObj" ?
+                      //   (<PortableText content={blockContent}/>) :
+                      _type === "twitter" ?
+                        (<iframe border="0" frameborder="0" height="250" width="550" src={tweetEmbed}></iframe>) :
+                      _type === "facebook" ?
+                        (<iframe src={embedFacebookHTML}></iframe>) :
+                      _type === "tiktok" ?
+                        (<iframe src={embedTiktokHTML}></iframe>) :
                         (<div>other Material</div>)
                       } 
                     </div>
@@ -60,19 +66,24 @@ export function StoryCategory(props) {
               currentLandmark == "dudaimsite" ?
               (
                 <>
-                  {dudaimsite.materialArray.map(({ _type, placeId, youtubeURL, url, blockContent, tweetURL  }) => (
-                     <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 overflow-scroll">
-                      {_type == "googleMaps" ? 
-                        (<iframe src={placeId}></iframe>) : 
-                      _type == "youtube" ?
-                        (<iframe src={youtubeURL}></iframe>) :
-                      _type == "imageURL" ?
+                  {dudaimsite.materialArray.map(({ _type, embedMapsSRC, embedYoutubeHTML, url, blockContent, tweetEmbed, embedFacebookHTML, embedTiktokHTML }) => (
+                    <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+                      {_type === "googleMaps" ? 
+                        (<iframe src={embedMapsSRC}></iframe>) : 
+                      _type === "youtube" ?
+                        (<iframe src={embedYoutubeHTML}></iframe>) :
+                      _type === "imageURL" ?
                         (<img src={url}/>) :
-                      _type == "blockObj" ?
-                      // >>> NEEDS IMPROVEMENT: render img element (watch https://www.youtube.com/watch?v=fKXGTJ0NA5c)
-                        (<PortableText content={blockContent}/>) :
-                      _type == "twitter" ?
-                        (<iframe border="0" frameborder="0" height="250" width="550" src={tweetURL}></iframe>) :
+                      _type === "image" ?
+                        (<img src={_type}/>) :
+                      // _type === "blockObj" ?
+                      //   (<PortableText content={blockContent}/>) :
+                      _type === "twitter" ?
+                        (<iframe border="0" frameborder="0" height="250" width="550" src={tweetEmbed}></iframe>) :
+                      _type === "facebook" ?
+                        (<iframe src={embedFacebookHTML}></iframe>) :
+                      _type === "tiktok" ?
+                        (<iframe src={embedTiktokHTML}></iframe>) : 
                         (<div>other Material</div>)
                       } 
                     </div>
@@ -80,58 +91,118 @@ export function StoryCategory(props) {
                 </>
               ) :
 
-              currentLandmark == "istanbul" ?
+              // ISSUE: BLOCK CONTENT WITH IMAGE DOES NOT WORK
+              currentLandmark == "hama" ?
               (
                 <>
-                  {istanbul.materialArray.map(({ _type }) => (
+                  {hama.materialArray.map(({ _type, embedMapsSRC, embedYoutubeHTML, url, blockContent, tweetEmbed, embedFacebookHTML, embedTiktokHTML }) => (
                     <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                    {_type == "googleMaps" ? 
-                      (<div>googleMaps</div>) : 
-                    _type == "youtube" ?
-                      (<div>youtube</div>) :
-                    _type == "imageURL" ?
-                      (<div>image</div>) :
-                    _type == "blockObj" ?
-                      (<div>comment section</div>) :
-                    _type == "twitter" ?
-                      (<div>twitter feed</div>) :
-                      (<div>other Material</div>)
-                    } 
-                  </div>
-                  ))}
-                </>
-              ) :  
-
-              currentLandmark == "lackova" ?
-              (
-                <>
-                  {lackova.materialArray.map(({ _type }) => (
-                    <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                      {_type}
+                      {_type === "googleMaps" ? 
+                        (<iframe src={embedMapsSRC}></iframe>) : 
+                      _type === "youtube" ?
+                        (<iframe src={embedYoutubeHTML}></iframe>) :
+                      _type === "imageURL" ?
+                        (<img src={url}/>) :
+                      _type === "image" ?
+                        (<img src={_type}/>) :
+                      // _type === "blockObj" ?
+                      //   (<PortableText content={blockContent}/>) :
+                      _type === "twitter" ?
+                        (<iframe border="0" frameborder="0" height="250" width="550" src={tweetEmbed}></iframe>) :
+                      _type === "facebook" ?
+                        (<iframe src={embedFacebookHTML}></iframe>) :
+                      _type === "tiktok" ?
+                        (<iframe src={embedTiktokHTML}></iframe>) :
+                        (<div>other Material</div>)
+                      } 
                     </div>
                   ))}
                 </>
               ) :  
 
+              // ISSUE: BLOCK CONTENT WITH IMAGE DOES NOT WORK
+              currentLandmark == "lackova" ?
+              (
+                <>
+                  {lackova.materialArray.map(({ _type, embedMapsSRC, embedYoutubeHTML, url, blockContent, tweetEmbed, embedFacebookHTML, embedTiktokHTML }) => (
+                    <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+                      {_type === "googleMaps" ? 
+                        (<iframe src={embedMapsSRC}></iframe>) : 
+                      _type === "youtube" ?
+                        (<iframe src={embedYoutubeHTML}></iframe>) :
+                      _type === "imageURL" ?
+                        (<img src={url}/>) :
+                      _type === "image" ?
+                        (<img src={_type}/>) :
+                      // _type === "blockObj" ?
+                      //   (<PortableText content={blockContent}/>) :
+                      _type === "twitter" ?
+                        (<iframe border="0" frameborder="0" height="250" width="550" src={tweetEmbed}></iframe>) :
+                      _type === "facebook" ?
+                        (<iframe src={embedFacebookHTML}></iframe>) :
+                      _type === "tiktok" ?
+                        (<iframe src={embedTiktokHTML}></iframe>) :
+                        (<div>other Material</div>)
+                      } 
+                    </div>
+                  ))}
+                </>
+              ) :  
+              
+              // DOESNT WORK
               currentLandmark == "droemling" ?
               (
                 <>
-                {droemling.materialArray.map(({ _type }) => (
-                  <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                    {_type}
-                  </div>
-                ))}
+                  {droemling.materialArray.map(({ _type, embedMapsSRC, embedYoutubeHTML, url, blockContent, tweetEmbed, embedFacebookHTML, embedTiktokHTML }) => (
+                    <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+                      {_type === "googleMaps" ? 
+                        (<iframe src={embedMapsSRC}></iframe>) : 
+                      _type === "youtube" ?
+                        (<iframe src={embedYoutubeHTML}></iframe>) :
+                      _type === "imageURL" ?
+                        (<img src={url}/>) :
+                      _type === "image" ?
+                        (<img src={_type}/>) :
+                      // _type === "blockObj" ?
+                      //   (<PortableText content={blockContent}/>) :
+                      _type === "twitter" ?
+                        (<iframe border="0" frameborder="0" height="250" width="550" src={tweetEmbed}></iframe>) :
+                      _type === "facebook" ?
+                        (<iframe src={embedFacebookHTML}></iframe>) :
+                      _type === "tiktok" ?
+                        (<iframe src={embedTiktokHTML}></iframe>) :
+                        (<div>other Material</div>)
+                      } 
+                    </div>
+                  ))}
               </>
               ) : 
 
               currentLandmark == "neveeitan" &&
               (                
               <>
-                {neveeitan.materialArray.map(({ _type }) => (
-                  <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
-                    {_type}
-                  </div>
-                ))}
+                  {neveeitan.materialArray.map(({ _type, embedMapsSRC, embedYoutubeHTML, url, blockContent, tweetEmbed, embedFacebookHTML, embedTiktokHTML }) => (
+                    <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6">
+                      {_type === "googleMaps" ? 
+                        (<iframe src={embedMapsSRC}></iframe>) : 
+                      _type === "youtube" ?
+                        (<iframe src={embedYoutubeHTML}></iframe>) :
+                      _type === "imageURL" ?
+                        (<img src={url}/>) :
+                      _type === "image" ?
+                        (<img src={_type}/>) :
+                      // _type === "blockObj" ?
+                      //   (<PortableText content={blockContent}/>) :
+                      _type === "twitter" ?
+                        (<iframe border="0" frameborder="0" height="250" width="550" src={tweetEmbed}></iframe>) :
+                      _type === "facebook" ?
+                        (<iframe src={embedFacebookHTML}></iframe>) :
+                      _type === "tiktok" ?
+                        (<iframe src={embedTiktokHTML}></iframe>) :
+                        (<div>other Material</div>)
+                      } 
+                    </div>
+                  ))}
               </>)
             }
           </div>

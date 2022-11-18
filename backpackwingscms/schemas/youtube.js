@@ -16,26 +16,26 @@ export default {
       type: "string",
       title: "Video Channel",
     },
+    // {
+    //   name: "youtubeURL",
+    //   type: "url",
+    //   title: "URL",
+    // },
     {
-      name: "youtubeURL",
-      type: "url",
-      title: "URL",
-    },
-    {
-      name: "embedHTML",
+      name: "embedYoutubeHTML",
       type: "string",
-      title: "Embed HTML",
+      title: "Embed Youtube HTML",
     },
-    {
-      name: "iframeSRC",
-      type: "string",
-      title: "iframe src",
-    },
+    // {
+    //   name: "iframeSRC",
+    //   type: "string",
+    //   title: "iframe src",
+    // },
   ],
   preview: {
     select: {
       title: "videoname",
-      subtitle: "youtubeURL",
+      subtitle: "channel",
     },
   },
 };

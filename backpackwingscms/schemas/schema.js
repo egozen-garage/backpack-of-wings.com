@@ -16,6 +16,8 @@ import imageURL from './imageURL'
 import googleMaps from './googleMaps'
 import movebank from './movebank'
 import movebankSingleLocation from './movebankSingleLocation'
+import facebook from './facebook'
+import tiktok from './tiktok'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -31,6 +33,8 @@ export default createSchema({
     weatherData, 
     youtube,
     twitter,
+    facebook,
+    tiktok,
     imageURL,
     // googleReviews,
     googleMaps,

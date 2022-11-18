@@ -22,14 +22,14 @@ export default {
             title: "Place ID",
         },
         {
-            name: "embedHTML",
+            name: "embedMapsSRC",
             type: "string",
             title: "embed HTML",
         },
         {
-            name: "iframeSRC",
+            name: "encodedPlusCode",
             type: "string",
-            title: "iframe SRC",
+            title: "encoded Plus Code",
         },
         // {
         //     name: "googleCoordinates",
