@@ -18,7 +18,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxd
 
 // const mapData = FetchMapData() // fetch relevant data for map
 
-export default function Mapbox() { 
+export default function Mapbox(props) { 
     console.log("CALL Mapbox")
     let dataReceived = false;
 
@@ -78,7 +78,7 @@ export default function Mapbox() {
         // console.log("data arrived " + JSON.stringify(mapData[2]))
         dataReceived = true;
         // console.log("bird data 30 days: " + movebankData[1].location_long)
-        return <DrawMapbox mapData={mapData}/>
+        return <DrawMapbox mapData={mapData} storyIds={props.storyIds}/>
     }
 }
 
@@ -228,7 +228,21 @@ function DrawMapbox(props){
 
 
 
-
+    function RandomUrlEndpoint(MarkerLandmark){
+        const landmarkNumber =    MarkerLandmark === "droemling" ? 0 : 
+                            MarkerLandmark === "lackova" ? 1 :
+                            MarkerLandmark === "istanbul" ? 2 :
+                            MarkerLandmark === "hama" ? 3 :
+                            MarkerLandmark === "neveeitan" ? 4 :
+                            MarkerLandmark === "dudaimsite" ? 5 : 0
+        // const randomNumber = Math.floor(Math.random() * 5)
+        // const urlLandmark = props.storyIds[randomNumber].ids[0].landmark
+        const amountOfIds = props.storyIds[landmarkNumber].ids.length
+        const storyId = props.storyIds[landmarkNumber].ids[Math.floor(Math.random() * amountOfIds)]._id
+        const urlEndpoint = "/loadmemory/" + MarkerLandmark + "/" + storyId
+        console.log("mapbox marker url: " + urlEndpoint)
+        navigate(urlEndpoint)
+    }
 
     // load map and project data
     useEffect(() => {
@@ -604,7 +618,7 @@ function DrawMapbox(props){
                 map.current.getCanvas().style.cursor = "pointer";
             });
             map.current.on("mouseleave", 'last-location', () => {
-                map.current.getCanvas().style.cursor = "default";
+                map.current.getCanvas().style.cursor = "grab";
             });
             map.current.on('click', 'last-location', (e) => {
                 // navigate('/'+e.features[0].properties.url)
@@ -626,7 +640,7 @@ function DrawMapbox(props){
                 map.current.getCanvas().style.cursor = "pointer";
             });
             map.current.on("mouseleave", 'last-location-text', () => {
-                map.current.getCanvas().style.cursor = "default";
+                map.current.getCanvas().style.cursor = "grab";
             });
             map.current.on('click', 'last-location-text', (e) => {
                 // navigate('/'+e.features[0].properties.url)
@@ -642,6 +656,18 @@ function DrawMapbox(props){
                     //respect to prefers-reduced-motion
                 });
                 // setCurrentRoute(e.features[0].properties.description)
+                return 
+            });
+            // map.current.on('click', 'water', (e) => {
+            //     navigate('/')
+            //     return 
+            // });
+            // map.current.on('click', 'hillshade', (e) => {
+            //     navigate('/')
+            //     return 
+            // });
+            map.current.on('click', 'land', (e) => {
+                navigate('/')
                 return 
             });
 
@@ -660,6 +686,9 @@ function DrawMapbox(props){
                 el.innerHTML = html;
                 return el.firstChild;
             }
+
+
+
 
             function updateLandmarks(){
                 if(!firstLoad.current) return
@@ -684,10 +713,12 @@ function DrawMapbox(props){
                         offset: offset,
                         element: divMarker
                     }).setLngLat(coords)
-                    marker.addTo(map.current);;
+                    marker.addTo(map.current)
                     marker.getElement().addEventListener('click', () => {
-                        navigate("/loadmemory/" + urlEndpoint)
+                        // navigate("/loadmemory/" + urlEndpoint)
+                        RandomUrlEndpoint(urlEndpoint)
                     });
+                    
                 }
                 for (const landmark of landmarks) {
                     i = i + 1

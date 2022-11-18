@@ -6,20 +6,31 @@ import { useLocation } from "react-router-dom";
 export default function MenuButtons(props) {
   const location = useLocation();
 
+  const storyIds = props.storyIds
+
   let currentURL = location.pathname.split("/")[1];
   let uploadStoryURL = location.pathname.split("/")[2];
   // let URLlength = location.pathname.split("/").length;
 
   const landmark = props.landmarkData[Math.floor(Math.random() * 5)].url.current 
+
+  // SELECT RANDOM URL
+  const randomNumber = Math.floor(Math.random() * 5)
+  const urlLandmark = props.storyIds[randomNumber].ids[0].landmark
+  const amountOfIds = props.storyIds[randomNumber].ids.length
+  const storyId = props.storyIds[randomNumber].ids[Math.floor(Math.random() * amountOfIds)]._id
+  const urlEndpoint = "/loadmemory/" + urlLandmark + "/" + storyId
+  
+  // console.log("random url endpoint - menu" + JSON.stringify(urlEndpoint))
   // console.log("menuButton: " + landmark)
-  console.log("load menu")
+  // console.log("menu random url: " + urlLandmark + "/" + storyId)
 
   return (
     <>
       {/* LOAD MEMORIES */}
       <NavLink
         className="fixed h-full loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg w-9"
-        to={currentURL === "loadmemory" ? "/" : "/loadmemory/"+landmark }
+        to={currentURL === "loadmemory" ? "/" : urlEndpoint }
       >
         <h1
           className="fixed bottom-5 left-1"
