@@ -4,7 +4,8 @@
 
 
 export default function Home() {
-    
+    // console.log("C App - home");
+
     return
 
     // MovebankAPI(); // Call Movebank API - Bird Data 
