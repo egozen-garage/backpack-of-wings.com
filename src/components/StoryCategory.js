@@ -1,7 +1,7 @@
 // import React from "react";
 // import { Story } from "./Story.js";
 // import SanityClient from "../client";
-// import { useEffect, useState } from "react";
+import { useId } from "react";
 import { useParams } from "react-router-dom";
 import StoryInputForm from "./StoryInputForm.js";
 import { useLocation } from "react-router-dom";
@@ -46,7 +46,8 @@ export function StoryCategory(props) {
 
 
   return (
-      <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
+    <>
+      <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
 
         {/* STORIES MATERIAL CONTAINER */}
         <div className="gradientMaterialOverlay my-10 pl-[0.4rem]">
@@ -260,5 +261,6 @@ export function StoryCategory(props) {
         <StoryInputForm currentLandmark={landmark}/>
         {/* <Story /> */}
       </div>
+    </>
   );
 }

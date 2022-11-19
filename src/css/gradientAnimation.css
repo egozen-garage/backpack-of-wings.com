@@ -52,6 +52,9 @@
 .gradientStoryOverlay {
   -webkit-mask-image: -webkit-gradient(linear, left 70%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
+.gradientFormUploadOverlay {
+  -webkit-mask-image: -webkit-gradient(linear, left 10%, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+}
 
 .gradientJonasIntroOverlay {
   -webkit-mask-image: -webkit-gradient(linear, left 50%, left 90%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
