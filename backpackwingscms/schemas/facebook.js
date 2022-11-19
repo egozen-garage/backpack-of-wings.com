@@ -1,10 +1,10 @@
-import { FaFacebookF } from 'react-icons/Fa'
+// import { FaFacebookF } from 'react-icons/Fa'
 
 export default {
   name: "facebook",
   type: "object",
   title: "Facebook Embed",
-  icon: FaFacebookF,
+  // icon: FaFacebookF,
   fields: [
     {
       name: "title",

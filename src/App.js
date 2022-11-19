@@ -1,7 +1,7 @@
 import { NavLink, Routes, Route } from "react-router-dom";
 // import { useState, useMemo, useEffect, useRef } from "react";
 import Home from "./components/Home";
-import { LoadMemories } from "./components/LoadMemories";
+// import { LoadMemories } from "./components/LoadMemories";
 import { StoryCategory } from "./components/StoryCategory";
 import { UploadStoriesIntro } from "./components/UploadStoriesIntro";
 import { Impressum } from "./components/Impressum";
@@ -14,7 +14,7 @@ import MenuButtons from "./components/MenuButtons";
 import AboutWindow from "./components/AboutWindow";
 import "./css/gradientAnimation.css";
 import "./App.css";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import SanityClient from "./client";
 // import CallWeatherData from "./utilities/CallWeatherWind";
 
@@ -126,7 +126,6 @@ function App() {
             path="/uploadstory/:landmark"
             exact
           />
-          {/* <Route element={<LoadMemories />} path="/loadmemory/:landmark" />  */}
           <Route element={<StoriesData storyIds={storyIds} />} path="/loadmemory/:landmark/:id" />
           <Route element={<Impressum />} path="/impressum" exact />
           <Route element={<NotFound />} path="*" exact />

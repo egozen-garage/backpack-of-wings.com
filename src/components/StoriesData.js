@@ -6,10 +6,10 @@ import "../css/animation.css";
 import "../css/gradientAnimation.css";
 import progressbar from "../img/audio-progressbar-01-black.svg";
 // import { Link, Outlet } from 'react-router-dom';
-import { useEffect, useMemo } from "react";
+import { useEffect } from "react";
 import { useParams } from "react-router-dom";
-import CallSanityAPI from "../utilities/CallSanityAPI";
-import { redirect } from "react-router-dom";
+// import CallSanityAPI from "../utilities/CallSanityAPI";
+// import { redirect } from "react-router-dom";
 import SanityClient from "../client";
 
 
@@ -56,8 +56,8 @@ export function StoriesData(props) {
   // let amountOfMemories = props.storyIds.length
 
   const [data, setData] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [error, setError] = useState(null);
+  // const [isLoaded, setIsLoaded] = useState(false);
+  // const [error, setError] = useState(null);
   useEffect(()=>{
       Promise.all([
           SanityClient.fetch(
@@ -67,10 +67,10 @@ export function StoriesData(props) {
       .then(([sanityData]) => {
               console.log("call story data locally")
               setData(sanityData);
-              setIsLoaded(true);
+              // setIsLoaded(true);
       })
       .catch((err) => {
-          setError(err)
+          // setError(err)
       })
   },[id])
   // let memoryContent = null;

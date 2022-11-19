@@ -6,13 +6,11 @@ import { useLocation } from "react-router-dom";
 export default function MenuButtons(props) {
   const location = useLocation();
 
-  const storyIds = props.storyIds
+  // const storyIds = props.storyIds
 
   let currentURL = location.pathname.split("/")[1];
   let uploadStoryURL = location.pathname.split("/")[2];
   // let URLlength = location.pathname.split("/").length;
-
-  const landmark = props.landmarkData[Math.floor(Math.random() * 5)].url.current 
 
   // SELECT RANDOM URL
   const randomNumber = Math.floor(Math.random() * 5)
