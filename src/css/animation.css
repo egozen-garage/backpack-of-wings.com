@@ -1,3 +1,41 @@
+.slide-right-to-left{
+    left:0;
+    right:0;
+    -webkit-animation: right-to-left 0.2s linear forwards;
+    animation: right-to-left 0.2s linear forwards;
+}
+@-webkit-keyframes right-to-left{
+    from{right:-100%}
+    to{right:0}
+}
+@keyframes right-to-left{ 
+    from{right:-100%}
+    to{right:0}
+}
+.slide-left-to-right{
+    -webkit-animation: left-to-right 0.2s linear forwards;
+    animation: left-to-right 0.2s linear forwards;
+}
+@-webkit-keyframes left-to-right{
+    from{left:0}
+    to{left:-200%}
+}
+@keyframes left-to-right{ 
+    from{left:0}
+    to{left:-200%}
+}
+.opacity-fade-out {
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0s 2s, opacity 2s linear;
+}
+.opacity-fade-in{
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0s 2s, opacity 2s linear;
+}
+
+
 .buttonInactive {
     transition: all 0.2s ease-in;
     background-color: white;
@@ -115,6 +153,14 @@
 
 @keyframes fadeInAnimation {
     0%, 40% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes fadeOutAnimation {
+    0% {
         opacity: 0;
     }
     100% {

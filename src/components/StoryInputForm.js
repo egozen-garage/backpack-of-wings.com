@@ -3,7 +3,7 @@ import { useForm } from "react-hook-form";
 import "../css/animation.css";
 import "../css/gradientAnimation.css";
 
-import { useEffect, useState, useRef } from "react";
+import { useState } from "react";
 
 
 export default function StoryInputForm(props){
@@ -25,6 +25,7 @@ export default function StoryInputForm(props){
   const {
     register,
     handleSubmit,
+    trigger,
     formState: { errors },
     reset,
   } = useForm();
@@ -48,8 +49,13 @@ export default function StoryInputForm(props){
       body: encode({ "form-name": "story-form", ...formData }),
     })
       .then((response) => {
+        // maybe recieve story id & landmark after upload --> first story in loadmemory
         // add what should happen after successful submission
         // e.g. navitate to success page
+        setFormSubmited(true)
+        setStory(null)
+        setAuthor(null)
+        setMail(null)
         reset();
       })
       .catch((error) => {
@@ -58,37 +64,37 @@ export default function StoryInputForm(props){
     event.preventDefault();
   };
 
+  const [formSubmited, setFormSubmited] = useState(false)
   const [story, setStory] = useState(null)
   const [author, setAuthor] = useState(null)
   const [mail, setMail] = useState(null)
   
-  const mailRef = useRef(null)
-
 
   function isValidEmail() {
     return /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/.test(mail);
   }
 
-
-  function handleChange(){
-
-  }
-
   function checkForm(){
+    setFormSubmited(false)
+    trigger()
     if(story && author && isValidEmail()){ 
+
+      console.log("form pressed and ready")
       return setFormReady(true) 
-    } else { 
-      if(!story){
-        return alert("Please enter a story")
-      }
-      if(!author){
-        return alert("Please enter a name")
-      }
-      if (!isValidEmail()) {
-        return alert("Please enter a valid email.")
-      }
-    }
+    } 
+    // else { 
+    //   if(!story){
+    //     return alert("Please enter a story")
+    //   }
+    //   if(!author){
+    //     return alert("Please enter a name")
+    //   }
+    //   if (!isValidEmail()) {
+    //     return alert("Please enter a valid email.")
+    //   }
+    // }
   }
+
 
   return (
       <>
@@ -169,7 +175,6 @@ export default function StoryInputForm(props){
               <input
                 ref="mailRef"
                 onInput={e => setMail(e.target.value)}
-                // onChange={e => handleChange(e.target.value)}
                 name="email"
                 className="bg-transparent shadow-innerText font-sans rounded-2xl w-full p-2"
                 required
@@ -209,9 +214,13 @@ export default function StoryInputForm(props){
         </div> */}
 
         { !formReady ? "" : 
-          <div className="fixed h-full bg-white z-60 pt-30 flex top-0 bottom-0 right-0 left-0 items-center justify-center " style={{backgroundColor: "rgba(255,255,255,0.5)"}}>
+          <div className={
+            formSubmited ? 
+            "opacity-fade-out slide-left-to-right fixed h-full bg-white z-60 pt-30 flex top-0 bottom-0 right-0 left-0 items-center justify-center" : 
+            "opacity-fade-in slide-right-to-left fixed h-full bg-white z-60 pt-30 flex top-0 bottom-0 right-0 left-0 items-center justify-center" }
+            style={{backgroundColor: "rgba(255,255,255,0.5)"}}>
             
-            <div className="fixed flex flex-col drop-shadow-lg mx-20 max-w-screen-sm w-full bg-white h-4/5 rounded-3xl p-8">
+            <div className=" fixed flex flex-col drop-shadow-lg mx-20 max-w-screen-sm w-full bg-white h-4/5 rounded-3xl p-8">
               <h1 className="upload-form-title bg-white font-bold text-lg mb-6"> landfill, hama</h1>
               <div className="noScrollBar font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto">
                 <p className=""> 
