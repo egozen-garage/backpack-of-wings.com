@@ -41,13 +41,13 @@ export function MaterialContent(props) {
           embedFacebookHTML,
           embedTiktokHTML,
         }) => (
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-6 overflow-scroll">
+          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 overflow-scroll">
             {_type === "googleMaps" ? (
-              <iframe src={embedMapsSRC}></iframe>
+              <iframe src={embedMapsSRC} className="h-full w-full"></iframe>
             ) : _type === "youtube" ? (
-              <iframe src={embedYoutubeHTML}></iframe>
+              <iframe src={embedYoutubeHTML} className="h-full w-full"></iframe>
             ) : _type === "imageURL" ? (
-              <img src={url} />
+              <img src={url} className="h-full"/>
             ) : _type === "image" ? (
               // ISSUE: URL ITEM NOT READ
               <img src={_type} />
@@ -69,9 +69,8 @@ export function MaterialContent(props) {
               <iframe
                 border="0"
                 frameborder="0"
-                height="250"
-                width="550"
                 src={tweetEmbed}
+                className="h-full w-full"
               ></iframe>
             ) : _type === "facebook" ? (
               <iframe src={embedFacebookHTML}></iframe>
