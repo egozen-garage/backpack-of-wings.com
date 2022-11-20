@@ -48,19 +48,22 @@ export default function StoryInputForm(props){
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "story-form", ...formData }),
     })
-      .then((response) => {
-        // maybe recieve story id & landmark after upload --> first story in loadmemory
-        // add what should happen after successful submission
-        // e.g. navitate to success page
-        setFormSubmited(true)
-        setStory(null)
-        setAuthor(null)
-        setMail(null)
-        reset();
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    .then((response) => {
+      // maybe recieve story id & landmark after upload --> first story in loadmemory
+      // add what should happen after successful submission
+      // e.g. navitate to success page
+
+      reset();
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+
+      setFormSubmited(true)
+      setFormReady(false) 
+      setStory(null)
+      setAuthor(null)
+      setMail(null)
     event.preventDefault();
   };
 
@@ -77,8 +80,10 @@ export default function StoryInputForm(props){
   function checkForm(){
     setFormSubmited(false)
     trigger()
+    console.log("form pressed and ready - mail:" + isValidEmail())
+    console.log("form pressed and ready - story:" + story)
+    console.log("form pressed and ready - author:" + author)
     if(story && author && isValidEmail()){ 
-
       console.log("form pressed and ready")
       return setFormReady(true) 
     } 
