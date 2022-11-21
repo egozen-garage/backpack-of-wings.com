@@ -9,6 +9,13 @@
     box-shadow: 2px 2px 5px gray;
 }
 
+.selectedLandmark{
+    background-color: black;
+    color: white;
+    font-family: "Apoc Revelations", serif;
+    font-weight: 700;
+}
+
 .landmarkMarker:hover{
     background-color: black;
     color: white;
