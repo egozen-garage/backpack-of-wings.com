@@ -17,13 +17,6 @@ import { MaterialContent } from "./MaterialContent.js";
 // const urlFor = (source) =>
 //   urlBuilder({ projectId: "qw7xv7xh", dataset: "production" }).image(source);
 
-// const client = sanityClient({
-//   projectId: "qw7xv7xh",
-//   dataset: "production",
-//   apiVersion: "2022-10-14",
-//   useCdn: true,
-// });
-
 // const serializer = {
 //   types: {
 //     image: (props) => (
