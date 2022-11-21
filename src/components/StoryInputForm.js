@@ -1,12 +1,13 @@
 import { useForm } from "react-hook-form";
-// import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import "../css/animation.css";
 import "../css/gradientAnimation.css";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 export default function StoryInputForm(props){
+  const { landmark } = useParams()
   const [formReady, setFormReady] = useState(false)
 
   // const checkForm = () => {
@@ -30,6 +31,16 @@ export default function StoryInputForm(props){
     reset,
   } = useForm();
   // const { register, handleSubmit, watch, formState: { errors } } = useForm();
+
+
+  const [newLandmarkRegistered, setNewLandmarkRegistered] = useState(false)
+  useEffect(() => {
+    setNewLandmarkRegistered(true)
+  }, [landmark])
+  if(newLandmarkRegistered){
+    reset()
+    setNewLandmarkRegistered(false)
+  }
 
   // Transforms the form data from the React Hook Form output to a format Netlify can read
   const encode = (data) => {

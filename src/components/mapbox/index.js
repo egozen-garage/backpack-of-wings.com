@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import MovebankDataYear from '../../json/MovebankDataYear.json';
 import sanityClient from "../../client";
 // import iconCurrentLocation from "../img/current-location.svg"
-import { useLocation } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 // import FetchMapData from './service/FetchMapData';
 import './mapboxStyle.css';
  
@@ -85,6 +85,9 @@ export default function Mapbox(props) {
 
 
 function DrawMapbox(props){
+    const { landmark } = useParams()
+    const urlLandmark = landmark
+
     const mapContainer = useRef(null);
     const weaterContainer = useRef(null);
     const map = useRef(null);
@@ -559,16 +562,7 @@ function DrawMapbox(props){
                 type: 'circle',
                 source: 'last-location',
                 id: 'last-location',
-                layout: {
-                    // 'text-field': ['get', 'description'],
-                    // 'text-variable-anchor': ['left'],
-                    // 'text-radial-offset': 0.5,
-                //     // 'text-justify': 'center',
-                //     // 'icon-image': ['get', 'icon'],
-                //     // 'icon-size': 0.3,
-                //     // 'icon-allow-overlap': true,
-                //     // 'text-allow-overlap': true,
-                },
+                minzoom: 6,
                 paint: {
                     'circle-radius': 10,
                     // 'circle-color': 'rgba(' + pathRGB + ',1)',
@@ -579,18 +573,13 @@ function DrawMapbox(props){
                         11, 'rgba(' + pathRGB + ',1)', // When zoom is 12 or higher, set opacit to 0
                         12, 'rgb(249,254,30)', // When zoom is 11 or less, set opacit to 1
                     ],
-                    // 'circle-color': 'rgba(0,204,255,1)',
-                    // 'circle-color': '#00ccff',
-                    // "text-color": 'rgba(' + pathRGB + ',1)',
-                    // "text-halo-color": "black",
-                    // "text-halo-width": 1,
-                    // "circle-opacity": 1
                 }
             });
             map.current.addLayer({
                 type: 'symbol',
                 source: 'last-location',
                 id: 'last-location-text',
+                minzoom: 6,
                 layout: {
                     'text-field': [
                         'format', 
@@ -609,7 +598,7 @@ function DrawMapbox(props){
                     'text-variable-anchor': ['left'],
                     'text-radial-offset': 1,
                     'text-justify': 'left',
-                },
+                }
             });
 
             // MAP INTERACTIONS
@@ -675,9 +664,9 @@ function DrawMapbox(props){
 
 
 
-            function LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color){
+            function LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color, landmarkId, selectedLandmark){
                 console.log("landmarks properties: " + i)
-                let html = `<div tabindex="${i}" class="landmarkMarker ${markerClassName} ${hideClassOnLoad} ">
+                let html = `<div tabindex="${i}" id="${landmarkId}" class="landmarkMarker ${selectedLandmark} ${markerClassName} ${hideClassOnLoad} ">
                                     <div style="background-color: ${color}; "class="landmarkCircle"></div>
                                     <div class="landmarkText">${landmarkForHtml.properties.description}</div>
                      
@@ -695,17 +684,20 @@ function DrawMapbox(props){
                 firstLoad.current = false
                 // for (let i = 0; i < landmarks.length; i++){
                     // const landmark = landmarks
+                console.log("landmark data for marker: " + JSON.stringify(landmarks))
                 let i = 0
                 for (const landmark of landmarks) {
                     i = i + 1
                     const hideClassOnLoad = urlPrefix === "uploadstory" ? "hideElement" : ""
-                    // console.log("updateLandmarks: " + feature.geometry.coordinates)
+                    const selectedLandmark = urlLandmarkMemo === landmark.properties.url ? "selectedLandmark" : ""
+                    // console.log("loadmemeory selected - urlLandmark: " + urlLandmarkMemo + " landmark.properties.url: " + landmark.properties.url)
+                    const landmarkId = "loadmemory-" + landmark.properties.url
                     const markerClassName = "load-memories"
                     const coords = landmark.geometry.coordinates
                     const urlEndpoint = landmark.properties.url
                     const landmarkForHtml = landmark
                     const color = "rgb(163, 220, 245)"
-                    const divMarker = LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color)
+                    const divMarker = LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color, landmarkId, selectedLandmark)
                     const offset = landmark.properties.counter === 1 ? [-10, 20] : [-10,0]
                     const marker = new mapboxgl.Marker({
                         // offset: 100,
@@ -723,13 +715,15 @@ function DrawMapbox(props){
                 for (const landmark of landmarks) {
                     i = i + 1
                     const hideClassOnLoad = urlPrefix === "loadmemory" ? "hideElement" : urlPrefix === "" ? "hideElement" : ""
+                    const selectedLandmark = urlLandmarkMemo === landmark.properties.url ? "selectedLandmark" : ""
                     // console.log("updateLandmarks: " + feature.geometry.coordinates)
+                    const landmarkId = "uploadstory-" + landmark.properties.url
                     const markerClassName = "upload-stories"
                     const coords = landmark.geometry.coordinates
                     const urlEndpoint = landmark.properties.url
                     const landmarkForHtml = landmark
                     const color = "rgb(240, 180, 252)"
-                    const divMarker = LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color)
+                    const divMarker = LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color, landmarkId, selectedLandmark)
                     const offset = landmark.properties.counter === 1 ? [-10, 20] : [-10,0]
                     const marker = new mapboxgl.Marker({
                         // offset: 100,
@@ -765,6 +759,12 @@ function DrawMapbox(props){
     const urlPrefix = useMemo(() => {
         const currentPath = location.pathname
         const prefix = currentPath.split('/')[1]
+        console.log("url prefix: " + prefix)
+        return prefix
+    }, [location.pathname])
+    const urlLandmarkMemo = useMemo(() => {
+        const currentPath = location.pathname
+        const prefix = currentPath.split('/')[2]
         console.log("url prefix: " + prefix)
         return prefix
     }, [location.pathname])
@@ -810,6 +810,40 @@ function DrawMapbox(props){
         // }
 
     }, [navigate, urlPrefix])
+
+    useEffect(() => {
+        console.log("new landmark: " + urlLandmarkMemo)
+        for(let i = 0; i < document.getElementsByClassName("landmarkMarker").length; i++){
+            document.getElementsByClassName("landmarkMarker")[i].classList.remove("selectedLandmark")
+        }
+        if(document.getElementById("loadmemory-droemling")){
+            if(urlLandmarkMemo === "droemling"){
+                document.getElementById("loadmemory-droemling").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-droemling").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "lackova"){
+                document.getElementById("loadmemory-lackova").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-lackova").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "istanbul"){
+                document.getElementById("loadmemory-istanbul").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-istanbul").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "hama"){
+                document.getElementById("loadmemory-hama").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-hama").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "neveeitan"){
+                document.getElementById("loadmemory-neveeitan").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-neveeitan").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "dudaimsite"){
+                document.getElementById("loadmemory-dudaimsite").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-dudaimsite").className += " selectedLandmark "
+            }
+        }
+
+    }, [urlLandmarkMemo])
 
     // function ClickLandmark(urlEndpoint){
     //     console.log("www urlEndpoint: ", urlEndpoint)
@@ -882,12 +916,12 @@ function DrawMapbox(props){
 
     const weatherContainerStyle = "fixed z-10 bottom-7 px-14 flex flex-wrap-nowrap place-content-between w-screen"
 
-    const mapContainerStyle ={
+    const mapStyle ={
         height: '100vh',
         // width: '100px',
         // zIndex: -1
     }
-    const mapStyle = "top-0 right-0 w-100 h-200 map-container"
+    const mapClasses = "top-0 w-100 h-200 map-container mx-9 "
     
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
 
@@ -922,7 +956,7 @@ function DrawMapbox(props){
                 <span className={weatherObject}>Temperature: <span className='font-mono inline-block'>{weatherData.temp} °C</span></span>
                 <span className={weatherObject}>Air humidity: <span className='font-mono inline-block'>{weatherData.humidity} g/m3</span></span>
             </div> }
-            <div ref={mapContainer} className={mapStyle} style={mapContainerStyle} />
+            <div ref={mapContainer} className={mapClasses} style={mapStyle} />
         </div>
     );
 }
