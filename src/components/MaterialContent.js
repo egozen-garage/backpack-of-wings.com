@@ -42,10 +42,10 @@ export function MaterialContent(props) {
 //     }
 //   }
   
-  const renderTdextBlock = (props) => {
-    console.log("portabletext, props, render all block Contents ="+JSON.stringify(props))
-    return <PortableText value={props} components={portableComponent}/>
-  }
+  // const renderTdextBlock = (props) => {
+  //   console.log("portabletext, props, render all block Contents ="+JSON.stringify(props))
+  //   return <PortableText value={props} components={portableComponent}/>
+  // }
 
 //   const builder = ImageUrlBuilder(singleLandmarkData)
 
