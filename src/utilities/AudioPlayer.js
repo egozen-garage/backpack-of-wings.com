@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import track from "../audio/6_birdSanctuary_germany.wav";
+import track from "../audio/6_BirdSanctuary_Germany.wav"
 import progressbar from "../img/audio-progressbar-01-black.svg";
 import soundscapeData from "../json/soundscapeData.json";
 import "../App.css";

@@ -3,7 +3,8 @@ import { useParams } from "react-router-dom";
 import { getImageDimensions } from "@sanity/asset-utils";
 import urlBuilder from "@sanity/image-url";
 import { ImageUrlBuilder } from "@sanity/image-url";
-import PortableText from "react-portable-text";
+// import PortableText from "react-portable-text";
+import {PortableText} from '@portabletext/react'
 
 export function MaterialContent(props) {
   let singleLandmarkData = props.singleLandmarkData;
@@ -77,32 +78,8 @@ export function MaterialContent(props) {
             ) : _type === "blockObj" ? (
                 // NEEDS FIXING!
                 // renderBlock(blockContent)
-                <>
-                {blockContent.map(({ _type, asset, children }) => (
-                  <div>
-                    {_type === "image" ? (
-                      <p>{asset._ref}</p>
-                    ) : (
-                        renderTextBlock(children)
-                    )}
-                  </div>
-                ))}
-                {console.log(
-                  "MaterialContent, array of portable text blocks =" +
-                    JSON.stringify(blockContent, null, 2)
-                )}
-                {console.log(
-                  "MaterialContent, optional object of custom components to use=" +
-                    JSON.stringify(blockComponents, null, 2)
-                )}
-              </>
+              <PortableText value={blockContent} />
             ) : 
-            // <>
-            // <PortableText
-            //   value={blockContent}
-            //   components={blockComponents}
-            // />
-            // </>
             _type === "twitter" ? (
               <iframe
                 border="0"
