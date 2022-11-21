@@ -1,22 +1,61 @@
 import React from "react";
 import { useParams } from "react-router-dom";
-import { getImageDimensions } from "@sanity/asset-utils";
-import urlBuilder from "@sanity/image-url";
-import { ImageUrlBuilder } from "@sanity/image-url";
+// import { getImageDimensions } from "@sanity/asset-utils";
+// import urlBuilder from "@sanity/image-url";
+// import { ImageUrlBuilder } from "@sanity/image-url";
 // import PortableText from "react-portable-text";
+import SanityClient from "../client";
 import {PortableText} from '@portabletext/react'
+import urlBuilder from '@sanity/image-url'
+import {getImageDimensions} from '@sanity/asset-utils'
+
+
+
+// Barebones lazy-loaded image component
+const ImageComponent = ({value, isInline}) => {
+  console.log("image url: " + urlBuilder().image(value).width(isInline ? 100 : 800).fit('max').auto('format').url())
+  const {width, height} = getImageDimensions(value)
+  return (
+    <img
+      src={urlBuilder(SanityClient)
+        .image(value)
+        .width(isInline ? 100 : 800)
+        .fit('max')
+        .auto('format')
+        .url()}
+      alt={value.alt || ' '}
+      loading="lazy"
+      style={{
+        // Display alongside text if image appears inside a block text span
+        display: isInline ? 'inline-block' : 'block',
+
+        // Avoid jumping around with aspect-ratio CSS property
+        aspectRatio: width / height,
+      }}
+    />
+  )
+}
+
+const components = {
+  types: {
+    image: ImageComponent,
+    // Any other custom types you have in your content
+    // Examples: mapLocation, contactForm, code, featuredProjects, latestNews, etc.
+  },
+}
 
 export function MaterialContent(props) {
+  console.log("material content rendered")
   let singleLandmarkData = props.singleLandmarkData;
-  const blockImageComponent = ({ value }) => {
-    return <pre>{value}</pre>;
-  };
-  const blockComponents = {
-    types: {
-      // ISSUE: STOPS TO RENDER RIGHT HERE, PROBLEM WITH REQUESTING "IMAGE" TYPE?
-      image: blockImageComponent,
-    },
-  };
+  // const blockImageComponent = ({ value }) => {
+  //   return <pre>{value}</pre>;
+  // };
+  // const blockComponents = {
+  //   types: {
+  //     // ISSUE: STOPS TO RENDER RIGHT HERE, PROBLEM WITH REQUESTING "IMAGE" TYPE?
+  //     image: blockImageComponent,
+  //   },
+  // };
 
 //   function toPlainText(children = []) {
 //     return children
@@ -78,7 +117,7 @@ export function MaterialContent(props) {
             ) : _type === "blockObj" ? (
                 // NEEDS FIXING!
                 // renderBlock(blockContent)
-              <PortableText value={blockContent} />
+              <PortableText value={blockContent} components={components}/>
             ) : 
             _type === "twitter" ? (
               <iframe
