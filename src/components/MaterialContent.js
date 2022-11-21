@@ -29,11 +29,9 @@ export function MaterialContent(props) {
   function renderTextBlock(children = []) {
     return children
     .map(child => {
-
             return (
                 <p className="p-2">{child.text}</p>
             )
-
         })
   }
 
@@ -44,10 +42,10 @@ export function MaterialContent(props) {
 //     }
 //   }
   
-//   const renderBlock = (props) => {
-//     console.log("portabletext, props, render all block Contents ="+JSON.stringify(props))
-//     return <PortableText value={props} components={portableComponent}/>
-//   }
+  const renderTdextBlock = (props) => {
+    console.log("portabletext, props, render all block Contents ="+JSON.stringify(props))
+    return <PortableText value={props} components={portableComponent}/>
+  }
 
 //   const builder = ImageUrlBuilder(singleLandmarkData)
 

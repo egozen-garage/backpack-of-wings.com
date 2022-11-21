@@ -109,12 +109,8 @@
 }
 
 .gradientImpressum {
-  background: rgb(207, 225, 232);
-  background: linear-gradient(
-    0deg,
-    rgba(207, 225, 232, 0.9514180672268907) 0%,
-    rgba(50, 50, 50, 0.9430147058823529) 100%
-  );
+  background: rgb(60,48,48);
+  background: linear-gradient(180deg, rgba(60,48,48,1) 0%, rgba(95,90,92,0.95) 30%, rgba(207,225,232,0.95) 100%);
 }
 
 .gradientPlayer {

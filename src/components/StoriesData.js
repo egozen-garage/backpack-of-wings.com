@@ -1,21 +1,20 @@
-import stories from "../json/storiesData.json";
-import { useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import "../css/animation.css";
-// import { useLocation } from "react-router-dom";
-import "../css/gradientAnimation.css";
-import progressbar from "../img/audio-progressbar-01-black.svg";
-// import { Link, Outlet } from 'react-router-dom';
-import { useEffect } from "react";
-import { useParams } from "react-router-dom";
-// import CallSanityAPI from "../utilities/CallSanityAPI";
-// import { redirect } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useParams, useLocation, Outlet, useNavigate } from "react-router-dom";
 import SanityClient from "../client";
 
+import AudioPlayer from "../utilities/AudioPlayer";
+import stories from "../json/storiesData.json";
+
+import "../css/animation.css";
+import "../css/gradientAnimation.css";
 
 
 export function StoriesData(props) {
   const { landmark, id } = useParams()
+  const location = useLocation();
+  const currentLandmark = location.pathname.split("/")[2];
+  console.log("StoriesData > current Landmark:" + currentLandmark);
+
   const navigate = useNavigate()
   
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -179,14 +178,8 @@ export function StoriesData(props) {
           { storyCounter === storyIds.length ? "Next Landmark " : "Next Memory "}&#8594;
           </span>
         </div>
-        {/* AUDIO PROGRESS BAR */}
-        <div className="py-4 z-32 progressBar-container">
-          <img
-            className="object-cover h-[4rem] wideScreen:h-[5rem]"
-            src={progressbar}
-            alt="progressbar"
-          />
-        </div>
+        {/* SOUNDSCAPE PLAY WAVEFORM */}
+        <AudioPlayer currentLandmark={currentLandmark}></AudioPlayer>
       </div>
       <div className="px-3">
         {stories.stories.map((story, storyIndex) => (

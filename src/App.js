@@ -120,7 +120,7 @@ function App() {
 
         <Routes>
           <Route element={<Home />} path="/" exact />
-          <Route element={<UploadStoriesIntro />} path="/uploadstory" exact />
+          <Route element={<UploadStoriesIntro />} storyIds={storyIds} path="/uploadstory" exact />
           <Route
             element={landmarkData ? <StoryCategory landmarkData={landmarkData} /> : ""}
             path="/uploadstory/:landmark"

@@ -124,15 +124,9 @@ export function UploadStoriesIntro() {
           </button>
         </div>
 
-        {/* PLAY SOUNDSCAPE */}
-        <AudioPlayer></AudioPlayer>
-        {/* AUDIO PROGRESS BAR */}
-        <div className="py-5 z-32 progressBar-container fixed bottom-0 left-0 w-screen px-14">
-          <img
-            className="object-cover h-[4rem] wideScreen:h-[6rem]"
-            src={progressbar}
-            alt="progressbar"
-          />
+        {/* SOUNDSCAPE PLAY WAVEFORM */}
+        <div className="fixed bottom-0 left-0 w-screen px-14">
+          <AudioPlayer></AudioPlayer>
         </div>
       </div>
     </>
