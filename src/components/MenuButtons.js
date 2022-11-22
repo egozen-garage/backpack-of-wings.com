@@ -27,12 +27,12 @@ export default function MenuButtons(props) {
     <>
       {/* LOAD MEMORIES */}
       <NavLink
-        className="fixed h-full loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg w-9"
+        className="fixed bottom-0 mobileHorizontal:bottom-0 h-10 mobileHorizontal:h-full w-full mobileHorizontal:w-9 loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg"
         to={currentURL === "loadmemory" ? "/" : urlEndpoint }
       >
         <h1
-          className="fixed bottom-5 left-1"
-          style={{ writingMode: "vertical-rl" }}
+          className="fixed bottom-0 mobileHorizontal:bottom-5 px-4 pb-2 transformRotatePos w-[10rem]"
+          // style={{ writingMode: "vertical-rl" }}
         >
           Load Memories
         </h1>
@@ -47,7 +47,7 @@ export default function MenuButtons(props) {
 
       {/* RIGHT PANEL: UPLOAD STORIES */}
       <NavLink
-        className="fixed h-full right-0 uploadStoryBtnContainer gradientUploadStory z-36 text-lg w-9"
+        className="fixed hidden mobileHorizontal:block h-full right-0 uploadStoryBtnContainer gradientUploadStory z-36 text-lg w-9"
         to="/uploadstory"
       >
         <h1

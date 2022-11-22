@@ -920,7 +920,7 @@ function DrawMapbox(props){
         // width: '100px',
         // zIndex: -1
     }
-    const mapClasses = "top-0 w-100 h-200 map-container mx-9 "
+    const mapClasses = "top-0 w-100 h-200 map-container mx-0 mobileHorizontal:mx-9 "
     
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
 

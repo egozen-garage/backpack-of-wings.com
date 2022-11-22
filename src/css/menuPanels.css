@@ -1,10 +1,11 @@
 .leftPanel {
-  transition: width 0.3s ease-in;
+  transition: height 0.3s ease-in;
   z-index: 1;
   position: fixed;
   left: 0;
-  width: 0vw;
-  height: 100vh;
+  bottom: 0;
+  width: 100vw;
+  height: 0vh;
   background: rgb(207, 207, 207);
   background: linear-gradient(
     180deg,
@@ -35,11 +36,49 @@
 }
 
 .leftPanel.w50 {
-  width: 35rem;
+  height: 100vh;
 }
 
 .rightPanel.w50 {
   width: 50rem;
+}
+
+.transformRotatePos {
+  transform: none;
+}
+
+
+/* MEDIA QUERIES */
+
+
+/* for Mobile HORIZONTAL 480px and above */
+@media all and (min-width: 480px) {
+  .transformRotatePos {
+    /* Safari */
+    -webkit-transform: rotate(-90deg) translate(2.8rem, -3.8rem);
+  
+    /* Firefox */
+    -moz-transform: rotate(-90deg);
+  
+    /* IE */
+    -ms-transform: rotate(-90deg);
+  
+    /* Opera */
+    -o-transform: rotate(-90deg);
+  
+    /* Internet Explorer */
+    filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=3);
+  }
+
+  .leftPanel {
+    transition: width 0.3s ease-in;
+    width: 0rem;
+    height: 100vh;
+  }
+
+  .leftPanel.w50 {
+    width: 35rem;
+  }
 }
 
 /* for WIDESCREEN 1800px and above */

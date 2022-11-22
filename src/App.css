@@ -21,4 +21,20 @@
     cursor: url(./img/cursor-pause.svg), 
             url(./img/cursor-pause.png), 
             url(./img/cursor-pause.jpg), pointer;
+    /* Safari */
+    -webkit-cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
+    /* Firefox */
+    -moz-cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
+    /* IE */
+    -ms-cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
+    /* Opera */
+    -o-cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
   }
