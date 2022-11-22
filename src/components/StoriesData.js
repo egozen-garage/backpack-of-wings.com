@@ -155,17 +155,17 @@ export function StoriesData(props) {
   if(data && storyIds){
   return (
     <>
-      <div className="storiesContainerAnimation fixed flex flex-col z-20 w-[35rem] wideScreen:w-[60rem] pt-24 pl-14 pr-12 h-screen">
+      <div className="storiesContainerAnimation fixed bottom-0 flex flex-col z-20 w-screen mobileHorizontal:w-[35rem] wideScreen:w-[60rem] pt-24 pb-10 mobileHorizontal:pb-0 px-4 mobileHorizontal:px-12 h-[40rem] mobileHorizontal:h-screen">
         {/* <div className=" bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]"> */}
         <div className="flex pb-10">
-          <h1 className="flex-1 text-xl wideScreen:text-2xl font-bold">
+          <h1 className="flex-1 text-lg mobileHorizontal:text-xl wideScreen:text-2xl font-bold">
             {stories.stories[currentIndex].location},
             {stories.stories[currentIndex].country}
           </h1>
-          <h1 className="flex-2 text-xl  wideScreen:text-2xl font-bold">{storyCounter}/{storyIds.length} Memories</h1>
+          <h1 className="flex-2 text-lg mobileHorizontal:text-xl  wideScreen:text-2xl font-bold">{storyCounter}/{storyIds.length} Memories</h1>
         </div>
         {/* STORY TEXT */}
-        <p className="noScrollBar gradientStoryOverlay font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
+        <p className="noScrollBar gradientStoryOverlay font-sans text-[0.9rem] mobileHorizontal:text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
           {data[0].message}
           {/* {stories.stories[currentIndex].text} */}
         </p>
