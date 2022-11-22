@@ -47,49 +47,6 @@ const components = {
 export function MaterialContent(props) {
   console.log("material content rendered")
   let singleLandmarkData = props.singleLandmarkData;
-  // const blockImageComponent = ({ value }) => {
-  //   return <pre>{value}</pre>;
-  // };
-  // const blockComponents = {
-  //   types: {
-  //     // ISSUE: STOPS TO RENDER RIGHT HERE, PROBLEM WITH REQUESTING "IMAGE" TYPE?
-  //     image: blockImageComponent,
-  //   },
-  // };
-
-//   function toPlainText(children = []) {
-//     return children
-//     .map(child => {
-//         return (
-//             <p>{child.text}</p>
-//         )
-//         })
-//   }
-
-  function renderTextBlock(children = []) {
-    return children
-    .map(child => {
-            return (
-                <p className="p-2">{child.text}</p>
-            )
-        })
-  }
-
-//   const portableComponent = {
-//     block: {
-//         normal: ({children}) => <p>{children[0].text}</p>,
-//         h4: ({children}) => <h4 className="text-2xl">{children[0].text}</h4>,
-//     }
-//   }
-  
-  // const renderTdextBlock = (props) => {
-  //   console.log("portabletext, props, render all block Contents ="+JSON.stringify(props))
-  //   return <PortableText value={props} components={portableComponent}/>
-  // }
-
-//   const builder = ImageUrlBuilder(singleLandmarkData)
-
-//   console.log("MaterialContent = " + singleLandmarkData);
 
   return (
     <>
@@ -104,7 +61,7 @@ export function MaterialContent(props) {
           embedFacebookHTML,
           embedTiktokHTML,
         }) => (
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 overflow-scroll">
+          <div className="bg-white shadow-innerWindow rounded-2xl w-80 h-[200px] mx-6 shrink-0 overflow-scroll">
             {_type === "googleMaps" ? (
               <iframe src={embedMapsSRC} className="h-full w-full"></iframe>
             ) : _type === "youtube" ? (
@@ -112,12 +69,12 @@ export function MaterialContent(props) {
             ) : _type === "imageURL" ? (
               <img src={url} className="h-full" />
             ) : _type === "image" ? (
-              // ISSUE: URL ITEM NOT READ
+              // ISSUE: IMAGE NOT RENDERED BECAUSE "URL" VALUE NOT READ
               <img src={_type} />
             ) : _type === "blockObj" ? (
-                // NEEDS FIXING!
-                // renderBlock(blockContent)
-              <PortableText value={blockContent} components={components}/>
+              <div className="p-5 text-sm">
+                <PortableText value={blockContent} components={components}/>
+              </div>
             ) : 
             _type === "twitter" ? (
               <iframe

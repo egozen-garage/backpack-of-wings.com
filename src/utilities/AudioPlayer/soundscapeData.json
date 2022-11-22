@@ -5,7 +5,7 @@
             "country": "Israel",
             "locationName": "dudaim",
             "locationType": "Landfill",
-            "audioURL": "./audioFile/1_landfill_israel.wav"
+            "audioURL": "localhost:3000/audioFile/1_landfill_israel.wav"
         },
         {
             "id" : 2,
