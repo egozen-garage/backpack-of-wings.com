@@ -286,7 +286,7 @@ export function MaterialContent(props) {
                     src={tweetEmbed}
                     title={_key}
                     key={"uniqueKey_"+_key}
-                    className="h-full w-full"
+                    className="h-full w-full "
                   ></iframe>
                 ) : _type === "facebook" ? (
                   <iframe
