@@ -34,7 +34,7 @@ export function Impressum() {
       </div>
 
       <div className="noScrollBar text-white gradientImpressum z-50 fixed top-0 left-0 h-full w-full px-2 mobileHorizontal:px-12 pt-[7rem] mobileHorizontal:pt-16 pb-16 overflow-scroll">
-        <p className="font-serif font-light text-2xl p-4 py-4">
+        <p className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 py-4">
           <span className="block py-9">
             Hyeseon Jeong <br />
             Erzbergerplatz 9 <br />
