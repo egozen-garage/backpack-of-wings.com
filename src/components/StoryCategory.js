@@ -9,7 +9,6 @@ import { MaterialContent } from "./MaterialContent.js";
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
 
-
 export function StoryCategory(props) {
   const { landmark } = useParams();
   let landmarkData = props.landmarkData;
