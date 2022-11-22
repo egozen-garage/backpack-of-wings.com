@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 // import { getImageDimensions } from "@sanity/asset-utils";
 // import urlBuilder from "@sanity/image-url";
 // import { ImageUrlBuilder } from "@sanity/image-url";
@@ -9,7 +9,7 @@ import {PortableText} from '@portabletext/react'
 import urlBuilder from '@sanity/image-url'
 import {getImageDimensions} from '@sanity/asset-utils'
 import { useState } from "react";
-import { useId } from 'react';
+// import { useId } from 'react';
 
 
 // Barebones lazy-loaded image component
@@ -49,14 +49,14 @@ const components = {
 export function MaterialContent(props) {
   let singleLandmarkData = props.singleLandmarkData;
 
-  function renderTextBlock(children = []) {
-    return children
-    .map(child => {
-            return (
-                <p className="p-2">{child.text}</p>
-            )
-        })
-  }
+  // function renderTextBlock(children = []) {
+  //   return children
+  //   .map(child => {
+  //           return (
+  //               <p className="p-2">{child.text}</p>
+  //           )
+  //       })
+  // }
 
 //   const portableComponent = {
 //     block: {
@@ -89,7 +89,7 @@ export function MaterialContent(props) {
   }
   const HideContent = () => {
     document.getElementById("previewContainer").className += " hidden "
-    document.getElementById("previewContent-" + previewId).className += " hidden "
+    // document.getElementById("previewContent-" + previewId).className += " hidden "
     setPreview(false)
   }
 
@@ -97,7 +97,7 @@ export function MaterialContent(props) {
   useEffect(() => {
     if(previewId === null) return
     document.getElementById("previewContainer").classList.remove("hidden")
-    document.getElementById("previewContent-" + previewId).classList.remove("hidden")
+    // document.getElementById("previewContent-" + previewId).classList.remove("hidden")
   }, [previewId])
   
   // const [tabindexCount, setTabindexCount] = useState(0)
@@ -158,59 +158,65 @@ export function MaterialContent(props) {
               }
               </div>
             </div>
-          </div>
-        {/* } */}
+            </div>
 
 
-      <div className="gradientMaterialOverlay my-10 pl-[0.4rem]">
+      
+
+
+                {/* <div id={"materialContent-"+i} tabindex={i} onClick={() => ShowContent(i)} className="relative bg-white shadow-innerWindow rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer ">  */}
+      <div className="gradientMaterialOverlay mt-3 mb-10 pl-[0.4rem] pr-[3rem]">
+      {/* <div className="gradientMaterialOverlay my-10 pl-[0.4rem]"> */}
         <div className="flex overflow-x-scroll overflow-y-hidden scrollbar-hide">
-          {
-            singleLandmarkData.materialArray.map(
-              ({
-                _type,
-                embedMapsSRC,
-                embedYoutubeHTML,
-                url,
-                blockContent,
-                tweetEmbed,
-                embedFacebookHTML,
-                embedTiktokHTML,
-              },i) => (
-                <div id={"materialContent-"+i} tabindex={i} onClick={() => ShowContent(i)} className="relative bg-white shadow-innerWindow rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer "> 
-                  <div className="absolute top-0 w-full h-full bg-black opacity-0"></div>
-
-                  {_type === "googleMaps" ? (
-                    <iframe src={embedMapsSRC} className="h-full w-full"></iframe>
-                  ) : _type === "youtube" ? (
-                    <iframe src={embedYoutubeHTML} className="h-full w-full"></iframe>
-                  ) : _type === "imageURL" ? (
-                    <img src={url} className="h-full" />
-                  ) : _type === "image" ? (
-                    // ISSUE: IMAGE NOT RENDERED BECAUSE "URL" VALUE NOT READ
-                    <img src={_type} />
-                  ) : _type === "blockObj" ? (
-                    <div className="p-5 text-sm">
-                      <PortableText value={blockContent} components={components}/>
-                    </div>
-                  ) : 
-                  _type === "twitter" ? (
-                    <iframe
-                      border="0"
-                      frameborder="0"
-                      src={tweetEmbed}
-                      className="h-full w-full"
-                    ></iframe>
-                  ) : _type === "facebook" ? (
-                    <iframe src={embedFacebookHTML}></iframe>
-                  ) : _type === "tiktok" ? (
-                    <iframe src={embedTiktokHTML}></iframe>
-                  ) : (
-                    <div>other Material</div>
-                  )}
-                </div>
-              )
+        {
+          singleLandmarkData.materialArray.map(
+            ({
+              _type,
+              _key,
+              embedMapsSRC,
+              embedYoutubeHTML,
+              url,
+              blockContent,
+              tweetEmbed,
+              embedFacebookHTML,
+              embedTiktokHTML,
+            }) => (
+              <div onClick={ShowContent} className="relative bg-white shadow-innerWindow rounded-2xl w-auto h-[12rem] wideScreen:h-[15rem] mx-6 shrink-0 cursor-pointer overflow-hidden"> 
+              {/* overflow-scroll */}
+                <div className="absolute top-0 w-full h-full bg-black opacity-0"></div>
+                {_type === "googleMaps" ? (
+                  <iframe src={embedMapsSRC} title={_key} className="h-full w-[20rem] wideScreen:w-[28rem]"></iframe>
+                ) : _type === "youtube" ? (
+                  <iframe src={embedYoutubeHTML} title={_key} className="h-full w-[24rem] wideScreen:w-[30rem]"></iframe>
+                ) : _type === "imageURL" ? (
+                  <img src={url} alt="fo" className="h-full w-[15rem]" />
+                ) : _type === "image" ? (
+                  // ISSUE: IMAGE NOT RENDERED BECAUSE "URL" VALUE NOT READ
+                  <img alt="fo" src={_type} />
+                ) : _type === "blockObj" ? (
+                  <div className="p-5 text-sm w-[22rem]">
+                    <PortableText value={blockContent} components={components}/>
+                  </div>
+                ) : 
+                _type === "twitter" ? (
+                  <iframe
+                    border="0"
+                    frameborder="0"
+                    src={tweetEmbed}
+                    title={_key}
+                    className="h-full w-full"
+                  ></iframe>
+                ) : _type === "facebook" ? (
+                  <iframe title={_key} src={embedFacebookHTML} className="h-auto w-full"></iframe>
+                ) : _type === "tiktok" ? (
+                  <iframe title={_key} src={embedTiktokHTML} className="h-auto w-full"></iframe>
+                ) : (
+                  <div>other Material</div>
+                )}
+              </div>
             )
-          }
+          )
+        }
 
         </div>
       </div>
