@@ -877,6 +877,8 @@ function DrawMapbox(props){
             map.current.doubleClickZoom.enable();
             map.current.keyboard.enable();
             map.current.dragPan.enable();
+            map.current.touchZoomRotate.enable();
+
         } else {
             // map.current.flyTo({ zoom:3});
             if(urlPrefix === "loadmemory"){
@@ -897,6 +899,7 @@ function DrawMapbox(props){
             map.current.dragRotate.disable();
             map.current.keyboard.disable();
             map.current.dragPan.disable();
+            map.current.touchZoomRotate.disable();
         }
     }, [current_latitude, current_longitude, zoom, urlPrefix])
 
