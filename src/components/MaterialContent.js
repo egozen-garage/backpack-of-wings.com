@@ -189,7 +189,7 @@ export function MaterialContent(props) {
                 ) : _type === "youtube" ? (
                   <iframe src={embedYoutubeHTML} title={_key} className="h-full w-[24rem] wideScreen:w-[30rem]"></iframe>
                 ) : _type === "imageURL" ? (
-                  <img src={url} alt="fo" className="h-full w-[15rem]" />
+                  <img src={url} alt="fo" className="h-full w-full" />
                 ) : _type === "image" ? (
                   // ISSUE: IMAGE NOT RENDERED BECAUSE "URL" VALUE NOT READ
                   <img alt="fo" src={_type} />
