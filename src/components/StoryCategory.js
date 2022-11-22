@@ -29,14 +29,17 @@ export function StoryCategory(props) {
   return (
     <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
 
+    { singleLandmarkData ? <MaterialContent singleLandmarkData={singleLandmarkData}/> : "" }
+    {/* <MaterialContent singleLandmarkData={singleLandmarkData}/> */}
+
       {/* STORIES MATERIAL CONTAINER */}
-      <div className="gradientMaterialOverlay my-10 pl-[0.4rem]">
+      {/* <div className="gradientMaterialOverlay my-10 pl-[0.4rem]">
         <div className="flex overflow-x-scroll overflow-y-hidden scrollbar-hide">
           {singleLandmarkData ? (
             <MaterialContent singleLandmarkData={singleLandmarkData}/>
           ) : ("")}
         </div>
-      </div>
+      </div> */}
 
       {/* STORIES INPUT TEXT CONTAINER */}
       <StoryInputForm currentLandmark={landmark} />
