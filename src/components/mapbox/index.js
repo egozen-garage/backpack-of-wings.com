@@ -8,6 +8,7 @@ import sanityClient from "../../client";
 import { useLocation } from 'react-router-dom'
 // import FetchMapData from './service/FetchMapData';
 import './mapboxStyle.css';
+import birdIconFile from '../../img/jonas-small.png'
  
 import { useNavigate } from "react-router-dom";
 
@@ -582,21 +583,31 @@ function DrawMapbox(props){
                 layout: {
                     'text-field': [
                         'format', 
-                        ['get', 'date'],
-                        {
-                            // 'font-scale': 1,
-                            'text-font': ['literal', ['Apoc-Revelations-Trial Bold', 'Open Sans Regular']],
-                        },
-                        '\n',
-                        ['get', 'location'],
+                        'current location of Jonas',
                         {
                             // 'font-scale': 1,
                             'text-font': ['literal', ['Apoc-Revelations-Trial Bold', 'Open Sans Regular']],
                         },
                     ],
-                    'text-variable-anchor': ['left'],
+                    // 'text-field': [
+                    //     'format', 
+                    //     ['get', 'date'],
+                    //     {
+                    //         // 'font-scale': 1,
+                    //         'text-font': ['literal', ['Apoc-Revelations-Trial Bold', 'Open Sans Regular']],
+                    //     },
+                    //     '\n',
+                    //     ['get', 'location'],
+                    //     {
+                    //         // 'font-scale': 1,
+                    //         'text-font': ['literal', ['Apoc-Revelations-Trial Bold', 'Open Sans Regular']],
+                    //     },
+                    // ],
+                    'text-variable-anchor': ['top'],
+                    // 'text-variable-anchor': ['left'],
                     'text-radial-offset': 1,
-                    'text-justify': 'left',
+                    'text-justify': 'center',
+                    // 'text-justify': 'left',
                 }
             });
 
@@ -680,6 +691,12 @@ function DrawMapbox(props){
                 el.innerHTML = html;
                 return el.firstChild;
             }
+            const CurrentLocationIcon = () => {
+                const html = `<img src="${birdIconFile}" alt="Current location of Jonas" width="60" height="60" style="cursor: pointer;"/>`
+                const el = document.createElement('div')
+                el.innerHTML = html
+                return el.firstChild
+            }
 
 
 
@@ -687,9 +704,27 @@ function DrawMapbox(props){
             function updateLandmarks(){
                 if(!firstLoad.current) return
                 firstLoad.current = false
-                // for (let i = 0; i < landmarks.length; i++){
-                    // const landmark = landmarks
-                console.log("landmark data for marker: " + JSON.stringify(landmarks))
+
+                const birdIcon = new mapboxgl.Marker({
+                    offset: [15,-10],
+                    anchor: 'bottom-right',
+                    element: CurrentLocationIcon(),
+                    zoom:8,
+                    minzoom: 6,
+                }).setLngLat([current_longitude, current_latitude])
+                birdIcon.addTo(map.current)
+                birdIcon.getElement().addEventListener('click', () => {
+                    map.current.flyTo({
+                        center: [current_longitude, current_latitude],
+                        zoom: 12,
+                        // bearing: 130,
+                        // pitch: 75,
+                        duration: 1000, // Animate over 1 seconds
+                        essential: true // This animation is considered essential with
+                        //respect to prefers-reduced-motion
+                    });
+                });
+
                 let i = 0
                 for (const landmark of landmarks) {
                     i = i + 1
