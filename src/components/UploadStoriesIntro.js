@@ -1,5 +1,5 @@
 import React from "react";
-import AudioPlayer from "../utilities/AudioPlayer.js";
+import AudioPlayer from "../utilities/AudioPlayer";
 import { useNavigate } from "react-router-dom";
 
 import "../App.css";

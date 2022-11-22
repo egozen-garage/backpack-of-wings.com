@@ -179,7 +179,7 @@ export function StoriesData(props) {
           </span>
         </div>
         {/* SOUNDSCAPE PLAY WAVEFORM */}
-        <AudioPlayer currentLandmark={currentLandmark}></AudioPlayer>
+        <AudioPlayer></AudioPlayer>
       </div>
       <div className="px-3">
         {stories.stories.map((story, storyIndex) => (
