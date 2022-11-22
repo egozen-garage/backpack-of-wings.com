@@ -100,7 +100,7 @@ export function MaterialContent(props) {
           embedFacebookHTML,
           embedTiktokHTML,
         }) => (
-          <div onClick={ShowContent} className="relative bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer "> 
+          <div onClick={ShowContent} className="relative bg-white shadow-innerWindow rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer "> 
           {/* overflow-scroll */}
             <div className="absolute top-0 w-full h-full bg-black opacity-0"></div>
             {_type === "googleMaps" ? (
@@ -110,12 +110,12 @@ export function MaterialContent(props) {
             ) : _type === "imageURL" ? (
               <img src={url} className="h-full" />
             ) : _type === "image" ? (
-              // ISSUE: URL ITEM NOT READ
+              // ISSUE: IMAGE NOT RENDERED BECAUSE "URL" VALUE NOT READ
               <img src={_type} />
             ) : _type === "blockObj" ? (
-                // NEEDS FIXING!
-                // renderBlock(blockContent)
-              <PortableText value={blockContent} components={components}/>
+              <div className="p-5 text-sm">
+                <PortableText value={blockContent} components={components}/>
+              </div>
             ) : 
             _type === "twitter" ? (
               <iframe

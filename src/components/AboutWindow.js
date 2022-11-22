@@ -34,21 +34,23 @@ export default function AboutWindow() {
 
   return (
     <>
-      {/* BACKPACK OF WINGS BUTTON */}
-      <div className="z-50 aboutBackground fixed flex top-0 py-6 px-14">
-        <div onClick={toggleCollapsible} className="aboutContainer flex-1">
-          <button className={isOpen? "buttonActive" : "buttonInactive"}>
-            <h1 className="text-xl mx-1 py-1">
-              The Backpack of Wings: Sensory Networks
-              {isOpen && (
-                <span className="font-mono text-white pl-4">x</span>
-              )}
+      <div className="z-50 aboutBackground fixed flex flex-wrap top-0 pb-6 px-14">
+
+        {/* BACKPACK OF WINGS BUTTON */}
+        <button onClick={toggleCollapsible} className="flex-1 mt-5">
+          <div className={isOpen? "buttonActive" : "buttonInactive"}>
+            <h1 className="flex flex-wrap text-lg tablet:text-xl min-w-[12rem] mx-1 py-1">
+              <span className="mx-auto pr-2">The Backpack of Wings:</span><span className="mx-auto">Sensory Networks</span>
             </h1>
-          </button>
-        </div>
+            {isOpen && (
+              <span className="font-mono text-lg tablet:text-xl text-white pl-2 pr-1 py-1 mt-[1px] ml-auto">x</span>
+            )}
+          </div>
+        </button>
+
         {/* IMPRESSUM */}
         <div className={isOpen ? "animateOpacity show" : "animateOpacity"}>
-          <div className="flex-2 buttonInactive mx-6">
+          <div className="flex-2 buttonInactive mx-0 mobileHorizontal:mx-6 mt-5">
             <NavLink to="/impressum" onClick={toggleImpressum}>
               <h1 className="text-xl mx-2 py-1">
                 Impressum
@@ -56,7 +58,9 @@ export default function AboutWindow() {
             </NavLink>
           </div>
         </div>
+
       </div>
+
       {/* LIGHTRAY HEADER */}
       <div className={currentURL === "/" ? "dashboardLight show" : "dashboardLight"}>
       </div>
