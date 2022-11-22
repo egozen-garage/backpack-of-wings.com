@@ -12,20 +12,30 @@ export default {
       title: "Video Name",
     },
     {
-      name: "iframe",
+      name: "channel",
       type: "string",
-      title: "iframe Code",
+      title: "Video Channel",
     },
+    // {
+    //   name: "youtubeURL",
+    //   type: "url",
+    //   title: "URL",
+    // },
     {
-      name: "youtubeURL",
-      type: "url",
-      title: "URL",
+      name: "embedYoutubeHTML",
+      type: "string",
+      title: "Embed Youtube HTML",
     },
+    // {
+    //   name: "iframeSRC",
+    //   type: "string",
+    //   title: "iframe src",
+    // },
   ],
   preview: {
     select: {
       title: "videoname",
-      subtitle: "youtubeURL",
+      subtitle: "channel",
     },
   },
 };

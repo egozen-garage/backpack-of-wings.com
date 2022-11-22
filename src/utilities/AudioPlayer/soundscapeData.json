@@ -1,0 +1,53 @@
+{
+    "soundscape": [
+        {
+            "id" : 1,
+            "country": "Israel",
+            "locationName": "dudaim",
+            "locationType": "Landfill",
+            "audioURL": "localhost:3000/audioFile/1_landfill_israel.wav"
+        },
+        {
+            "id" : 2,
+            "country": "Israel",
+            "locationName": "neveeitan",
+            "locationType": "Fishpond",
+            "audioURL": "./audioFile/2_fishPonds_israel.wav"
+        },
+        {
+            "id" : 3,
+            "country": "Syria",
+            "locationName": "hama",
+            "locationType": "Agricultural Land",
+            "audioURL": "./audioFile/3_agriculturalLand_ syria_turkey.wav"
+        },
+        {
+            "id" : 4,
+            "country": "Turkey",
+            "locationName": "istanbul",
+            "locationType": "Landfill",
+            "audioURL": "./audioFile/4_landfill_istanbul.wav"
+        },
+        {
+            "id" : 5,
+            "country": "Slovakia",
+            "locationName": "lackova",
+            "locationType": "Grazing Land",
+            "audioURL": "./audioFile/5_grazingLand_slovakia.wav"
+        },
+        {
+            "id" : 6,
+            "country": "Germany",
+            "locationName": "droemling",
+            "locationType": "Bird Sanctuary",
+            "audioURL": "./audioFile/6_birdSanctuary_germany.wav"
+        },
+        {
+            "id" : 7,
+            "country": null,
+            "locationName": null,
+            "locationType": null,
+            "audioURL": "./audioFile/Short_version_all_6_tracks.wav"
+        }
+    ]
+}

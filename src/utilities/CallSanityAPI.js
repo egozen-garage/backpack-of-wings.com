@@ -2,11 +2,10 @@ import SanityClient from "../client";
 import { useEffect, useState } from "react";
 
 export default function CallSanityAPI(query) {
-    const [data, setData] = useState([]);
+    console.log("CallSanityApi")
+    const [data, setData] = useState(null);
     const [isLoaded, setIsLoaded] = useState(false);
     const [error, setError] = useState(null);
-
-    // const query = '*[_type == "landmark"]{url{current}, locationName, country}'
     useEffect(()=>{
         Promise.all([
             SanityClient.fetch(
@@ -14,8 +13,8 @@ export default function CallSanityAPI(query) {
             )
         ])
         .then(([sanityData]) => {
-            setData(sanityData);
-            setIsLoaded(true);
+                setData(sanityData);
+                setIsLoaded(true);
         })
         .catch((err) => {
             setError(err)

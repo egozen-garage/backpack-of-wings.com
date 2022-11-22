@@ -12,26 +12,36 @@ export default {
             title: "Name of Place",
         },
         {
+            name: "mapsURL",
+            type: "string",
+            title: "URL",
+        },
+        {
             name: "placeId",
             type: "string",
             title: "Place ID",
         },
         {
-            name: "googleiFrame",
+            name: "embedMapsSRC",
             type: "string",
-            title: "iframe code",
+            title: "embed HTML",
         },
         {
-            name: "googleCoordinates",
-            type: "geopoint",
-            title: "Place Coordinate",
+            name: "encodedPlusCode",
+            type: "string",
+            title: "encoded Plus Code",
         },
+        // {
+        //     name: "googleCoordinates",
+        //     type: "geopoint",
+        //     title: "Place Coordinate",
+        // },
     ],
     preview: {
         select: {
           url: "url",
           title: "placeName",
-          subtitle: "placeId",
+          subtitle: "mapsURL",
         },
       },
 };

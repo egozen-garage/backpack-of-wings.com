@@ -1,0 +1,40 @@
+/* Hide scrollbar for Chrome, Safari and Opera */
+.noScrollBar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  /* Hide scrollbar for IE, Edge and Firefox */
+  .noScrollBar {
+    -ms-overflow-style: none; /* IE and Edge */
+    scrollbar-width: none; /* Firefox */
+  }
+  
+  .soundscapeButton {
+    z-index: 60;
+    padding: 1.25rem 0rem;
+    cursor:   url(./img/cursor-play.svg), 
+              url(./img/cursor-play.png), 
+              url(./img/cursor-play.jpg), pointer;
+  }
+
+  .soundscapeButton.pause {
+    cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
+    /* Safari */
+    -webkit-cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
+    /* Firefox */
+    -moz-cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
+    /* IE */
+    -ms-cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
+    /* Opera */
+    -o-cursor: url(./img/cursor-pause.svg), 
+            url(./img/cursor-pause.png), 
+            url(./img/cursor-pause.jpg), pointer;
+  }

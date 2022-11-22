@@ -13,10 +13,12 @@ import movebankData from './movebankData'
 import youtube from './youtube'
 import twitter from './twitter'
 import imageURL from './imageURL'
-import googleReviews from './googleReviews'
+// import googleReviews from './googleReviews'
 import googleMaps from './googleMaps'
 import movebank from './movebank'
 import movebankSingleLocation from './movebankSingleLocation'
+import facebook from './facebook'
+import tiktok from './tiktok'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -33,8 +35,10 @@ export default createSchema({
     movebankData,
     youtube,
     twitter,
+    facebook,
+    tiktok,
     imageURL,
-    googleReviews,
+    // googleReviews,
     googleMaps,
     movebank,
     movebankSingleLocation,

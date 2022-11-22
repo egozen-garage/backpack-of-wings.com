@@ -1,9 +1,20 @@
 .gradientBackground {
+  transition: opacity 1s ease-in;
+  transition-delay: 1s;
+  position: fixed;
+  z-index: 90;
+  height: 100vh;
+  width: 100vw;
+  opacity: 1;
   background: linear-gradient(-45deg, #f0b4fc, #e6e6e6, #a3dcf5, #e6e6e6);
   background-size: 400% 400%;
   -webkit-animation: Gradient 15s ease infinite;
   -moz-animation: Gradient 15s ease infinite;
   animation: Gradient 15s ease infinite;
+}
+
+.gradientBackground.hide {
+  opacity: 0;
 }
 
 .gradientBGJonasIntro {
@@ -14,14 +25,13 @@
   animation: Gradient 15s ease infinite;
 }
 
+.animatePopupClose {
+  transition: height .2s ease-out, opacity .5s ease-out;
+}
+
 .gradientLoadMemories {
-  background: rgb(207, 207, 207);
-  background: linear-gradient(
-    180deg,
-    rgba(207, 207, 207, 1) 14%,
-    rgba(195, 211, 218, 1) 55%,
-    rgba(163, 220, 245, 1) 100%
-  );
+  background: rgb(255,207,207);
+  background: linear-gradient(270deg, rgba(255,207,207,1) 0%, rgba(217,199,220,1) 65%, rgba(255,180,252,1) 100%);
 }
 
 .gradientUploadStory {
@@ -37,9 +47,40 @@
 .gradientStoryOverlay {
   -webkit-mask-image: -webkit-gradient(linear, left 70%, left bottom, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
+.gradientFormUploadOverlay {
+  -webkit-mask-image: -webkit-gradient(linear, left 10%, left top, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+}
 
 .gradientJonasIntroOverlay {
-  -webkit-mask-image: -webkit-gradient(linear, left 70%, left 90%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+  -webkit-mask-image: -webkit-gradient(linear, left 50%, left 90%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
+}
+
+.gradientLandingPageOverlay {
+  -webkit-mask-image: -webkit-gradient(
+    linear, left top, left bottom,
+    color-stop(0%, rgba(0,0,0,0)),
+    color-stop(10%, rgba(0,0,0,1)),
+    color-stop(50%, rgba(0,0,0,1)),
+    color-stop(95%, rgba(0,0,0,0))
+  );
+}
+
+.gradientAboutPageOverlay {
+  -webkit-mask-image: -webkit-gradient(
+    linear, left top, left bottom,
+    color-stop(0%, rgba(0,0,0,1)),
+    color-stop(90%, rgba(0,0,0,1)),
+    color-stop(100%, rgba(0,0,0,0))
+  );
+}
+.gradientLandingPageOverlay {
+  -webkit-mask-image: -webkit-gradient(
+    linear, left top, left bottom,
+    color-stop(0%, rgba(0,0,0,0)),
+    color-stop(10%, rgba(0,0,0,1)),
+    color-stop(50%, rgba(0,0,0,1)),
+    color-stop(95%, rgba(0,0,0,0))
+  );
 }
 
 .gradientMaterialOverlay {
@@ -81,12 +122,8 @@
 }
 
 .gradientImpressum {
-  background: rgb(255, 255, 255);
-  background: linear-gradient(
-    0deg,
-    rgba(255, 255, 255, 0.9514180672268907) 0%,
-    rgba(0, 0, 0, 0.9430147058823529) 100%
-  );
+  background: rgb(60,48,48);
+  background: linear-gradient(180deg, rgba(60,48,48,1) 0%, rgba(95,90,92,0.95) 30%, rgba(207,225,232,0.95) 100%);
 }
 
 .gradientPlayer {
@@ -134,4 +171,22 @@
   100% {
     background-position: 0% 50%;
   }
+}
+
+
+/* MEDIA QUERIES */
+
+
+/* for Mobile HORIZONTAL 480px and above */
+@media all and (min-width: 480px) {
+  .gradientLoadMemories {
+    background: rgb(207, 207, 207);
+    background: linear-gradient(
+      180deg,
+      rgba(207, 207, 207, 1) 14%,
+      rgba(195, 211, 218, 1) 55%,
+      rgba(163, 220, 245, 1) 100%
+    );
+  }
+  
 }

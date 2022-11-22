@@ -7,7 +7,7 @@ import sanityClient from "../../client";
 // import iconCurrentLocation from "../img/current-location.svg"
 import { useLocation } from 'react-router-dom'
 // import FetchMapData from './service/FetchMapData';
-import './mapboxStyle.css'
+import './mapboxStyle.css';
  
 import { useNavigate } from "react-router-dom";
 
@@ -18,7 +18,7 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYXJtaW5hcm5kdCIsImEiOiJjbDh2b2lhM2owZzE2M3dxd
 
 // const mapData = FetchMapData() // fetch relevant data for map
 
-export default function Mapbox() { 
+export default function Mapbox(props) { 
     console.log("CALL Mapbox")
     let dataReceived = false;
 
@@ -37,7 +37,7 @@ export default function Mapbox() {
                     fetch(apiUrl).then((response) => response.json()),
                     sanityClient.fetch(
                         // *[dateTime(_updatedAt) > dateTime(now()) - 60*60*24*7] // Updated within the past week
-                        `*[_type == "weatherData" && dateTime(_updatedAt) > dateTime(now()) - 60*60]{
+                        `*[_type == "weatherData" && dateTime(_updatedAt) > dateTime(now()) - 60*60*2]{
                             temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description, timestamp
                         }[0]`
                         // `*[_type == "weatherData"]{
@@ -54,6 +54,7 @@ export default function Mapbox() {
                     // setLandmark(landmark);
                     // setDataReady(true);
                     setMapData([movebankData, weatherData, landmark])
+                    console.log("FetchMapData: Api Data has been called" + JSON.stringify(weatherData))
                     console.log("FetchMapData: Api Data has been called")
                 })
                 .catch((err) => {
@@ -77,13 +78,15 @@ export default function Mapbox() {
         // console.log("data arrived " + JSON.stringify(mapData[2]))
         dataReceived = true;
         // console.log("bird data 30 days: " + movebankData[1].location_long)
-        return <DrawMapbox mapData={mapData}/>
+        return <DrawMapbox mapData={mapData} storyIds={props.storyIds}/>
     }
 }
 
 
 
 function DrawMapbox(props){
+    // const { landmark } = useParams()
+
     const mapContainer = useRef(null);
     const weaterContainer = useRef(null);
     const map = useRef(null);
@@ -227,7 +230,21 @@ function DrawMapbox(props){
 
 
 
-
+    function RandomUrlEndpoint(MarkerLandmark){
+        const landmarkNumber =    MarkerLandmark === "droemling" ? 0 : 
+                            MarkerLandmark === "lackova" ? 1 :
+                            MarkerLandmark === "istanbul" ? 2 :
+                            MarkerLandmark === "hama" ? 3 :
+                            MarkerLandmark === "neveeitan" ? 4 :
+                            MarkerLandmark === "dudaimsite" ? 5 : 0
+        // const randomNumber = Math.floor(Math.random() * 5)
+        // const urlLandmark = props.storyIds[randomNumber].ids[0].landmark
+        const amountOfIds = props.storyIds[landmarkNumber].ids.length
+        const storyId = props.storyIds[landmarkNumber].ids[Math.floor(Math.random() * amountOfIds)]._id
+        const urlEndpoint = "/loadmemory/" + MarkerLandmark + "/" + storyId
+        console.log("mapbox marker url: " + urlEndpoint)
+        navigate(urlEndpoint)
+    }
 
     // load map and project data
     useEffect(() => {
@@ -544,16 +561,7 @@ function DrawMapbox(props){
                 type: 'circle',
                 source: 'last-location',
                 id: 'last-location',
-                layout: {
-                    // 'text-field': ['get', 'description'],
-                    // 'text-variable-anchor': ['left'],
-                    // 'text-radial-offset': 0.5,
-                //     // 'text-justify': 'center',
-                //     // 'icon-image': ['get', 'icon'],
-                //     // 'icon-size': 0.3,
-                //     // 'icon-allow-overlap': true,
-                //     // 'text-allow-overlap': true,
-                },
+                minzoom: 6,
                 paint: {
                     'circle-radius': 10,
                     // 'circle-color': 'rgba(' + pathRGB + ',1)',
@@ -564,18 +572,13 @@ function DrawMapbox(props){
                         11, 'rgba(' + pathRGB + ',1)', // When zoom is 12 or higher, set opacit to 0
                         12, 'rgb(249,254,30)', // When zoom is 11 or less, set opacit to 1
                     ],
-                    // 'circle-color': 'rgba(0,204,255,1)',
-                    // 'circle-color': '#00ccff',
-                    // "text-color": 'rgba(' + pathRGB + ',1)',
-                    // "text-halo-color": "black",
-                    // "text-halo-width": 1,
-                    // "circle-opacity": 1
                 }
             });
             map.current.addLayer({
                 type: 'symbol',
                 source: 'last-location',
                 id: 'last-location-text',
+                minzoom: 6,
                 layout: {
                     'text-field': [
                         'format', 
@@ -594,7 +597,7 @@ function DrawMapbox(props){
                     'text-variable-anchor': ['left'],
                     'text-radial-offset': 1,
                     'text-justify': 'left',
-                },
+                }
             });
 
             // MAP INTERACTIONS
@@ -603,7 +606,7 @@ function DrawMapbox(props){
                 map.current.getCanvas().style.cursor = "pointer";
             });
             map.current.on("mouseleave", 'last-location', () => {
-                map.current.getCanvas().style.cursor = "default";
+                map.current.getCanvas().style.cursor = "grab";
             });
             map.current.on('click', 'last-location', (e) => {
                 // navigate('/'+e.features[0].properties.url)
@@ -625,7 +628,7 @@ function DrawMapbox(props){
                 map.current.getCanvas().style.cursor = "pointer";
             });
             map.current.on("mouseleave", 'last-location-text', () => {
-                map.current.getCanvas().style.cursor = "default";
+                map.current.getCanvas().style.cursor = "grab";
             });
             map.current.on('click', 'last-location-text', (e) => {
                 // navigate('/'+e.features[0].properties.url)
@@ -643,6 +646,18 @@ function DrawMapbox(props){
                 // setCurrentRoute(e.features[0].properties.description)
                 return 
             });
+            // map.current.on('click', 'water', (e) => {
+            //     navigate('/')
+            //     return 
+            // });
+            // map.current.on('click', 'hillshade', (e) => {
+            //     navigate('/')
+            //     return 
+            // });
+            map.current.on('click', 'land', (e) => {
+                navigate('/')
+                return 
+            });
 
             map.current.on('resize', () => {
                 map.current.resize()
@@ -654,9 +669,9 @@ function DrawMapbox(props){
             // });
 
 
-            function LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color){
+            function LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color, landmarkId, selectedLandmark){
                 console.log("landmarks properties: " + i)
-                let html = `<div tabindex="${i}" class="landmarkMarker ${markerClassName} ${hideClassOnLoad} ">
+                let html = `<div tabindex="${i}" id="${landmarkId}" class="landmarkMarker ${selectedLandmark} ${markerClassName} ${hideClassOnLoad} ">
                                     <div style="background-color: ${color}; "class="landmarkCircle"></div>
                                     <div class="landmarkText">${landmarkForHtml.properties.description}</div>
                      
@@ -666,22 +681,28 @@ function DrawMapbox(props){
                 return el.firstChild;
             }
 
+
+
+
             function updateLandmarks(){
                 if(!firstLoad.current) return
                 firstLoad.current = false
                 // for (let i = 0; i < landmarks.length; i++){
                     // const landmark = landmarks
+                console.log("landmark data for marker: " + JSON.stringify(landmarks))
                 let i = 0
                 for (const landmark of landmarks) {
                     i = i + 1
                     const hideClassOnLoad = urlPrefix === "uploadstory" ? "hideElement" : ""
-                    // console.log("updateLandmarks: " + feature.geometry.coordinates)
+                    const selectedLandmark = urlLandmarkMemo === landmark.properties.url ? "selectedLandmark" : ""
+                    // console.log("loadmemeory selected - urlLandmark: " + urlLandmarkMemo + " landmark.properties.url: " + landmark.properties.url)
+                    const landmarkId = "loadmemory-" + landmark.properties.url
                     const markerClassName = "load-memories"
                     const coords = landmark.geometry.coordinates
                     const urlEndpoint = landmark.properties.url
                     const landmarkForHtml = landmark
                     const color = "rgb(163, 220, 245)"
-                    const divMarker = LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color)
+                    const divMarker = LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color, landmarkId, selectedLandmark)
                     const offset = landmark.properties.counter === 1 ? [-10, 20] : [-10,0]
                     const marker = new mapboxgl.Marker({
                         // offset: 100,
@@ -689,21 +710,25 @@ function DrawMapbox(props){
                         offset: offset,
                         element: divMarker
                     }).setLngLat(coords)
-                    marker.addTo(map.current);;
+                    marker.addTo(map.current)
                     marker.getElement().addEventListener('click', () => {
-                        navigate("/loadmemory/" + urlEndpoint)
+                        // navigate("/loadmemory/" + urlEndpoint)
+                        RandomUrlEndpoint(urlEndpoint)
                     });
+                    
                 }
                 for (const landmark of landmarks) {
                     i = i + 1
                     const hideClassOnLoad = urlPrefix === "loadmemory" ? "hideElement" : urlPrefix === "" ? "hideElement" : ""
+                    const selectedLandmark = urlLandmarkMemo === landmark.properties.url ? "selectedLandmark" : ""
                     // console.log("updateLandmarks: " + feature.geometry.coordinates)
+                    const landmarkId = "uploadstory-" + landmark.properties.url
                     const markerClassName = "upload-stories"
                     const coords = landmark.geometry.coordinates
                     const urlEndpoint = landmark.properties.url
                     const landmarkForHtml = landmark
                     const color = "rgb(240, 180, 252)"
-                    const divMarker = LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color)
+                    const divMarker = LandmarkHTML(landmarkForHtml, markerClassName, hideClassOnLoad, i, color, landmarkId, selectedLandmark)
                     const offset = landmark.properties.counter === 1 ? [-10, 20] : [-10,0]
                     const marker = new mapboxgl.Marker({
                         // offset: 100,
@@ -743,7 +768,12 @@ function DrawMapbox(props){
         console.log("url prefix: " + typeof prefix)
         return prefix
     }, [location.pathname])
-
+    const urlLandmarkMemo = useMemo(() => {
+        const currentPath = location.pathname
+        const prefix = currentPath.split('/')[2]
+        console.log("url prefix: " + prefix)
+        return prefix
+    }, [location.pathname])
     useEffect(() => {
         if(urlPrefix === "uploadstory"){
             // if(document.getElementsByClassName("load-memories hideElement")) return
@@ -767,6 +797,52 @@ function DrawMapbox(props){
             }
         }
     }, [navigate, urlPrefix])
+
+    useEffect(() => {
+        console.log("new landmark: " + urlLandmarkMemo)
+        for(let i = 0; i < document.getElementsByClassName("landmarkMarker").length; i++){
+            document.getElementsByClassName("landmarkMarker")[i].classList.remove("selectedLandmark")
+        }
+        if(document.getElementById("loadmemory-droemling")){
+            if(urlLandmarkMemo === "droemling"){
+                document.getElementById("loadmemory-droemling").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-droemling").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "lackova"){
+                document.getElementById("loadmemory-lackova").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-lackova").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "istanbul"){
+                document.getElementById("loadmemory-istanbul").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-istanbul").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "hama"){
+                document.getElementById("loadmemory-hama").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-hama").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "neveeitan"){
+                document.getElementById("loadmemory-neveeitan").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-neveeitan").className += " selectedLandmark "
+            }
+            if(urlLandmarkMemo === "dudaimsite"){
+                document.getElementById("loadmemory-dudaimsite").classList.add("selectedLandmark")
+                document.getElementById("uploadstory-dudaimsite").className += " selectedLandmark "
+            }
+        }
+
+    }, [urlLandmarkMemo])
+
+    // function ClickLandmark(urlEndpoint){
+    //     console.log("www urlEndpoint: ", urlEndpoint)
+    //     const currentPath = location.pathname
+
+
+    //     console.log("www urlPrefix: ", currentPath)
+    //     // map.current.on('click', 'story-locations', (e) => {
+    //     //     console.log("url: " + urlPrefix)
+    //     //     navigate( urlPrefix + '/' + e.features[0].properties.url);
+    //     // });
+    // }
 
 
     // window.setTimeout(()=>map.current.resize(), 500)
@@ -811,68 +887,34 @@ function DrawMapbox(props){
         }
     }, [current_latitude, current_longitude, zoom, urlPrefix])
 
+    // NEEED FIXING: SPACE BETWEEN WEATHER ITEMS (log 14.11.22, 14:30)
+    // const weatherContainerStyle = {
+    //     position: 'fixed',
+    //     zIndex: 3,
+    //     bottom: '40px',
+    //     paddingLeft: '60px',
+    //     paddingRight: '60px',
+    //     display: 'flex',
+    //     flexWrap: 'nowrap',
+    //     justifyContent: 'space-between',
+    //     width: '100vw',
+    // }
 
+    const weatherContainerStyle = "fixed z-10 bottom-7 px-14 flex flex-wrap-nowrap place-content-between w-screen"
 
-
-
-    const weaterContainerStyle= {
-        position: 'fixed',
-        zIndex: 3,
-        bottom: '40px',
-        marginLeft: '60px',
-        marginRight: '60px',
-        // backgroundColor: '#fff',
-    }
-    const mapContainerStyle ={
-        transition: 'all 0.3s ease-in',
+    const mapStyle ={
         height: '100vh',
         // marginLeft:  urlPrefix === "loadmemory" ? '50vw'  : urlPrefix === "uploadstory" ? '0'    : '0',
         // marginRight: urlPrefix === "loadmemory" ? '0'     : urlPrefix === "uploadstory" ? '50vw' : '0',
         // transform: urlPrefix === "loadmemory" ? 'translateX(50%)'     : urlPrefix === "uploadstory" ? 'translateX(-50%)' : 'translateX(0)',
     }
-
-    // const [interval, setInterval] = useState()
-    // useEffect(() => {
-    //     let interval;
-    //     mapContainer.current.addEventListener("transitionstart", (e) => {
-    //         // on dubble click it goes to infinity !!!
-    //         // interval = setInterval(() => {
-    //         //     map.current.resize()
-    //         //     console.log('Transition This will run every second!');
-    //         //   }, 10);
-    //         //   window.setTimeout(()=> clearInterval(interval), 2000)
-            
-    //     })
-    //     mapContainer.current.addEventListener("transitionend", (e) => {
-    //         // map.current.resize()
-    //         // console.log("transition end")
-    //         clearInterval(interval);
-    //         interval = ""
-    //         if(document.getElementById("loadmemory")){
-    //             map.current.fitBounds([
-    //                 [6, 0], // southwestern corner of the bounds
-    //                 [50, 60], // northeastern corner of the bounds
-    //             ]);
-    //         } 
-    //         else {
-    //             map.current.flyTo({center: [current_longitude, current_latitude], zoom:12});
-    //         }
-    //     })
-    //     window.addEventListener("resize", () => {
-    //         console.log("transition window resize")
-    //         clearInterval(interval);
-    //         interval = ""
-    //     })
-    // // eslint-disable-next-line react-hooks/exhaustive-deps
-    // }, [])
-
-
-
+    const mapClasses = "top-0 w-100 h-200 map-container mx-0 mobileHorizontal:mx-9 "
+    
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
 
-    const mapStyle = "top-0 right-0 map-container"
+    // const mapStyle = "top-0 right-0 map-container"
 
-    const weatherObject = "mr-10 font-mono text-sm "
+    const weatherObject = "weatherObject mr-10 font-mono text-2xs xl:text-xs 2xl:text-sm"
 
     
     function timestamp2Time(timestamp){
@@ -883,18 +925,17 @@ function DrawMapbox(props){
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description
 
     return (
-        <div style={{paddingLeft: "2.25rem", paddingRight: "2.25rem"}}>
-            { zoom ? "" :
-            <div ref={weaterContainer} style={weaterContainerStyle}>
-                <span className={weatherObject}>Jonas Location: {weatherData.city_name}, {weatherData.country}</span>
-                <span className={weatherObject}>Sunrise {timestamp2Time(weatherData.sunrise)}</span>
-                <span className={weatherObject}>Sunset {timestamp2Time(weatherData.sunset)}</span>
-                <span className={weatherObject}>Weather condition: {weatherData.weather_description}</span>
-                <span className={weatherObject}>{weatherData.temp} °C</span>
-                <span className={weatherObject}>Air humidity: {weatherData.humidity} g/m3</span>
+        <div>
+            { zoom || !weatherData ? "" :
+            <div ref={weaterContainer} className={weatherContainerStyle}>
+                <span className={weatherObject}>Jonas Location: <span className='font-mono inline-block'>{weatherData.city_name}, {weatherData.country}</span></span>
+                <span className={weatherObject}>Sunrise: {timestamp2Time(weatherData.sunrise)}</span>
+                <span className={weatherObject}>Sunset: {timestamp2Time(weatherData.sunset)}</span>
+                <span className={weatherObject}>Weather condition: <span className='font-mono inline-block'>{weatherData.weather_description}</span></span>
+                <span className={weatherObject}>Temperature: <span className='font-mono inline-block'>{weatherData.temp} °C</span></span>
+                <span className={weatherObject}>Air humidity: <span className='font-mono inline-block'>{weatherData.humidity} g/m3</span></span>
             </div> }
-            <div id="map" ref={mapContainer} className={mapStyle} style={mapContainerStyle} />
-            {/* <div ref={mapContainer} className={mapStyle} style={{...mapContainerStyle, ...mapZoomStyle}}/> */}
+            <div ref={mapContainer} className={mapClasses} style={mapStyle} />
         </div>
     );
 }
