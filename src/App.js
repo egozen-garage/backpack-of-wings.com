@@ -115,7 +115,7 @@ function App() {
           style={{ objectFit: "cover" }}
         >
           {/* <div className="fixed z-0 w-full h-full px-7"> */}
-          <Mapbox storyIds={storyIds} />
+          {/* <Mapbox storyIds={storyIds} /> */}
         </div>
 
         <Routes>

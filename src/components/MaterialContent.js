@@ -28,6 +28,7 @@ const ImageComponent = ({value, isInline}) => {
       style={{
         // Display alongside text if image appears inside a block text span
         display: isInline ? 'inline-block' : 'block',
+        width: '100%',
 
         // Avoid jumping around with aspect-ratio CSS property
         aspectRatio: width / height,
@@ -45,26 +46,7 @@ const components = {
 }
 
 export function MaterialContent(props) {
-  console.log("material content rendered")
   let singleLandmarkData = props.singleLandmarkData;
-  // const blockImageComponent = ({ value }) => {
-  //   return <pre>{value}</pre>;
-  // };
-  // const blockComponents = {
-  //   types: {
-  //     // ISSUE: STOPS TO RENDER RIGHT HERE, PROBLEM WITH REQUESTING "IMAGE" TYPE?
-  //     image: blockImageComponent,
-  //   },
-  // };
-
-//   function toPlainText(children = []) {
-//     return children
-//     .map(child => {
-//         return (
-//             <p>{child.text}</p>
-//         )
-//         })
-//   }
 
   function renderTextBlock(children = []) {
     return children
@@ -91,8 +73,22 @@ export function MaterialContent(props) {
 
 //   console.log("MaterialContent = " + singleLandmarkData);
 
+
+  const ShowContent = () => {
+    console.log("open content")
+  }
+
+  
   return (
     <>
+      {/* <div className="previewMaterial fixed h-full bg-white z-60 pt-30 flex top-0 bottom-0 right-0 left-0 items-center justify-center">
+        <div className="fixed flex flex-col drop-shadow-lg mx-20 max-w-screen-sm w-full bg-white h-4/5 rounded-3xl p-8">
+          <div className="noScrollBar font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto">
+          content
+          </div>
+        </div>
+      </div> */}
+
       {singleLandmarkData.materialArray.map(
         ({
           _type,
@@ -104,7 +100,9 @@ export function MaterialContent(props) {
           embedFacebookHTML,
           embedTiktokHTML,
         }) => (
-          <div className="bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 overflow-scroll">
+          <div onClick={ShowContent} className="relative bg-white rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer "> 
+          {/* overflow-scroll */}
+            <div className="absolute top-0 w-full h-full bg-black opacity-0"></div>
             {_type === "googleMaps" ? (
               <iframe src={embedMapsSRC} className="h-full w-full"></iframe>
             ) : _type === "youtube" ? (
