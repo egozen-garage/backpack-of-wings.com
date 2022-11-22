@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
-import progressbar from "../../img/audio-progressbar-01-black.svg";
+import progressbar from "./audio-progressbar-01-black.svg";
 import dudaimsite from "./audioFiles/1_landfill_israel.wav";
 import neveeitan from "./audioFiles/2_fishPonds_israel.wav";
 import hama from "./audioFiles/3_agriculturalLand_ syria_turkey.wav";

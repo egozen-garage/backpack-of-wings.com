@@ -131,28 +131,45 @@ export function MaterialContent(props) {
               ) => (
                 <div
                   id={"previewContent-" + i}
-                  tabindex={i}
+                  tabIndex={i}
                   className="previewMaterial hidden relative"
                 >
                   {_type === "googleMaps" ? (
                     <iframe
                       src={embedMapsSRC}
                       title={"popUp." + _key}
+                      // key={"popUp." + _key}
                       className="h-full w-full"
                     ></iframe>
                   ) : _type === "youtube" ? (
                     <iframe
                       src={embedYoutubeHTML}
-                      title={"popUp." + _key}
                       className="h-full w-full"
+                      title={"popUp." + _key}
+                      // key={"popUp." + _key}
                     ></iframe>
                   ) : _type === "imageURL" ? (
-                    <img src={url} className="h-full" alt="fo" />
+                    <img 
+                      src={url} 
+                      className="h-full" 
+                      alt="fo" 
+                      title={"popUp." + _key}
+                      // key={"popUp." + _key}
+                      />
                   ) : _type === "image" ? (
                     // ISSUE: IMAGE NOT RENDERED BECAUSE "URL" VALUE NOT READ
-                    <img src={_type} alt="fo" />
+                    <img 
+                      src={_type} 
+                      alt="fo" 
+                      title={"popUp." + _key}
+                      // key={"popUp." + _key}
+                      />
                   ) : _type === "blockObj" ? (
-                    <div className="p-5 text-sm">
+                    <div 
+                      className="p-5 text-sm" 
+                      title={"popUp." + _key}
+                      // key={"popUp." + _key}
+                      >
                       <PortableText
                         value={blockContent}
                         components={components}
@@ -161,23 +178,24 @@ export function MaterialContent(props) {
                   ) : _type === "twitter" ? (
                     <iframe
                       border="0"
-                      frameborder="0"
+                      frameBorder="0"
                       src={tweetEmbed}
                       className="h-full w-full"
                       title={"popUp." + _key}
+                      // key={"popUp." + _key}
                     ></iframe>
                   ) : _type === "facebook" ? (
                     <iframe
                       src={embedFacebookHTML}
                       title={"popUp." + _key}
+                      // key={"popUp." + _key}
                     ></iframe>
-                  ) : _type === "tiktok" ? (
+                  ) : _type === "tiktok" && (
                     <iframe
                       src={embedTiktokHTML}
                       title={"popUp." + _key}
+                      // key={"popUp." + _key}
                     ></iframe>
-                  ) : (
-                    <div>other Material</div>
                   )}
                 </div>
               )
@@ -207,7 +225,7 @@ export function MaterialContent(props) {
             ) => (
               <div
                 id={"materialContent-" + i}
-                tabindex={i}
+                tabIndex={i}
                 onClick={() => ShowContent(i)}
                 className="relative bg-white shadow-innerWindow rounded-2xl w-auto h-[200px] mx-6 shrink-0 p-2 cursor-pointer overflow-hidden"
               >
@@ -218,21 +236,36 @@ export function MaterialContent(props) {
                   <iframe
                     src={embedMapsSRC}
                     title={_key}
+                    // key={_key}
                     className="h-full w-[20rem] wideScreen:w-[28rem]"
                   ></iframe>
                 ) : _type === "youtube" ? (
                   <iframe
                     src={embedYoutubeHTML}
                     title={_key}
+                    // key={_key}
                     className="h-full w-[24rem] wideScreen:w-[30rem]"
                   ></iframe>
                 ) : _type === "imageURL" ? (
-                  <img src={url} alt="fo" className="h-full w-full" />
+                  <img 
+                    src={url} alt="fo" 
+                    title={_key} 
+                    // key={_key}
+                    className="h-full w-full" />
                 ) : _type === "image" ? (
                   // ISSUE: IMAGE NOT RENDERED BECAUSE "URL" VALUE NOT READ
-                  <img alt="fo" src={_type} />
+                  <img 
+                    alt="fo" 
+                    src={_type} 
+                    title={_key}
+                    // key={_key}
+                    />
                 ) : _type === "blockObj" ? (
-                  <div className="p-5 text-sm w-[22rem]">
+                  <div 
+                    className="p-5 text-sm w-[22rem]" 
+                    title={_key}
+                    // key={_key}
+                    >
                     <PortableText
                       value={blockContent}
                       components={components}
@@ -241,25 +274,26 @@ export function MaterialContent(props) {
                 ) : _type === "twitter" ? (
                   <iframe
                     border="0"
-                    frameborder="0"
+                    frameBorder="0"
                     src={tweetEmbed}
                     title={_key}
+                    // key={_key}
                     className="h-full w-full"
                   ></iframe>
                 ) : _type === "facebook" ? (
                   <iframe
                     title={_key}
+                    // key={_key}
                     src={embedFacebookHTML}
                     className="h-auto w-full"
                   ></iframe>
-                ) : _type === "tiktok" ? (
+                ) : _type === "tiktok" && (
                   <iframe
                     title={_key}
+                    // key={_key}
                     src={embedTiktokHTML}
                     className="h-auto w-full"
                   ></iframe>
-                ) : (
-                  <div>other Material</div>
                 )}
               </div>
             )
