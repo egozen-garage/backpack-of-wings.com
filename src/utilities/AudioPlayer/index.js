@@ -1,4 +1,4 @@
-import React, { Component, useEffect, useState } from "react";
+import React, { Component, useEffect, useState, useRef } from "react";
 import { useParams } from "react-router-dom";
 
 import progressbar from "../../img/audio-progressbar-01-black.svg";
@@ -18,15 +18,10 @@ export function AudioPlayer() {
 
   // by putting the Audio() in the State, we prevent react in refreshing from each render
   const [audio, setAudio] = useState(null)
-  console.log("check audio state")
-  
-  const [pauseAudio, setPauseAudio] = useState(false)
-  if (pauseAudio) audio.pause()
-  console.log("player is, render pauseAudio value:" + pauseAudio)
-  
+  console.log("check audio landmark: " + landmark)
+
+  const audioRef = useRef()
   useEffect(() => {
-    setPauseAudio(true)
-    
     const trackArray = [
       {"landmark":"dudaimsite", "track":dudaimsite}, 
       {"landmark":"neveeitan", "track":neveeitan}, 
@@ -34,34 +29,33 @@ export function AudioPlayer() {
       {"landmark":"istanbul", "track":istanbul}, 
       {"landmark":"lackova", "track":lackova}, 
       {"landmark":"droemling", "track":droemling}, 
-      {"landmark":"undefined", "track":all} 
+      {"landmark":undefined, "track":all} 
       ]
       for (const x in trackArray) {
         if (landmark === trackArray[x].landmark) {
-          setAudio(new Audio(trackArray[x].track))
-          console.log("player is, audio selected" + trackArray[x].track)
-          // setTrack(trackArray[x].track)
-        } else setAudio(new Audio(all))
+          setAudio(trackArray[x].track)
+        } 
+      }
+      return () => {
+        setIsPlaying(false)
       }
     }, [landmark])
-    
+
+
     // Main function to handle both play and pause operations
     function playPause() {
-      setPauseAudio(false)
-
-  
       if (isPlaying) {
         // Pause track if playing
-        audio.pause();
+        audioRef.current.pause();
         setIsPlaying(false)
         console.log("player is pausing ");
       } else {
         // Play track if paused
-        audio.play();
+        audioRef.current.play();
         setIsPlaying(true)
         console.log("player is playing ");
       }          
-      }
+    }
 
   return (
     <>
@@ -69,8 +63,9 @@ export function AudioPlayer() {
       <div
         className={isPlaying ? "soundscapeButton pause" : "soundscapeButton"}
         onClick={playPause}
-      >
-        <img
+      > 
+      <audio src={audio} ref={audioRef} />
+        <img 
           className="object-cover h-[4rem] wideScreen:h-[5rem]"
           src={progressbar}
           alt="progressbar"
