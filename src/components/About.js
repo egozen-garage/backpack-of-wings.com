@@ -1,6 +1,6 @@
 import React from "react";
 import jonas from "../img/Jonas-2-glow.png";
-import Typewriter from "typewriter-effect/dist/core";
+// import Typewriter from "typewriter-effect/dist/core";
 
 export function About() {
 

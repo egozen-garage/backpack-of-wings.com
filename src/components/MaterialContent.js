@@ -1,5 +1,5 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 // import { getImageDimensions } from "@sanity/asset-utils";
 // import urlBuilder from "@sanity/image-url";
 // import { ImageUrlBuilder } from "@sanity/image-url";
@@ -48,14 +48,14 @@ const components = {
 export function MaterialContent(props) {
   let singleLandmarkData = props.singleLandmarkData;
 
-  function renderTextBlock(children = []) {
-    return children
-    .map(child => {
-            return (
-                <p className="p-2">{child.text}</p>
-            )
-        })
-  }
+  // function renderTextBlock(children = []) {
+  //   return children
+  //   .map(child => {
+  //           return (
+  //               <p className="p-2">{child.text}</p>
+  //           )
+  //       })
+  // }
 
 //   const portableComponent = {
 //     block: {
@@ -92,6 +92,7 @@ export function MaterialContent(props) {
       {singleLandmarkData.materialArray.map(
         ({
           _type,
+          _key,
           embedMapsSRC,
           embedYoutubeHTML,
           url,
@@ -100,20 +101,20 @@ export function MaterialContent(props) {
           embedFacebookHTML,
           embedTiktokHTML,
         }) => (
-          <div onClick={ShowContent} className="relative bg-white shadow-innerWindow rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer "> 
+          <div onClick={ShowContent} className="relative bg-white shadow-innerWindow rounded-2xl w-auto h-[12rem] wideScreen:h-[15rem] mx-6 shrink-0 cursor-pointer overflow-hidden"> 
           {/* overflow-scroll */}
             <div className="absolute top-0 w-full h-full bg-black opacity-0"></div>
             {_type === "googleMaps" ? (
-              <iframe src={embedMapsSRC} className="h-full w-full"></iframe>
+              <iframe src={embedMapsSRC} title={_key} className="h-full w-[20rem] wideScreen:w-[28rem]"></iframe>
             ) : _type === "youtube" ? (
-              <iframe src={embedYoutubeHTML} className="h-full w-full"></iframe>
+              <iframe src={embedYoutubeHTML} title={_key} className="h-full w-[24rem] wideScreen:w-[30rem]"></iframe>
             ) : _type === "imageURL" ? (
-              <img src={url} className="h-full" />
+              <img src={url} alt="fo" className="h-full w-[15rem]" />
             ) : _type === "image" ? (
               // ISSUE: IMAGE NOT RENDERED BECAUSE "URL" VALUE NOT READ
-              <img src={_type} />
+              <img alt="fo" src={_type} />
             ) : _type === "blockObj" ? (
-              <div className="p-5 text-sm">
+              <div className="p-5 text-sm w-[22rem]">
                 <PortableText value={blockContent} components={components}/>
               </div>
             ) : 
@@ -122,12 +123,13 @@ export function MaterialContent(props) {
                 border="0"
                 frameborder="0"
                 src={tweetEmbed}
+                title={_key}
                 className="h-full w-full"
               ></iframe>
             ) : _type === "facebook" ? (
-              <iframe src={embedFacebookHTML}></iframe>
+              <iframe title={_key} src={embedFacebookHTML} className="h-auto w-full"></iframe>
             ) : _type === "tiktok" ? (
-              <iframe src={embedTiktokHTML}></iframe>
+              <iframe title={_key} src={embedTiktokHTML} className="h-auto w-full"></iframe>
             ) : (
               <div>other Material</div>
             )}

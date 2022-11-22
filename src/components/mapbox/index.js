@@ -5,7 +5,7 @@ import mapboxgl from 'mapbox-gl'; // or "const mapboxgl = require('mapbox-gl');"
 import MovebankDataYear from '../../json/MovebankDataYear.json';
 import sanityClient from "../../client";
 // import iconCurrentLocation from "../img/current-location.svg"
-import { useLocation, useParams } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 // import FetchMapData from './service/FetchMapData';
 import './mapboxStyle.css';
  
@@ -85,8 +85,7 @@ export default function Mapbox(props) {
 
 
 function DrawMapbox(props){
-    const { landmark } = useParams()
-    const urlLandmark = landmark
+    // const { landmark } = useParams()
 
     const mapContainer = useRef(null);
     const weaterContainer = useRef(null);

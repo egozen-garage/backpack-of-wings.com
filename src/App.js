@@ -1,33 +1,26 @@
-import { NavLink, Routes, Route } from "react-router-dom";
-// import { useState, useMemo, useEffect, useRef } from "react";
+import { useEffect, useState } from "react";
+import { Routes, Route } from "react-router-dom";
+import SanityClient from "./client";
+
+import { LandingPage } from "./components/LandingPage";
 import Home from "./components/Home";
-// import { LoadMemories } from "./components/LoadMemories";
-import { StoryCategory } from "./components/StoryCategory";
+import { StoriesData } from "./components/StoriesData"
 import { UploadStoriesIntro } from "./components/UploadStoriesIntro";
+import { StoryCategory } from "./components/StoryCategory";
 import { Impressum } from "./components/Impressum";
 import { NotFound } from "./components/NotFound";
-import { LandingPage } from "./components/LandingPage";
-import { StoriesData } from "./components/StoriesData"
-import Mapbox from "./components/mapbox";
-// import CallSanityAPI from "./utilities/CallSanityAPI";
 import MenuButtons from "./components/MenuButtons";
 import AboutWindow from "./components/AboutWindow";
-import "./css/gradientAnimation.css";
-import "./App.css";
-import { useEffect, useState } from "react";
-import SanityClient from "./client";
-// import CallWeatherData from "./utilities/CallWeatherWind";
+import Mapbox  from "./components/mapbox";
 
-// import FetchMapData from "./components/mapbox/service/FetchMapData";
-// import { set } from "react-hook-form";
+import "./css/gradientAnimation.css";
+import "./css/animation.css";
+import "./App.css";
 
 function App() {
-  console.log("C App is running");
-
   const [landmarkData, setLandmarkData] = useState(false)
   const [storyIds, setStoryIds] = useState(null)
   useEffect(() =>{
-    // console.log("C App.js - load landmark data")
     Promise.all([
       SanityClient.fetch(
           `*[_type == "landmark"]`
@@ -71,21 +64,6 @@ function App() {
           dudaimsite.ids.push(storyIds[x]) 
         }
       }
-      // const droemling = {"droemling":[]}
-      // const lackova = {"lackova":[]}
-      // const istanbul = {"istanbul":[]}
-      // const hama = {"hama":[]}
-      // const neveeitan = {"neveeitan":[]}
-      // const dudaimsite = {"dudaimsite":[]}
-      // for(const x in storyIds){
-      //   if(storyIds[x].landmark === "droemling"){ droemling.droemling.push(storyIds[x]) }
-      //   if(storyIds[x].landmark === "lackova"){ lackova.lackova.push(storyIds[x]) }
-      //   if(storyIds[x].landmark === "istanbul"){ istanbul.push(storyIds[x]) }
-      //   if(storyIds[x].landmark === "hama"){ hama.hama.push(storyIds[x]) }
-      //   if(storyIds[x].landmark === "neveeitan"){ neveeitan.hama.push(storyIds[x]) }
-      //   if(storyIds[x].landmark === "dudaimsite"){ dudaimsite.hama.push(storyIds[x]) }
-      // }
-      // setStoryIds({droemling, lackova, istanbul, hama, neveeitan, dudaimsite})
       setStoryIds([droemling, lackova, istanbul, hama, neveeitan, dudaimsite])
   })
   .catch((err) => {
@@ -131,13 +109,6 @@ function App() {
           <Route element={<NotFound />} path="*" exact />
         </Routes>
       </div>
-
-      {/* BACK TO DASHBOARD BUTTON */}
-      {/* <div className="inline-flex text-sm text-white fixed z-40 bottom-3 right-4 px-9">
-        <NavLink className="px-3" to="/">
-          <p>Dashboard</p>
-        </NavLink>
-      </div> */}
 
       {/* IDLE TIMER */}
       {/* <IdleTimerContainer></IdleTimerContainer> */}

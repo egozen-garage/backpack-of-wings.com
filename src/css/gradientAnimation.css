@@ -2,7 +2,7 @@
   transition: opacity 1s ease-in;
   transition-delay: 1s;
   position: fixed;
-  z-index: 58;
+  z-index: 90;
   height: 100vh;
   width: 100vw;
   opacity: 1;
@@ -60,6 +60,24 @@
   -webkit-mask-image: -webkit-gradient(linear, left 50%, left 90%, from(rgba(0,0,0,1)), to(rgba(0,0,0,0)));
 }
 
+.gradientLandingPageOverlay {
+  -webkit-mask-image: -webkit-gradient(
+    linear, left top, left bottom,
+    color-stop(0%, rgba(0,0,0,0)),
+    color-stop(10%, rgba(0,0,0,1)),
+    color-stop(50%, rgba(0,0,0,1)),
+    color-stop(95%, rgba(0,0,0,0))
+  );
+}
+
+.gradientAboutPageOverlay {
+  -webkit-mask-image: -webkit-gradient(
+    linear, left top, left bottom,
+    color-stop(0%, rgba(0,0,0,1)),
+    color-stop(90%, rgba(0,0,0,1)),
+    color-stop(100%, rgba(0,0,0,0))
+  );
+}
 .gradientLandingPageOverlay {
   -webkit-mask-image: -webkit-gradient(
     linear, left top, left bottom,

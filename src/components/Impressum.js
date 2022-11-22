@@ -8,7 +8,7 @@ export function Impressum() {
 
   return (
     <>
-      <div className="z-60 aboutBackground fixed flex flex-wrap top-0 pb-6 px-14">
+      <div className="z-70 aboutBackground fixed flex flex-wrap top-0 pb-6 px-14">
         {/* BACKPACK OF WINGS BUTTON */}
         <button
           onClick={() => navigate(-1)}
@@ -33,7 +33,7 @@ export function Impressum() {
           </div>
       </div>
 
-      <div className="noScrollBar text-white gradientImpressum z-50 fixed top-0 left-0 h-full w-full px-2 mobileHorizontal:px-12 pt-[7rem] mobileHorizontal:pt-16 pb-16 overflow-scroll">
+      <div className="noScrollBar text-white gradientImpressum z-60 fixed top-0 left-0 h-full w-full px-2 mobileHorizontal:px-12 pt-[7rem] mobileHorizontal:pt-16 pb-16 overflow-scroll">
         <p className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 py-4">
           <span className="block py-9">
             Hyeseon Jeong <br />
@@ -47,6 +47,7 @@ export function Impressum() {
               className="pulsate"
               href="https://www.heysun.xyz/"
               target="_blank"
+              rel="noopener noreferrer"
             >
               Seongmin Yuk
             </a>
@@ -57,6 +58,7 @@ export function Impressum() {
               className="pulsate"
               href="https://www.egozen.org/"
               target="_blank"
+              rel="noopener noreferrer"
             >
               egozen collective
             </a>
@@ -74,7 +76,7 @@ export function Impressum() {
           <span className="block py-9">
             Supported by: <br />
             Michael Quetting, Hemal Naik, Andrea Flack <br />
-            <a className="pulsate" href="https://www.bmuv.de/" target="_blank">
+            <a className="pulsate" href="https://www.bmuv.de/" target="_blank" rel="noopener noreferrer">
               Federal Ministry for the Environment, Nature Conservation, Nuclear
               Safety and Consumer Protection (BMUV)
             </a>{" "}

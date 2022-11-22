@@ -1,7 +1,4 @@
 import React, { useState } from "react";
-// import { Link, Outlet } from 'react-router-dom';
-import "../css/gradientAnimation.css";
-import "../css/animation.css";
 import backpack from "../img/backpack.gif";
 
 export function LandingPage(props) {
@@ -16,7 +13,7 @@ export function LandingPage(props) {
     <>
       {/* INTRO WINDOW */}
       <div
-        className="fixed z-60 flex flex-col w-[20rem] tablet:w-[30rem] laptop:w-[40rem] wideScreen:w-[60rem] h-[70vh] laptop:h-[60vh] wideScreen:h-[50vh] bg-white shadow-3xl border-solid rounded-[2rem] top-1/7 wideScreen:top-1/5 tablet:-ml-[15rem] left-1/2 -ml-[10rem] laptop:-ml-[20rem] wideScreen:-ml-[30rem]"
+        className="fixed z-99 flex flex-col w-[20rem] tablet:w-[30rem] laptop:w-[40rem] wideScreen:w-[60rem] h-[70vh] laptop:h-[60vh] wideScreen:h-[50vh] bg-white shadow-3xl border-solid rounded-[2rem] top-1/7 wideScreen:top-1/5 tablet:-ml-[15rem] left-1/2 -ml-[10rem] laptop:-ml-[20rem] wideScreen:-ml-[30rem]"
       >
         <div className="noScrollBar gradientLandingPageOverlay w-auto wideScreen:w-[46rem] overflow-y-scroll pt-8 pb-40 px-8 rounded-[2rem]">
           <h1 className="font-serif flex-1 leading-6 tablet:leading-[2rem] laptop:leading-8 text-2xl tablet:text-3xl wideScreen:leading-[2.8rem] wideScreen:text-[3rem]">
