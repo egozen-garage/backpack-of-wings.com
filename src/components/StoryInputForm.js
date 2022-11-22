@@ -111,10 +111,6 @@ export default function StoryInputForm(props){
     // }
   }
 
-  function HideFormPreview(){
-
-  }
-
 
   return (
       <>
