@@ -75,39 +75,28 @@ export function MaterialContent(props) {
 //   console.log("MaterialContent = " + singleLandmarkData);
 
 
-  const [preview, setPreview] = useState(null)
+  // const [preview, setPreview] = useState(null)
   const [previewId, setPreviewId] = useState(null)
   const ShowContent = (id) => {
     setPreviewId(id)
-    // document.getElementById("previewContainer").classList.remove("hidden")
+    document.getElementById("previewContainer").classList.remove("hidden")
     // const numberOfId = id.split("-").pop()
-    // document.getElementById("previewContent-" + previewId).classList.remove("hidden")
+    // const contentId = "previewContent-" + previewId
+    document.getElementById("previewContent-" + id).classList.remove("hidden") 
     // document.getElementById(previewId).className += " hideElement "
-    console.log("show content with id: " + id + " number: " + id)
-
-    setPreview(true)
+    // setPreview(true)
   }
   const HideContent = () => {
     document.getElementById("previewContainer").className += " hidden "
-    // document.getElementById("previewContent-" + previewId).className += " hidden "
-    setPreview(false)
+    document.getElementById("previewContent-" + previewId).className += " hidden "
+    // setPreview(false)
   }
 
-
-  useEffect(() => {
-    if(previewId === null) return
-    document.getElementById("previewContainer").classList.remove("hidden")
-    // document.getElementById("previewContent-" + previewId).classList.remove("hidden")
-  }, [previewId])
-  
-  // const [tabindexCount, setTabindexCount] = useState(0)
-
-  // tabindex={IncrementTabindex(1)} 
   return (
     <>
         {/* { !preview ? "" :  */}
           <div id="previewContainer" className="hidden previewMaterial fixed flex h-full z-60 top-0 bottom-0 right-0 left-0 items-center justify-center ">
-            <div onClick={HideContent}  className="fixed bg-black opacity-40 top-0 bottom-0 right-0 left-0"></div>
+            <div onClick={HideContent}  className="fixed bg-black opacity-0 top-0 bottom-0 right-0 left-0"></div>
             <div className="fixed flex flex-col drop-shadow-lg mx-20 max-w-screen-sm w-full bg-white h-4/5 w-4/5 rounded-3xl p-8">
               <div className="noScrollBar font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto">
               {/* {previewContent} */}
@@ -123,7 +112,7 @@ export function MaterialContent(props) {
                     embedFacebookHTML,
                     embedTiktokHTML,
                   },i) => (
-                    <div id={"previewContent-"+i} tabindex={i} className="previewMaterial hidden relative bg-white shadow-innerWindow rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer "> 
+                    <div id={"previewContent-"+i} tabindex={i} className="previewMaterial hidden relative"> 
                       {_type === "googleMaps" ? (
                         <iframe src={embedMapsSRC} className="h-full w-full"></iframe>
                       ) : _type === "youtube" ? (
@@ -158,13 +147,12 @@ export function MaterialContent(props) {
               }
               </div>
             </div>
-            </div>
+          </div>
 
 
       
 
 
-                {/* <div id={"materialContent-"+i} tabindex={i} onClick={() => ShowContent(i)} className="relative bg-white shadow-innerWindow rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer ">  */}
       <div className="gradientMaterialOverlay mt-3 mb-10 pl-[0.4rem] pr-[3rem]">
       {/* <div className="gradientMaterialOverlay my-10 pl-[0.4rem]"> */}
         <div className="flex overflow-x-scroll overflow-y-hidden scrollbar-hide">
@@ -180,8 +168,9 @@ export function MaterialContent(props) {
               tweetEmbed,
               embedFacebookHTML,
               embedTiktokHTML,
-            }) => (
-              <div onClick={ShowContent} className="relative bg-white shadow-innerWindow rounded-2xl w-auto h-[12rem] wideScreen:h-[15rem] mx-6 shrink-0 cursor-pointer overflow-hidden"> 
+            }, i) => (
+              <div id={"materialContent-"+i} tabindex={i} onClick={() => ShowContent(i)} className="relative bg-white shadow-innerWindow rounded-2xl w-80 h-[200px] mx-6 shrink-0 p-2 cursor-pointer "> 
+              {/* <div onClick={ShowContent} className="relative bg-white shadow-innerWindow rounded-2xl w-auto h-[12rem] wideScreen:h-[15rem] mx-6 shrink-0 cursor-pointer overflow-hidden">  */}
               {/* overflow-scroll */}
                 <div className="absolute top-0 w-full h-full bg-black opacity-0"></div>
                 {_type === "googleMaps" ? (
