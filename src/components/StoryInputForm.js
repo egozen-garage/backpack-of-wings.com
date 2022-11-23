@@ -60,6 +60,7 @@ export default function StoryInputForm(props){
       body: encode({ "form-name": "story-form", ...formData }),
     })
     .then((response) => {
+      console.log("Story Input Form Response: " + JSON.stringify(response))
       // maybe recieve story id & landmark after upload --> first story in loadmemory
       // add what should happen after successful submission
       // e.g. navitate to success page
