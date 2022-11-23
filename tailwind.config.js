@@ -26,6 +26,7 @@ module.exports = {
         'backpackYellow' : '#f9fe1e',
         'backpackGray' : '#CFCFCF',
         'backpackBlue' : '#F0B4FC',
+        'backpackPink' : 'rgba(240, 180, 252, 0.5)'
       },
       fontFamily: {
         sans: ["'Area Normal'", ...defaultTheme.fontFamily.sans],
