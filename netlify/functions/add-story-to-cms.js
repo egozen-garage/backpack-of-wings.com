@@ -29,7 +29,7 @@ exports.handler = async (event, context, callback) => {
 
   // Build the document JSON and submit it to SANITY
   if (isStoryForm) {
-    // const response = null;
+    // let response = null;
     const storyData = {
       _type: "story",
       landmark: payload.landmarkName,
@@ -39,17 +39,22 @@ exports.handler = async (event, context, callback) => {
       publishedAt: today,
     }
     client.create(storyData)
-    .then((res) => ({
+    .then((res) => {
         // console.log("Story Input Form Response: " + JSON.stringify(res))
       // console.log(`story was created`)
-      // response = res._id;
-      statusCode: 200,
-      body: `Hello, ${res._id}!`,
-    }))
-  
+      // response = res
+      // statusCode: 200,
+      // body: `Hello, ${res._id}!`,
+    })
   }
+
   callback(null, {
     statusCode: 200,
     body:"Netlify callback"
   })
+
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: "Hello World" }),
+  };
 }
