@@ -3,7 +3,7 @@ import { useParams, useLocation, Outlet, useNavigate } from "react-router-dom";
 import SanityClient from "../client";
 
 import AudioPlayer from "../utilities/AudioPlayer";
-import stories from "../json/storiesData.json";
+// import stories from "../json/storiesData.json";
 
 import "../css/animation.css";
 import "../css/gradientAnimation.css";
@@ -17,7 +17,7 @@ export function StoriesData(props) {
 
   const navigate = useNavigate()
   
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [currentIndex, setCurrentIndex] = useState(0);
 
   // let memoryContent = CallSanityAPI(`*[_id == "${id}"]`)
 
@@ -148,9 +148,9 @@ export function StoriesData(props) {
     // navigate(newStoryIds[])
   };
 
-  const goToStory = (storyIndex) => {
-    setCurrentIndex(storyIndex);
-  };
+  // const goToStory = (storyIndex) => {
+  //   setCurrentIndex(storyIndex);
+  // };
 
   const [storyTitle, setStoryTitle] = useState(null)
   const landmarkdata = props.landmarkData
@@ -198,7 +198,7 @@ export function StoriesData(props) {
         {/* SOUNDSCAPE PLAY WAVEFORM */}
         <AudioPlayer></AudioPlayer>
       </div>
-      <div className="px-3">
+      {/* <div className="px-3">
         {stories.stories.map((story, storyIndex) => (
           <div
             className="bg-white rounded-2xl w-3 h-3 m-6 cursor-pointer"
@@ -208,7 +208,7 @@ export function StoriesData(props) {
             <p className="text-white px-5">Location{storyIndex}</p>
           </div>
         ))}
-      </div>
+      </div> */}
       <Outlet />
     </>
   );
