@@ -111,6 +111,18 @@ export default function StoryInputForm(props){
     // }
   }
 
+  const [storyTitle, setStoryTitle] = useState(null)
+  const landmarkdata = props.landmarkData
+  console.log("landmarkdata: " + JSON.stringify(landmarkdata[0]))
+  useEffect(() => {
+    for(const x in landmarkdata){
+      if(landmark === landmarkdata[x].url.current){
+        const locationType = landmarkdata[x].locationType
+        const locationName = landmarkdata[x].locationName
+        setStoryTitle(locationType + ", " + locationName)
+      }
+    }
+  }, [landmark, landmarkdata])
 
   return (
       <>
@@ -239,7 +251,7 @@ export default function StoryInputForm(props){
 
             
             <div className=" fixed flex flex-col drop-shadow-lg mx-20 max-w-screen-sm w-full bg-white h-4/5 w-4/5 rounded-3xl p-8">
-              <h1 className="upload-form-title bg-white font-bold text-lg mb-6"> landfill, hama</h1>
+              <h1 className="upload-form-title bg-white font-bold text-lg mb-6">{storyTitle}</h1>
               <div className="noScrollBar font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto">
                 <p className=""> 
                   {story}
