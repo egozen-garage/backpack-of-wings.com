@@ -12,7 +12,6 @@ import { NotFound } from "./components/NotFound";
 import MenuButtons from "./components/MenuButtons";
 import AboutWindow from "./components/AboutWindow";
 import Mapbox  from "./components/mapbox";
-import { MouseSleeper } from "./components/mouseSleeper";
 
 import "./css/gradientAnimation.css";
 import "./css/animation.css";
@@ -80,7 +79,6 @@ function App() {
   if (landmarkData) {
   return (
     <>
-      <MouseSleeper/>
       {/* INTRODUCTORY PAGE */}
         <LandingPage />
         <AboutWindow />

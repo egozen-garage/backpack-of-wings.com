@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import backpack from "../img/backpack3.gif";
+import { MouseSleeper } from "./mouseSleeper";
 
 export function LandingPage(props) {
   const [buttonPopup, setButtonPopup] = useState(true);
 
   function HideLandingPage() {
-    setButtonPopup((prevState) => !prevState);
+    // setButtonPopup((prevState) => !prevState);
+    setButtonPopup(false);
   }
 
   // boolean true or false statement
-  return buttonPopup ? (
+  return (
     <>
+
+      {/* { buttonPopup ? "" :  } */}
+      <MouseSleeper onBoarding={buttonPopup}/>
+
+
       {/* INTRO WINDOW */}
+
+      { !buttonPopup ? "" :
+      <>
       <div
         className="fixed z-99 flex flex-col w-[20rem] tablet:w-[30rem] laptop:w-[40rem] wideScreen:w-[60rem] h-[70vh] laptop:h-[60vh] wideScreen:h-[50vh] bg-white shadow-3xl border-solid rounded-[2rem] top-1/7 wideScreen:top-1/5 tablet:-ml-[15rem] left-1/2 -ml-[10rem] laptop:-ml-[20rem] wideScreen:-ml-[30rem]"
       >
@@ -45,8 +55,8 @@ export function LandingPage(props) {
       </div>
       {/* BACKGROUND */}
       <div className="gradientBackground"></div>
+      </>
+      }
     </>
-  ): (
-    ""
   );
 }
