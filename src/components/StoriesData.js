@@ -173,12 +173,12 @@ export function StoriesData(props) {
 
         {/* NEXT BUTTON */}
         <div
-          className="font-serif font-bold text-lg wideScreen:text-2xl z-50 w-1/2 cursor-e-resize mt-auto pb-5"
+          className="font-serif text-sm tablet:text-lg wideScreen:text-2xl z-50 w-full cursor-e-resize mt-auto pb-0 tablet:pb-5"
           onClick={goToNext}
         >
-          <span className="pulsateBlack">
-          { storyCounter === storyIds.length ? "Next Landmark " : "Next Memory "}&#8594;
-          </span>
+          <button className="button float-right">
+          { storyCounter === storyIds.length ? "Next Landmark " : "Next "}&#8594;
+          </button>
         </div>
 
         {/* SOUNDSCAPE PLAY WAVEFORM */}

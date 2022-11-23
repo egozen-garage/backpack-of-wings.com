@@ -256,7 +256,7 @@ export default function StoryInputForm(props){
                     <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Edit</p>
                   </button>
                   <button type="submit" className=" ">
-                    <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Submit &#8594;</p>
+                    <p className="button font-serif font-bold">Submit &#8594;</p>
                   </button>
                 </div>
               </div>

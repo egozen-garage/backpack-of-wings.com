@@ -29,26 +29,28 @@ export default function AboutWindow() {
     height: isOpen ? "100vh" : "0",
   });
 
+  console.log("toggleeCollapsible is: " + isOpen)
+
   return (
     <>
       <div className="z-60 aboutBackground fixed flex flex-wrap top-0 pb-6 px-12 wideScreen:px-16 mt-2 wideScreen:mt-4">
 
         {/* BACKPACK OF WINGS BUTTON */}
         <button onClick={toggleCollapsible} className="flex-1">
-          <div className={isOpen? "buttonActive" : "buttonInactive"}>
+          <div className={isOpen? "buttonActive" : "buttonInactive white"}>
             <h1 className="flex flex-wrap text-lg tablet:text-xl wideScreen:text-xl min-w-[12rem] mx-1 py-1">
               <span className="mx-auto pr-2">The Backpack of Wings:</span><span className="mx-auto">Sensory Networks</span>
             </h1>
             {isOpen && (
-              <span className="font-mono text-lg tablet:text-xl text-white pl-2 pr-1 py-1 mt-[1px] ml-auto">x</span>
+              <span className="font-mono text-lg tablet:text-xl text-white pl-0 tablet:pl-2 pr-1 py-1 mt-[1px] ml-auto">x</span>
             )}
           </div>
         </button>
 
         {/* IMPRESSUM */}
         <div className={isOpen ? "animateOpacity show" : "animateOpacity"}>
-          <div className="flex-2 buttonInactive mx-0 mobileHorizontal:mx-6 mt-5">
-            <NavLink to="/impressum">
+          <div className="flex-2 buttonInactive white mx-0 mobileHorizontal:mx-6 mt-5">
+            <NavLink to="/impressum" onClick={toggleCollapsible}>
               <h1 className="text-xl mx-2 py-1">
                 Impressum
               </h1>

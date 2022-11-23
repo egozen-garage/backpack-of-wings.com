@@ -15,6 +15,7 @@ import Mapbox  from "./components/mapbox";
 
 import "./css/gradientAnimation.css";
 import "./css/animation.css";
+import "./css/styleComponents.css";
 import "./App.css";
 
 function App() {

@@ -944,7 +944,7 @@ function DrawMapbox(props){
     //     width: '100vw',
     // }
 
-    const weatherContainerStyle = "fixed z-10 bottom-7 px-14 flex flex-wrap-nowrap place-content-between w-screen"
+    const weatherContainerStyle = "fixed z-10 bottom-7 px-0 tablet:px-14 flex flex-wrap-nowrap place-content-between w-screen"
 
     const mapStyle ={
         height: '100vh',

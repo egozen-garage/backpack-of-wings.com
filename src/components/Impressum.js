@@ -17,7 +17,7 @@ export function Impressum() {
         {/* BACKPACK OF WINGS BUTTON */}
         <button
           onClick={() => navigate(-1)}
-          className="flex-1 mt-5 buttonInactive"
+          className="flex-1 mt-5 buttonInactive white lapto:white"
         >
           <div className="flex">
             <h1 className="flex flex-wrap text-lg tablet:text-xl min-w-[12rem] mx-1 py-1">
@@ -38,8 +38,8 @@ export function Impressum() {
           </div>
       </div>
 
-      <div className="noScrollBar text-white gradientImpressum z-60 fixed top-0 left-0 h-full w-full px-2 mobileHorizontal:px-12 pt-[7rem] mobileHorizontal:pt-16 pb-16 overflow-scroll">
-        <p className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 pt-4 pb-20">
+      <div className="noScrollBar text-white gradientImpressum z-60 fixed top-0 left-0 h-full w-full px-2 mobileHorizontal:px-12 pt-[10rem] mobileHorizontal:pt-16 overflow-scroll">
+        <p className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 pt-4 pb-[15rem]">
           <span className="block py-4">
             Hyeseon Jeong <br />
             Erzbergerplatz 9 <br />
