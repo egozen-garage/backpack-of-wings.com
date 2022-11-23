@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import backpack from "../img/backpack.gif";
+import backpack from "../img/backpack3.gif";
 
 export function LandingPage(props) {
   const [buttonPopup, setButtonPopup] = useState(true);
@@ -39,7 +39,7 @@ export function LandingPage(props) {
           onClick={() => HideLandingPage()}
         >
           <p className="button font-serif text-xl wideScreen:text-2xl bg-white border-black border-solid border-[1px] rounded-[2rem] py-1 px-5">
-            Connect &#10142;
+            Connect &#8594;
           </p>
         </button>
       </div>

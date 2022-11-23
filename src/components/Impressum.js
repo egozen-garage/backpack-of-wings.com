@@ -2,6 +2,11 @@ import React from "react";
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
 import { NavLink, useNavigate } from "react-router-dom";
+import ez from "../img/logo_ez.png";
+import bmuv from "../img/logo_bmuv.svg";
+import dth from "../img/logo_dth.svg";
+import mpiab from "../img/logo_mpiab.png";
+
 
 export function Impressum() {
   const navigate = useNavigate();
@@ -34,13 +39,13 @@ export function Impressum() {
       </div>
 
       <div className="noScrollBar text-white gradientImpressum z-60 fixed top-0 left-0 h-full w-full px-2 mobileHorizontal:px-12 pt-[7rem] mobileHorizontal:pt-16 pb-16 overflow-scroll">
-        <p className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 py-4">
-          <span className="block py-9">
+        <p className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 pt-4 pb-20">
+          <span className="block py-4">
             Hyeseon Jeong <br />
             Erzbergerplatz 9 <br />
             50733 Cologne
           </span>
-          <span className="block py-9">
+          <span className="block py-4">
             Artists: <br />
             Hyeseon Jeong,{" "}
             <a
@@ -52,7 +57,7 @@ export function Impressum() {
               Seongmin Yuk
             </a>
           </span>
-          <span className="block py-9">
+          <span className="block py-4">
             Design and Web-Development: <br />
             <a
               className="pulsate"
@@ -63,17 +68,17 @@ export function Impressum() {
               egozen collective
             </a>
           </span>
-          <span className="block py-9">
+          <span className="block py-4">
             Acknowledgement: <br />
             Michael Quetting, Hemal Naik, Andrea Flack <br />
             from Max Planck Institute of Animal Behaviour <br />
             Atelier Xoda Temporary Gallery, Nordic House
           </span>
-          <span className="block">
+          <span className="block py-4">
             'The Backpack of Wings' is developed in the context of Driving the
             Human.
           </span>
-          <span className="block py-9">
+          <span className="block py-4">
             Supported by: <br />
             Michael Quetting, Hemal Naik, Andrea Flack <br />
             <a className="pulsate" href="https://www.bmuv.de/" target="_blank" rel="noopener noreferrer">
@@ -83,6 +88,12 @@ export function Impressum() {
             based on a decision of the German Bundestag
           </span>
         </p>
+        <div className="flex logoWrapper fixed bottom-10 w-screen h-auto">
+          <img className="px-5 h-20" src={bmuv} alt="logo_bmuv"/>
+          <img className="px-5 h-20" src={dth} alt="logo_dth"/>
+          <img className="px-5 py-2 h-20" src={mpiab} alt="logo_mpiab"/>
+          <img className="px-5 py-2 h-20" src={ez} alt="logo_egozen"/>
+        </div>
       </div>
     </>
   );
