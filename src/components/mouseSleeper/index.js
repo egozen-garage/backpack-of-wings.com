@@ -1,9 +1,6 @@
-<<<<<<< HEAD
-=======
 // import { useRef, useState } from "react";
 // import { useNavigate } from "react-router-dom";
 
->>>>>>> beta
 export function MouseSleeper(){
     // const navigate = useNavigate()
     // const [showMessage, setShowMessage] = useState(false)
