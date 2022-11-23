@@ -6,7 +6,6 @@ import { useParams } from "react-router-dom";
 import StoryInputForm from "./StoryInputForm.js";
 import { MaterialContent } from "./MaterialContent.js";
 import { useNavigate } from "react-router-dom";
-import birdIcon from "../img/Jonas-2-glow.png"
 
 import "../css/gradientAnimation.css";
 import "../css/animation.css";
