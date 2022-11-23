@@ -16,6 +16,7 @@ import { MouseSleeper } from "./components/mouseSleeper";
 
 import "./css/gradientAnimation.css";
 import "./css/animation.css";
+import "./css/styleComponents.css";
 import "./App.css";
 
 function App() {

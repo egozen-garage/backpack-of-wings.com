@@ -35,10 +35,10 @@ export function LandingPage(props) {
           alt="backpack"
         />
         <button
-          className="absolute bottom-6 wideScreen:bottom-10 right-6 wideScreen:right-10 closeBtn"
+          className="absolute bottom-6 wideScreen:bottom-10 right-6 wideScreen:right-10"
           onClick={() => HideLandingPage()}
         >
-          <p className="button font-serif text-xl wideScreen:text-2xl bg-white border-black border-solid border-[1px] rounded-[2rem] py-1 px-5">
+          <p className="button font-serif text-xl wideScreen:text-2xl">
             Connect &#8594;
           </p>
         </button>
