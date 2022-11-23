@@ -155,7 +155,7 @@ export function StoriesData(props) {
   if(data && storyIds){
   return (
     <>
-      <div className="storiesContainerAnimation fixed bottom-0 flex flex-col z-20 w-screen mobileHorizontal:w-[35rem] wideScreen:w-[60rem] pt-24 pb-10 mobileHorizontal:pb-0 px-4 mobileHorizontal:px-12 h-[40rem] mobileHorizontal:h-screen">
+      <div className="storiesContainerAnimation fixed bottom-0 flex flex-col z-20 w-screen mobileHorizontal:w-[35rem] wideScreen:w-[60rem] pt-24 pb-10 mobileHorizontal:pb-0 px-4 mobileHorizontal:px-16 wideScreen:px-20 h-[40rem] mobileHorizontal:h-screen">
         {/* <div className=" bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]"> */}
         <div className="flex pb-10">
           <h1 className="flex-1 text-lg mobileHorizontal:text-xl wideScreen:text-2xl font-bold">
@@ -164,11 +164,13 @@ export function StoriesData(props) {
           </h1>
           <h1 className="flex-2 text-lg mobileHorizontal:text-xl  wideScreen:text-2xl font-bold">{storyCounter}/{storyIds.length} Memories</h1>
         </div>
+
         {/* STORY TEXT */}
         <p className="noScrollBar gradientStoryOverlay font-sans text-[0.9rem] mobileHorizontal:text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
           {data[0].message}
           {/* {stories.stories[currentIndex].text} */}
         </p>
+
         {/* NEXT BUTTON */}
         <div
           className="font-serif font-bold text-lg wideScreen:text-2xl z-50 w-1/2 cursor-e-resize mt-auto pb-5"
@@ -178,6 +180,7 @@ export function StoriesData(props) {
           { storyCounter === storyIds.length ? "Next Landmark " : "Next Memory "}&#8594;
           </span>
         </div>
+
         {/* SOUNDSCAPE PLAY WAVEFORM */}
         <AudioPlayer></AudioPlayer>
       </div>

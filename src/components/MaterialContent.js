@@ -111,8 +111,8 @@ export function MaterialContent(props) {
           onClick={HideContent}
           className="fixed bg-black opacity-10 top-0 bottom-0 right-0 left-0"
         ></div>
-        <div className="fixed flex flex-col drop-shadow-lg mx-20 max-w-screen-sm w-full bg-white h-4/5 w-4/5 rounded-3xl p-8">
-          <div className="noScrollBar font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto">
+        <div className="fixed flex flex-col drop-shadow-lg mx-20 w-[inherit] bg-white h-auto rounded-3xl p-8">
+          <div className="font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto">
             {/* {previewContent} */}
             {singleLandmarkData.materialArray.map(
               (
@@ -141,12 +141,12 @@ export function MaterialContent(props) {
                       src={embedMapsSRC}
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
-                      className="h-full w-full"
+                      className="h-[30rem] wideScreen:h-[40rem] w-[30rem] laptop:w-[40rem] wideScreen:w-[50rem] rounded-2xl"
                     ></iframe>
                   ) : _type === "youtube" ? (
                     <iframe
                       src={embedYoutubeHTML}
-                      className="h-full w-full"
+                      className="h-[15rem] tablet:h-[20rem] wideScreen:h-[30rem] w-[30rem] tablet:w-[40rem] wideScreen:w-[60rem] rounded-2xl"
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
                     ></iframe>
@@ -168,7 +168,7 @@ export function MaterialContent(props) {
                       />
                   ) : _type === "blockObj" ? (
                     <div 
-                      className="p-5 text-sm" 
+                      className="p-5 text-sm wideScreen:text-lg h-full max-h-[80vh] max-w-sm wideScreen:max-w-lg" 
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
                       >
@@ -184,7 +184,7 @@ export function MaterialContent(props) {
                       border="0"
                       frameBorder="0"
                       src={tweetEmbed}
-                      className="h-full w-full"
+                      className="h-[20rem] tablet:h-[25rem] wideScreen:h-[45rem] w-[auto] tablet:w-[20rem]  wideScreen:w-[30rem]"
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
                     ></iframe>
@@ -193,12 +193,14 @@ export function MaterialContent(props) {
                       src={embedFacebookHTML}
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
+                      className="h-[50vh] desktop:h-[44rem] w-[20rem] tablet:w-[30rem] desktop:w-[32rem]"
                     ></iframe>
                   ) : _type === "tiktok" && (
                     <iframe
                       src={embedTiktokHTML}
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
+                      className="h-[45rem] w-[25rem]"
                     ></iframe>
                   )}
                 </div>
@@ -209,9 +211,9 @@ export function MaterialContent(props) {
       </div>
 
       {/* THUMBNAIL WINDOW */}
-      <div className="gradientMaterialOverlay mt-3 mb-10 pl-[0.4rem] pr-[3rem]">
+      <div className="gradientMaterialOverlay mt-3 mb-10 pr-[3rem]">
         {/* <div className="gradientMaterialOverlay my-10 pl-[0.4rem]"> */}
-        <div className="flex overflow-x-scroll overflow-y-hidden scrollbar-hide">
+        <div className="flex overflow-x-scroll overflow-y-hidden scrollbar-hide pl-[1rem]">
           {singleLandmarkData.materialArray.map(
             (
               {
@@ -231,7 +233,7 @@ export function MaterialContent(props) {
                 id={"materialContent-" + i}
                 tabIndex={i}
                 onClick={() => ShowContent(i)}
-                className="relative bg-white shadow-innerWindow rounded-2xl w-auto h-[200px] mx-6 shrink-0 p-2 cursor-pointer overflow-hidden"
+                className="relative bg-white shadow-innerWindow rounded-2xl w-auto h-[12rem] wideScreen:h-[18rem] mx-3 shrink-0 cursor-pointer overflow-hidden"
                 title={_key}
                 key={"uniqueKey_"+_key}
               >
@@ -243,14 +245,14 @@ export function MaterialContent(props) {
                     src={embedMapsSRC}
                     title={_key}
                     key={"uniqueKey_"+_key}
-                    className="h-full w-[20rem] wideScreen:w-[28rem]"
+                    className="h-full w-[20rem] wideScreen:w-[30rem]"
                   ></iframe>
                 ) : _type === "youtube" ? (
                   <iframe
                     src={embedYoutubeHTML}
                     title={_key}
                     key={"uniqueKey_"+_key}
-                    className="h-full w-[24rem] wideScreen:w-[30rem]"
+                    className="h-full w-[24rem] wideScreen:w-[34rem]"
                   ></iframe>
                 ) : _type === "imageURL" ? (
                   <img 
@@ -268,7 +270,7 @@ export function MaterialContent(props) {
                     />
                 ) : _type === "blockObj" ? (
                   <div 
-                    className="p-5 text-sm w-[22rem]" 
+                    className="p-5 text-sm w-[26rem]" 
                     title={_key}
                     key={"uniqueKey_"+_key}
                     >
@@ -293,7 +295,7 @@ export function MaterialContent(props) {
                     title={_key}
                     key={"uniqueKey_"+_key}
                     src={embedFacebookHTML}
-                    className="h-auto w-full"
+                    className="h-[30rem] w-full"
                   ></iframe>
                 ) : _type === "tiktok" && (
                   <iframe

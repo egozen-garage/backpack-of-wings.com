@@ -27,11 +27,11 @@ export default function MenuButtons(props) {
     <>
       {/* LOAD MEMORIES */}
       <NavLink
-        className="fixed bottom-0 mobileHorizontal:bottom-0 h-10 mobileHorizontal:h-full w-full mobileHorizontal:w-9 loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg"
+        className="fixed button bottom-0 mobileHorizontal:bottom-0 h-10 mobileHorizontal:h-full w-full mobileHorizontal:w-9 wideScreen:w-12 loadMemoriesBtnContainer gradientLoadMemories z-36 text-lg wideScreen:text-2xl"
         to={currentURL === "loadmemory" ? "/" : urlEndpoint }
       >
         <h1
-          className="fixed bottom-0 mobileHorizontal:bottom-5 px-4 pb-2 transformRotatePos w-[10rem]"
+          className="fixed bottom-0 mobileHorizontal:bottom-5 px-4 mobileHorizontal:px-[1.2rem] wideScreen:px-[0.4rem] mb-2 mobileHorizontal:mb-0 wideScreen:mb-6 transformRotatePos w-auto"
           // style={{ writingMode: "vertical-rl" }}
         >
           Load Memories
@@ -47,11 +47,11 @@ export default function MenuButtons(props) {
 
       {/* RIGHT PANEL: UPLOAD STORIES */}
       <NavLink
-        className="fixed hidden mobileHorizontal:block h-full right-0 uploadStoryBtnContainer gradientUploadStory z-36 text-lg w-9"
+        className="fixed button hidden mobileHorizontal:block h-full right-0 uploadStoryBtnContainer gradientUploadStory z-36 text-lg wideScreen:text-2xl w-9 wideScreen:w-12"
         to="/uploadstory"
       >
         <h1
-          className="fixed bottom-5 right-1"
+          className="fixed bottom-5 right-1 wideScreen:right-[0.4rem] "
           style={{ writingMode: "vertical-rl" }}
         >
           Upload Stories

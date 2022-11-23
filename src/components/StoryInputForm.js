@@ -146,7 +146,7 @@ export default function StoryInputForm(props){
 
             {/* STORY TEXT BODY */}
             <div className="flex pb-2 h-full">
-              <div className="flex-col w-40 text-2xs font-mono font-bold mt-2 mr-2">
+              <div className="flex-col w-40 wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-2 mr-2">
                 <label htmlFor="message" className="block pb-12">
                   Please write in the perspective of Jonas
                   {errors.message && <span style={{ color: "red" }}> *</span>}
@@ -169,7 +169,7 @@ export default function StoryInputForm(props){
 
             {/* STORY AUTHOR NAME */}
             <div className="flex pb-2 mt-auto">
-              <label htmlFor="name" className="w-40 text-2xs font-mono font-bold mt-3 mr-2">
+              <label htmlFor="name" className="w-40 wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-3 mr-2">
                 Write your name
                 {errors.name && <span style={{ color: "red" }}> *</span>}
               </label>
@@ -184,7 +184,7 @@ export default function StoryInputForm(props){
 
             {/* STORY EMAIL ADDRESS */}
             <div className="flex">
-              <label htmlFor="email" className="w-40 text-2xs font-mono font-bold mt-3 mr-2">
+              <label htmlFor="email" className="w-40 wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-3 mr-2">
                 Write your E-Mail
                 {errors.email && <span style={{ color: "red" }}> *</span>}
               </label>
@@ -223,8 +223,8 @@ export default function StoryInputForm(props){
             {/* <button type="submit" className="pt-7 ml-auto">
               <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Finalise &#8594;</p>
             </button> */}
-            <button type="button" onClick={checkForm} className="pt-7 ml-auto">
-              <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Finalise &#8594;</p>
+            <button type="button" onClick={checkForm} className="pt-7 pb-0 wideScreen:pt-16 wideScreen:pb-10 ml-auto">
+              <p className="button text-m wideScreen:text-2xl font-serif border-black border-solid border-[1px] rounded-[2rem] py-2 px-5">Finalise &#8594;</p>
             </button>
           {/* </form>
         </div> */}

@@ -45,13 +45,13 @@ export function UploadStoriesIntro() {
 
   return (
     <>
-      <div className="jonasIntroContainerAnimation flex w-screen h-screen top-0 fixed z-30 px-8">
+      <div className="jonasIntroContainerAnimation flex w-screen h-screen top-0 fixed z-30">
 
         {/* BACKGROUND GRADIENT ANIMATION */}
         <div className="gradientJonasIntroOverlay gradientBGJonasIntro h-screen w-screen fixed"></div>
 
         {/* INTRODUCTION TEXT OF JONAS */}
-        <div className="gradientJonasIntroOverlay text-xl h-screen overflow-y-scroll noScrollBar pb-[12rem] wideScreen:pb-[20rem]">
+        <div className="gradientJonasIntroOverlay px-14 text-xl h-screen overflow-y-scroll noScrollBar pb-[12rem] wideScreen:pb-[20rem]">
           <div className="pl-8 pt-24 wideScreen:pt-28 pb-10 text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] ">
             <div className="flex flex-wrap font-serif py-4">
               <span>Hello, I am Jonas.</span>
@@ -112,7 +112,7 @@ export function UploadStoriesIntro() {
         {/* NEXT BUTTON */}
         <div className="relative h-screen w-[60rem] tablet:w-[120rem] pr-8">
           <button
-            className="z-50 wideScreen:text-2xl button left-0 absolute bottom-28 tablet:bottom-32 wideScreen:bottom-[13rem] -ml-24 tablet:ml-0 mt-3 px-4 py-2 border-black border-solid border-[1px] rounded-[2rem] font-serif"
+            className="z-50 text-m wideScreen:text-2xl button left-0 absolute bottom-28 tablet:bottom-32 wideScreen:bottom-[13rem] -ml-24 tablet:ml-0 mt-3 px-4 py-2 border-black border-solid border-[1px] rounded-[2rem] font-serif"
             // TEMPORARY SOLUTION > ADD SHUFFLE TO URL ITEM ARRAY
             onClick={() =>
               navigate("/uploadstory/" + landmarkOptions[randomNumber])
