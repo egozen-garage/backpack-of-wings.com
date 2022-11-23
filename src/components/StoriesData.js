@@ -152,6 +152,19 @@ export function StoriesData(props) {
     setCurrentIndex(storyIndex);
   };
 
+  const [storyTitle, setStoryTitle] = useState(null)
+  const landmarkdata = props.landmarkData
+  console.log("landmarkdata: " + JSON.stringify(landmarkdata[0]))
+  useEffect(() => {
+    for(const x in landmarkdata){
+      if(landmark === landmarkdata[x].url.current){
+        const locationType = landmarkdata[x].locationType
+        const locationName = landmarkdata[x].locationName
+        setStoryTitle(locationType + ", " + locationName)
+      }
+    }
+  }, [landmark, landmarkdata])
+
   if(data && storyIds){
   return (
     <>
@@ -159,8 +172,9 @@ export function StoriesData(props) {
         {/* <div className=" bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]"> */}
         <div className="flex pb-10">
           <h1 className="flex-1 text-lg mobileHorizontal:text-xl wideScreen:text-2xl font-bold">
-            {stories.stories[currentIndex].location},
-            {stories.stories[currentIndex].country}
+            {/* {stories.stories[currentIndex].location},
+            {stories.stories[currentIndex].country} */}
+            {storyTitle}
           </h1>
           <h1 className="flex-2 text-lg mobileHorizontal:text-xl  wideScreen:text-2xl font-bold">{storyCounter}/{storyIds.length} Memories</h1>
         </div>

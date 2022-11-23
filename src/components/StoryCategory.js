@@ -37,7 +37,7 @@ export function StoryCategory(props) {
       {/* <MaterialContent singleLandmarkData={singleLandmarkData}/> */}
 
       {/* STORIES INPUT TEXT CONTAINER */}
-      <StoryInputForm currentLandmark={landmark} />
+      <StoryInputForm currentLandmark={landmark} landmarkData={landmarkData}/>
       {/* <Story /> */}
       
     </div>
