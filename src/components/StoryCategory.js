@@ -28,15 +28,15 @@ export function StoryCategory(props) {
 
   const singleLandmarkData = data();
 
-  const backButtonClass = "hover:bg-backpackPink p-1 px-2 mr-10 float-left outline outline-1 w-auto rounded-[2rem] font-serif font-bold"
+  // const backButtonClass = "hover:bg-backpackPink p-1 px-2 mr-10 float-left outline outline-1 w-auto rounded-[2rem] font-serif font-bold"
+  const backButtonClass = "button text-md"
   const backButtonStyle = {
     // backgroundColor: "rgba(240, 180, 252, 0.5)",
   }
 
   return (
     <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
-
-      <div className="px-8 pt-4 pb-8">
+      <div className="">
         <button 
           type="button" 
           onClick={() => {navigate("/uploadstory")}} 
@@ -56,7 +56,6 @@ export function StoryCategory(props) {
       {/* STORIES INPUT TEXT CONTAINER */}
       <StoryInputForm currentLandmark={landmark} landmarkData={landmarkData}/>
       {/* <Story /> */}
-      
     </div>
   );
 }
