@@ -12,6 +12,7 @@ import { NotFound } from "./components/NotFound";
 import MenuButtons from "./components/MenuButtons";
 import AboutWindow from "./components/AboutWindow";
 import Mapbox  from "./components/mapbox";
+import { MouseSleeper } from "./components/mouseSleeper";
 
 import "./css/gradientAnimation.css";
 import "./css/animation.css";
@@ -79,6 +80,7 @@ function App() {
   if (landmarkData) {
   return (
     <>
+      <MouseSleeper/>
       {/* INTRODUCTORY PAGE */}
         <LandingPage />
         <AboutWindow />
@@ -105,7 +107,7 @@ function App() {
             path="/uploadstory/:landmark"
             exact
           />
-          <Route element={<StoriesData storyIds={storyIds} />} path="/loadmemory/:landmark/:id" />
+          <Route element={<StoriesData storyIds={storyIds} landmarkData={landmarkData} />} path="/loadmemory/:landmark/:id" />
           <Route element={<Impressum />} path="/impressum" exact />
           <Route element={<NotFound />} path="*" exact />
         </Routes>

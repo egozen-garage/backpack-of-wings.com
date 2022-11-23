@@ -86,17 +86,23 @@ export function MaterialContent(props) {
   const ShowContent = (id) => {
     setPreviewId(id);
     document.getElementById("previewContainer").classList.remove("hidden");
-    // const numberOfId = id.split("-").pop()
-    // const contentId = "previewContent-" + previewId
     document.getElementById("previewContent-" + id).classList.remove("hidden");
-    // document.getElementById(previewId).className += " hideElement "
-    // setPreview(true)
   };
   const HideContent = () => {
+    // puse youtube videos
+    const iframe = document.getElementById("previewContent-" + previewId).getElementsByTagName("iframe")[0]
+    if(iframe){
+      // if(iframeFirstClasse === "iframeyoutube-iframe"){
+      const iframeFirstClasse = iframe.classList[0]
+      if(iframeFirstClasse === "youtube-iframe"){
+        console.log("pause youtube video")
+        var iframeSrc = iframe.src;
+        iframe.src = iframeSrc;
+      }
+    }
+    // // hide popup
     document.getElementById("previewContainer").className += " hidden ";
-    document.getElementById("previewContent-" + previewId).className +=
-      " hidden ";
-    // setPreview(false)
+    document.getElementById("previewContent-" + previewId).className += " hidden ";
   };
 
   return (
@@ -146,7 +152,9 @@ export function MaterialContent(props) {
                   ) : _type === "youtube" ? (
                     <iframe
                       src={embedYoutubeHTML}
-                      className="h-[15rem] tablet:h-[20rem] wideScreen:h-[30rem] w-[30rem] tablet:w-[40rem] wideScreen:w-[60rem] rounded-2xl"
+                      // allow="autoplay; encrypted-media"
+                      // allowscriptaccess="always"
+                      className="youtube-iframe h-[15rem] tablet:h-[20rem] wideScreen:h-[30rem] w-[30rem] tablet:w-[40rem] wideScreen:w-[60rem] rounded-2xl"
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
                     ></iframe>

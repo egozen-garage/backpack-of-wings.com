@@ -3,7 +3,7 @@ import { useParams, useLocation, Outlet, useNavigate } from "react-router-dom";
 import SanityClient from "../client";
 
 import AudioPlayer from "../utilities/AudioPlayer";
-import stories from "../json/storiesData.json";
+// import stories from "../json/storiesData.json";
 
 import "../css/animation.css";
 import "../css/gradientAnimation.css";
@@ -17,7 +17,7 @@ export function StoriesData(props) {
 
   const navigate = useNavigate()
   
-  const [currentIndex, setCurrentIndex] = useState(0);
+  // const [currentIndex, setCurrentIndex] = useState(0);
 
   // let memoryContent = CallSanityAPI(`*[_id == "${id}"]`)
 
@@ -148,9 +148,22 @@ export function StoriesData(props) {
     // navigate(newStoryIds[])
   };
 
-  const goToStory = (storyIndex) => {
-    setCurrentIndex(storyIndex);
-  };
+  // const goToStory = (storyIndex) => {
+  //   setCurrentIndex(storyIndex);
+  // };
+
+  const [storyTitle, setStoryTitle] = useState(null)
+  const landmarkdata = props.landmarkData
+  console.log("landmarkdata: " + JSON.stringify(landmarkdata[0]))
+  useEffect(() => {
+    for(const x in landmarkdata){
+      if(landmark === landmarkdata[x].url.current){
+        const locationType = landmarkdata[x].locationType
+        const locationName = landmarkdata[x].locationName
+        setStoryTitle(locationType + ", " + locationName)
+      }
+    }
+  }, [landmark, landmarkdata])
 
   if(data && storyIds){
   return (
@@ -159,8 +172,9 @@ export function StoriesData(props) {
         {/* <div className=" bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]"> */}
         <div className="flex pb-10">
           <h1 className="flex-1 text-lg mobileHorizontal:text-xl wideScreen:text-2xl font-bold">
-            {stories.stories[currentIndex].location},
-            {stories.stories[currentIndex].country}
+            {/* {stories.stories[currentIndex].location},
+            {stories.stories[currentIndex].country} */}
+            {storyTitle}
           </h1>
           <h1 className="flex-2 text-lg mobileHorizontal:text-xl  wideScreen:text-2xl font-bold">{storyCounter}/{storyIds.length} Memories</h1>
         </div>
@@ -184,7 +198,7 @@ export function StoriesData(props) {
         {/* SOUNDSCAPE PLAY WAVEFORM */}
         <AudioPlayer></AudioPlayer>
       </div>
-      <div className="px-3">
+      {/* <div className="px-3">
         {stories.stories.map((story, storyIndex) => (
           <div
             className="bg-white rounded-2xl w-3 h-3 m-6 cursor-pointer"
@@ -194,7 +208,7 @@ export function StoriesData(props) {
             <p className="text-white px-5">Location{storyIndex}</p>
           </div>
         ))}
-      </div>
+      </div> */}
       <Outlet />
     </>
   );
