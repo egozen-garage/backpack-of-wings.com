@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import backpack from "../img/backpack.gif";
+import backpack from "../img/backpack3.gif";
 
 export function LandingPage(props) {
   const [buttonPopup, setButtonPopup] = useState(true);
@@ -20,12 +20,13 @@ export function LandingPage(props) {
             Hello I'm Jonas. <br /> Welcome to my Backpack. <br /> Here you can
             access an app that tracks and provides information about my memories
             of migration. Some are lost, some remain. It would be great if you
-            could retrieve my memories.
+            could retrieve my memories. <span className="mobileHorizontal:hidden">Please use the tablet or laptop for a full experience.</span>
           </h1>
           <p className="font-mono flex-2 leading-[13px] tablet:leading-4 laptop:leading-5 wideScreen:leading-7 text-xs tablet:text-sm laptop:text-lg wideScreen:text-2xl pt-6 wideScreen:pt-10">
             By connecting, you allow yourself to synchronise, follow and retrace
             the experience of a real bird...
           </p>
+
         </div>
 
         <img
@@ -38,7 +39,7 @@ export function LandingPage(props) {
           onClick={() => HideLandingPage()}
         >
           <p className="button font-serif text-xl wideScreen:text-2xl bg-white border-black border-solid border-[1px] rounded-[2rem] py-1 px-5">
-            Connect &#10142;
+            Connect &#8594;
           </p>
         </button>
       </div>

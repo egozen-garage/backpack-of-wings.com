@@ -546,9 +546,35 @@ function DrawMapbox(props){
 
 
 
-
-
-
+            // transparent layer over the whole earth
+            map.current.addSource('transparent-click-layer', {
+                'type': 'geojson',
+                'data': {
+                    'type': 'Feature',
+                    'geometry': {
+                        'type': 'Polygon',
+                        // These coordinates outline Maine.
+                        'coordinates': [
+                            [
+                                [-180, -90],
+                                [180, -90],
+                                [180, 90],
+                                [-180, 90],
+                            ]
+                        ]
+                    }
+                }
+            })
+            map.current.addLayer({
+                'id': 'transparent-click-layer',
+                'type': 'fill',
+                'source': 'transparent-click-layer', // reference the data source
+                'layout': {},
+                'paint': {
+                    'fill-color': '#0080ff', // blue color fill
+                    'fill-opacity': 0
+                }
+            });
 
 
             // ADD THE LAST LOCATION 
@@ -612,6 +638,11 @@ function DrawMapbox(props){
             });
 
             // MAP INTERACTIONS
+            map.current.on('mouseup', 'transparent-click-layer', (e) => {
+                console.log("click eath")
+                navigate('/')
+                return 
+            });
             // current location of bird
             map.current.on("mouseenter", 'last-location', () => {
                 map.current.getCanvas().style.cursor = "pointer";
@@ -661,10 +692,7 @@ function DrawMapbox(props){
             //     navigate('/')
             //     return 
             // });
-            // map.current.on('click', 'hillshade', (e) => {
-            //     navigate('/')
-            //     return 
-            // });
+
             map.current.on('click', 'land', (e) => {
                 navigate('/')
                 return 
@@ -946,7 +974,7 @@ function DrawMapbox(props){
         // marginRight: urlPrefix === "loadmemory" ? '0'     : urlPrefix === "uploadstory" ? '50vw' : '0',
         // transform: urlPrefix === "loadmemory" ? 'translateX(50%)'     : urlPrefix === "uploadstory" ? 'translateX(-50%)' : 'translateX(0)',
     }
-    const mapClasses = "top-0 w-100 h-200 map-container mx-0 mobileHorizontal:mx-9 "
+    const mapClasses = "top-0 w-100 h-200 map-container mx-0 mobileHorizontal:mx-9 wideScreen:mx-12"
     
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
 
