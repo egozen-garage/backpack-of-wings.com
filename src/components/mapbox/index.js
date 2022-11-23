@@ -966,8 +966,7 @@ function DrawMapbox(props){
     //     width: '100vw',
     // }
 
-    const weatherContainerStyle = "fixed z-10 bottom-7 px-14 flex flex-wrap-nowrap place-content-between w-screen"
-
+    
     const mapStyle ={
         height: '100vh',
         // marginLeft:  urlPrefix === "loadmemory" ? '50vw'  : urlPrefix === "uploadstory" ? '0'    : '0',
@@ -977,10 +976,10 @@ function DrawMapbox(props){
     const mapClasses = "top-0 w-100 h-200 map-container mx-0 mobileHorizontal:mx-9 wideScreen:mx-12"
     
     // temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset
-
-    // const mapStyle = "top-0 right-0 map-container"
-
-    const weatherObject = "weatherObject mr-10 font-mono text-2xs xl:text-xs 2xl:text-sm"
+    
+    
+    const weatherContainerStyle = "fixed z-10 bottom-7 px-4 xs:px-14 pb-6 xs:pb-4 flex flex-wrap-nowrap place-content-between w-screen grid grid-cols-3 lg:grid-cols-6"
+    const weatherObject = "weatherObject mr-4 font-mono text-2xs xl:text-xs 2xl:text-sm mt-4"
 
     
     function timestamp2Time(timestamp){
@@ -994,12 +993,12 @@ function DrawMapbox(props){
         <div>
             { zoom || !weatherData ? "" :
             <div ref={weaterContainer} className={weatherContainerStyle}>
-                <span className={weatherObject}>Jonas Location: <span className='font-mono inline-block'>{weatherData.city_name}, {weatherData.country}</span></span>
-                <span className={weatherObject}>Sunrise: {timestamp2Time(weatherData.sunrise)}</span>
-                <span className={weatherObject}>Sunset: {timestamp2Time(weatherData.sunset)}</span>
-                <span className={weatherObject}>Weather condition: <span className='font-mono inline-block'>{weatherData.weather_description}</span></span>
-                <span className={weatherObject}>Temperature: <span className='font-mono inline-block'>{weatherData.temp} °C</span></span>
-                <span className={weatherObject}>Air humidity: <span className='font-mono inline-block'>{weatherData.humidity} g/m3</span></span>
+                <span className={weatherObject + " order-1 lg:order-1"}>Jonas Location: <span className='font-mono inline-block'>{weatherData.city_name}, {weatherData.country}</span></span>
+                <span className={weatherObject + " order-3 lg:order-2"}>Sunrise: {timestamp2Time(weatherData.sunrise)}</span>
+                <span className={weatherObject + " order-6 lg:order-3"}>Sunset: {timestamp2Time(weatherData.sunset)}</span>
+                <span className={weatherObject + " order-4 lg:order-4"}>Weather condition: <span className='font-mono inline-block'>{weatherData.weather_description}</span></span>
+                <span className={weatherObject + " order-2 lg:order-5"}>Temperature: <span className='font-mono inline-block'>{weatherData.temp} °C</span></span>
+                <span className={weatherObject + " order-5 lg:order-6"}>Air humidity: <span className='font-mono inline-block'>{weatherData.humidity} g/m3</span></span>
             </div> }
             <div ref={mapContainer} className={mapClasses} style={mapStyle} />
         </div>

@@ -112,7 +112,7 @@ export function UploadStoriesIntro() {
         {/* NEXT BUTTON */}
         <div className="relative h-screen w-[60rem] tablet:w-[120rem] pr-8">
           <button
-            className="z-50 text-m wideScreen:text-2xl button left-0 absolute bottom-28 tablet:bottom-32 wideScreen:bottom-[13rem] -ml-24 tablet:ml-0 mt-3 px-4 py-2 border-black border-solid border-[1px] rounded-[2rem] font-serif"
+            className="button z-50 text-m wideScreen:text-2xl left-0 absolute bottom-28 tablet:bottom-32 wideScreen:bottom-[13rem] -ml-24 tablet:ml-0 mt-3 font-serif"
             // TEMPORARY SOLUTION > ADD SHUFFLE TO URL ITEM ARRAY
             onClick={() =>
               navigate("/uploadstory/" + landmarkOptions[randomNumber])

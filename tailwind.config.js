@@ -6,6 +6,7 @@ module.exports = {
   ],
   theme: {
     screens: {
+      'xs': '480px',
       'sm': '640px',
       'md': '768px',
       'lg': '1024px',
@@ -25,6 +26,7 @@ module.exports = {
         'backpackYellow' : '#f9fe1e',
         'backpackGray' : '#CFCFCF',
         'backpackBlue' : '#F0B4FC',
+        'backpackPink' : 'rgba(240, 180, 252, 0.5)'
       },
       fontFamily: {
         sans: ["'Area Normal'", ...defaultTheme.fontFamily.sans],

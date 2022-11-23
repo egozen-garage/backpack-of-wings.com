@@ -126,7 +126,7 @@ export default function StoryInputForm(props){
 
   return (
       <>
-        <div className="z-30 uploadstories-container uploadstories-textField h-full pl-4 pr-12 mx-6 ">
+        <div className="z-30 uploadstories-container uploadstories-textField overflow-scroll noScrollBar h-full pl-4 pr-12 mx-6 ">
           <form
             onSubmit={handleSubmit(handlePost)}
             name="story-form"
@@ -268,7 +268,7 @@ export default function StoryInputForm(props){
                     <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Edit</p>
                   </button>
                   <button type="submit" className=" ">
-                    <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Submit &#8594;</p>
+                    <p className="button font-serif font-bold">Submit &#8594;</p>
                   </button>
                 </div>
               </div>

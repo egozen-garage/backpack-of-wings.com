@@ -1,17 +1,27 @@
 import React, { useState } from "react";
 import backpack from "../img/backpack3.gif";
+import { MouseSleeper } from "./mouseSleeper";
 
 export function LandingPage(props) {
   const [buttonPopup, setButtonPopup] = useState(true);
 
   function HideLandingPage() {
-    setButtonPopup((prevState) => !prevState);
+    // setButtonPopup((prevState) => !prevState);
+    setButtonPopup(false);
   }
 
   // boolean true or false statement
-  return buttonPopup ? (
+  return (
     <>
+
+      {/* { buttonPopup ? "" :  } */}
+      <MouseSleeper onBoarding={buttonPopup}/>
+
+
       {/* INTRO WINDOW */}
+
+      { !buttonPopup ? "" :
+      <>
       <div
         className="fixed z-99 flex flex-col w-[20rem] tablet:w-[30rem] laptop:w-[40rem] wideScreen:w-[60rem] h-[70vh] laptop:h-[60vh] wideScreen:h-[50vh] bg-white shadow-3xl border-solid rounded-[2rem] top-1/7 wideScreen:top-1/5 tablet:-ml-[15rem] left-1/2 -ml-[10rem] laptop:-ml-[20rem] wideScreen:-ml-[30rem]"
       >
@@ -35,18 +45,18 @@ export function LandingPage(props) {
           alt="backpack"
         />
         <button
-          className="absolute bottom-6 wideScreen:bottom-10 right-6 wideScreen:right-10 closeBtn"
+          className="absolute bottom-6 wideScreen:bottom-10 right-6 wideScreen:right-10"
           onClick={() => HideLandingPage()}
         >
-          <p className="button font-serif text-xl wideScreen:text-2xl bg-white border-black border-solid border-[1px] rounded-[2rem] py-1 px-5">
+          <p className="button font-serif text-xl wideScreen:text-2xl">
             Connect &#8594;
           </p>
         </button>
       </div>
       {/* BACKGROUND */}
       <div className="gradientBackground"></div>
+      </>
+      }
     </>
-  ): (
-    ""
   );
 }
