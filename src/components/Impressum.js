@@ -8,7 +8,7 @@ export function Impressum() {
 
   return (
     <>
-      <div className="z-70 aboutBackground fixed flex flex-wrap top-0 pb-6 px-14">
+      <div className="z-70 aboutBackground fixed flex flex-wrap top-0 pb-6 px-12 mt-2 wideScreen:mt-4">
         {/* BACKPACK OF WINGS BUTTON */}
         <button
           onClick={() => navigate(-1)}

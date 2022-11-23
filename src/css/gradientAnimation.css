@@ -25,6 +25,14 @@
   animation: Gradient 15s ease infinite;
 }
 
+.gradientButton {
+  background: linear-gradient(-45deg, #f0b4fc, #cfcfcf, #a3dcf5, #f0b4fc);
+  background-size: 400% 400%;
+  -webkit-animation: Gradient 15s ease infinite;
+  -moz-animation: Gradient 15s ease infinite;
+  animation: Gradient 15s ease infinite;
+}
+
 .animatePopupClose {
   transition: height .2s ease-out, opacity .5s ease-out;
 }
@@ -87,7 +95,7 @@
   -webkit-mask-image: -webkit-gradient(
     linear, right top, left top, 
     color-stop(5%, rgba(0,0,0,0)), 
-    color-stop(20%, rgba(0,0,0,1)), 
+    color-stop(15%, rgba(0,0,0,1)), 
     color-stop(96%, rgba(0,0,0,1)), 
     color-stop(99%, rgba(0,0,0,0))
   );
