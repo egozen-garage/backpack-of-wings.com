@@ -39,6 +39,7 @@ exports.handler = async (event, context, callback) => {
     }
     client.create(storyData).then((res) => {
       console.log(`story was created`)
+      console.log("Story Input Form Response: " + JSON.stringify(res))
     })
 }
 
