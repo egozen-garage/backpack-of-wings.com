@@ -29,7 +29,7 @@ exports.handler = async (event, context, callback) => {
 
   // Build the document JSON and submit it to SANITY
   if (isStoryForm) {
-    const response = null;
+    // const response = null;
     const storyData = {
       _type: "story",
       landmark: payload.landmarkName,
