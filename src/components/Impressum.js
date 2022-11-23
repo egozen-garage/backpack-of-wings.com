@@ -20,16 +20,16 @@ export function Impressum() {
           onClick={() => navigate(-1)}
           className="flex-1 buttonInactive white"
         >
-            <h1 className="flex flex-wrap text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl w-full min-w-[15rem] mx-1 py-1">
+            <h1 className="flex flex-wrap text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl w-full min-w-[15rem] mx-1 py-1 mobileHorizontal:py-2">
               <span className="ml-auto pr-2 float-right">The Backpack of Wings:</span>
               <span className="mr-auto float-left">Sensory Networks</span>
             </h1>
         </button>
 
         {/* IMPRESSUM */}
-          <div className="flex-2 buttonActive mx-4 mobileHorizontal:mx-6 mt-1 mobileHorizontal:mt-5">
+          <div className="flex-2 buttonActive mx-4 mobileHorizontal:mx-6 mt-1 mobileHorizontal:mt-4">
             <NavLink to="/">
-              <h1 className="text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl mx-2">
+              <h1 className="text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl mx-2 my-2">
                 Impressum<span className="font-mono text-white pl-2">x</span>
                 </h1>
             </NavLink>

@@ -5,8 +5,8 @@ import backpackGif from '../../img/backpack3.gif'
 export function MouseSleeper(props){
     const navigate = useNavigate()
     const [showMessage, setShowMessage] = useState(false)
-    const timeUntilMessage = 5000
-    // const timeUntilMessage = 60000 * 5
+    const timeUntilMessage = 60000 * 5
+    // const timeUntilMessage = 5000
 
     const onBoarding = props.onBoarding
     useEffect(() => {
@@ -49,10 +49,10 @@ export function MouseSleeper(props){
                 </div>
                 <img alt="backpack" src={backpackGif} className="h-40 w-auto object-center order-2 m-auto" />  
                 <div className="flex items-center justify-center order-3">
-                    <button className="button text-md" onClick={reloadPage}>
+                    <button className="button text-md font-serif" onClick={reloadPage}>
                         Go to Start
                     </button>
-                    <button className="button text-md" onClick={() => setShowMessage(false)}>
+                    <button className="button text-md font-serif" onClick={() => setShowMessage(false)}>
                         Continue
                     </button>
                 </div>
