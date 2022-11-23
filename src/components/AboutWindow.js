@@ -49,9 +49,9 @@ export default function AboutWindow() {
 
         {/* IMPRESSUM */}
         <div className={isOpen ? "animateOpacity show" : "animateOpacity"}>
-          <div className="flex-2 buttonInactive white my-0 mobileHorizontal:my-4 mx-4 mobileHorizontal:mx-6">
+          <div className="flex-2 buttonInactive white mx-4 mobileHorizontal:mx-6 mt-1 mobileHorizontal:mt-5">
             <NavLink to="/impressum" onClick={toggleCollapsible}>
-              <h1 className="text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl mx-2 py-1">
+              <h1 className="text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl mx-2">
                 Impressum
               </h1>
             </NavLink>

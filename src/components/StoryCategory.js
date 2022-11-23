@@ -29,14 +29,14 @@ export function StoryCategory(props) {
   const singleLandmarkData = data();
 
   // const backButtonClass = "hover:bg-backpackPink p-1 px-2 mr-10 float-left outline outline-1 w-auto rounded-[2rem] font-serif font-bold"
-  const backButtonClass = "button text-md"
+  const backButtonClass = "button text-xs wideScreen:text-sm font-serif"
   const backButtonStyle = {
     // backgroundColor: "rgba(240, 180, 252, 0.5)",
   }
 
   return (
     <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
-      <div className="">
+      <div className="pl-3 pb-2">
         <button 
           type="button" 
           onClick={() => {navigate("/uploadstory")}} 

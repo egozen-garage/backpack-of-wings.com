@@ -13,7 +13,7 @@ export function Impressum() {
 
   return (
     <>
-      <div className="z-70 aboutBackground fixed flex flex-wrap top-0 pb-6 px-0 mobileHorizontal:px-12 mt-0 mobileHorizontal:mt-2 wideScreen:mt-4">
+      <div className="z-70 aboutBackground fixed flex flex-wrap top-0 pb-6 px-0 mobileHorizontal:px-12 wideScreen:px-16 mt-0 mobileHorizontal:mt-2 wideScreen:mt-4">
 
         {/* BACKPACK OF WINGS BUTTON */}
         <button
@@ -36,7 +36,7 @@ export function Impressum() {
           </div>
       </div>
 
-      <div className="text-white gradientImpressum z-60 fixed top-0 left-0 h-screen w-full px-2 mobileHorizontal:px-12 pt-[6rem] mobileHorizontal:pt-16 overflow-scroll noScrollBar ">
+      <div className="text-white gradientImpressum z-60 fixed top-0 left-0 h-screen w-full px-2 mobileHorizontal:px-12 wideScreen:px-16 pt-[6rem] mobileHorizontal:pt-16 wideScreen:pt-[8rem] overflow-scroll noScrollBar ">
         <div className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 pt-4 pb-[2rem] tablet:pb-[15rem]">
           <span className="block py-4">
             Hyeseon Jeong <br />
