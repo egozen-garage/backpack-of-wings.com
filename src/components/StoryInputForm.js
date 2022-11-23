@@ -126,7 +126,7 @@ export default function StoryInputForm(props){
 
   return (
       <>
-        <div className="z-30 uploadstories-container uploadstories-textField h-full pl-4 pr-12 mx-6 ">
+        <div className="z-30 uploadstories-container uploadstories-textField overflow-scroll noScrollBar h-full pl-4 pr-12 mx-6 ">
           <form
             onSubmit={handleSubmit(handlePost)}
             name="story-form"
