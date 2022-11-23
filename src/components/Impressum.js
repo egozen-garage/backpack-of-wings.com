@@ -13,33 +13,31 @@ export function Impressum() {
 
   return (
     <>
-      <div className="z-70 aboutBackground fixed flex flex-wrap top-0 pb-6 px-12 mt-2 wideScreen:mt-4">
+      <div className="z-70 aboutBackground fixed flex flex-wrap top-0 pb-6 px-0 mobileHorizontal:px-12 mt-0 mobileHorizontal:mt-2 wideScreen:mt-4">
+
         {/* BACKPACK OF WINGS BUTTON */}
         <button
           onClick={() => navigate(-1)}
-          className="flex-1 mt-5 buttonInactive white lapto:white"
+          className="flex-1 buttonInactive white"
         >
-          <div className="flex">
-            <h1 className="flex flex-wrap text-lg tablet:text-xl min-w-[12rem] mx-1 py-1">
-              <span className="mx-auto pr-2">The Backpack of Wings:</span>
-              <span className="mx-auto">Sensory Networks</span>
+            <h1 className="flex flex-wrap text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl w-full min-w-[15rem] mx-1 py-1">
+              <span className="ml-auto pr-2 float-right">The Backpack of Wings:</span>
+              <span className="mr-auto float-left">Sensory Networks</span>
             </h1>
-            {/* <span className="font-mono text-lg tablet:text-xl text-white pl-2 pr-1 py-1 mt-[1px]">x</span> */}
-          </div>
         </button>
 
         {/* IMPRESSUM */}
-          <div className="flex-2 buttonActive mx-0 mobileHorizontal:mx-6 mt-5">
+          <div className="flex-2 buttonActive mx-4 mobileHorizontal:mx-6 mt-1 mobileHorizontal:mt-5">
             <NavLink to="/">
-              <h1 className="text-xl mx-2 py-1">
+              <h1 className="text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl mx-2">
                 Impressum<span className="font-mono text-white pl-2">x</span>
                 </h1>
             </NavLink>
           </div>
       </div>
 
-      <div className="noScrollBar text-white gradientImpressum z-60 fixed top-0 left-0 h-full w-full px-2 mobileHorizontal:px-12 pt-[10rem] mobileHorizontal:pt-16 overflow-scroll">
-        <p className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 pt-4 pb-[15rem]">
+      <div className="text-white gradientImpressum z-60 fixed top-0 left-0 h-screen w-full px-2 mobileHorizontal:px-12 pt-[6rem] mobileHorizontal:pt-16 overflow-scroll noScrollBar ">
+        <div className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 pt-4 pb-[2rem] tablet:pb-[15rem]">
           <span className="block py-4">
             Hyeseon Jeong <br />
             Erzbergerplatz 9 <br />
@@ -47,15 +45,15 @@ export function Impressum() {
           </span>
           <span className="block py-4">
             Artists: <br />
-            Hyeseon Jeong,{" "}
             <a
               className="pulsate"
               href="https://www.heysun.xyz/"
               target="_blank"
               rel="noopener noreferrer"
             >
-              Seongmin Yuk
+              Hyeseon Jeong,{" "}
             </a>
+              Seongmin Yuk
           </span>
           <span className="block py-4">
             Design and Web-Development: <br />
@@ -87,12 +85,12 @@ export function Impressum() {
             </a>{" "}
             based on a decision of the German Bundestag
           </span>
-        </p>
-        <div className="flex logoWrapper fixed bottom-10 w-screen h-auto">
-          <img className="px-5 h-20" src={bmuv} alt="logo_bmuv"/>
-          <img className="px-5 h-20" src={dth} alt="logo_dth"/>
-          <img className="px-5 py-2 h-20" src={mpiab} alt="logo_mpiab"/>
-          <img className="px-5 py-2 h-20" src={ez} alt="logo_egozen"/>
+        </div>
+        <div className="mb-10 flex flex-wrap justify-between logoWrapper w-screen h-[10rem]">
+          <img className="px-5 h-[6rem] mobileHorizontal:h-[6rem]" src={bmuv} alt="logo_bmuv"/>
+          <img className="px-5 h-[4rem] mobileHorizontal:h-[5rem]" src={dth} alt="logo_dth"/>
+          <img className="px-5 h-[4rem] py-2 mobileHorizontal:h-[5rem]" src={mpiab} alt="logo_mpiab"/>
+          <img className="px-5 h-[4rem] py-2 mobileHorizontal:h-[4.5rem]" src={ez} alt="logo_egozen"/>
         </div>
       </div>
     </>

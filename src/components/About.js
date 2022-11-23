@@ -6,7 +6,7 @@ export function About() {
 
   return (
     <>
-      <div className="p-16 px-6 mobileHorizontal:px-[4.5rem] wideScreen:px-[5rem] pt-[10rem] pb-10 mobileHorizontal:pt-[6rem]">
+      <div className="p-16 px-6 mobileHorizontal:px-[4.5rem] wideScreen:px-[5rem] pt-[7.5rem] pb-10 mobileHorizontal:pt-[6rem]">
         {/* <button className="aboutBtn absolute right-3 top-3" onClick={() => props.setTrigger(false)}>&#9711;</button>{props.children} */}
         <span className="loginShell flex flex-nowrap flex-col z-45 font-mono py-4 tablet:py-8 text-[11px] mobileHorizontal:text-[14px]">
           <span>last login.</span><span>fri jun 24 18.44.10 on ttys000</span>

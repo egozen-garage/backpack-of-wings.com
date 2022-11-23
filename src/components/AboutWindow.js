@@ -33,25 +33,25 @@ export default function AboutWindow() {
 
   return (
     <>
-      <div className="z-60 aboutBackground fixed flex flex-wrap top-0 pb-6 px-12 wideScreen:px-16 mt-2 wideScreen:mt-4">
+      <div className="z-60 mobileHorizontal:z-60 aboutBackground fixed flex flex-wrap top-0 pb-6 px-0 mobileHorizontal:px-12 wideScreen:px-16 mt-0 sm:mt-2 wideScreen:mt-4">
 
         {/* BACKPACK OF WINGS BUTTON */}
-        <button onClick={toggleCollapsible} className="flex-1">
+        <button onClick={toggleCollapsible} className="flex-1 my-0">
           <div className={isOpen? "buttonActive" : "buttonInactive white"}>
-            <h1 className="flex flex-wrap text-lg tablet:text-xl wideScreen:text-xl min-w-[12rem] mx-1 py-1">
-              <span className="mx-auto pr-2">The Backpack of Wings:</span><span className="mx-auto">Sensory Networks</span>
+            <h1 className="flex flex-wrap text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl w-full min-w-[15rem] mx-1 py-1">
+              <span className="ml-auto pr-2 float-right">The Backpack of Wings:</span><span className="mr-auto float-left">Sensory Networks</span>
             </h1>
             {isOpen && (
-              <span className="font-mono text-lg tablet:text-xl text-white pl-0 tablet:pl-2 pr-1 py-1 mt-[1px] ml-auto">x</span>
+              <span className="font-mono text-s tablet:text-xl text-white pl-2 tablet:pl-2 pr-1 py-1 mt-0 tablet:mt-[1px] ml-auto">x</span>
             )}
           </div>
         </button>
 
         {/* IMPRESSUM */}
         <div className={isOpen ? "animateOpacity show" : "animateOpacity"}>
-          <div className="flex-2 buttonInactive white mx-0 mobileHorizontal:mx-6 mt-5">
+          <div className="flex-2 buttonInactive white my-0 mobileHorizontal:my-4 mx-4 mobileHorizontal:mx-6">
             <NavLink to="/impressum" onClick={toggleCollapsible}>
-              <h1 className="text-xl mx-2 py-1">
+              <h1 className="text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl mx-2 py-1">
                 Impressum
               </h1>
             </NavLink>
