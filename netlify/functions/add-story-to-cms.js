@@ -27,6 +27,7 @@ exports.handler = async (event, context, callback) => {
   // Checking which form has been submitted
   const isStoryForm = payload.formID === "story-form";
 
+  var response = null;
   // Build the document JSON and submit it to SANITY
   if (isStoryForm) {
     // let response = null;
@@ -42,19 +43,19 @@ exports.handler = async (event, context, callback) => {
     .then((res) => {
         // console.log("Story Input Form Response: " + JSON.stringify(res))
       // console.log(`story was created`)
-      // response = res
-      // statusCode: 200,
-      // body: `Hello, ${res._id}!`,
+      response = res._id
     })
   }
-
+  // response = "hi"
+  
   callback(null, {
     statusCode: 200,
-    body:"Netlify callback"
+    body: JSON.stringify({ storyId: response})
   })
 
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ message: "Hello World" }),
-  };
+
+  // return {
+  //   statusCode: 200,
+  //   body: JSON.stringify({ message: "Hello World" }),
+  // };
 }
