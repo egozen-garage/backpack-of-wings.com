@@ -41,7 +41,7 @@ exports.handler = async (event, context, callback) => {
     }
     client.create(storyData)
     .then((res) => {
-        // console.log("Story Input Form Response: " + JSON.stringify(res))
+      console.log("Story Input Form Response: " + JSON.stringify(res._id))
       // console.log(`story was created`)
       response = res._id
     })
