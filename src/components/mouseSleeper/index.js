@@ -38,7 +38,7 @@ export function MouseSleeper(props){
 
 
     const message = (
-        <div className="fixed flex h-full z-60 top-0 bottom-0 right-0 left-0 items-center justify-center backdrop-blur-sm">
+        <div className="fixed flex h-full z-70 top-0 bottom-0 right-0 left-0 items-center justify-center backdrop-blur-sm">
             {/* <div className="fixed bg-black opacity-10 top-0 bottom-0 right-0 left-0 "></div> */}
             <div className=" bg-white rounded-2xl p-8 z-60 grid grid-cols-1 drop-shadow-lg">
 
@@ -49,10 +49,10 @@ export function MouseSleeper(props){
                 </div>
                 <img alt="backpack" src={backpackGif} className="h-40 w-auto object-center order-2 m-auto" />  
                 <div className="flex items-center justify-center order-3">
-                    <button className="button text-md" onClick={reloadPage}>
+                    <button className="button text-md font-serif" onClick={reloadPage}>
                         Go to Start
                     </button>
-                    <button className="button text-md" onClick={() => setShowMessage(false)}>
+                    <button className="button text-md font-serif" onClick={() => setShowMessage(false)}>
                         Continue
                     </button>
                 </div>

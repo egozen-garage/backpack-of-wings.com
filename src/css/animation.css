@@ -48,14 +48,14 @@
     padding: 0rem 0.8rem;
 }
 
+.buttonInactive.about {
+    width: 27rem;
+}
+
 .buttonInactive.white {
-    display: flex;
-    transition: all 0.2s ease-in;
     background-color: white;
     box-shadow: 0px 0px 4px 4px #FFF;
-    border-radius: 1.8rem;
-    margin: 1rem 1rem;
-    padding: 0rem 0.8rem;
+    /* width: 100vw; */
 }
 
 .buttonActive {
@@ -89,8 +89,13 @@
 
 .animateOpacity {
     visibility: hidden;
-    transition: opacity .5s ease-in-out;
+    transition: opacity .1s ease-in-out;
     opacity: 0;
+}
+
+.animateOpacity.hide {
+    height: 0px;
+    width: 0px;
 }
 
 .introWindow {
@@ -185,3 +190,15 @@
         opacity: 1;
     }
 }
+
+/* for Mobile HORIZONTAL 480px and above */
+@media all and (min-width: 480px) {
+    .animateOpacity.hide {
+        width: 100%;
+    }
+
+    /* .buttonInactive.white {
+        width: auto;
+    } */
+    
+  }

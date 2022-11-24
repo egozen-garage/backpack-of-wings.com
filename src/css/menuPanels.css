@@ -1,6 +1,6 @@
 .leftPanel {
   transition: height 0.3s ease-in;
-  z-index: 1;
+  z-index: 11;
   position: fixed;
   left: 0;
   bottom: 0;
@@ -12,7 +12,7 @@
 
 .rightPanel {
   transition: width 0.4s ease-in;
-  z-index: 1;
+  z-index: 11;
   position: fixed;
   right: 0;
   width: 0vw;
@@ -81,6 +81,18 @@
   .leftPanel.w50 {
     width: 35rem;
     height: 100vh;
+  }
+
+  .rightPanel.w50 {
+    width: 35rem;
+  }
+}
+
+/* for SMALL SCREEN 1280px and above */
+@media all and (min-width: 1280px) {
+
+  .rightPanel.w50 {
+    width: 50rem;
   }
 }
 
