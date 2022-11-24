@@ -16,6 +16,7 @@ import imageURL from './imageURL'
 // import googleReviews from './googleReviews'
 import googleMaps from './googleMaps'
 import movebank from './movebank'
+import movebankDaily from './movebankDaily'
 import movebankSingleLocation from './movebankSingleLocation'
 import facebook from './facebook'
 import tiktok from './tiktok'
@@ -41,6 +42,7 @@ export default createSchema({
     // googleReviews,
     googleMaps,
     movebank,
+    movebankDaily,
     movebankSingleLocation,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas

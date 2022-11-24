@@ -152,6 +152,7 @@ function DrawMapbox(props){
     // -----------------------------------------------------------------
     const lastItemInYearData = MovebankDataYear.individuals[0].locations.length;
     const yearData = MovebankDataYear.individuals[0].locations
+    console.log("year data length: " + yearData.length)
     const yearCoordinates = [];
     for(let i = 0; i < lastItemInYearData; i++){
     // for(let i = 0; i < 50; i++){
