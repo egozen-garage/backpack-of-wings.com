@@ -27,7 +27,7 @@ exports.handler = async (event, context, callback) => {
   // Checking which form has been submitted
   const isStoryForm = payload.formID === "story-form";
 
-  var response = null;
+  // var response = null;
   // Build the document JSON and submit it to SANITY
   if (isStoryForm) {
     // let response = null;
@@ -40,20 +40,14 @@ exports.handler = async (event, context, callback) => {
       publishedAt: today,
     }
     client.create(storyData)
-    .then((res) => {
-      // console.log(`story was created`)
-      // response = res
-      response = res._id
-      // callback(null, {
-      //   statusCode: 200,
-      //   body: JSON.stringify({ storyId: res._id})
-      // })
+    .then(res => {
+      console.log("Story Input Form Response: " + JSON.stringify(res._id))
       callback(null, {
         statusCode: 200,
-        body: JSON.stringify({storyId: response})
+        body: JSON.stringify({storyId: res._id})
       });
-      console.log("Story Input Form Response: " + JSON.stringify(res._id))
     })
+    .catch(ex => callback(ex));
   }
   // // response = "hi"
   // callback(null, {
