@@ -63,6 +63,10 @@ export default function StoryInputForm(props){
       reset();
       const res = response.body
       console.log("Story Input Form Response: " + res + " in JSON: " + JSON.stringify(res))
+      const resJson = response.json()
+      console.log("Story Input Form Response: " + resJson + " in JSON: " + JSON.stringify(resJson))
+      const resBodyJson = response.body.json()
+      console.log("Story Input Form Response: " + resBodyJson + " in JSON: " + JSON.stringify(resBodyJson))
       // console.log("Story Input Form Response JSON: " + response.json() + " in JSON: " + JSON.stringify(response.json()))
       // console.log("Story Input Form Response body: " + response.body + " in JSON: " + JSON.stringify(response.body))
       // maybe recieve story id & landmark after upload --> first story in loadmemory
