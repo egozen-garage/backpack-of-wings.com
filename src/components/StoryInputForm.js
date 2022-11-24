@@ -61,6 +61,7 @@ export default function StoryInputForm(props){
     })
     .then((response) => {
       console.log("Story Input Form Response: " + response + " in JSON: " + JSON.stringify(response))
+      console.log("Story Input Form Response JSON: " + response.json() + " in JSON: " + JSON.stringify(response.json()))
       console.log("Story Input Form Response body: " + response.body + " in JSON: " + JSON.stringify(response.body))
       // maybe recieve story id & landmark after upload --> first story in loadmemory
       // add what should happen after successful submission
