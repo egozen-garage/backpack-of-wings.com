@@ -59,21 +59,15 @@ export default function StoryInputForm(props){
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "story-form", ...formData }),
     })
-    .then((response) => {
-      reset();
-      // const res = response.body
-      // console.log("Story Input Form Response: " + res + " in JSON: " + JSON.stringify(res))
-      const resJson = response.json()
-      console.log("Story Input Form Response: " + resJson + " in JSON: " + JSON.stringify(resJson))
-      // const resBodyJson = response.body.json()
-      // console.log("Story Input Form Response: " + resBodyJson + " in JSON: " + JSON.stringify(resBodyJson))
-      // console.log("Story Input Form Response JSON: " + response.json() + " in JSON: " + JSON.stringify(response.json()))
-      // console.log("Story Input Form Response body: " + response.body + " in JSON: " + JSON.stringify(response.body))
-      // maybe recieve story id & landmark after upload --> first story in loadmemory
-      // add what should happen after successful submission
-      // e.g. navitate to success page
-
+    .then(response => response.json())
+    .then(json => {
+      console.log(json);
     })
+    // .then((data) => {
+    //   reset();
+    //   const resJson = data
+    //   console.log("Story Input Form Response: " + resJson + " in JSON: " + JSON.stringify(resJson))
+    // })
     .catch((error) => {
       console.log(error);
     });
