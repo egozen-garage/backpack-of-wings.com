@@ -31,14 +31,14 @@ const apiMonthlyData = 'https://www.movebank.org/movebank/service/public/json?&s
 
 
 
-
+const sanityDocumentId = "03c63e19-b827-48b1-8266-c60fdd6d1e66"
 
 const handler = async (event, context, callback) => {
-// exports.handler = async (event, context, callback) => {
-    try {
-        // 1. Check last location entry in Sanity           --> query timestamp
-        const response = await client.fetch(
-            `*[_type == "movebankDaily"]{
+    // exports.handler = async (event, context, callback) => {
+        try {
+            // 1. Check last location entry in Sanity           --> query timestamp
+            const response = await client.fetch(
+            `*[_id == ${sanityDocumentId}]{
                 location[0]{timestamp}
             }[0]`
         )
@@ -76,7 +76,7 @@ const handler = async (event, context, callback) => {
                 // newData.unshift(newLocation)
                 const patch = {
                     patch: {
-                        "id" : "03c63e19-b827-48b1-8266-c60fdd6d1e66", // id of Movebank document with locations
+                        "id" : sanityDocumentId, // id of Movebank document with locations
                         "insert": {
                           "before": "location[0]",
                           "items": [newLocation]
