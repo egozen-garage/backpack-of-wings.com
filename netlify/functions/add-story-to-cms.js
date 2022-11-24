@@ -55,11 +55,11 @@ exports.handler = async (event, context, callback) => {
       console.log("Story Input Form Response: " + JSON.stringify(res._id))
     })
   }
-  // response = "hi"
-  callback(null, {
-    statusCode: 200,
-    body: JSON.stringify({ storyId: response})
-  })
+  // // response = "hi"
+  // callback(null, {
+  //   statusCode: 200,
+  //   body: JSON.stringify({ storyId: response})
+  // })
 
 
   // return {
