@@ -5,8 +5,8 @@ import backpackGif from '../../img/backpack3.gif'
 export function MouseSleeper(props){
     const navigate = useNavigate()
     const [showMessage, setShowMessage] = useState(false)
-    const timeUntilMessage = 60000 * 5
     // const timeUntilMessage = 5000
+    const timeUntilMessage = 60000 * 5
 
     const onBoarding = props.onBoarding
     useEffect(() => {
