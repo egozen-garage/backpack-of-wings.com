@@ -29,7 +29,6 @@ const apiLastLocation = 'https://www.movebank.org/movebank/service/public/json?&
 
 // openWeather api
 const openWeatherBaseUrl = 'https://api.openweathermap.org/data/2.5/weather?'
-// const openWeatherApiKey = 'd169cb8d495ba87e4e8b7cc41af3aad7'
 const openWeatherApiKey = process.env.REACT_APP_OPENWEATHER
 const exclude = 'minutely,hourly,daily,alerts'
 const unit = '&units=metric'
@@ -102,7 +101,7 @@ const handler = async (event, context, callback) => {
             patch: {
                 "id" : sanityDocumentId, // id of Movebank document with locations
                 "insert": {
-                  "before": "location[0]",
+                  "before": "weatherData[0]",
                   "items": [newWeatherData]
                 }
               }
@@ -141,8 +140,8 @@ const handler = async (event, context, callback) => {
 // schedule every 1 minute
 // exports.handler = schedule("* * * * *", handler);
 // schedule every 15 minute
-exports.handler = schedule("*/15 * * * *", handler);
+// exports.handler = schedule("*/15 * * * *", handler);
 // exports.handler = schedule("@hourly", handler);
 // schedule every 4 hours
-// exports.handler = schedule("0 */4 * * *", handler);
+exports.handler = schedule("0 */4 * * *", handler);
 
