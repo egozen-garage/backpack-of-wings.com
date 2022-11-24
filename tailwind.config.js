@@ -74,6 +74,15 @@ module.exports = {
         '60': '60',
         '70': '70',
         '99': '99',
+      },
+      animation: {
+        loadingProgressBar: 'loadingProgressBar 2s ease-in',
+      },
+      keyframes: {
+        loadingProgressBar: {
+          '0%': { width: '0%' },
+          '90%': { width: '90%' },
+        }
       }
     },
   },
