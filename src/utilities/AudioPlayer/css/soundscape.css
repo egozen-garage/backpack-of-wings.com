@@ -1,0 +1,37 @@
+.soundscape {
+    box-shadow: 10px 5px 5px red;
+}
+
+/* Marquee styles */
+.marquee {
+    --gap: 0rem;
+    position: relative;
+    display: flex;
+    overflow-x: clip;
+    /* user-select: none; */
+    gap: var(--gap);
+  }
+  
+  .marquee__content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    gap: var(--gap);
+    min-width: 100%;
+    /* margin: 0px; */
+    /* width: 10rem; */
+  }
+  
+  @keyframes scroll {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(calc(-100% - var(--gap)));
+    }
+  }
+  
+  .marquee__content {
+    animation: scroll 100s linear infinite;
+  }
+  
