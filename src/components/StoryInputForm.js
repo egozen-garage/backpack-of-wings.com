@@ -61,7 +61,7 @@ export default function StoryInputForm(props){
     })
     .then((response) => {
       reset();
-      const res = response.body.getReader()
+      const res = response.body
       console.log("Story Input Form Response: " + res + " in JSON: " + JSON.stringify(res))
       // console.log("Story Input Form Response JSON: " + response.json() + " in JSON: " + JSON.stringify(response.json()))
       // console.log("Story Input Form Response body: " + response.body + " in JSON: " + JSON.stringify(response.body))
