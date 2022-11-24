@@ -38,7 +38,7 @@ const handler = async (event, context, callback) => {
         try {
             // 1. Check last location entry in Sanity           --> query timestamp
             const response = await client.fetch(
-            `*[_id == ${sanityDocumentId}]{
+            `*[_id == "${sanityDocumentId}"]{
                 location[0]{timestamp}
             }[0]`
         )
