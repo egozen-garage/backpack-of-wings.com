@@ -20,6 +20,8 @@ import movebankDaily from './movebankDaily'
 import movebankSingleLocation from './movebankSingleLocation'
 import facebook from './facebook'
 import tiktok from './tiktok'
+import weather from './weather'
+import weatherObject from './weatherObject'
 
 // Then we give our schema to the builder and provide the result to Sanity
 export default createSchema({
@@ -44,6 +46,8 @@ export default createSchema({
     movebank,
     movebankDaily,
     movebankSingleLocation,
+    weather,
+    weatherObject,
     // When added to this list, object types can be used as
     // { type: 'typename' } in other document schemas
     blockContent,
