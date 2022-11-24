@@ -42,8 +42,8 @@ exports.handler = async (event, context, callback) => {
     client.create(storyData)
     .then((res) => {
       // console.log(`story was created`)
-      response = res
-      // response = res._id
+      // response = res
+      response = res._id
       // callback(null, {
       //   statusCode: 200,
       //   body: JSON.stringify({ storyId: res._id})
