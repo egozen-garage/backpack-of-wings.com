@@ -168,7 +168,7 @@ export function StoriesData(props) {
   if(data && storyIds){
   return (
     <>
-      <div className="storiesContainerAnimation fixed bottom-0 flex flex-col z-20 w-screen mobileHorizontal:w-[35rem] wideScreen:w-[60rem] pt-0 mobileHorizontal:pt-24 pb-10 mobileHorizontal:pb-0 px-4 mobileHorizontal:px-16 wideScreen:px-20 h-[34rem] mobileHorizontal:h-screen">
+      <div className="storiesContainerAnimation fixed bottom-0 flex flex-col z-20 w-screen mobileHorizontal:w-[35rem] wideScreen:w-[60rem] pt-0 mobileHorizontal:pt-[7rem] wideScreen:pt-[10rem] pb-10 mobileHorizontal:pb-0 px-6 mobileHorizontal:px-16 wideScreen:px-20 h-[34rem] mobileHorizontal:h-screen">
         {/* <div className=" bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]"> */}
         <div className="flex pb-10">
           <h1 className="flex-1 text-lg mobileHorizontal:text-xl wideScreen:text-2xl font-bold">

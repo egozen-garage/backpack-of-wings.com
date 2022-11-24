@@ -31,7 +31,7 @@ export default function MenuButtons(props) {
         to={currentURL === "loadmemory" ? "/" : urlEndpoint }
       >
         <h1
-          className="fixed bottom-0 mobileHorizontal:bottom-6 px-4 mobileHorizontal:px-[1.2rem] wideScreen:px-[0.4rem] mb-2 mobileHorizontal:mb-0 wideScreen:mb-6 transformRotatePos w-auto"
+          className="fixed bottom-0 mobileHorizontal:bottom-6 px-6 mobileHorizontal:px-[1.2rem] wideScreen:px-[0.4rem] mb-2 mobileHorizontal:mb-0 wideScreen:mb-6 transformRotatePos w-auto"
           // style={{ writingMode: "vertical-rl" }}
         >
           {/* {currentURL === "loadmemory" ? "Home" : "Load Memories"} */}

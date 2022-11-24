@@ -36,7 +36,7 @@ export function Impressum() {
           </div>
       </div>
 
-      <div className="text-white gradientImpressum z-60 fixed top-0 left-0 h-screen w-full px-6 mobileHorizontal:px-[4.5rem] wideScreen:px-[5rem] pt-[7.5rem] mobileHorizontal:pt-[6rem] overflow-scroll noScrollBar ">
+      <div className="text-white gradientImpressum z-60 fixed top-0 left-0 h-screen w-full px-6 mobileHorizontal:px-[4rem] wideScreen:px-[5rem] pt-[7.5rem] mobileHorizontal:pt-[6rem] overflow-scroll noScrollBar ">
         <div className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] pb-[2rem] tablet:pb-[15rem]">
           <span className="block py-4">
             Hyeseon Jeong <br />
@@ -86,7 +86,9 @@ export function Impressum() {
             based on a decision of the German Bundestag
           </span>
         </div>
-        <div className="mb-10 flex flex-wrap justify-between logoWrapper w-screen h-[10rem]">
+        
+        {/* LOGOS */}
+        <div className="mb-10 flex flex-wrap justify-between logoWrapper h-[10rem]">
           <img className="px-5 h-[6rem] mobileHorizontal:h-[6rem]" src={bmuv} alt="logo_bmuv"/>
           <img className="px-5 h-[4rem] mobileHorizontal:h-[5rem]" src={dth} alt="logo_dth"/>
           <img className="px-5 h-[4rem] py-2 mobileHorizontal:h-[5rem]" src={mpiab} alt="logo_mpiab"/>
