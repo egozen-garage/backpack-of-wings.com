@@ -71,7 +71,7 @@ export default function StoryInputFormSubmited(props){
         <div className="fixed flex h-full z-60 top-0 bottom-0 right-0 left-0 items-center justify-center backdrop-blur-sm">
             {/* <div className="fixed bg-black opacity-10 top-0 bottom-0 right-0 left-0 "></div> */}
             <div className=" bg-white rounded-2xl p-8 z-60 grid grid-cols-1 drop-shadow-lg transition-width ease-in duration-300">
-                { !newStoryId ? thanksForUpload : uploadingProcess }
+                { newStoryId ? thanksForUpload : uploadingProcess }
             </div>
         </div>
     )
