@@ -50,7 +50,7 @@ exports.handler = async (event, context, callback) => {
       // })
       callback(null, {
         statusCode: 200,
-        body: JSON.stringify(res._id)
+        body: JSON.stringify({storyId: res._id})
       });
       console.log("Story Input Form Response: " + JSON.stringify(res._id))
     })
