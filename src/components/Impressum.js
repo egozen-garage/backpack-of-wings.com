@@ -20,7 +20,7 @@ export function Impressum() {
           onClick={() => navigate(-1)}
           className="flex-1 buttonInactive white"
         >
-            <h1 className="flex flex-wrap text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl w-full min-w-[15rem] mx-1 py-1 mobileHorizontal:py-2">
+            <h1 className="flex flex-wrap text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl w-full min-w-[15rem] mx-1 py-2 mobileHorizontal:py-2">
               <span className="ml-auto pr-2 float-right">The Backpack of Wings:</span>
               <span className="mr-auto float-left">Sensory Networks</span>
             </h1>
@@ -36,8 +36,8 @@ export function Impressum() {
           </div>
       </div>
 
-      <div className="text-white gradientImpressum z-60 fixed top-0 left-0 h-screen w-full px-2 mobileHorizontal:px-12 wideScreen:px-16 pt-[6rem] mobileHorizontal:pt-16 wideScreen:pt-[8rem] overflow-scroll noScrollBar ">
-        <div className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] p-4 pt-4 pb-[2rem] tablet:pb-[15rem]">
+      <div className="text-white gradientImpressum z-60 fixed top-0 left-0 h-screen w-full px-6 mobileHorizontal:px-[4.5rem] wideScreen:px-[5rem] pt-[7.5rem] mobileHorizontal:pt-[6rem] overflow-scroll noScrollBar ">
+        <div className="font-serif font-light text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] pb-[2rem] tablet:pb-[15rem]">
           <span className="block py-4">
             Hyeseon Jeong <br />
             Erzbergerplatz 9 <br />

@@ -84,8 +84,13 @@
 
 .animateOpacity {
     visibility: hidden;
-    transition: opacity .5s ease-in-out;
+    transition: opacity .1s ease-in-out;
     opacity: 0;
+}
+
+.animateOpacity.hide {
+    height: 0px;
+    width: 0px;
 }
 
 .introWindow {
@@ -180,3 +185,11 @@
         opacity: 1;
     }
 }
+
+/* for Mobile HORIZONTAL 480px and above */
+@media all and (min-width: 480px) {
+    .animateOpacity.hide {
+        width: 100%;
+    }
+    
+  }

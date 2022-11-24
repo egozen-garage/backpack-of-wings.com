@@ -34,8 +34,8 @@ export function StoryCategory(props) {
   }
 
   return (
-    <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[50rem] wideScreen:w-[80rem]">
-      <div className="pl-3 pb-2">
+    <div className="uploadStories-Wrapper uploadStoriesContainerAnimation fixed flex flex-col top-0 pt-4 z-30 right-0 h-screen w-[35rem] xl:w-[50rem] wideScreen:w-[80rem]">
+      <div className="ml-auto mr-[4.5rem] lg:mr-auto lg:ml-0 pl-3 pb-2">
         <button 
           type="button" 
           onClick={() => {navigate("/uploadstory")}} 

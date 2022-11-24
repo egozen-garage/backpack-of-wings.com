@@ -6,15 +6,15 @@ export function About() {
 
   return (
     <>
-      <div className="p-16 px-6 mobileHorizontal:px-[4.5rem] wideScreen:px-[5rem] pt-[7.5rem] pb-10 mobileHorizontal:pt-[6rem]">
+      <div className="p-16 px-6 mobileHorizontal:px-[4.5rem] wideScreen:px-[5rem] pt-[7.5rem] mobileHorizontal:pt-[6rem] pb-10">
         {/* <button className="aboutBtn absolute right-3 top-3" onClick={() => props.setTrigger(false)}>&#9711;</button>{props.children} */}
-        <span className="loginShell flex flex-nowrap flex-col z-45 font-mono py-4 tablet:py-8 text-[11px] mobileHorizontal:text-[14px]">
+        {/* <span className="loginShell flex flex-nowrap flex-col z-45 font-mono py-4 tablet:py-8 text-[11px] mobileHorizontal:text-[14px]">
           <span>last login.</span><span>fri jun 24 18.44.10 on ttys000</span>
           <br />
           the default interactive shell is now zsh.
           <br />
           &#40;base&#41; user-mbp. ~ loading ...
-        </span>
+        </span> */}
         <div className="text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem]">
 
         <p className="font-serif py-4">
