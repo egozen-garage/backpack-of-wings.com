@@ -61,7 +61,9 @@ export default function StoryInputForm(props){
     })
     .then(response => response.json())
     .then(json => {
-      console.log(json);
+      reset();
+      const newStoryId = json.storyId
+      console.log(newStoryId);
     })
     // .then((data) => {
     //   reset();
