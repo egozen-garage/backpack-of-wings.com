@@ -33,11 +33,11 @@ export default function AboutWindow() {
 
   return (
     <>
-      <div className="z-60 w-screen mobileHorizontal:w-auto aboutBackground fixed flex flex-wrap top-0 mb-6 px-0 mobileHorizontal:px-12 wideScreen:px-16 mt-0 sm:mt-2 wideScreen:mt-4">
+      <div className="z-60 aboutBackground fixed flex flex-wrap top-0 mb-6 px-0 mobileHorizontal:px-12 wideScreen:px-16 mt-0 sm:mt-2 wideScreen:mt-4">
 
         {/* BACKPACK OF WINGS BUTTON */}
-        <button onClick={toggleCollapsible} className="flex-1 my-0">
-          <div className={isOpen? "buttonActive" : "buttonInactive white"}>
+        <button onClick={toggleCollapsible} className="my-0 w-screen mobileHorizontal:w-auto">
+          <div className={isOpen? "buttonActive" : "buttonInactive white "}>
             <h1 className="flex flex-wrap text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl w-full min-w-[15rem] mx-1 py-2">
               <span className="ml-auto pr-2 float-right">The Backpack of Wings:</span><span className="mr-auto float-left">Sensory Networks</span>
             </h1>
@@ -49,7 +49,7 @@ export default function AboutWindow() {
 
         {/* IMPRESSUM */}
         <div className={isOpen ? "animateOpacity show" : "animateOpacity hide"}>
-          <div className="flex-2 buttonInactive white mx-4 mobileHorizontal:mx-6 mt-1 mobileHorizontal:mt-4">
+          <div className="buttonInactive white mx-4 mobileHorizontal:mx-6 mt-1 mobileHorizontal:mt-4">
             <NavLink to="/impressum" onClick={toggleCollapsible}>
               <h1 className="text-[0.95rem] xs:text-[1rem] mobileHorizontal:text-md tablet:text-xl mx-2 my-2">
                 Impressum
