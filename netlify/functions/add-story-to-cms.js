@@ -40,9 +40,11 @@ exports.handler = async (event, context, callback) => {
         }
 
         const response = await client.create(storyData);
-        const data = await response.json();
+        const data = await response;
 
-        console.log("Story Input Form Response: " + JSON.stringify(data))
+        console.log("Story Input Form Response data: " + data)
+        console.log("Story Input Form Response _id: " + data._id)
+        console.log("Story Input Form Response JSON: " + JSON.stringify(data))
         callback(null, {
           statusCode: 200,
           body: JSON.stringify({storyId: data._id})
