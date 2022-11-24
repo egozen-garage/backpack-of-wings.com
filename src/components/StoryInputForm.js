@@ -2,6 +2,7 @@ import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import "../css/animation.css";
 import "../css/gradientAnimation.css";
+import StoryInputFormSubmited from './StoryInputFormSubmited'
 
 import { useEffect, useState } from "react";
 
@@ -9,6 +10,7 @@ import { useEffect, useState } from "react";
 export default function StoryInputForm(props){
   const { landmark } = useParams()
   const [formReady, setFormReady] = useState(false)
+  const [newStoryId, setNewStoryId] = useState(null)
 
   // const checkForm = () => {
   //   setFormReady(true)
@@ -62,14 +64,9 @@ export default function StoryInputForm(props){
     .then(response => response.json())
     .then(json => {
       reset();
-      const newStoryId = json.storyId
-      console.log(newStoryId);
+      const returnedStoryId = json.storyId
+      setNewStoryId(returnedStoryId)
     })
-    // .then((data) => {
-    //   reset();
-    //   const resJson = data
-    //   console.log("Story Input Form Response: " + resJson + " in JSON: " + JSON.stringify(resJson))
-    // })
     .catch((error) => {
       console.log(error);
     });
@@ -130,6 +127,7 @@ export default function StoryInputForm(props){
 
   return (
       <>
+        <StoryInputFormSubmited newStoryId={newStoryId} landmark={landmark} />
         <div className="z-30 uploadstories-container uploadstories-textField overflow-scroll noScrollBar h-full pl-4 pr-12 mx-6 ">
           <form
             onSubmit={handleSubmit(handlePost)}
