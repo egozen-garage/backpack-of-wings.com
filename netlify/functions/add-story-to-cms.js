@@ -29,26 +29,50 @@ exports.handler = async (event, context, callback) => {
 
   // var response = null;
   // Build the document JSON and submit it to SANITY
-  if (isStoryForm) {
-    // let response = null;
-    const storyData = {
-      _type: "story",
-      landmark: payload.landmarkName,
-      name: payload.name,
-      email: payload.email,
-      message: payload.message,
-      publishedAt: today,
-    }
-    client.create(storyData)
-    .then(res => {
-      console.log("Story Input Form Response: " + JSON.stringify(res._id))
-      callback(null, {
-        statusCode: 200,
-        body: JSON.stringify({storyId: res._id})
-      });
-    })
-    .catch(ex => callback(ex));
+  try {
+        const storyData = {
+          _type: "story",
+          landmark: payload.landmarkName,
+          name: payload.name,
+          email: payload.email,
+          message: payload.message,
+          publishedAt: today,
+        }
+
+        const response = await client.create(storyData);
+        const data = await response.json();
+
+        console.log("Story Input Form Response: " + JSON.stringify(data))
+        callback(null, {
+          statusCode: 200,
+          body: JSON.stringify({storyId: data._id})
+        });
+  }  catch (err) {
+    console.log(err);
   }
+  // if (isStoryForm) {
+  //   // let response = null;
+  //   const storyData = {
+  //     _type: "story",
+  //     landmark: payload.landmarkName,
+  //     name: payload.name,
+  //     email: payload.email,
+  //     message: payload.message,
+  //     publishedAt: today,
+  //   }
+  //   client.create(storyData)
+  //   .then(res => {
+  //     console.log("Story Input Form Response: " + JSON.stringify(res._id))
+  //     callback(null, {
+  //       statusCode: 200,
+  //       body: JSON.stringify({storyId: res._id})
+  //     });
+  //   })
+  //   .catch(ex => callback(ex));
+  // }
+
+
+
   // // response = "hi"
   // callback(null, {
   //   statusCode: 200,
