@@ -62,12 +62,12 @@ const handler = async (event, context, callback) => {
             if(lastTimestamp < monthlyLocations[x].timestamp){
                 counter = counter + 1
                 // console.log("add new data entry")
-                const timestamp = monthlyLocations[x].timestamp
+                const timestamp = monthlyLocations[x].timestamp.toString()
                 const longitude = monthlyLocations[x].location_long
                 const latitude = monthlyLocations[x].location_lat
                 const newLocation = {
                     "_type": "locationEntry",
-                    "_key": timestamp.toString(),
+                    "_key": timestamp,
                     "timestamp": timestamp,
                     "longitude": longitude,
                     "latitude": latitude,
@@ -119,4 +119,5 @@ const handler = async (event, context, callback) => {
 };
 
 
-exports.handler = schedule("@hourly", handler);
+// exports.handler = schedule("@hourly", handler);
+exports.handler = schedule("*/15 * * * *", handler);
