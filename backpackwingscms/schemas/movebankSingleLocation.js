@@ -4,13 +4,13 @@ export default {
     type: 'object',
     fields: [
         {
-            name: 'longitude',
+            name: 'location_long',
             title: 'Longitude',
             type: 'number',
             // readOnly: true,
         },
         {
-            name: 'latitude',
+            name: 'location_lat',
             title: 'Latitude',
             type: 'number',
             // readOnly: true,

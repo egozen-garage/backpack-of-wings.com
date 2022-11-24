@@ -36,14 +36,13 @@ export default function Mapbox(props) {
         // if(!dataReady){
             Promise.all([
                     fetch(apiUrl).then((response) => response.json()),
+                    // sanityClient.fetch(
+                    //     `*[_type == "movebank"]{location[0...250]{latitude, longitude, timestamp}}`
+                    // ),
                     sanityClient.fetch(
-                        // *[dateTime(_updatedAt) > dateTime(now()) - 60*60*24*7] // Updated within the past week
                         `*[_type == "weatherData" && dateTime(_updatedAt) > dateTime(now()) - 60*60*2]{
                             temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description, timestamp
                         }[0]`
-                        // `*[_type == "weatherData"]{
-                        //     temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description, timestamp
-                        // }[0]`
                     ),
                     sanityClient.fetch(
                         `*[_type == "landmark" ]{"url":url.current, "country":country, "locationType": locationType, "locationName": locationName, "latitude":latitude, "longitude":longitude}`
@@ -51,9 +50,13 @@ export default function Mapbox(props) {
                 ])
                 .then(([movebankData, weatherData, landmark]) => {
                     setMovebankData(movebankData.individuals[0].locations);
+                    // setMovebankData(movebankData[0].location);
+                    // console.log("new movebankdata: " + JSON.stringify(movebankData[0].location))
+                    // console.log("old movebankdata: " + JSON.stringify(movebankData.individuals[0].locations))
                     // setWeatherData(weatherData);
                     // setLandmark(landmark);
                     // setDataReady(true);
+                    // const movebank = movebankData[0].location
                     setMapData([movebankData, weatherData, landmark])
                     console.log("FetchMapData: Api Data has been called" + JSON.stringify(weatherData))
                     console.log("FetchMapData: Api Data has been called")
@@ -65,7 +68,7 @@ export default function Mapbox(props) {
         //     return
         // }
     }, [])    
-
+    console.log("mapbox data fetched")
 
     // console.log("mapData: " + JSON.stringify(mapData))
     // console.log("mapData: " + JSON.stringify(movebankData))
@@ -76,6 +79,7 @@ export default function Mapbox(props) {
         return ( <pre>data loading...</pre>)
     }
     if(movebankData && !dataReceived){
+        console.log("data arrived")
         // console.log("data arrived " + JSON.stringify(mapData[2]))
         dataReceived = true;
         // console.log("bird data 30 days: " + movebankData[1].location_long)
@@ -86,6 +90,7 @@ export default function Mapbox(props) {
 
 
 function DrawMapbox(props){
+    console.log("mapbox loaded")
     // const { landmark } = useParams()
 
     const mapContainer = useRef(null);
@@ -103,6 +108,7 @@ function DrawMapbox(props){
     // console.log("mapData: " + JSON.stringify(props.mapData[0]))
     // console.log("mapData: " + JSON.stringify(props.weatherData))
 
+    // const latestBirdData = props.mapData[0] // FetchMapData() --> [0] movebankData latest locations
     const latestBirdData = props.mapData[0].individuals[0].locations // FetchMapData() --> [0] movebankData latest locations
     const weatherData    = props.mapData[1] // FetchMapData() --> [1] weatherData
     const landmarkSanity = props.mapData[2] // FetchMapData() --> [2] landmark
@@ -117,8 +123,9 @@ function DrawMapbox(props){
     let lastItemCount = latestBirdData.length-1
     let current_longitude = latestBirdData[lastItemCount].location_long
     let current_latitude = latestBirdData[lastItemCount].location_lat
-    // console.log("last entry: " + lastItemCount + " timestamp: " + props.birdData[0].timestamp)
-    // console.log("bird data: " + props.birdData[1].location_long)
+    // let current_longitude = latestBirdData[lastItemCount].longitude
+    // let current_latitude = latestBirdData[lastItemCount].latitude
+    // console.log("bird data: " + props.birdData[1].longitude)
     console.log("current location: " + current_latitude + ", " + current_longitude)
     const currentCoordinates = [];
     for(let i = 0; i < latestBirdData.length; i++){
