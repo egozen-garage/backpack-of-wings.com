@@ -67,7 +67,7 @@ const handler = async (event, context, callback) => {
                 const latitude = monthlyLocations[x].location_lat
                 const newLocation = {
                     "_type": "locationEntry",
-                    "_key": timestamp,
+                    "_key": timestamp.toString(),
                     "timestamp": timestamp,
                     "longitude": longitude,
                     "latitude": latitude,
@@ -75,7 +75,7 @@ const handler = async (event, context, callback) => {
                 // newData.unshift(newLocation)
                 const patch = {
                     patch: {
-                        "id" : "edba8f30-d0aa-41a5-9e52-0ba061d91874", // id of Movebank document with locations
+                        "id" : "03c63e19-b827-48b1-8266-c60fdd6d1e66", // id of Movebank document with locations
                         "insert": {
                           "before": "location[0]",
                           "items": [newLocation]
@@ -85,6 +85,7 @@ const handler = async (event, context, callback) => {
                 mutations.push(patch)
             }
         }
+
 
 
 
