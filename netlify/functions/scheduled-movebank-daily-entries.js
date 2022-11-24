@@ -70,8 +70,8 @@ const handler = async (event, context, callback) => {
                     "_type": "locationEntry",
                     "_key": key,
                     "timestamp": timestamp,
-                    "longitude": longitude,
-                    "latitude": latitude,
+                    "location_long": longitude,
+                    "location_lat": latitude,
                 }
                 // newData.unshift(newLocation)
                 const patch = {
