@@ -3,16 +3,19 @@ import { useNavigate } from "react-router-dom"
 
 export default function StoryInputFormSubmited(props){
     let newStoryId = props.newStoryId
+    let formSubmited = props.formSubmited
     let landmark = props.landmark
     const navigate = useNavigate()
     const [hide, setHide] = useState(false)
-
+    
 
     useEffect(() => {
         setHide(false)
     }, [props.newStoryId])
+
     const hidePopup = () => {
         setHide(true)
+        // formSubmited =false
     }
     const goToNewStory = () => {
         navigate("/loadmemory/" + landmark + "/" + newStoryId)

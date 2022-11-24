@@ -11,17 +11,7 @@ export default function StoryInputForm(props){
   const { landmark } = useParams()
   const [formReady, setFormReady] = useState(false)
   const [newStoryId, setNewStoryId] = useState(null)
-
-  // const checkForm = () => {
-  //   setFormReady(true)
-  //   console.log("form ready for check: " + formReady)
-  // }
-  console.log("storyInputForm: " + JSON.stringify(props) )
-  console.log("storyInputForm: " + props.currentLandmark )
-
-  // const location = useLocation();
-  // let currentURL = location.pathname.split("/")[1];
-  // let uploadStoryURL = location.pathname.split("/")[2];
+  // const [formSubmited, setFormSubmited] = useState(null)
 
   // Initiate forms
   // const { register, handleSubmit, errors, reset } = useForm()
@@ -56,7 +46,6 @@ export default function StoryInputForm(props){
   // Handles the post process to Netlify so we can access their serverless functions
   const handlePost = (formData, event) => {
     fetch(`/.netlify/functions/add-story-to-cms`, {
-      // fetch(`/.netlify/functions/add-story-to-cms`, {
       method: "POST",
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({ "form-name": "story-form", ...formData }),
@@ -71,11 +60,11 @@ export default function StoryInputForm(props){
       console.log(error);
     });
 
-      setFormSubmited(true)
-      setFormReady(false) 
-      setStory(null)
-      setAuthor(null)
-      setMail(null)
+    setFormSubmited(true)
+    setFormReady(false) 
+    setStory(null)
+    setAuthor(null)
+    setMail(null)
     event.preventDefault();
   };
 
@@ -92,29 +81,13 @@ export default function StoryInputForm(props){
   function checkForm(){
     setFormSubmited(false)
     trigger()
-    console.log("form pressed and ready - mail:" + isValidEmail())
-    console.log("form pressed and ready - story:" + story)
-    console.log("form pressed and ready - author:" + author)
     if(story && author && isValidEmail()){ 
-      console.log("form pressed and ready")
       return setFormReady(true) 
     } 
-    // else { 
-    //   if(!story){
-    //     return alert("Please enter a story")
-    //   }
-    //   if(!author){
-    //     return alert("Please enter a name")
-    //   }
-    //   if (!isValidEmail()) {
-    //     return alert("Please enter a valid email.")
-    //   }
-    // }
   }
 
   const [storyTitle, setStoryTitle] = useState(null)
   const landmarkdata = props.landmarkData
-  console.log("landmarkdata: " + JSON.stringify(landmarkdata[0]))
   useEffect(() => {
     for(const x in landmarkdata){
       if(landmark === landmarkdata[x].url.current){
@@ -127,7 +100,7 @@ export default function StoryInputForm(props){
 
   return (
       <>
-        <StoryInputFormSubmited newStoryId={newStoryId} landmark={landmark} />
+        <StoryInputFormSubmited newStoryId={newStoryId} landmark={landmark} formSubmited={formSubmited} />
         <div className="z-30 uploadstories-container uploadstories-textField overflow-scroll noScrollBar h-full pl-4 pr-12 mx-6 ">
           <form
             onSubmit={handleSubmit(handlePost)}
