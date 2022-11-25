@@ -27,6 +27,7 @@ module.exports = {
       colors: {
         'backpackYellow' : '#f9fe1e',
         'backpackGray' : '#CFCFCF',
+        'backpackDarkGray' : '#94a3b8',
         'backpackBlue' : '#F0B4FC',
         'backpackPink' : 'rgba(240, 180, 252, 0.5)'
       },

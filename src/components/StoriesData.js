@@ -117,10 +117,47 @@ export function StoriesData(props) {
   const timeout = useRef()
   const timeUnitLoading = 500 
   const [loadingNewStory, setLoadingNewStory] = useState(false)
+  // let procentage = 0
+  // const increaseProcentage = () => {
+    //   procentageInterval = setInterval(function() {
+      //     console.log("interval")
+      //     procentage += 1
+      //   }, 10)
+      
+      //   if(procentage === 100) {
+        //     // window.clearInterval(procentageInterval);
+        //   }
+        // }
+        
+        
+  const [loadProcentage, setLoadProcentage] = useState(0)
+  useEffect(() => {
+    if(loadingNewStory === false) return
+    let procentage = 0;
+      const procentageInterval = setInterval(function() {
+        // console.log("interval " + procentage)
+        procentage += 1
+        setLoadProcentage(procentage += 1)
+      if(procentage === 100) {
+        window.clearInterval(procentageInterval);
+      }
+      }, 5)
+    }, [loadingNewStory])
+
+    const animatedWidth = { width: loadProcentage+"%"}
+    const loadingBar = (
+      <div className=" p-8 z-60 grid grid-cols-1 transition-width ease-in duration-300">
+          <div className="flex items-center order-2 bg-backpackDarkGray h-1 w-full mt-2">
+                <div style={animatedWidth} className="bg-black h-full   "></div>
+          </div>
+      </div>
+    )
+    
   const goToNext = () => {
     setLoadingNewStory(true)
     timeout.current = setTimeout(function(){
       setLoadingNewStory(false)
+      // setLoadProcentage(0)
       console.log("timer is on")
     }, timeUnitLoading);
     setStoryCounter(storyIds.length === storyCounter ? 1 : storyCounter+1)
@@ -178,6 +215,8 @@ export function StoriesData(props) {
     }
   }, [landmark, landmarkdata])
 
+
+
   if(data && storyIds){
   return (
     <>
@@ -192,7 +231,8 @@ export function StoriesData(props) {
         {/* STORY TEXT */}
         <div className="noScrollBar gradientStoryOverlay font-sans text-[0.9rem] mobileHorizontal:text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
           {/* <Carousel storyData={data} storyCounter={storyCounter}/> */}
-          {loadingNewStory ? "" : data[0].message}
+          {loadingNewStory ? loadingBar : data[0].message}
+          {/* {loadingBar} */}
         </div>
 
         {/* NEXT BUTTON */}
