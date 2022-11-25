@@ -153,6 +153,19 @@ export function StoriesData(props) {
       </div>
     )
     
+
+  const [nrOfNextLandmark, setNrOfNextLandmark] = useState(null)
+  useEffect(() => {
+    let number =  landmark === "droemling" ? 1 : 
+                  landmark === "lackova" ? 2 :
+                  landmark === "istanbul" ? 3 :
+                  landmark === "hama" ? 4 :
+                  landmark === "neveeitan" ? 5 :
+                  landmark === "dudaimsite" ? 0 : 0
+    setNrOfNextLandmark(number)
+    console.log("next Number: " + number)
+  }, [landmark])
+
   const goToNext = () => {
     setLoadingNewStory(true)
     timeout.current = setTimeout(function(){
@@ -162,24 +175,27 @@ export function StoriesData(props) {
     }, timeUnitLoading);
     setStoryCounter(storyIds.length === storyCounter ? 1 : storyCounter+1)
     if(storyIds.length === storyCounter){
-      const landmarkNumber =  landmark === "droemling" ? 0 : 
-                              landmark === "lackova" ? 1 :
-                              landmark === "istanbul" ? 2 :
-                              landmark === "hama" ? 3 :
-                              landmark === "neveeitan" ? 4 :
-                              landmark === "dudaimsite" ? 5 : 0
-      const randomNumber = [{"landmark_id": 0}, {"landmark_id": 1}, {"landmark_id": 2}, {"landmark_id": 3}, {"landmark_id": 4}, {"landmark_id": 5}]
-      var newRandomNumber = randomNumber.filter(function(record) {
-        return record['landmark_id'] !== landmarkNumber;
-      });
-      let shuffledNumbers = newRandomNumber
-        .map(value => ({ value, sort: Math.random() }))
-        .sort((a, b) => a.sort - b.sort)
-        .map(({ value }) => value)
-      console.log("random numbers array: " + JSON.stringify(shuffledNumbers))
-      const randomNumber2SelectNewLandmark = Math.floor(Math.random() * 4)
-      const newId = props.storyIds[shuffledNumbers[randomNumber2SelectNewLandmark].landmark_id].ids[0]._id
-      const newLandmark = props.storyIds[shuffledNumbers[randomNumber2SelectNewLandmark].landmark_id].ids[0].landmark
+      //random Landmark
+      // let landmarkNumber =  landmark === "droemling" ? 0 : 
+      //                         landmark === "lackova" ? 1 :
+      //                         landmark === "istanbul" ? 2 :
+      //                         landmark === "hama" ? 3 :
+      //                         landmark === "neveeitan" ? 4 :
+      //                         landmark === "dudaimsite" ? 5 : 0
+      // const randomNumber = [{"landmark_id": 0}, {"landmark_id": 1}, {"landmark_id": 2}, {"landmark_id": 3}, {"landmark_id": 4}, {"landmark_id": 5}]      
+      // var newRandomNumber = randomNumber.filter(function(record) {
+      //   return record['landmark_id'] !== landmarkNumber;
+      // });
+      // let shuffledNumbers = newRandomNumber
+      //   .map(value => ({ value, sort: Math.random() }))
+      //   .sort((a, b) => a.sort - b.sort)
+      //   .map(({ value }) => value)
+      // const randomNumber2SelectNewLandmark = Math.floor(Math.random() * 4)
+      // const newId = props.storyIds[shuffledNumbers[randomNumber2SelectNewLandmark].landmark_id].ids[0]._id
+      // const newLandmark = props.storyIds[shuffledNumbers[randomNumber2SelectNewLandmark].landmark_id].ids[0].landmark
+      // ordered Landmark
+      const newId = props.storyIds[nrOfNextLandmark].ids[0]._id
+      const newLandmark = props.storyIds[nrOfNextLandmark].ids[0].landmark
       const newUrlEndpoint = "/loadmemory/" + newLandmark + "/" + newId
       navigate(newUrlEndpoint)
       
