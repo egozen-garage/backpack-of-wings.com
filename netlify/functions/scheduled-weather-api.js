@@ -109,18 +109,25 @@ const handler = async (event, context, callback) => {
 
 
         // Post patches to Sanity
-        fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/mutate/${dataset}`, {
-            method: 'post',
-            headers: {
-                'Content-type': 'application/json',
-                Authorization: `Bearer ${token}`
-            },
-            body: JSON.stringify({mutations})
-        })
-        .then(response => response.json())
-        .then(result => console.log(result))
-        .catch(error => console.error(error))
+        async function mutate(mutations) {
+          console.log("mutation: " + JSON.stringify(mutations))
+          await fetch(`https://${projectId}.api.sanity.io/v${apiVersion}/data/mutate/${dataset}`, {
+              method: 'post',
+              headers: {
+                  'Content-type': 'application/json',
+                  Authorization: `Bearer ${token}`
+              },
+              body: JSON.stringify({mutations})
+          })
+          .then(response => response.json())
+          .then(result => console.log(result))
+          .catch(error => console.error(error))
+          
+          // const json = await result.json();
+          // return json;
+        }
                     
+        mutate(mutations);
 
         return { 
             statusCode: 200, 
@@ -139,8 +146,8 @@ const handler = async (event, context, callback) => {
 // schedule every 1 minute
 // exports.handler = schedule("* * * * *", handler);
 // schedule every 15 minute
-// exports.handler = schedule("*/15 * * * *", handler);
-exports.handler = schedule("@hourly", handler);
+exports.handler = schedule("*/15 * * * *", handler);
+// exports.handler = schedule("@hourly", handler);
 // schedule every 4 hours
 // exports.handler = schedule("0 */4 * * *", handler);
 
