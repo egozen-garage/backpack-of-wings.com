@@ -16,6 +16,7 @@ export default {
       name: "url",
       title: "URL Endpoint",
       type: "slug",
+      readOnly: true,
     },
     {
       name: "locationName",
