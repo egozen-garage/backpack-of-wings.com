@@ -117,7 +117,7 @@ export function MaterialContent(props) {
           onClick={HideContent}
           className="fixed bg-black opacity-10 top-0 bottom-0 right-0 left-0"
         ></div>
-        <div className="fixed flex flex-col drop-shadow-lg mx-20 w-[inherit] bg-white h-auto rounded-3xl p-8">
+        <div className="fixed flex flex-col drop-shadow-lg mx-20 sm:w-[inherit] bg-white h-auto rounded-3xl p-8">
           <div className="font-sans text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto">
             {/* {previewContent} */}
             {singleLandmarkData.materialArray.map(
@@ -138,7 +138,7 @@ export function MaterialContent(props) {
                 <div
                   id={"previewContent-" + i}
                   tabIndex={i}
-                  className="previewMaterial hidden relative"
+                  className="previewMaterial hidden relative "
                   title={_key}
                   key={"uniqueKey_"+_key}
                 >
@@ -147,14 +147,14 @@ export function MaterialContent(props) {
                       src={embedMapsSRC}
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
-                      className="h-[30rem] wideScreen:h-[40rem] w-[30rem] laptop:w-[40rem] wideScreen:w-[50rem] rounded-2xl"
+                      // className="h-[30rem] wideScreen:h-[40rem] w-[30rem] laptop:w-[40rem] wideScreen:w-[50rem] rounded-2xl"
+                      className="h-auto wideScreen:h-[40rem] w-auto laptop:w-[40rem] wideScreen:w-[50rem] rounded-2xl"
                     ></iframe>
                   ) : _type === "youtube" ? (
                     <iframe
                       src={embedYoutubeHTML}
-                      // allow="autoplay; encrypted-media"
-                      // allowscriptaccess="always"
-                      className="youtube-iframe h-[15rem] tablet:h-[20rem] wideScreen:h-[30rem] w-[30rem] tablet:w-[40rem] wideScreen:w-[60rem] rounded-2xl"
+                      // className="youtube-iframe h-[15rem] tablet:h-[20rem] wideScreen:h-[30rem] w-[30rem] tablet:w-[40rem] wideScreen:w-[60rem] rounded-2xl"
+                      className="youtube-iframe h-auto tablet:h-[20rem] wideScreen:h-[30rem] w-auto tablet:w-[40rem] wideScreen:w-[60rem] rounded-2xl "
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
                     ></iframe>
@@ -176,7 +176,8 @@ export function MaterialContent(props) {
                       />
                   ) : _type === "blockObj" ? (
                     <div 
-                      className="p-5 text-sm wideScreen:text-lg h-full max-h-[80vh] max-w-sm wideScreen:max-w-lg" 
+                      // className="p-5 text-sm wideScreen:text-lg h-full max-h-[80vh] max-w-sm wideScreen:max-w-lg" 
+                      className="sm:p-5 p-0 text-sm wideScreen:text-lg wideScreen:max-h-[80] max-h-[70vh] sm:max-w-sm w-100 wideScreen:max-w-lg" 
                       title={"popUp_" + _key}
                       key={"popUp_uniqueKey_" + _key}
                       >
@@ -219,9 +220,9 @@ export function MaterialContent(props) {
       </div>
 
       {/* THUMBNAIL WINDOW */}
-      <div className="gradientMaterialOverlay mt-3 mb-10 pr-[3rem]">
+      <div className="gradientMaterialOverlay mt-3 mb-10 sm:pr-[3rem] pr-0">
         {/* <div className="gradientMaterialOverlay my-10 pl-[0.4rem]"> */}
-        <div className="flex overflow-x-scroll overflow-y-hidden scrollbar-hide pl-[1rem]">
+        <div className="flex overflow-x-scroll overflow-y-hidden scrollbar-hide pl-[1rem] ">
           {singleLandmarkData.materialArray.map(
             (
               {

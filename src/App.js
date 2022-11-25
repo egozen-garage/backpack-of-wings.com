@@ -72,10 +72,12 @@ function App() {
   })
   }, [])
 
-  if(storyIds){
-    console.log("story ids : " + JSON.stringify(storyIds[3].ids[0].landmark))
-  }
+  // if(storyIds){
+  //   console.log("story ids : " + JSON.stringify(storyIds[3].ids[0].landmark))
+  // }
   
+
+
   if (landmarkData) {
   return (
     <>

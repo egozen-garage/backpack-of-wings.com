@@ -51,7 +51,7 @@ export function UploadStoriesIntro() {
         <div className="gradientJonasIntroOverlay gradientBGJonasIntro h-screen w-screen fixed"></div>
 
         {/* INTRODUCTION TEXT OF JONAS */}
-        <div className="gradientJonasIntroOverlay px-14 text-xl h-screen overflow-y-scroll noScrollBar pb-[12rem] wideScreen:pb-[20rem]">
+        <div className="gradientJonasIntroOverlay sm:px-14 px-0 text-xl h-screen overflow-y-scroll noScrollBar pb-[12rem] wideScreen:pb-[20rem]">
           <div className="pl-8 pt-24 wideScreen:pt-28 pb-10 text-xl tablet:text-2xl wideScreen:text-[2.5rem] wideScreen:leading-[3.5rem] ">
             <div className="flex flex-wrap font-serif py-4">
               <span>Hello, I am Jonas.</span>
@@ -123,7 +123,7 @@ export function UploadStoriesIntro() {
         </div>
 
         {/* SOUNDSCAPE PLAY WAVEFORM */}
-        <div className="fixed bottom-0 left-0 w-screen px-14">
+        <div className="fixed bottom-8 left-0 w-screen px-14">
           <AudioPlayer></AudioPlayer>
         </div>
       </div>
