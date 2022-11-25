@@ -94,8 +94,8 @@
 }
 
 .animateOpacity.hide {
-    height: 0px;
-    width: 0px;
+    height: 0px !important;
+    width: 0px !important;
 }
 
 .introWindow {

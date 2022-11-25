@@ -63,23 +63,26 @@ export function AudioPlayer() {
       <div
         className={
           isPlaying
-            ? "soundscapeButton pause marquee marquee--fit-content"
-            : "soundscapeButton"
+            ? "soundscapeCursor pause marquee"
+            : "soundscapeCursor"
         }
         onClick={playPause}
       >
+        <div className="fixed bottom-[4.8rem] left-[2.5rem] mobileHorizontal:bottom-[2.3rem] mobileHorizontal:left-[5.3rem] z-70 ">
+          <div className={isPlaying ? "icon pause" : "icon"}/>
+        </div>
         <audio src={audio} ref={audioRef} />
-        <div className="marquee__content ">
+        <div className="marquee__content overflow-x-hidden">
           {/* <div className="bg-solid bg-white w-10 h-10"></div> */}
           <img
-            className="object-cover h-[4rem] wideScreen:h-[5rem]"
+            className="object-cover h-[4rem] wideScreen:h-[6rem]"
             src={progressbar}
             alt="progressbar"
           />
 
         </div>
         {isPlaying && ( 
-            <div className="marquee__content">
+            <div className="marquee__content overflow-x-hidden">
             {/* <div className="bg-solid bg-white w-10 h-10"></div> */}
             <img
               className="object-cover h-[4rem] wideScreen:h-[5rem]"

@@ -3,7 +3,7 @@ import { useParams, useLocation, Outlet, useNavigate } from "react-router-dom";
 import SanityClient from "../client";
 
 import AudioPlayer from "../utilities/AudioPlayer";
-// import stories from "../json/storiesData.json";
+import Carousel from "../utilities/Carousel";
 
 import "../css/animation.css";
 import "../css/gradientAnimation.css";
@@ -23,6 +23,7 @@ export function StoriesData(props) {
 
   const [storyIds, setStoryIds] = useState(null)
   const [firstId, setFirstId] = useState(false)
+  // const [storyArray, setStoryArray] = useState(null)
   useEffect(() => {
     console.log("call Sanity to check amout of storys")
     Promise.all([
@@ -43,7 +44,7 @@ export function StoriesData(props) {
   const [newStoryIds, setNewStoryIds] = useState(null)
   if(storyIds && firstId){
     setFirstId(false)
-    // console.log("amount of id entries: " + JSON.stringify(storyIds))
+    console.log("amount of id entries: " + JSON.stringify(storyIds))
     var temNewStoryIds = storyIds.filter(function(record) {
       return record['_id'] !== id;
     });
@@ -61,11 +62,13 @@ export function StoriesData(props) {
       Promise.all([
           SanityClient.fetch(
             `*[_id == "${id}"]`
+            // `*[_type == "story" && landmark == ${currentLandmark}]`
           )
-      ])
+      ]) 
       .then(([sanityData]) => {
               console.log("call story data locally")
               setData(sanityData);
+              // setStoryArray(sanityData);
               // setIsLoaded(true);
       })
       .catch((err) => {
@@ -76,6 +79,7 @@ export function StoriesData(props) {
 
 
   console.log("memory Content: " + JSON.stringify(data) )
+  // console.log("check storyArray:" + JSON.stringify(storyArray))
 
   // const [memoryId2URL, setMemoryId2URL] = useState(false);
 
@@ -108,6 +112,7 @@ export function StoriesData(props) {
   }, [navigate]);
 
   const [storyCounter, setStoryCounter] = useState(1)
+  // console.log("storyArray, count storyCounter: " + storyCounter)
 
   const goToNext = () => {
     setStoryCounter(storyIds.length === storyCounter ? 1 : storyCounter+1)
@@ -169,21 +174,18 @@ export function StoriesData(props) {
   return (
     <>
       <div className="storiesContainerAnimation fixed bottom-0 flex flex-col z-20 w-screen mobileHorizontal:w-[35rem] wideScreen:w-[60rem] pt-0 mobileHorizontal:pt-[7rem] wideScreen:pt-[10rem] pb-10 mobileHorizontal:pb-0 px-6 mobileHorizontal:px-16 wideScreen:px-20 h-[34rem] mobileHorizontal:h-screen">
-        {/* <div className=" bg-white shadow-3xl rounded-2xl col-start-1 row-start-2 row-span-4 p-3 mx-6 h-[440px]"> */}
         <div className="flex pb-10">
           <h1 className="flex-1 text-lg mobileHorizontal:text-xl wideScreen:text-2xl font-bold">
-            {/* {stories.stories[currentIndex].location},
-            {stories.stories[currentIndex].country} */}
             {storyTitle}
           </h1>
           <h1 className="flex-2 text-lg mobileHorizontal:text-xl  wideScreen:text-2xl font-bold">{storyCounter}/{storyIds.length} Memories</h1>
         </div>
 
         {/* STORY TEXT */}
-        <p className="noScrollBar gradientStoryOverlay font-sans text-[0.9rem] mobileHorizontal:text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
-          {data[0].message}
-          {/* {stories.stories[currentIndex].text} */}
-        </p>
+        <div className="noScrollBar gradientStoryOverlay font-sans text-[0.9rem] mobileHorizontal:text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
+          <Carousel storyData={data} storyCounter={storyCounter}/>
+          {/* {data[0].message} */}
+        </div>
 
         {/* NEXT BUTTON */}
         <div

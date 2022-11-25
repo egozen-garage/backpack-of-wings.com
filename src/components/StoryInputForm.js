@@ -98,12 +98,51 @@ export default function StoryInputForm(props){
     }
   }, [landmark, landmarkdata])
 
+  const mobileThreshold = 640
+  const [hideForm, setHideForm] = useState(null)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth)
+  useEffect(() => {
+    window.addEventListener("resize", () => {
+      setWindowWidth(window.innerWidth)
+      console.log("window width: " +window.innerWidth)
+      if(window.innerWidth < mobileThreshold){
+        setHideForm(true)
+      } else {
+        setHideForm(false)
+      }
+    })
+    if(window.innerWidth < mobileThreshold){
+      setHideForm(true)
+    }
+
+  }, [])
+
+  const containerStyle = "sm:relative fixed sm:z-58 z-30 sm:bg-inherit  uploadstories-container uploadstories-textField overflow-scroll noScrollBar h-full sm:pt-0 pt-20 sm:pl-4 xs:pl-14 pl-9 sm:pr-12 xs:pr-14 pr-9 sm:mx-6 sm-0 top-0 bottom-0 right-0 left-0  "
+
+  const backgroundGradient = windowWidth <= mobileThreshold ? " gradientUploadStory " : ""
+  // const hidden = windowWidth >= mobileThreshold ? " hidden " : ""
+
+  // const buttonStyleWriteStory = "sm:collapse fixed visible  bottom-10 w-full  sm:hidden block place-content-center"
+  const buttonStyleWriteStory = "flex sm:flex-nowrap flex-wrap w-full mt-10 "
+
+
+  // fixed h-full z-60 pt-30 flex top-0 bottom-0 right-0 left-0
   return (
       <>
         <StoryInputFormSubmited newStoryId={newStoryId} landmark={landmark} formSubmited={formSubmited} />
         
-        <div className="z-30 uploadstories-container uploadstories-textField overflow-scroll noScrollBar h-full pl-4 pr-12 mx-6 ">
-          <form
+        {/* <div className="z-30 uploadstories-container uploadstories-textField overflow-scroll noScrollBar h-full pl-4 pr-12 mx-6 ">
+          <form */}
+
+        <div className={buttonStyleWriteStory}>
+          {/* <button onClick={() => setHideForm(false)} className="button text-sm w-auto float-center">Write a story</button> */}
+          <button onClick={() => setHideForm(false)} className="button text-sm font-serif mb-6 w-full sm:hidden block">Write a story</button>
+        </div>
+
+
+    { hideForm ? "" : 
+      <div className={[containerStyle, backgroundGradient]}>
+        <form
             onSubmit={handleSubmit(handlePost)}
             name="story-form"
             method="POST"
@@ -133,31 +172,32 @@ export default function StoryInputForm(props){
             />
 
             {/* STORY TEXT BODY */}
-            <div className="flex pb-2 h-full">
-              <div className="flex-col w-40 wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-2 mr-2">
-                <label htmlFor="message" className="block pb-12">
+            <div className="flex pb-2 h-full sm:flex-nowrap flex-wrap items-stretch ">
+              <div className="flex-col sm:w-48 w-full wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-2 mr-2 h-20 ">
+
+                <label htmlFor="message" className="block sm:pb-12 pb-2">
                   Please write in the perspective of Jonas
                   {errors.message && <span style={{ color: "red" }}> *</span>}
                 </label>
-                <label className="block pb-12">
+                <label className="block sm:pb-12 pb-2">
                   What did I see, hear, feel and smell?
                 </label>
-                <label className="block pb-5">What did I sense?</label>
+                <label className="block sm:pb-5 pb-2">What did I sense?</label>
               </div>
               <textarea
                 onInput={e => setStory(e.target.value)}
                 title="What did I sense?"
                 rows="4"
                 name="message"
-                className="bg-transparent shadow-innerText font-sans rounded-2xl p-2 h-auto w-full resize-none "
+                className="bg-transparent shadow-innerText font-sans rounded-2xl p-2 h-auto w-full h-full resize-none "
                 required
                 {...register("message", { required: true })}
               />
             </div>
 
             {/* STORY AUTHOR NAME */}
-            <div className="flex pb-2 mt-auto">
-              <label htmlFor="name" className="w-40 wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-3 mr-2">
+            <div className="flex pb-2 mt-auto sm:flex-nowrap flex-wrap">
+              <label htmlFor="name" className="w-48 wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-3 mr-2">
                 Write your name
                 {errors.name && <span style={{ color: "red" }}> *</span>}
               </label>
@@ -171,8 +211,8 @@ export default function StoryInputForm(props){
             </div>
 
             {/* STORY EMAIL ADDRESS */}
-            <div className="flex">
-              <label htmlFor="email" className="w-40 wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-3 mr-2">
+            <div className="flex sm:flex-nowrap flex-wrap">
+              <label htmlFor="email" className="w-48 wideScreen:w-[15rem] text-2xs wideScreen:text-xs font-mono font-bold mt-3 mr-2">
                 Write your E-Mail
                 {errors.email && <span style={{ color: "red" }}> *</span>}
               </label>
@@ -211,17 +251,18 @@ export default function StoryInputForm(props){
             {/* <button type="submit" className="pt-7 ml-auto">
               <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Finalise &#8594;</p>
             </button> */}
-            <button type="button" onClick={checkForm} className="pt-7 pb-0 wideScreen:pt-16 wideScreen:pb-10 ml-auto">
+            <button type="button" onClick={checkForm} className="my-2 pb-0 wideScreen:pt-16 wideScreen:pb-10 ml-auto">
               <p className="button text-m wideScreen:text-2xl font-serif border-black border-solid border-[1px] rounded-[2rem] py-2 px-5">Finalise &#8594;</p>
             </button>
+            <button  onClick={() => setHideForm(true)}className="button text-sm font-serif mb-6 sm:hidden block">back</button>
           {/* </form>
         </div> */}
 
         { !formReady ? "" : 
           <div className={
             formSubmited ? 
-            "opacity-fade-out slide-left-to-right fixed h-full z-60 pt-30 flex top-0 bottom-0 right-0 left-0 items-center justify-center" : 
-            "opacity-fade-in slide-right-to-left fixed h-full z-60 pt-30 flex top-0 bottom-0 right-0 left-0 items-center justify-center" }
+            "opacity-fade-out slide-left-to-right fixed h-full z-59 pt-30 flex top-0 bottom-0 right-0 left-0 items-center justify-center" : 
+            "opacity-fade-in slide-right-to-left fixed h-full z-59 pt-30 flex top-0 bottom-0 right-0 left-0 items-center justify-center" }
           >
             <div onClick={() => setFormReady(false)}  className="fixed bg-black opacity-10 top-0 bottom-0 right-0 left-0"></div>
 
@@ -240,7 +281,7 @@ export default function StoryInputForm(props){
                   <input required type="checkbox" className="w-5 h-5 rounded-none outline-black"/> <span class="checkmark pl-5">I hereby allow to share my story in the website section Load Memories</span>
                 </label>
                 <div className="right-10 mr-0 ml-auto float-right" >
-                  <button type="button" onClick={() => setFormReady(false)} className="mr-4">
+                  <button type="button" onClick={() => setFormReady(false)} className="mr-0">
                     <p className="button font-serif font-bold border-black border-solid border-[1px] rounded-[2rem] py-1 px-4">Edit</p>
                   </button>
                   <button type="submit" className=" ">
@@ -253,7 +294,8 @@ export default function StoryInputForm(props){
           </div>
         }
         </form>
-        </div>
+      </div>
+    }
 
       </>
   );
