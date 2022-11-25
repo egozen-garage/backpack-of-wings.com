@@ -88,11 +88,11 @@ export function Impressum() {
         </div>
         
         {/* LOGOS */}
-        <div className="mb-10 flex flex-wrap justify-between logoWrapper h-[10rem]">
-          <img className="px-5 h-[6rem] mobileHorizontal:h-[6rem]" src={bmuv} alt="logo_bmuv"/>
-          <img className="px-5 h-[4rem] mobileHorizontal:h-[5rem]" src={dth} alt="logo_dth"/>
-          <img className="px-5 h-[4rem] py-2 mobileHorizontal:h-[5rem]" src={mpiab} alt="logo_mpiab"/>
-          <img className="px-5 h-[4rem] py-2 mobileHorizontal:h-[4.5rem]" src={ez} alt="logo_egozen"/>
+        <div className="mb-10 flex flex-wrap justify-between logoWrapper h-[10rem] -mx-5">
+          <img className="mx-2 h-[6rem] mobileHorizontal:h-[6rem]" src={bmuv} alt="logo_bmuv"/>
+          <img className="mx-5 h-[4rem] mobileHorizontal:h-[5rem]" src={dth} alt="logo_dth"/>
+          <img className="mx-5 h-[4rem] py-2 mobileHorizontal:h-[5rem]" src={mpiab} alt="logo_mpiab"/>
+          <img className="mx-5 h-[4rem] py-2 mobileHorizontal:h-[4.5rem]" src={ez} alt="logo_egozen"/>
         </div>
       </div>
     </>

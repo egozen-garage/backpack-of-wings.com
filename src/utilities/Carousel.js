@@ -1,61 +1,130 @@
 import React from "react";
+import { useState, useEffect } from "react";
+import { useLocation } from "react-router-dom";
+import SanityClient from "../client";
 
-class Carousel extends React.Component {
+export default function Carousel(props) {
+  const storyCounter = props.storyCounter
+  const location = useLocation();
+  const currentLandmark = location.pathname.split("/")[2];
 
-    data = [];
+  // define states
+  const [storyArray, setStoryArray] = useState([]);
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [varWidth, setVarWidth] = useState("100")
+  const [isMobile, setIsMobile] = useState(false)
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-    constructor() {
-        super();
-        this.state = {
-            activeIndex: 0
-        }
-        // TODO Ken: Fill data array by using the read backend query
-        let lorem = "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et ";
-        for (let i = 1; i <= 8; i++) {
-            this.data.push(
-                {id: lorem.repeat(i), key: i},
-            )
-        }
+  // to fetch all stories of current location
+  useEffect(() => {
+    Promise.all([
+      SanityClient.fetch(
+        `*[_type == "story" && landmark == "${currentLandmark}"]`
+      ),
+    ])
+      .then(([sanityData]) => {
+        console.log("call storyArray locally");
+        setStoryArray(sanityData);
+        // setIsLoaded(true);
+      })
+      .catch((err) => {
+        // setError(err)
+      });
+  }, [currentLandmark]);
 
-        this.onNextClick = this.onNextClick.bind(this);
-        this.onPrevClick = this.onPrevClick.bind(this);
+  // hooks next button by assigning storyCounter to update activeIndex var 
+  useEffect(() => {
+    setActiveIndex((storyCounter-1));
+  }, [storyCounter])
+
+  // NEXT - PREVIOUS button functions
+  // function onNextClick() {
+  //   if (activeIndex < storyArray.length - 1) {
+  //     setActiveIndex(activeIndex + 1);
+  //   } else {
+  //     setActiveIndex(0);
+  //   }
+  // }
+
+  // function onPrevClick() {
+  //   if (activeIndex > 0) {
+  //     setActiveIndex(activeIndex - 1);
+  //   } else {
+  //     setActiveIndex(storyArray.length - 1);
+  //   }
+  // }
+
+  // read current window width
+  useEffect(() => {
+    window.addEventListener("resize", (event) => {
+      setWindowWidth(window.innerWidth);
+    });
+  }, [])
+
+  // assign to variable varWdith
+  useEffect(() => {
+    if (windowWidth < 480 ) {
+      setIsMobile(true)
     }
-    onNextClick() {
-        if(this.state.activeIndex < this.data.length - 1){
-            this.setState({activeIndex: this.state.activeIndex + 1});
-        } else {
-            this.setState({activeIndex: 0})
-        }
+    // laptop width
+    if (windowWidth >= 480 && windowWidth < 1800 ) {
+      setVarWidth("27"); 
+      setIsMobile(false)
     }
+    // wide screen width
+    if (windowWidth >= 1800 ) {
+      setVarWidth("50"); 
+      setIsMobile(false)
+    }
+  }, [windowWidth])
+  
 
-    onPrevClick() {
-        if(this.state.activeIndex > 0) {
-            this.setState({activeIndex: this.state.activeIndex - 1});
-        } else {
-            this.setState({activeIndex: this.data.length - 1})
-        }
-    }
-    render() {
-        let sliderStyle ={
-            transform:`translateX(${this.state.activeIndex * -100}%)`,
-            transition: '0.2s'
-        }
-        return (
-            <div className='container'>
-                <div className='buttons'>
-                    <button onClick={this.onPrevClick}>◀</button>
-                    <button onClick={this.onNextClick}>▶</button>
-                </div>
-                <ol className='slide-container' style={sliderStyle}>
-                    {this.data.map(data => {
-                        return (
-                            <li className="list-item" key={data.key}>{data.id}</li>
-                        );
-                    })}
-                </ol>
-            </div>
-        );
-    }
+  // Carousel Style attributes
+  let containerStyle = {
+    display: "flex",
+    // width: `${varWidth}${widthUnit}`,
+    overflow: "hidden",
+    zIndex: '1000'
+  };
+
+  // let buttonStyle = {
+  //   width: "50px",
+  // };
+
+  let slideContainerStyle = {
+    transform: `translateX(${isMobile? activeIndex * - (window.innerWidth / 18) : activeIndex * - varWidth}rem)`,
+    transition: "0.2s",
+    position: "relative",
+    display: "flex",
+    margin: "0",
+    padding: "0",
+  };
+
+  let listItemStyle = {
+    width: `${isMobile ? window.innerWidth / 18 : varWidth}rem`,
+    listStyle: "none",
+    /*font-size: 112px;*/
+    color: "black",
+    padding: "0 4px 0 4px",
+  };
+
+  return (
+    <>
+      {/* PREVIOUS - BACK BUTTONS */}
+      {/* <div style={buttonStyle}>
+        <button onClick={onPrevClick}>◀</button>
+        <button onClick={onNextClick}>▶</button>
+      </div> */}
+      <div className="container" style={containerStyle}>
+        
+        <div style={slideContainerStyle}>
+          {storyArray.map((data) => (
+            <p style={listItemStyle} key={data._id}>
+              {data.message}
+            </p>
+          ))}
+        </div>
+      </div>
+    </>
+  );
 }
-
-export default Carousel;

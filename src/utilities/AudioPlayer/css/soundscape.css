@@ -2,12 +2,26 @@
     box-shadow: 10px 5px 5px red;
 }
 
+.icon {
+  background-image: url(../img/cursor-play.svg);
+  background-size: cover;   
+  background-repeat: no-repeat;
+  height: 2rem;
+  width: 2rem;
+  padding: 1rem;
+}
+
+.icon.pause {
+  background-image: url(../img/cursor-pause.svg);
+}
+
 /* Marquee styles */
 .marquee {
     --gap: 0rem;
     position: relative;
     display: flex;
     overflow-x: clip;
+    /* overflow-x: hidden; */
     /* user-select: none; */
     gap: var(--gap);
   }
