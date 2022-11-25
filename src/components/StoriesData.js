@@ -1,9 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useLocation, Outlet, useNavigate } from "react-router-dom";
 import SanityClient from "../client";
 
 import AudioPlayer from "../utilities/AudioPlayer";
-import Carousel from "../utilities/Carousel";
+// import Carousel from "../utilities/Carousel";
 
 import "../css/animation.css";
 import "../css/gradientAnimation.css";
@@ -114,7 +114,15 @@ export function StoriesData(props) {
   const [storyCounter, setStoryCounter] = useState(1)
   // console.log("storyArray, count storyCounter: " + storyCounter)
 
+  const timeout = useRef()
+  const timeUnitLoading = 500 
+  const [loadingNewStory, setLoadingNewStory] = useState(false)
   const goToNext = () => {
+    setLoadingNewStory(true)
+    timeout.current = setTimeout(function(){
+      setLoadingNewStory(false)
+      console.log("timer is on")
+    }, timeUnitLoading);
     setStoryCounter(storyIds.length === storyCounter ? 1 : storyCounter+1)
     if(storyIds.length === storyCounter){
       const landmarkNumber =  landmark === "droemling" ? 0 : 
@@ -183,8 +191,8 @@ export function StoriesData(props) {
 
         {/* STORY TEXT */}
         <div className="noScrollBar gradientStoryOverlay font-sans text-[0.9rem] mobileHorizontal:text-base wideScreen:text-xl wideScreen:leading-8 overflow-y-scroll h-auto pb-32">
-          <Carousel storyData={data} storyCounter={storyCounter}/>
-          {/* {data[0].message} */}
+          {/* <Carousel storyData={data} storyCounter={storyCounter}/> */}
+          {loadingNewStory ? "" : data[0].message}
         </div>
 
         {/* NEXT BUTTON */}
