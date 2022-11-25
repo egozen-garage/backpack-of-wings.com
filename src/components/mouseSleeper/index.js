@@ -29,7 +29,7 @@ export function MouseSleeper(props){
                 }, timeUntilMessage);
             })
         }
-    }, [onBoarding])
+    }, [onBoarding, timeUntilMessage])
     
     const reloadPage = () => {
         navigate('/')
