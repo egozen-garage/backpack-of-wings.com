@@ -67,7 +67,6 @@ const handler = async (event, context, callback) => {
 
         // write data to sanity database:
         const newWeatherData = {
-            "_type": "locationEntry",
             "_key": key,
             "timestamp": dateTime,
             "latitude": current_lat,

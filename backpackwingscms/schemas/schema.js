@@ -8,14 +8,11 @@ import schemaTypes from 'all:part:@sanity/base/schema-type'
 import blockContent from './blockContent'
 import landmark from './landmark'
 import story from './story'
-import weatherData from './weatherData'
-import movebankData from './movebankData'
 import youtube from './youtube'
 import twitter from './twitter'
 import imageURL from './imageURL'
 // import googleReviews from './googleReviews'
 import googleMaps from './googleMaps'
-import movebank from './movebank'
 import movebankDaily from './movebankDaily'
 import movebankSingleLocation from './movebankSingleLocation'
 import facebook from './facebook'
@@ -34,8 +31,6 @@ export default createSchema({
     // in the studio.
     landmark,
     story,
-    weatherData, 
-    movebankData,
     youtube,
     twitter,
     facebook,
@@ -43,7 +38,6 @@ export default createSchema({
     imageURL,
     // googleReviews,
     googleMaps,
-    movebank,
     movebankDaily,
     movebankSingleLocation,
     weather,

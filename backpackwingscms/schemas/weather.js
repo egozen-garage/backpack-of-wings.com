@@ -8,7 +8,7 @@ export default {
     fields: [
         {
             title: "Weather Data",
-            name: "gpsLocations",
+            name: "weatherTitle",
             type: 'string',
             // readOnly: true,
         },
@@ -22,7 +22,7 @@ export default {
 
     preview: {
       select: {
-        title: 'gpsLocations',
+        title: 'weatherTitle',
       }
     },
   }

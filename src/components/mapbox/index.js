@@ -23,7 +23,7 @@ export default function Mapbox(props) {
     console.log("CALL Mapbox")
     let dataReceived = false;
 
-    const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
+    // const apiUrl = 'https://www.movebank.org/movebank/service/public/json?&study_id=10449318&individual_local_identifiers=HL457%20%283083%29&sensor_type=gps&event_reduction_profile=EURING_03';
     
     let [movebankData, setMovebankData] = useState(null)
     // let [weatherData, setWeatherData] = useState(null);
@@ -35,31 +35,30 @@ export default function Mapbox(props) {
         // if(dataReady) return
         // if(!dataReady){
             Promise.all([
-                    fetch(apiUrl).then((response) => response.json()),
-                    // sanityClient.fetch(
-                    //     `*[_type == "movebank"]{location[0...250]{latitude, longitude, timestamp}}`
-                    // ),
+                    // fetch(apiUrl).then((response) => response.json()),
                     sanityClient.fetch(
-                        `*[_type == "weatherData" && dateTime(_updatedAt) > dateTime(now()) - 60*60*2]{
-                            temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description, timestamp
-                        }[0]`
+                        `*[_type == "movebankDaily"]{location[0...200]{location_lat, location_long, timestamp}}`
+                    ),
+                    sanityClient.fetch(
+                        `*[_type == "weather"]{weatherData[0]{
+                            temp, pressure, humidity, wind_speed, wind_deg, 
+                            sunrise, sunset, city_name, timezone, country, 
+                            weather_description, timestamp
+                        }}`
+                        // `*[_type == "weatherData" && dateTime(_updatedAt) > dateTime(now()) - 60*60*2]{
+                        //     temp, pressure, humidity, wind_speed, wind_deg, sunrise, sunset, city_name, timezone, country, weather_description, timestamp
+                        // }[0]`
                     ),
                     sanityClient.fetch(
                         `*[_type == "landmark" ]{"url":url.current, "country":country, "locationType": locationType, "locationName": locationName, "latitude":latitude, "longitude":longitude}`
                     ),
                 ])
-                .then(([movebankData, weatherData, landmark]) => {
-                    setMovebankData(movebankData.individuals[0].locations);
-                    // setMovebankData(movebankData[0].location);
-                    // console.log("new movebankdata: " + JSON.stringify(movebankData[0].location))
-                    // console.log("old movebankdata: " + JSON.stringify(movebankData.individuals[0].locations))
-                    // setWeatherData(weatherData);
-                    // setLandmark(landmark);
-                    // setDataReady(true);
-                    // const movebank = movebankData[0].location
+                .then(([movebankRes, weatherRes, landmark]) => {
+                    const weatherData = weatherRes[0].weatherData
+                    const movebankData = movebankRes[0].location                  // for movebank queries from sanity
+                    // const movebankData = movebankRes.individuals[0].locations    // for direct query form Movebank
+                    setMovebankData(movebankData);
                     setMapData([movebankData, weatherData, landmark])
-                    console.log("FetchMapData: Api Data has been called" + JSON.stringify(weatherData))
-                    console.log("FetchMapData: Api Data has been called")
                 })
                 .catch((err) => {
                     console.log(err);
@@ -109,7 +108,7 @@ function DrawMapbox(props){
     // console.log("mapData: " + JSON.stringify(props.weatherData))
 
     // const latestBirdData = props.mapData[0] // FetchMapData() --> [0] movebankData latest locations
-    const latestBirdData = props.mapData[0].individuals[0].locations // FetchMapData() --> [0] movebankData latest locations
+    const latestBirdData = props.mapData[0] // FetchMapData() --> [0] movebankData latest locations
     const weatherData    = props.mapData[1] // FetchMapData() --> [1] weatherData
     const landmarkSanity = props.mapData[2] // FetchMapData() --> [2] landmark
     // const dataReady      = props.mapData[3] // FetchMapData() --> [3] dataReady
