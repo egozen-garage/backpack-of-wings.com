@@ -645,9 +645,10 @@ function DrawMapbox(props){
             });
 
             // MAP INTERACTIONS
+            // click on Map Background to go back to Home Page
             map.current.on('mouseup', 'transparent-click-layer', (e) => {
-                console.log("click eath")
-                navigate('/')
+                // console.log("Go to Home")
+                // navigate('/')
                 return 
             });
             // current location of bird
@@ -679,6 +680,7 @@ function DrawMapbox(props){
             map.current.on("mouseleave", 'last-location-text', () => {
                 map.current.getCanvas().style.cursor = "grab";
             });
+
             map.current.on('click', 'last-location-text', (e) => {
                 // navigate('/'+e.features[0].properties.url)
                 navigate('/')
@@ -695,6 +697,8 @@ function DrawMapbox(props){
                 // setCurrentRoute(e.features[0].properties.description)
                 return 
             });
+
+
             // map.current.on('click', 'water', (e) => {
             //     navigate('/')
             //     return 
