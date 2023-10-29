@@ -108,7 +108,19 @@ export function MaterialContent(props) {
   };
 
   const scroll = (scrollOffset) => {
-    materialContainerRef.current.scrollLeft += scrollOffset;
+    const container = materialContainerRef.current;
+
+    // Calculate the target scroll position
+    const targetScrollLeft = container.scrollLeft + scrollOffset;
+
+    // Use CSS transitions to animate the scroll
+    container.style.scrollBehavior = 'smooth';
+    container.scrollLeft = targetScrollLeft;
+
+    // After the animation, remove scroll behavior for normal scrolling
+    container.addEventListener('scroll', () => {
+      container.style.scrollBehavior = 'auto';
+    });
   };
 
   return (
@@ -230,7 +242,7 @@ export function MaterialContent(props) {
       <div className="flex mt-3 mb-10 sm:pr-[3rem] pr-0 ml-[16px]">
         {/* <div className="gradientMaterialOverlay my-10 pl-[0.4rem]"> */}
         {/* <div className="flex "> */}
-          <button className=" " onClick={() => scroll(-200)} >
+          <button className=" " onClick={() => scroll(-400)} >
             <p className="button font-serif font-bold">&#8592;</p>
           </button>
           <div ref={materialContainerRef} className="snap-x gradientMaterialOverlay flex overflow-x-scroll overflow-y-hidden scrollbar-hide pl-[1rem] pr-[10rem]  ">
@@ -330,7 +342,7 @@ export function MaterialContent(props) {
               )
             )}
           </div>
-          <button className=" " onClick={() => scroll(200)} >
+          <button className=" " onClick={() => scroll(400)} >
             <p className="button font-serif font-bold">&#8594;</p>
           </button>
         {/* </div> */}

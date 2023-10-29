@@ -9,7 +9,7 @@ export function MouseSleeper(props){
     const onBoarding = props.onBoarding
     useEffect(() => {
         // const timeUntilMessage = 5000
-        const timeUntilMessage = 60000 * 5
+        const timeUntilMessage = 60000 * 3
         let timeout;
         if(!onBoarding){
             document.addEventListener("mousemove", () => {

@@ -41,7 +41,7 @@ export default function Mapbox(props) {
                 ),
             ])
             .then(([movebankData, weatherData]) => {
-                setMovebankData(movebankData.individuals[0].locations);
+                setMovebankData(movebankData?.individuals[0]?.locations);
                 setWeatherData(weatherData);
             })
             .catch((err) => {
